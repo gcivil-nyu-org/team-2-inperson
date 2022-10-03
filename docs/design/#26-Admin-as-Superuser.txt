@@ -1,0 +1,11 @@
+title #26 Admin as Superuser
+
+User->Frontend:Check forum contents
+note over User, Frontend: Chat violates regulations?
+Frontend->Backend:Request violation counts
+Backend->Frontend:Send violation counts
+note over User, Frontend:Violation >= 3
+User->Frontend:Request to delete the account
+Frontend->Backend:Confirm deletion
+User->Frontend:Modify user data
+Frontend->Backend:Confirm data change and store
