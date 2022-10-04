@@ -1,0 +1,34 @@
+title #26 Admin as Superuser
+
+actor Admin
+participant Frontend
+participant Backend
+
+activate Frontend
+Admin->Frontend:Check forum contents
+note over Admin, Frontend: Chat violates regulations?
+activate Backend
+Frontend->Backend:Request to increment violation counts
+deactivate Frontend
+alt Violation count > 2?
+Backend-->Backend:Suspend user account
+else else
+Backend-->Backend:Increment violation count
+end
+deactivate Backend
+activate Frontend
+Admin->Frontend:Request to recover user account
+activate Backend
+Frontend->Backend:Confirm account recovery
+Backend-->Frontend:Account recovered feedback
+deactivate Backend
+Frontend-->Admin:Notify about account recovery
+deactivate Frontend
+activate Frontend
+Admin->Frontend:Modify user data
+activate Backend
+Frontend->Backend:Confirm data change and store
+Backend-->Frontend:Data change been made
+deactivate Backend
+Frontend-->Admin:Display updated data
+deactivate Frontend
