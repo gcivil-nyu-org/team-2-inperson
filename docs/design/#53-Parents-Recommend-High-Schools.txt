@@ -1,0 +1,21 @@
+title #53 (Parents) Recommend High Schools to Students
+
+actor "Parents" as Parents #red
+activate Parents
+actor "Students" as Students #green
+Parents ->ShortLists/UI: Notify ShortLists that they are ready to share their lists to the app
+deactivate Parents
+activate ShortLists/UI
+ShortLists/UI --> System(AI): Send the lists of schools to the System(AI)
+deactivate ShortLists/UI
+activate System(AI)
+System(AI) -->System(AI): Recalculate the high school cards' order and frequency formula
+database DataBase
+System(AI) -> DataBase: Save the updated formula
+deactivate System(AI)
+activate System(AI)
+System(AI) -->ShortLists/UI: Notify the app the most updated High School cards are ready
+deactivate System(AI)
+activate ShortLists/UI
+ShortLists/UI ->Students: Start to show the cards in the most updated sequence that factors into Parents' recommendations
+deactivate ShortLists/UI
