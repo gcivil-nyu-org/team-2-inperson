@@ -13,12 +13,12 @@ UI (Browser)->API:Send Detailes & ID
 activate Data Store
 API->Data Store:Check Existence 
 
-note over API,Data Store: Parent/Guardian Already Exists
+alt Parent/Guardian Already Exists
 Data Store-->API:User Found
 API-->UI (Browser):Already Exists
 UI (Browser)-->Parent/Guardian: Display-Already Exists
 
-note over API, Data Store: New Parent/Guardian
+else New Parent/Guardian
 Data Store-->API:User Not Found
 deactivate Data Store
 API-->API: Verify ID and Details of Parent/Guardian
@@ -32,3 +32,4 @@ UI (Browser)-->Parent/Guardian:Display- Verified Parent/Guardian Account
 
 deactivate API
 UI (Browser)-->Parent/Guardian: Pop up- You can request for Student Account(s)
+end 

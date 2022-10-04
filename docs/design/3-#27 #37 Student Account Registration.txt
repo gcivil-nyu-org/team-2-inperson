@@ -14,12 +14,12 @@ UI (Browser)->API:Send Detailes & Parent Token
 activate Data Store
 API->Data Store:Check Existence 
 
-note over API,Data Store: Student Already Exists
+alt Student Already Exists
 Data Store-->API:User Found
 API-->UI (Browser):Already Exists
 UI (Browser)-->Student: Display-Already Exists! Go to Login!
 
-note over API, Data Store: New Student
+else New Student
 Data Store-->API:User Not Found
 API->Data Store: Add Student Account Info and Update Parent Info
 Data Store-->Data Store: Add New Student & Update Parent
@@ -31,3 +31,4 @@ API-->API: Email Parent/Guardian about Added Student
 API-->UI (Browser):Student Added Confirmation
 deactivate API
 UI (Browser)-->Student:Display- Register Succefully!
+end

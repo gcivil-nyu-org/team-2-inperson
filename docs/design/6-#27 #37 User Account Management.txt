@@ -12,11 +12,11 @@ UI (Browser) -> API: Send Profile Updates
 activate API
 API-->API:Check Updates
 
-note over API,UI (Browser): Updates Invalid 
+alt Updates Invalid 
 UI (Browser)<--API: Invalid Updates
 User<--UI (Browser): Display-Invalid Update Request
 
-note over API, Data Store: Update Valid
+else Update Valid
 activate Data Store
 API->Data Store:Send Updates to Perform
 Data Store-->Data Store:Update User Account
@@ -25,3 +25,4 @@ deactivate Data Store
 API-->UI (Browser):Dispay Success to User
 deactivate API
 UI (Browser)-->User:Display- Successfully Updated
+end

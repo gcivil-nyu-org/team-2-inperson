@@ -17,11 +17,11 @@ Data Store-->Data Store: Validate User Credentials
 Data Store-->API: Valid/Invalid Confirmation 
 deactivate Data Store
 
-note over API, Data Store: Invalid User
+alt Invalid User
 UI (Browser)<--API: User Not Found
 User<--UI (Browser): Display-Invalid Credentials
 
-note over API, Data Store: Valid User
+else Valid User
 User<--API: Email Reset Password Link
 API-->UI (Browser):Show sent message
 UI (Browser)-->User:Display-Please check email
@@ -41,4 +41,4 @@ API-->UI (Browser):Show Update Sucess
 API-->User:Email success confirmation for update
 deactivate API
 UI (Browser)-->User: Display- Updated Successfully!Go to Login!
-
+end
