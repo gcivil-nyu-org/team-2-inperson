@@ -12,7 +12,7 @@ RUN apt-get -y install python3 python3-pip
 RUN pip3 install django psycopg gunicorn
 
 # systemctl and nginx for sidecar
-RUN apt-get -y intsall systemctl nginx
+RUN apt-get -y install systemctl nginx
 
 # copy app to root
 COPY ./root/ /
