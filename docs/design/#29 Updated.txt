@@ -1,9 +1,7 @@
 title #29 (Students&Parents) Categorize High Schools and Make Lists
 
 actor Students/Parents
-activate Students/Parents
 Students/Parents->ShortLists/UI: Drag high schools they like to a list
-deactivate Students/Parents
 activate ShortLists/UI
 database Database
 ShortLists/UI -> Database: Retrieve the information from the database
