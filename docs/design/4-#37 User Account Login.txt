@@ -1,0 +1,26 @@
+title User Account Login
+
+actor User
+participant UI (Browser)
+participant API
+database Data Store
+
+activate UI (Browser)
+User->UI (Browser): Enter Credentials 
+UI (Browser) <-- UI (Browser): Data Validation 
+UI (Browser) -> API: Send Credentials
+activate API
+API -> Data Store: Send Credentials for Check
+activate Data Store
+Data Store --> Data Store: Validate User Credentials 
+Data Store --> API: Valid/Invalid Confirmation
+deactivate Data Store
+
+note over API, Data Store: Invalid User
+UI (Browser)<--API: User not found
+User<--UI (Browser): Display-Invalid Username or Password
+
+note over API, Data Store: Valid User
+UI (Browser)<--API: User found
+deactivate API
+User<--UI (Browser): Login Successful Display-Profile Home Page

@@ -1,0 +1,23 @@
+title Invite Student
+
+
+actor Parent/Guardian
+participant UI (Browser)
+participant API
+
+
+activate UI (Browser)
+Parent/Guardian->UI (Browser):Request For Student Account 
+
+UI (Browser)-->UI (Browser): Check Count of Students
+
+note over Parent/Guardian,UI (Browser): Student Count Five
+UI (Browser)-->Parent/Guardian:Display-Limit Reached! 
+UI (Browser)-->Parent/Guardian:Pop up- Update Exsiting or Contact Support!
+
+note over Parent/Guardian,UI (Browser): Student Count Less Than Five  
+activate API
+UI (Browser)->API:Request New Student for current Parent/Guardian Account
+API-->Parent/Guardian: Email Link For Student Account Registration
+deactivate API
+UI (Browser)-->Parent/Guardian:Display- Success! Check Email.

@@ -1,0 +1,34 @@
+title Parent/Guardian Account Registration & Verification
+
+actor Parent/Guardian
+participant UI (Browser)
+participant API
+database Data Store
+
+activate UI (Browser)
+Parent/Guardian->UI (Browser):Enter Details & ID
+UI (Browser)-->UI (Browser):Data Validation
+activate API
+UI (Browser)->API:Send Detailes & ID
+activate Data Store
+API->Data Store:Check Existence 
+
+note over API,Data Store: Parent/Guardian Already Exists
+Data Store-->API:User Found
+API-->UI (Browser):Already Exists
+UI (Browser)-->Parent/Guardian: Display-Already Exists
+
+note over API, Data Store: New Parent/Guardian
+Data Store-->API:User Not Found
+deactivate Data Store
+API-->API: Verify ID and Details of Parent/Guardian
+activate Data Store
+API->Data Store: Add Parent/Guardian Account
+Data Store-->Data Store: Update DB by adding new User
+Data Store-->API:User Added Confirmation
+deactivate Data Store
+API-->UI (Browser): Parent/Guardian Added Confirmation
+UI (Browser)-->Parent/Guardian:Display- Verified Parent/Guardian Account
+
+deactivate API
+UI (Browser)-->Parent/Guardian: Pop up- You can request for Student Account(s)

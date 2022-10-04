@@ -1,0 +1,44 @@
+title User Account Recovery
+
+actor User
+participant UI (Browser)
+participant API
+database Data Store
+
+
+activate UI (Browser)
+User->UI (Browser): Forgot Password Click & Enter Credentials 
+UI (Browser)-->UI (Browser):Data Validation
+UI (Browser)->API: Send Credentials
+activate API
+API->Data Store: Send Credentials for Check
+activate Data Store 
+Data Store-->Data Store: Validate User Credentials
+Data Store-->API: Valid/Invalid Confirmation 
+deactivate Data Store
+
+note over API, Data Store: Invalid User
+UI (Browser)<--API: User Not Found
+User<--UI (Browser): Display-Invalid Credentials
+
+note over API, Data Store: Valid User
+User<--API: Email Reset Password Link
+API-->UI (Browser):Show sent message
+UI (Browser)-->User:Display-Please check email
+deactivate UI (Browser)
+User-->User:Open Email and Clik on Link
+
+activate UI (Browser)
+User->UI (Browser):New Credentials enter
+UI (Browser)-->UI (Browser):Data Validation
+UI (Browser)->API: Send New Credentials
+activate Data Store
+API->Data Store:Update User Credentials 
+Data Store-->Data Store:Update User Account Info
+Data Store-->API:Confirmed Credential Update
+deactivate Data Store
+API-->UI (Browser):Show Update Sucess
+API-->User:Email success confirmation for update
+deactivate API
+UI (Browser)-->User: Display- Updated Successfully!Go to Login!
+

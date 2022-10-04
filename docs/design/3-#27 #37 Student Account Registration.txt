@@ -1,0 +1,33 @@
+title Student Account Registration
+
+
+actor Student
+participant UI (Browser)
+participant API
+database Data Store
+
+activate UI (Browser)
+Student->UI (Browser):Click on Valid Link & Enter Details
+UI (Browser)-->UI (Browser):Data Validation
+activate API
+UI (Browser)->API:Send Detailes & Parent Token
+activate Data Store
+API->Data Store:Check Existence 
+
+note over API,Data Store: Student Already Exists
+Data Store-->API:User Found
+API-->UI (Browser):Already Exists
+UI (Browser)-->Student: Display-Already Exists! Go to Login!
+
+note over API, Data Store: New Student
+Data Store-->API:User Not Found
+API->Data Store: Add Student Account Info and Update Parent Info
+Data Store-->Data Store: Add New Student & Update Parent
+Data Store-->API:Users Added-Updated Confirmation
+deactivate Data Store
+API-->API: Set Parent/Guardian-Student Permissions-Accounts
+API-->API: Email Parent/Guardian about Added Student
+
+API-->UI (Browser):Student Added Confirmation
+deactivate API
+UI (Browser)-->Student:Display- Register Succefully!

@@ -1,0 +1,27 @@
+title User Account Management
+
+actor User
+participant UI (Browser)
+participant API
+database Data Store
+
+activate UI (Browser)
+User->UI (Browser): Perform Updates
+UI (Browser) <-- UI (Browser): Data Validation 
+UI (Browser) -> API: Send Profile Updates
+activate API
+API-->API:Check Updates
+
+note over API,UI (Browser): Updates Invalid 
+UI (Browser)<--API: Invalid Updates
+User<--UI (Browser): Display-Invalid Update Request
+
+note over API, Data Store: Update Valid
+activate Data Store
+API->Data Store:Send Updates to Perform
+Data Store-->Data Store:Update User Account
+Data Store-->API: Update Confirmation
+deactivate Data Store
+API-->UI (Browser):Dispay Success to User
+deactivate API
+UI (Browser)-->User:Display- Successfully Updated
