@@ -1,0 +1,8 @@
+# Secrets and Environments:
+.env
+
+# Python Specific:
+__pycache__
+
+# Mac Specific:
+.DS_Store
