@@ -1,0 +1,7 @@
+title #29 (Students&Parents) Categorize High Schools and Make Lists
+
+
+Students/Parents->ShortLists/UI: Drag high schools they like to a list
+ShortLists/UI -> DataBase: Retrieve the information from the database
+DataBase --> ShortLists/UI: Save the school's info in the lists
+Students/Parents->ShortLists/UI: Students can change the name, color, and fonts of the lists

@@ -1,0 +1,14 @@
+title #7 (Students) Share ShortLists with their Parents
+
+
+Students -> ShortLists/UI: Select up to 3 lists
+ShortLists/UI -> Parents: Show the selected lists to Parents
+Parents -->ShortLists/UI: View the lists and schools and check out each school
+Parents -->ShortLists/UI: Make personal notes on each school
+loop The loop will end when both parents and students are satisfied with their discussions over each school.
+Parents -->ShortLists/UI: Click into a school and start a discussion about that school
+ShortLists/UI --> Students: Show the discussions on certain schools
+Students -> ShortLists/UI: Join the discussions
+ShortLists/UI -> Parents: Show the messages back to parents
+Parents -->ShortLists/UI: Respond to the messages
+end
