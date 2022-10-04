@@ -1,0 +1,25 @@
+title Student/Parent Discussion
+
+actor User
+participant UI
+database Data Store
+
+note over User,UI:User (student/parent) logged in
+
+activate User
+activate UI
+User->UI: Select school in shared list
+
+activate Data Store
+UI->Data Store: Request school data
+UI<--Data Store:  Return data
+User<--UI:  Display data
+
+User->UI: Enter comment/discussion interface
+UI->Data Store: Request discussion history
+UI<--Data Store: Return discussion history
+User<--UI: Display discussion history
+User->UI: Leave comment
+deactivate User
+
+UI->Data Store:save comment in DB
