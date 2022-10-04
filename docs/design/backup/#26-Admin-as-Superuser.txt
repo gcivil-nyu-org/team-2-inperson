@@ -1,0 +1,11 @@
+title #26 Admin as Superuser
+
+Admin->Frontend:Check forum contents
+note over Admin, Frontend: Chat violates regulations?
+Frontend->Backend:Request to increment violation counts
+note over Frontend, Backend:Violation > 2?
+Backend->Backend:Suspend user account
+Admin->Frontend:Request to recover user account
+Frontend->Backend:Confirm account recovery
+Admin->Frontend:Modify user data
+Frontend->Backend:Confirm data change and store

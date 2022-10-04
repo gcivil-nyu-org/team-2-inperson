@@ -1,33 +1,23 @@
 title #3-View-Personalized-Recommendations-of-High-Schools
-
-actor User
-participant UI (Browser)
-participant API
-participant Data Store
-
-activate UI (Browser)
 User->UI (Browser): Set Preferences
-activate API
 UI (Browser) -> API: Send Preferences
-activate Data Store
 API -> Data Store: Store Preferences
 API -> API: Choose Random School IDs (based on location?)
 API -> Data Store: Request Simple data for schools
 Data Store -> API: Send Schools' Simplified Data 
-API --> UI (Browser): Send Selections (Simple View Dataset)
-UI (Browser) --> User: Render Simple View
+API -> UI (Browser): Send Selections (Simple View Dataset)
+UI (Browser) -> User: Render Simple View
 Data Store -> API: Confirm Stored Preferences
-API --> API: Compute first matches
-API --> Data Store: Store match set
+API -> API: Compute first matches
+API -> Data Store: Store match set
 note over User,UI (Browser): User chooses Detailed View?
 User->UI (Browser): Request Detailed View
 UI (Browser)-> API: Request Detailed Data for School
-API --> API: Check Cache
+API -> API: Check Cache
 API -> Data Store: Request School Detail Data
-Data Store --> API: Send School's Detail Data
-API --> UI (Browser): Send School Detail Data
-deactivate Data Store
-UI (Browser) --> User: Render Detailed View
+Data Store -> API: Send School's Detail Data
+API -> UI (Browser): Send School Detail Data
+UI (Browser) -> User: Render Detailed View
 API -> API: Cache School's Detailed Data
-note over User,UI (Browser): User discards/categorizes school?
+note over User,UI (Browser): Or, user discards/categorizes school?
 User -> UI (Browser): TO CATEGORIZE EPIC
