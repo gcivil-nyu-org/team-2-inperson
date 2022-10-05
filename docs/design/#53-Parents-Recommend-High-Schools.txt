@@ -1,15 +1,21 @@
-title #29 (Students&Parents) Categorize High Schools and Make Lists
+title #53 (Parents) Recommend High Schools to Students
 
-actor Students/Parents
-Students/Parents->ShortLists/UI: Drag high schools they like to a list
+actor "Parents" as Parents #red
+activate Parents
+actor "Students" as Students #green
+Parents ->ShortLists/UI: Notify ShortLists that they are ready to share their lists to the app
+deactivate Parents
 activate ShortLists/UI
-database Database
-ShortLists/UI -> Database: Retrieve the information from the database
+ShortLists/UI --> System(AI): Send the lists of schools to the System(AI)
 deactivate ShortLists/UI
-activate Database
-Database --> ShortLists/UI: Save the school's info in the lists
-deactivate Database
+activate System(AI)
+System(AI) -->System(AI): Recalculate the high school cards' order and frequency formula
+database DataBase
+System(AI) -> DataBase: Save the updated formula
+deactivate System(AI)
+activate System(AI)
+System(AI) -->ShortLists/UI: Notify the app the most updated High School cards are ready
+deactivate System(AI)
 activate ShortLists/UI
-Students/Parents->ShortLists/UI: Students can change the name, color, and fonts of the lists
+ShortLists/UI ->Students: Start to show the cards in the most updated sequence that factors into Parents' recommendations
 deactivate ShortLists/UI
-activate Students/Parents
