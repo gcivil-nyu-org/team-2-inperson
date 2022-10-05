@@ -3,7 +3,7 @@ title #3-View-Personalized-Recommendations-of-High-Schools
 actor User
 participant UI (Browser)
 participant API
-participant Data Store
+database Data Store
 
 activate UI (Browser)
 User->UI (Browser): Set Preferences
