@@ -3,8 +3,11 @@
 # TODO(waltage): verify that nginx is actually running after this
 systemctl start nginx
 
-cd /app/$1
+# xray-dameon for aws xray
+xray-daemon -f /var/log/xray-daemon.log &
 
+# TODO(waltage): start the app
+cd /app/$1
 gunicorn $1.wsgi -b localhost:8080
 
-# fails if gunicorn is down
+# BLOCKING.... fails/exits if gunicorn goes down
