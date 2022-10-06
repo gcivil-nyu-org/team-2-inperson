@@ -1,13 +1,22 @@
-
-title #29 (Students&Parents) Categorize High Schools and Make Lists
+title (Students&Parents) Categorize High Schools and Make Lists
 
 actor Students/Parents
-Students/Parents->ShortLists/UI: Drag high schools they like to a list
+Students/Parents->ShortLists/UI: Drag liked high school to list
 activate ShortLists/UI
 database Database
-ShortLists/UI -> Database: Retrieve the information from the database
+ShortLists/UI -> Database: Save school categorization to DB
 activate Database
-Database --> ShortLists/UI: Send and Save the school's info in the lists
+Database --> ShortLists/UI: Return updated list data
 deactivate Database
-Students/Parents->ShortLists/UI: Students can change the name, color, and fonts of the lists
+
+Students/Parents<--ShortLists/UI:Display updated list data
+Students/Parents->ShortLists/UI: Change name/color/font of list
+
+activate Database
+ShortLists/UI->Database:Save list setting(s) to DB
+ShortLists/UI<--Database:Return updated list setting(s)
+
+Students/Parents<--ShortLists/UI: Display updated list appearance
+
 deactivate ShortLists/UI
+
