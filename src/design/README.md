@@ -1,4 +1,4 @@
-# Shortlist Design
+# Shortlist Design 🏫🖌
 
 1. Folder that provides Shortlist design assets in one place that makes application look authentic.
 2. The team can use the folder to design Shortlist Application and update frontend-backend.
