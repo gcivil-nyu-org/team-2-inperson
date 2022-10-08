@@ -1,5 +1,5 @@
 <script>
-import SimCard from "../layout/SimpleView/SimCard.vue"
+import SimCard from "../../components/school/simple/SimCard.vue"
 
 
 export default {
