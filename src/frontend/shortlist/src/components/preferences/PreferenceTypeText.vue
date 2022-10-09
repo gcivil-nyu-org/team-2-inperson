@@ -17,11 +17,9 @@ export default {
     }
   }
 }
-
 </script>
 
 <template>
-  <!--{{responseId}}-->
   <div class="pref-q-container">
     <div class="pref-q-name">
       {{question.Name}}

@@ -87,7 +87,7 @@ export default {
   <div class="stage-container">
     <div class="stage-component">
 
-      <PreferenceManager title="Set Preferences" @preferenceSubmitted="prefResults.submitted = true">
+      <PreferenceManager v-if="!prefResults.submitted" title="Set Preferences" @preferenceSubmitted="prefResults.submitted = true">
 
         <PreferenceManagerPage id="0" subtitle="Instruction & Curriculum">
           <PreferenceOneSelect :question="question1" v-model="prefResults.q1"/>
