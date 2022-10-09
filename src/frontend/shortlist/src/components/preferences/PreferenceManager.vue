@@ -1,50 +1,107 @@
 <script>
+import { ref, provide } from 'vue'
+
 export default {
   name: "PreferenceManager",
-  props: ["title", "subtitle"],
+  props: ["title"],
+  methods: {
+    clicker(event) {
+      
+      if (event == "Next") {
+        this.selectedPage == this.numPages - 1 ? this.selectedPage = this.selectedPage : this.selectedPage++;
+      } else if (event == "Back") {
+        this.selectedPage == 0 ? this.selectedPage = this.selectedPage : this.selectedPage--;
+      } else {
+        console.log(event);
+      }
+      
+      if (this.selectedPage > 0) {
+        this.actions.back.enabled = true;
+        
+      } else {
+        this.actions.back.enabled = false;
+      }
 
-  setup() {
+      if (this.selectedPage == this.numPages - 1) {
+        this.actions.next.enabled = false;
+        this.actions.submit.enabled = true;
+      } else {
+        this.actions.next.enabled = true;
+        this.actions.submit.enabled = false;
+      }
+    }
+  },
+  data() {
     const actions = {
       back: {
         text: "Back",
-        enabled: true,
+        enabled: false,
         type: "button",
-        action: false
       },
       next: {
         text: "Next",
-        enabled: true,
+        enabled: false,
         type: "button",
-        action: false
       },
       submit: {
         text: "Submit",
         enabled: false,
-        type: "button",
-        action: false
+        type: "submit",
       }
+    };
+
+    if (this.numPages == 1) {
+      actions.submit.enabled = true;
+    } else {
+      actions.next.enabled = true;
     }
-    
-    return {actions}
+
+    return {
+      actions
+    }
+  },
+  setup(props, { slots }, ) {
+    let preferencePages = ref(slots.default());
+
+    let numPages = preferencePages.value.length;
+    let selectedPage = ref(0);
+
+    provide("selectedPage", selectedPage);
+
+    return {
+      preferencePages,
+      numPages,
+      selectedPage
+    }
   },
   
 }
 </script>
 
 <template>
+
   <div class="pref-container">
     <div class="pref-title">
-      {{title}}<br>
-      <span style="font-size: 20px;">{{subtitle}}</span>
+      {{title}}
     </div>
     
     <div class="pref-main">
       <slot></slot>
     </div>
+
     <div style="flex-grow: 1;">&nbsp;</div>
     <div class="pref-actions">
-      <template v-for="action in actions" :key="action">
-        <button v-if="action.enabled" @click="action.action">{{action.text}}</button>
+      <template v-if="actions.back.enabled">
+        <button @click="clicker('Back')">Back</button>
+        <div style="flex-grow: 1"></div>
+      </template>
+      <template v-if="actions.next.enabled">
+        <div style="flex-grow: 1"></div>
+        <button @click="clicker('Next')">Next</button>
+      </template>
+      <template v-if="actions.submit.enabled">
+        <div style="flex-grow: 1"></div>
+        <button @click="clicker('Submit')">Submit</button>
       </template>
     </div>
   </div>
@@ -72,6 +129,9 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: baseline;
+
+  min-height: 500px;
+  overflow: scroll;
 }
 
 .pref-actions {

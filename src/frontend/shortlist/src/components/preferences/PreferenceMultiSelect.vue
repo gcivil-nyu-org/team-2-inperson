@@ -4,11 +4,20 @@
 export default {
   name: "PreferenceMultiSelect",
   props: [
-    "responseId",
-    "questionName",
-    "questionText",
-    "questionOptions",
-  ]
+    "question",
+    "modelValue",
+  ],
+  emits: ["update:modelValue"],
+  computed: {
+    value: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        this.$emit("update:modelValue", value)
+      }
+    }
+  }
 }
 
 </script>
@@ -17,14 +26,18 @@ export default {
   <!--{{responseId}}-->
   <div class="pref-q-container">
     <div class="pref-q-name">
-      {{questionName}}
+      {{question.Name}}
     </div>
     <div class="pref-q-question">
-      {{questionText}}
+      {{question.Text}}
     </div>
-    <template v-for="opt, optindex in questionOptions" :key="optindex">
-      <input type="checkbox" :id="responseId" :name="responseId + '.' + optindex" :value="optindex">
-      <label class="pref-opt-label" :for="responseId + '.' + optindex"> {{opt}}</label><br>
+    <template v-for="opt, optindex in question.Options" :key="optindex">
+      <input type="checkbox" 
+        :value="opt"
+        :name="optindex" 
+        v-model="value">
+      
+      <label class="pref-opt-label" :for="optindex"> {{opt}}</label><br>
     </template>
   </div>
 </template>
@@ -33,6 +46,7 @@ export default {
 .pref-q-container {
   padding: 10px;
   width: 100%;
+  min-width: 450px;
 }
 .pref-q-name {
   width: 100%;
