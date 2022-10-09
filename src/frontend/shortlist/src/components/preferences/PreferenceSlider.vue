@@ -17,7 +17,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <template>
