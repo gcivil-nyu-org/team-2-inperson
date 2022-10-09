@@ -1,8 +1,6 @@
 <script>
-
-
 export default {
-  name: "PreferenceOneSelect",
+  name: "PreferenceTypeText",
   props: [
     "question",
     "modelValue",
@@ -14,7 +12,6 @@ export default {
         return this.modelValue
       },
       set(value) {
-        console.log(value);
         this.$emit("update:modelValue", value)
       }
     }
@@ -34,7 +31,7 @@ export default {
     </div>
     <div>
       <input type="text" 
-        :name="questionId" 
+        :name="question.Name" 
         v-model="value">
     </div>
   </div>
