@@ -3,33 +3,25 @@
 import SimPic from "../SimpleView/SimPic.vue"
 import SimTitle from "../SimpleView/SimTitle.vue"
 */
+import DetailProps from "../detail/DetailProps.vue"
 
 export default {
-  name: "SimCard",
-  components: { /*SimPic, SimTitle*/ },
+  name: "DetailCard",
+  components: { DetailProps },
 }
 
 </script>
 
 <template>
-    <div class="card-container">
-        <img class="img-top-card" src="../../../image/img-top-card.png" 
-        alt="img-top-card" />
-        <h4 class="title">Stuyvesant High School</h4>
-        <!--
-        <v-img 
-            lazy-src="../../../images/img-top-card.png"
-            max-height = "200px"
-            max-width = "300px"
-            src="../../../images/img-top-card.png"
-        ></v-img>
-        -->
+    <div class="detail-card-container">
+        <h4 class="detail-title">Detail View</h4>
+        <DetailProps></DetailProps>
     </div>
     
 </template>
 
 <style scoped>
-.card-container {
+.detail-card-container {
     /*align-items: flex-start;*/
     /*background-color: var(--white); */
     background-color: white;
@@ -39,7 +31,7 @@ export default {
     border-radius: 8px;
     box-shadow: 0px 4px 4px #00000040;
     display: flex;
-    height: 450px;
+    height: 480px;
     width: 400px;
     min-width: 300px;
     flex-wrap: wrap;
@@ -47,15 +39,7 @@ export default {
     align-items: center;
 
 }
-.img-top-card {
-    height:250px;
-    width:380px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:20px;
-    
-}
-.title {
+.detail-title {
     align-self: center;
     letter-spacing: 0;
     margin-right: 1px;

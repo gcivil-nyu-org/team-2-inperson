@@ -1,27 +1,29 @@
-
-
 <script>
-import NavBarTop from "../components/layout/NavBarTop.vue";
+import SimpleView from "../components/school/simple/SimpleView.vue";
+import DetailView from "../components/school/detail/DetailView.vue";
 
 export default {
-    name: "StageViewNavBar",
-    components: { NavBarTop }
+    name: "StageView",
+    components: { SimpleView, DetailView }
 }
 </script>
 
 <template>
-  <div class="container">
-    <NavBarTop></NavBarTop>
-  </div>
+    <div class="container">
+      <DetailView></DetailView>
+    </div>
 </template>
 
 <style scoped>
 .container {
-  width: 100vw;
-  height: 100vh;
+  width: 550px;
+  height: 100%;
   display: flex;
+  margin-left:auto;
+  margin-right:auto;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  background-color:green;
 }
 </style>
