@@ -1,6 +1,4 @@
 <script>
-
-
 export default {
   name: "PreferenceOneSelect",
   props: [
@@ -14,7 +12,6 @@ export default {
         return this.modelValue
       },
       set(value) {
-        console.log(value);
         this.$emit("update:modelValue", value)
       }
     }
@@ -23,7 +20,6 @@ export default {
 </script>
 
 <template>
-  <!--{{responseId}}-->
   <div class="pref-q-container">
     <div class="pref-q-name">
       {{question.Name}}
