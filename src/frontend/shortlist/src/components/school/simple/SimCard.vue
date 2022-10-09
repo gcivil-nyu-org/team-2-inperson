@@ -3,10 +3,11 @@
 import SimPic from "../SimpleView/SimPic.vue"
 import SimTitle from "../SimpleView/SimTitle.vue"
 */
+import SimDimensions from "../simple/SimDimensions.vue"
 
 export default {
   name: "SimCard",
-  components: { /*SimPic, SimTitle*/ },
+  components: { SimDimensions/*, SimPic, SimTitle*/ },
 }
 
 </script>
@@ -16,6 +17,7 @@ export default {
         <img class="img-top-card" src="../../../images/img-top-card.png" 
         alt="img-top-card" />
         <h4 class="title">Stuyvesant High School</h4>
+        <SimDimensions></SimDimensions>
         <!--
         <v-img 
             lazy-src="../../../images/img-top-card.png"
@@ -39,7 +41,7 @@ export default {
     border-radius: 8px;
     box-shadow: 0px 4px 4px #00000040;
     display: flex;
-    height: 450px;
+    height: 480px;
     width: 400px;
     min-width: 300px;
     flex-wrap: wrap;
