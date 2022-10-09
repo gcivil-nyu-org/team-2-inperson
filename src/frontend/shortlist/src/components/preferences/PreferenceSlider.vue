@@ -1,12 +1,21 @@
 <script>
+
+
 export default {
-  name: "PreferenceMultiSelect",
+  name: "PreferenceSlider",
   props: [
     "questionId",
     "questionText",
-    "questionOptions",
-  ]
+    "min",
+    "max",
+  ],
+  computed: {
+  result() {
+    return (this.min + this.max)/2
+    }
+  },
 }
+
 </script>
 
 <template>
@@ -18,10 +27,9 @@ export default {
     <div class="pref-q-question">
       {{questionText}}
     </div>
-    <template v-for="opt, optindex in questionOptions" :key="optindex">
-      <input type="checkbox" :id="optindex+''+opt" :name="optindex+''+opt" :value="opt">
-      <label class="pref-opt-label" :for="optindex+''+opt"> {{opt}}</label><br>
-    </template>
+    <div>
+      <input type="range" :min="min" :max="max" :value="result">
+    </div>
   </div>
 </template>
 

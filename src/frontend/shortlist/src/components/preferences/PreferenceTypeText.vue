@@ -1,12 +1,14 @@
 <script>
+
+
 export default {
-  name: "PreferenceMultiSelect",
+  name: "PreferenceTypeText",
   props: [
     "questionId",
     "questionText",
-    "questionOptions",
   ]
 }
+
 </script>
 
 <template>
@@ -18,10 +20,9 @@ export default {
     <div class="pref-q-question">
       {{questionText}}
     </div>
-    <template v-for="opt, optindex in questionOptions" :key="optindex">
-      <input type="checkbox" :id="optindex+''+opt" :name="optindex+''+opt" :value="opt">
-      <label class="pref-opt-label" :for="optindex+''+opt"> {{opt}}</label><br>
-    </template>
+    <div>
+      <input type="text" :id="questionId" :name="questionId" value="xyz">
+    </div>
   </div>
 </template>
 
