@@ -4,6 +4,7 @@ import { ref, provide } from 'vue'
 export default {
   name: "PreferenceManager",
   props: ["title"],
+  emits: ["preferenceSubmitted"],
   methods: {
     clicker(event) {
       
@@ -12,7 +13,7 @@ export default {
       } else if (event == "Back") {
         this.selectedPage == 0 ? this.selectedPage = this.selectedPage : this.selectedPage--;
       } else {
-        console.log(event);
+        this.$emit("preferenceSubmitted");
       }
       
       if (this.selectedPage > 0) {
