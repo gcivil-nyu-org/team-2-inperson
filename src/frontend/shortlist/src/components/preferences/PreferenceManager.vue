@@ -121,8 +121,20 @@ export default {
 .pref-title {
   width: 100%;
   font-family: "Cabin Sketch", cursive;
+  font-weight: bold;
+  font-size: 2.5rem;
+  padding-bottom: None;
+  line-height: 2rem;
+  color:#067418;
 }
 
+.pref-subtitle{
+  font-size: 20px; 
+  font-family: 'Aleo', serif; 
+  background-color: #D6CDA4;
+  font-weight: bold;
+  color:black
+}
 .pref-main {
   width: 100%;
   display: flex;
@@ -133,18 +145,42 @@ export default {
   min-height: 500px;
   overflow: scroll;
 }
-
-.pref-actions {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+.pref-actions-line{
+  width:100%;
   justify-content: space-between;
+  display: flex;
+}
+.pref-actions {
+  flex-wrap: wrap;
   align-items: center;
+  font-weight: bold;
+  background-color:black;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Libre Baskerville', serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.pref-actions:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+  background-color:#008037;
 }
 
 .pref-actions button {
   padding: 20px;
-  background-color: green;
+  background-color: #008037;
 }
 
 
