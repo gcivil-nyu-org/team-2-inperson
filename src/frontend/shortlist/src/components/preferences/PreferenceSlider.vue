@@ -1,34 +1,46 @@
 <script>
-
-
 export default {
   name: "PreferenceSlider",
   props: [
-    "questionId",
-    "questionText",
-    "min",
-    "max",
+    "question",
+    "modelValue",
   ],
+  emits: ["update:modelValue"],
   computed: {
-  result() {
-    return (this.min + this.max)/2
+    value: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        this.$emit("update:modelValue", value)
+      }
     }
-  },
+  }
 }
 
 </script>
 
 <template>
-  <!--{{responseId}}-->
   <div class="pref-q-container">
     <div class="pref-q-name">
-      {{questionId}}
+      {{question.Name}}
     </div>
     <div class="pref-q-question">
-      {{questionText}}
+      {{question.Text}}
     </div>
     <div>
-      <input type="range" :min="min" :max="max" :value="result">
+      <span style="font-size: 15px; margin-right: 5px;">
+      {{question.MinLabel}}
+      </span>
+      
+      <input type="range" 
+        :min="question.Min" 
+        :max="question.Max" 
+        v-model="value">
+
+      <span style="font-size: 15px; margin-left: 5px;">
+        {{question.MaxLabel}}
+      </span>
     </div>
   </div>
 </template>
