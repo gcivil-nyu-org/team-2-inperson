@@ -2,13 +2,22 @@
 import PreferenceManager from '../components/preferences/PreferenceManager.vue';
 import PreferenceManagerPage from "../components/preferences/PreferenceManagerPage.vue";
 import PreferenceMultiSelect from '../components/preferences/PreferenceMultiSelect.vue';
+import PreferenceOneSelect from '../components/preferences/PreferenceOneSelect.vue';
+import PreferenceTypeText from '../components/preferences/PreferenceTypeText.vue';
+import PreferenceDropdown from '../components/preferences/PreferenceDropdown.vue';
+import PreferenceSlider from '../components/preferences/PreferenceSlider.vue';
+
 
 export default {
   name: "StageView",
   components: { 
     PreferenceManager, 
-    PreferenceMultiSelect, 
-    PreferenceManagerPage 
+    PreferenceManagerPage,
+    PreferenceMultiSelect,
+    PreferenceOneSelect,
+    PreferenceTypeText,
+    PreferenceDropdown,
+    PreferenceSlider, 
   },
   data() {
     return {
@@ -57,6 +66,7 @@ export default {
   }
 }
 
+
 </script>
 
 <template> 
@@ -73,6 +83,61 @@ export default {
       </PreferenceManagerPage>
       <PreferenceManagerPage id="1" subtitle="Part 2 of the q'aire">
         <PreferenceMultiSelect :question="question3" v-model="prefResults.q3"/>
+      </PreferenceManagerPage>
+      <PreferenceManagerPage id="2">
+        <PreferenceOneSelect 
+          questionId="Curricular"
+          questionText="School programs offering?"
+          :questionOptions="[
+            'Virtual',
+            'Hybrid',
+            'Both',
+          ]"
+        />
+      
+        <PreferenceMultiSelect 
+          questionId="Extra-Curricular"
+          questionText="Sports preference?"
+          :questionOptions="[
+            'Cricket',
+            'Football',
+            'Tennis',
+            'Basketball',
+          ]"
+        />
+      </PreferenceManagerPage>
+      
+      <PreferenceManagerPage id="3">
+        <PreferenceTypeText 
+          questionId="Other"
+          questionText="Enter school name in your mind."
+        />
+        <PreferenceDropdown
+          questionId="Travel"
+          questionText="Subway decide"
+          :questionOptions="[
+            '1',
+            '2',
+            'A',
+            'R',
+          ]"
+        />
+        <PreferenceDropdown
+          questionId="Curricular"
+          questionText="Interest Areas"
+          :questionOptions="[
+            'Animal Science',
+            'Engineering',
+            'Science & Math',
+            'Law & Government',
+          ]"
+        />
+        <PreferenceSlider 
+          questionId="School-Status"
+          questionText="School rank level? [left to right: low to high rank]"
+          min="0"
+          max="10"
+        />
       </PreferenceManagerPage>
     </PreferenceManager>
   </div>
