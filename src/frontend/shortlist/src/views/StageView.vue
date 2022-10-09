@@ -22,127 +22,90 @@ export default {
   data() {
     return {
       prefResults: {
-        q1: [],
+        q1: "",
         q2: [],
-        q3: [],
-        q4: [],
-        q5: [],
-        q6: [],
-        q7: [],
+        q3: "",
+        q4: "",
+        q5: 4,
+        submitted: false,
       }
     }
   },
   setup() {
     return {
       question1: {
-        Name: "Question 1",
-        Text: "Which is your favorite type of pizza?",
+        Name: "Instruction Mode",
+        Text: "Which instruction mode do you prefer?",
         Options: [
-          'Teacher Ratings',
-          'Onion and Broccoli',
-          'tomato',
-          'no pizza for me',
+          'Virtual',
+          'Hybrid',
+          'In-person',
         ]
       },
       question2: {
-        Name: "Question 2",
-        Text: "How do you feel about vue?",
+        Name: "Extra-Curriculars",
+        Text: "Do you have any Extra-curricular interests?",
         Options: [
-          'Suxor',
-          'It\'s okay',
-          'Great',
-          'Haven\'t tried it',
+          'Sports',
+          'Performing Arts',
+          'STEM',
+          'Others',
         ]
       },
       question3: {
-        Name: "Question 3",
-        Text: "Another Page?",
+        Name: "School Preference",
+        Text: "Do you already have a school in mind?",
+      },
+      question4: {
+        Name: "Transit",
+        Text: "Is there a transit bus/train line you're interested in?",
         Options: [
-          'Yes',
-          "No",
-        ]
-      }
-    }
-  }
-}
-
-
-</script>
-
-<template> 
-<div style="font-size:10px; width:300px; background-color: yellow; padding: 15px; position: absolute; ">
-  results:
-<pre>{{prefResults}}</pre>
-</div>
-<div class="stage-container">
-  <div class="stage-component">
-    <PreferenceManager title="Set Preferences">
-      <PreferenceManagerPage id="0" subtitle="Part 1 of our questions...">
-        <PreferenceMultiSelect :question="question1" v-model="prefResults.q1"/>
-        <PreferenceMultiSelect :question="question2" v-model="prefResults.q2"/>
-      </PreferenceManagerPage>
-      <PreferenceManagerPage id="1" subtitle="Part 2 of the q'aire">
-        <PreferenceMultiSelect :question="question3" v-model="prefResults.q3"/>
-      </PreferenceManagerPage>
-      <PreferenceManagerPage id="2">
-        <PreferenceOneSelect 
-          questionId="Curricular"
-          questionText="School programs offering?"
-          :questionOptions="[
-            'Virtual',
-            'Hybrid',
-            'Both',
-          ]"
-        />
-      
-        <PreferenceMultiSelect 
-          questionId="Extra-Curricular"
-          questionText="Sports preference?"
-          :questionOptions="[
-            'Cricket',
-            'Football',
-            'Tennis',
-            'Basketball',
-          ]"
-        />
-      </PreferenceManagerPage>
-      
-      <PreferenceManagerPage id="3">
-        <PreferenceTypeText 
-          questionId="Other"
-          questionText="Enter school name in your mind."
-        />
-        <PreferenceDropdown
-          questionId="Travel"
-          questionText="Subway decide"
-          :questionOptions="[
             '1',
             '2',
             'A',
             'R',
-          ]"
-        />
-        <PreferenceDropdown
-          questionId="Curricular"
-          questionText="Interest Areas"
-          :questionOptions="[
-            'Animal Science',
-            'Engineering',
-            'Science & Math',
-            'Law & Government',
-          ]"
-        />
-        <PreferenceSlider 
-          questionId="School-Status"
-          questionText="School rank level? [left to right: low to high rank]"
-          min="0"
-          max="10"
-        />
-      </PreferenceManagerPage>
-    </PreferenceManager>
-  </div>
-</div>
+        ]
+      },
+      question5: {
+        Name: "Academic Performance",
+        Text: "How would you rank your academic performance so far?",
+        Min: 1,
+        MinLabel: "Average",
+        Max: 7,
+        MaxLabel: "Excellent",
+      }
+    }
+  }
+}
+</script>
 
+<template> 
+  <div style="font-size:12px; width:300px; background-color: yellow; padding: 15px; position: absolute; ">
+    results:
+    <pre>{{prefResults}}</pre>
+  </div>
+  <div class="stage-container">
+    <div class="stage-component">
+
+      <PreferenceManager title="Set Preferences" @preferenceSubmitted="prefResults.submitted = true">
+
+        <PreferenceManagerPage id="0" subtitle="Instruction & Curriculum">
+          <PreferenceOneSelect :question="question1" v-model="prefResults.q1"/>
+          <PreferenceMultiSelect :question="question2" v-model="prefResults.q2"/>
+        </PreferenceManagerPage>
+
+        <PreferenceManagerPage id="1" subtitle="Location/School Specific">
+          <PreferenceTypeText :question="question3" v-model="prefResults.q3"/>
+          <PreferenceDropdown :question="question4" v-model="prefResults.q4"/>
+        </PreferenceManagerPage>
+
+        <PreferenceManagerPage id="2" subtitle="This or that...">
+          <PreferenceSlider :question="question5" v-model="prefResults.q5"/>
+        </PreferenceManagerPage>
+      </PreferenceManager>
+
+    </div>
+  </div>
 </template>
 
 <style scoped>
