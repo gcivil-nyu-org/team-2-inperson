@@ -31,10 +31,10 @@ export default {
 <style scoped>
 .sim-dimensions-container {
   font-size: 20px;
-  width: 480px;
+  width: 380px;
   height: auto;
-  
-
+  margin-left:auto;
+  margin-right:auto;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
