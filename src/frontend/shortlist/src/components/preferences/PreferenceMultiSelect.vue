@@ -1,6 +1,4 @@
 <script>
-
-
 export default {
   name: "PreferenceMultiSelect",
   props: [
@@ -19,7 +17,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <template>
