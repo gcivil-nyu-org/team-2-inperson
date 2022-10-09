@@ -2,10 +2,20 @@
 export default {
   name: "PreferenceDropdown",
   props: [
-    "questionId",
-    "questionText",
-    "questionOptions",
-  ]
+    "question",
+    "modelValue",
+  ],
+  emits: ["update:modelValue"],
+  computed: {
+    value: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        this.$emit("update:modelValue", value)
+      }
+    }
+  }
 }
 </script>
 
@@ -13,17 +23,17 @@ export default {
   <!--{{responseId}}-->
   <div class="pref-q-container">
     <div class="pref-q-name">
-      {{questionId}}
+      {{question.Name}}
     </div>
     <div class="pref-q-question">
-      {{questionText}}
+      {{question.Text}}
     </div>
     <div class="pref-opt-label">
-    <select :name="questionId" :id="questionId">
-        <option value="default"></option>
-    <template v-for="opt, optindex in questionOptions" :key="optindex">
-      <option  :value="opt">{{opt}}</option>
-    </template>
+    <select :name="question.Name" :id="question.Name" v-model="value">
+        <option value="default" ></option>
+        <template v-for="opt, optindex in question.Options" :key="optindex">
+          <option  :value="opt">{{opt}}</option>
+        </template>
     </select>
     </div>
   </div>
