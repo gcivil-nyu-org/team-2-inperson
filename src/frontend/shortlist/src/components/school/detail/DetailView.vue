@@ -1,16 +1,16 @@
 <script>
-import SimCard from "../../components/school/simple/SimCard.vue"
+import DetailCard from "../detail/DetailCard.vue"
 
 
 export default {
   name: "SimpleView",
-  components: { SimCard },
+  components: { DetailCard },
 }
 </script>
 
 <template>
   <div class="sim-container">
-      <SimCard></SimCard>
+      <DetailCard></DetailCard>
   </div>
 </template>
 

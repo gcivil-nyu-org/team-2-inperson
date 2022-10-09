@@ -1,8 +1,6 @@
 <script>
 import SimDimension from "../simple/SimDimension.vue"
 
-
-
 export default {
   name: "SimDimensions",
   components: {SimDimension},
@@ -21,10 +19,6 @@ export default {
     <template v-for="dimension in dimensions" :key="dimension">
       <SimDimension :text="dimension.text" :href2="dimension.href2" :color="dimension.color"/>
     </template>
-
-    <!--
-    <NavLink text="Home" href2="http://www.google.com" color="blue"/>
-    -->
   </div>
 </template>
 
@@ -38,8 +32,5 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  
 }
-
-
 </style>

@@ -14,7 +14,7 @@ export default {
 
 <template>
     <div class="card-container">
-        <img class="img-top-card" src="../../../images/img-top-card.png" 
+        <img class="img-top-card" src="../../../image/img-top-card.png" 
         alt="img-top-card" />
         <h4 class="title">Stuyvesant High School</h4>
         <SimDimensions></SimDimensions>
