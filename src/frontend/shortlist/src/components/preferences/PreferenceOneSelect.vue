@@ -4,26 +4,39 @@
 export default {
   name: "PreferenceOneSelect",
   props: [
-    "questionId",
-    "questionText",
-    "questionOptions",
-  ]
+    "question",
+    "modelValue",
+  ],
+  emits: ["update:modelValue"],
+  computed: {
+    value: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        console.log(value);
+        this.$emit("update:modelValue", value)
+      }
+    }
+  }
 }
-
 </script>
 
 <template>
   <!--{{responseId}}-->
   <div class="pref-q-container">
     <div class="pref-q-name">
-      {{questionId}}
+      {{question.Name}}
     </div>
     <div class="pref-q-question">
-      {{questionText}}
+      {{question.Text}}
     </div>
-    <template v-for="opt, optindex in questionOptions" :key="optindex">
-      <input type="radio" :id="optindex+''+opt" :name="questionId" :value="opt">
-      <label class="pref-opt-label" :for="optindex+''+opt"> {{opt}}</label><br>
+    <template v-for="opt, optindex in question.Options" :key="optindex">
+      <input type="radio" 
+        :value="opt"
+        name="radio" 
+        v-model="value">
+      <label class="pref-opt-label" :for="optindex">{{opt}}</label><br>
     </template>
   </div>
 </template>
