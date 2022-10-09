@@ -2,11 +2,23 @@
 
 
 export default {
-  name: "PreferenceTypeText",
+  name: "PreferenceOneSelect",
   props: [
-    "questionId",
-    "questionText",
-  ]
+    "question",
+    "modelValue",
+  ],
+  emits: ["update:modelValue"],
+  computed: {
+    value: {
+      get() {
+        return this.modelValue
+      },
+      set(value) {
+        console.log(value);
+        this.$emit("update:modelValue", value)
+      }
+    }
+  }
 }
 
 </script>
@@ -15,13 +27,15 @@ export default {
   <!--{{responseId}}-->
   <div class="pref-q-container">
     <div class="pref-q-name">
-      {{questionId}}
+      {{question.Name}}
     </div>
     <div class="pref-q-question">
-      {{questionText}}
+      {{question.Text}}
     </div>
     <div>
-      <input type="text" :id="questionId" :name="questionId" value="xyz">
+      <input type="text" 
+        :name="questionId" 
+        v-model="value">
     </div>
   </div>
 </template>
