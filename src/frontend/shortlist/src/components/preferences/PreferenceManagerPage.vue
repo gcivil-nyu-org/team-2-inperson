@@ -5,11 +5,9 @@ export default {
   props: ["id", "subtitle"],
   setup() {
     const selectedPage = inject("selectedPage");
-    
     return {
       selectedPage
     }
-    
   }
 }
 </script>
