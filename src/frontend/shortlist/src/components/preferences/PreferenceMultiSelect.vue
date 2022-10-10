@@ -24,8 +24,10 @@ export default {
     <div class="pref-q-name">{{question.Name}}</div>
     <div class="pref-q-question">{{question.Text}}</div>
     <template v-for="opt, optindex in question.Options" :key="optindex">
-      <input type="checkbox" class="form-check-input" :value="opt" :name="optindex" v-model="value">
-      <label class="form-check-label" :for="optindex"> {{opt}}</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" :value="opt" :name="optindex" v-model="value">
+        <label class="form-check-label" :for="optindex"> {{opt}}</label>
+      </div>
     </template>
   </div>
 </template>
@@ -38,6 +40,7 @@ export default {
   font-family: 'Klee One', cursive;
   font-weight: bold;
 }
+
 .pref-q-name {
   width: 100%;
   font-size: 24px;
@@ -49,6 +52,7 @@ export default {
   width: 100%;
   font-size: 18px;
 }
+
 .form-check-input:checked {
     background-color:#56865a;
     border-color:#56865a;
