@@ -93,8 +93,18 @@ export default {
 
     <div style="flex-grow: 1;">&nbsp;</div>
     <div class="pref-actions-line">
-      <template v-for="action in actions" :key="action">
-        <button v-if="action.enabled" @click="action.action" class="pref-actions">{{action.text}}</button>
+      <template v-if="actions.back.enabled">
+        <button class="pref-actions" @click="clicker('Back')">Back</button>
+        <div style="flex-grow: 1"></div>
+      </template>
+      <template v-if="actions.next.enabled">
+        <div style="flex-grow: 1"></div>
+        <button class="pref-actions" @click="clicker('Next')">Next</button>
+      </template>
+      <template v-if="actions.submit.enabled">
+        <div style="flex-grow: 1"></div>
+        <button class="pref-actions" style="background-color: #008037; font-weight:900; box-shadow: 0 0 0 6px rgba(44,187,99,.35) inset;"
+          @click="clicker('Submit')">Submit</button>
       </template>
     </div>
   </div>
@@ -146,7 +156,7 @@ export default {
 .pref-actions {
   flex-wrap: wrap;
   align-items: center;
-  font-weight: bold;
+  font-weight: 500;
   background-color:black;
   border-radius: 100px;
   box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
