@@ -43,51 +43,54 @@ export default {
 </script>
 
 <template>
+  <div class="sim-outer">
     <div class="sim-container">
-      <div style="background: yellow; width: 500px; height: 700px;">
-        <div class="topbox">
-          <SimCard :schoolData="schoolData"/>
-        </div>
-        <div class="secondbox">
-          <SimCard :schoolData="schoolData"/> 
-        </div>
-        <div class="thirdbox">
-          <SimCard :schoolData="schoolData"/>
-        </div>
+      <div class="topbox">
+        <SimCard :schoolData="schoolData"/>
+      </div>
+      <div class="secondbox">
+        <SimCard :schoolData="schoolData"/> 
+      </div>
+      <div class="thirdbox">
+        <SimCard :schoolData="schoolData"/>
       </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
-.sim-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.sim-outer {
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  justify-content: space-around; 
   align-items: center;
+}
+.sim-container {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
 }
 
 .topbox {
-  position: absolute;
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
   z-index: 400;
-  left: 30px;
-  top: 0px;
-  right: 20px;
+  margin-left: 30px;
+  margin-top: 0px;
 }
 
 .secondbox {
+  grid-area: 1 / 1 / 1 / 1;
   z-index: 300;
-  position: absolute;
-  left: 15px;
-  top: 15px;
+  margin-left: 15px;
+  margin-top: 15px;
 }
 
 .thirdbox {
+  grid-area: 1 / 1 / 1 / 1;
   z-index: 200;
-  position: absolute;
-  left: 0px;
-  top: 30px;
-
+  margin-left: 0px;
+  margin-top: 30px;
 }
 </style>
