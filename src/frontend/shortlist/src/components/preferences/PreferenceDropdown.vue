@@ -28,7 +28,7 @@ export default {
         class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" 
         style="background-color:#ebf3e6;font-weight:900;width:100%;color:black;font-size: 18px;"
       >
-        <option class="dropdown-item" value="default" ></option>
+        <option class="dropdown-item" value="" ></option>
         <template v-for="opt, optindex in question.Options" :key="optindex">
           <option class="dropdown-item" :value="opt">{{opt}}</option>
         </template>
