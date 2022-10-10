@@ -28,7 +28,7 @@ export default {
       {{questionText}}
     </div>
     <div>
-      <input type="range" :min="min" :max="max" :value="result">
+      <input type="range" class="slider" :min="min" :max="max" :value="result">
     </div>
   </div>
 </template>
