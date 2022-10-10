@@ -14,6 +14,7 @@ export default {
         this.selectedPage == 0 ? this.selectedPage = this.selectedPage : this.selectedPage--;
       } else {
         this.$emit("preferenceSubmitted");
+        this.$router.push('/');
       }
       
       if (this.selectedPage > 0) {
