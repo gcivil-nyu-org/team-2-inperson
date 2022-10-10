@@ -83,7 +83,8 @@ export default {
 
   <div class="pref-container">
     <div class="pref-title">
-      {{title}}
+      {{title}}<br>
+      <span class="pref-subtitle">{{subtitle}}</span>
     </div>
     
     <div class="pref-main">
@@ -91,18 +92,9 @@ export default {
     </div>
 
     <div style="flex-grow: 1;">&nbsp;</div>
-    <div class="pref-actions">
-      <template v-if="actions.back.enabled">
-        <button @click="clicker('Back')">Back</button>
-        <div style="flex-grow: 1"></div>
-      </template>
-      <template v-if="actions.next.enabled">
-        <div style="flex-grow: 1"></div>
-        <button @click="clicker('Next')">Next</button>
-      </template>
-      <template v-if="actions.submit.enabled">
-        <div style="flex-grow: 1"></div>
-        <button @click="clicker('Submit')">Submit</button>
+    <div class="pref-actions-line">
+      <template v-for="action in actions" :key="action">
+        <button v-if="action.enabled" @click="action.action" class="pref-actions">{{action.text}}</button>
       </template>
     </div>
   </div>
