@@ -1,6 +1,4 @@
 <script>
-
-
 export default {
   name: "PreferenceSlider",
   props: [
@@ -15,7 +13,6 @@ export default {
     }
   },
 }
-
 </script>
 
 <template>
