@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <div v-show="id == selectedPage">
+  <div v-show="id == selectedPage" style="margin-top: 10px; max-width:450px">
     <div class="pref-section-header">{{subtitle}}</div>
     <slot></slot>
   </div>
@@ -21,12 +21,11 @@ export default {
 
 <style scoped>
 .pref-section-header{
-  font-size: 20px;
-  width: 100%;
-  margin-top: 15px;
-  padding: 10px;
-  color: white;
-  background-color: green;
-
+  font-size: 20px; 
+  font-family: 'Aleo', serif; 
+  background-color: #D6CDA4;
+  font-weight: bold;
+  color:black;
+  padding: 8px;
 }
 </style>
