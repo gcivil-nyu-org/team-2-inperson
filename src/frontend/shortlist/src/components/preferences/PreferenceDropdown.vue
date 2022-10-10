@@ -19,11 +19,11 @@ export default {
       {{questionText}}
     </div>
     <div class="pref-opt-label">
-    <select :name="questionId" :id="questionId">
-        <option value="default"></option>
-    <template v-for="opt, optindex in questionOptions" :key="optindex">
-      <option  :value="opt">{{opt}}</option>
-    </template>
+    <select :name="questionId" :id="questionId" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" style="background-color:#ebf3e6;font-weight:900;width:100%;color:black;font-size: 18px;">
+        <option class="dropdown-item" value="default"></option>
+        <template v-for="opt, optindex in questionOptions" :key="optindex">
+          <option  class="dropdown-item" :value="opt">{{opt}}</option>
+        </template>
     </select>
     </div>
   </div>
