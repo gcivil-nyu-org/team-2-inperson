@@ -35,6 +35,7 @@ export default {
       <label class="pref-opt-label" :for="optindex">{{opt}}</label><br>
     </template>
   </div>
+  </div>
 </template>
 
 <style scoped>
