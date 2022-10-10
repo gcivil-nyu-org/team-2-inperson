@@ -103,7 +103,8 @@ export default {
       </template>
       <template v-if="actions.submit.enabled">
         <div style="flex-grow: 1"></div>
-        <button class="pref-actions" @click="clicker('Submit')">Submit</button>
+        <button class="pref-actions" style="background-color: #008037; font-weight:900; box-shadow: 0 0 0 6px rgba(44,187,99,.35) inset;"
+          @click="clicker('Submit')">Submit</button>
       </template>
     </div>
   </div>
@@ -155,7 +156,7 @@ export default {
 .pref-actions {
   flex-wrap: wrap;
   align-items: center;
-  font-weight: bold;
+  font-weight: 500;
   background-color:black;
   border-radius: 100px;
   box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
