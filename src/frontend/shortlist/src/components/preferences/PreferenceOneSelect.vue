@@ -42,20 +42,22 @@ export default {
 .pref-q-container {
   padding: 10px;
   width: 100%;
+  font-family: 'Klee One', cursive;
+  font-weight: bold;
 }
 .pref-q-name {
   width: 100%;
   font-size: 24px;
   font-weight: 500;
+  font-family: 'Cabin Sketch', cursive;
 }
 
 .pref-q-question {
   width: 100%;
   font-size: 18px;
 }
-
-.pref-opt-label {
-  font-size: 12px;
+.form-check-input:checked {
+    background-color: #56865a;
+    border-color: #56865a;
 }
-
 </style>
