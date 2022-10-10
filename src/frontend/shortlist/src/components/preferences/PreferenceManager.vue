@@ -35,16 +35,16 @@ export default {
   <div class="pref-container">
     <div class="pref-title">
       {{title}}<br>
-      <span style="font-size: 20px;">{{subtitle}}</span>
+      <span class="pref-subtitle">{{subtitle}}</span>
     </div>
     
     <div class="pref-main">
       <slot></slot>
     </div>
     <div style="flex-grow: 1;">&nbsp;</div>
-    <div class="pref-actions">
+    <div class="pref-actions-line">
       <template v-for="action in actions" :key="action">
-        <button v-if="action.enabled" @click="action.action">{{action.text}}</button>
+        <button v-if="action.enabled" @click="action.action" class="pref-actions">{{action.text}}</button>
       </template>
     </div>
   </div>
