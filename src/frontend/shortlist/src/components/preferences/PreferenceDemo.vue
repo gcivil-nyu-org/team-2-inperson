@@ -85,10 +85,10 @@ export default {
     results:
     <pre>{{prefResults}}</pre>
   </div>
-  <div class="stage-container">
-    <div class="stage-component" v-if="!prefResults.submitted">
+  <div class="preference-demo-container">
+    <div class="preference-demo-component" v-if="!prefResults.submitted">
 
-      <PreferenceManager title="Set Preferences" subtitle="Subtitle is here" @preferenceSubmitted="prefResults.submitted = true">
+      <PreferenceManager title="Set Preferences" @preferenceSubmitted="prefResults.submitted = true">
 
         <PreferenceManagerPage id="0" subtitle="Instruction & Curriculum">
           <PreferenceOneSelect :question="question1" v-model="prefResults.q1"/>
@@ -110,7 +110,7 @@ export default {
 </template>
 
 <style scoped>
-.stage-container {
+.preference-demo-container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -119,7 +119,7 @@ export default {
   align-items: center;
 }
 
-.stage-component {
+.preference-demo-component {
   width: 600px;
   border-radius: 20px;
   padding: 40px;
