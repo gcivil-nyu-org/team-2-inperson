@@ -7,6 +7,7 @@ import PreferenceTypeText from './PreferenceTypeText.vue';
 import PreferenceDropdown from './PreferenceDropdown.vue';
 import PreferenceSlider from './PreferenceSlider.vue';
 
+// TODO: unify all styles across components
 
 export default {
   name: "PreferenceDemo",
