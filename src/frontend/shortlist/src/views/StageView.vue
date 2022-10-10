@@ -10,7 +10,9 @@ export default {
 
 <template>
     <div class="container">
-      <DetailView></DetailView>
+      <!--<DetailView></DetailView>-->
+      <simple-view></simple-view>
+
     </div>
 </template>
 
