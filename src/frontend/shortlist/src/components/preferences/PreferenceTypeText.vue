@@ -1,6 +1,4 @@
 <script>
-
-
 export default {
   name: "PreferenceTypeText",
   props: [
@@ -21,7 +19,7 @@ export default {
       {{questionText}}
     </div>
     <div>
-      <input type="text" :id="questionId" :name="questionId" value="xyz">
+      <input type="text" class="text" :id="questionId" :name="questionId" placeholder="">
     </div>
   </div>
 </template>
@@ -30,11 +28,14 @@ export default {
 .pref-q-container {
   padding: 10px;
   width: 100%;
+  font-family: 'Klee One', cursive;
+  font-weight: bold;
 }
 .pref-q-name {
   width: 100%;
   font-size: 24px;
   font-weight: 500;
+  font-family: 'Cabin Sketch', cursive;
 }
 
 .pref-q-question {
@@ -46,4 +47,18 @@ export default {
   font-size: 12px;
 }
 
+.text{
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #666;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: 'Aleo', serif;
+  outline: none;
+  transition: border-color .2s;
+  font-family: 'Aleo', serif;
+}
 </style>
