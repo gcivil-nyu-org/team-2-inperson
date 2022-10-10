@@ -46,6 +46,7 @@ export default {
   font-family: 'Klee One', cursive;
   font-weight: bold;
 }
+
 .pref-q-name {
   width: 100%;
   font-size: 24px;
@@ -57,6 +58,7 @@ export default {
   width: 100%;
   font-size: 18px;
 }
+
 .form-check-input:checked {
     background-color:#56865a;
     border-color:#56865a;
