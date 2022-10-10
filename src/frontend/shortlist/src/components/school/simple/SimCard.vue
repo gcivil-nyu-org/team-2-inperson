@@ -1,33 +1,32 @@
 <script>
-/*
-import SimPic from "../SimpleView/SimPic.vue"
-import SimTitle from "../SimpleView/SimTitle.vue"
-*/
-import SimDimensions from "../simple/SimDimensions.vue"
-
-export default {
-  name: "SimCard",
-  components: { SimDimensions/*, SimPic, SimTitle*/ },
-}
-
+    export default {
+        name: "SimCard",
+        props: ["schoolData"],
+    }
 </script>
 
 <template>
     <div class="card-container">
-        <img class="img-top-card" src="../../../image/img-top-card.png" 
-        alt="img-top-card" />
-        <h4 class="title">Stuyvesant High School</h4>
-        <SimDimensions></SimDimensions>
-        <!--
-        <v-img 
-            lazy-src="../../../images/img-top-card.png"
-            max-height = "200px"
-            max-width = "300px"
-            src="../../../images/img-top-card.png"
-        ></v-img>
-        -->
+        <div class="simple-img-container">
+            <img class="simple-img" :src="schoolData.img"/>
+        </div>
+        <div style="width: 100%; diplay: flex; flex-wrap: wrap; justify-content:flex-end; padding: 15px;">
+            <div class="simple-school-name">
+                {{schoolData.name}}
+            </div>
+            <div class="simple-school-borough">
+                {{schoolData.borough}}
+            </div>
+        </div>
+        <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; padding: 15px;">
+            <template v-for="dimension in schoolData.dimensions" :key="dimension">
+                <div class="dimension-row">
+                    <div class="dimension-name">{{dimension.name}}</div>
+                    <div class="dimension-value">{{dimension.value}}</div>
+                </div>
+            </template>
+        </div>
     </div>
-    
 </template>
 
 <style scoped>
