@@ -1,15 +1,15 @@
 <script>
-import PreferenceDemo from "../components/preferences/PreferenceDemo.vue";
+import SimCardDemo from "../components/school/simple/SimCardDemo.vue";
 
 export default {
   components: {
-    PreferenceDemo
+    SimCardDemo
   }
 }
 </script>
 
 <template> 
-  <PreferenceDemo/>
+  <SimCardDemo/>
 </template>
 
 <style scoped>
