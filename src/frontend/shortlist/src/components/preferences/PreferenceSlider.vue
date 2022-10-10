@@ -21,13 +21,9 @@ export default {
 
 <template>
   <div class="pref-q-container">
-    <div class="pref-q-name">
-      {{question.Name}}
-    </div>
-    <div class="pref-q-question">
-      {{question.Text}}
-    </div>
-    <div>
+    <div class="pref-q-name">{{question.Name}}</div>
+    <div class="pref-q-question">{{question.Text}}</div>
+    <div style="display: flex; align-items: center; justify-content: space-around; margin-top: 10px;">
       <span style="font-size: 15px; margin-right: 5px;">
       {{question.MinLabel}}
       </span>
@@ -69,15 +65,15 @@ export default {
 }
 
 .slider {
-  -webkit-appearance: none;
+  appearance: none;
   width: 100%;
+  max-width:200px;
   height: 15px;
   border-radius: 5px;  
   background: #d3d3d3;
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
   appearance: none;
   width: 25px;
   height: 25px;
