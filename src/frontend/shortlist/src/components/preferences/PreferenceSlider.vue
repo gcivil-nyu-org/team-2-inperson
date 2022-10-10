@@ -32,7 +32,7 @@ export default {
       {{question.MinLabel}}
       </span>
       
-      <input type="range" 
+      <input type="range" class="slider"
         :min="question.Min" 
         :max="question.Max" 
         v-model="value">
@@ -48,11 +48,15 @@ export default {
 .pref-q-container {
   padding: 10px;
   width: 100%;
+  font-family: 'Klee One', cursive;
+  font-weight: bold;
 }
+
 .pref-q-name {
   width: 100%;
   font-size: 24px;
   font-weight: 500;
+  font-family: 'Cabin Sketch', cursive;
 }
 
 .pref-q-question {
@@ -64,4 +68,21 @@ export default {
   font-size: 12px;
 }
 
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #56865a;
+  cursor: pointer;
+}
 </style>
