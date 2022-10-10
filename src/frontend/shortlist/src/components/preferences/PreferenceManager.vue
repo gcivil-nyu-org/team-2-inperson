@@ -84,7 +84,6 @@ export default {
   <div class="pref-container">
     <div class="pref-title">
       {{title}}<br>
-      <span class="pref-subtitle">{{subtitle}}</span>
     </div>
     
     <div class="pref-main">
@@ -131,13 +130,6 @@ export default {
   color:#067418;
 }
 
-.pref-subtitle{
-  font-size: 20px; 
-  font-family: 'Aleo', serif; 
-  background-color: #D6CDA4;
-  font-weight: bold;
-  color:black
-}
 .pref-main {
   width: 100%;
   display: flex;
