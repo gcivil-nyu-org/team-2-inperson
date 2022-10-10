@@ -30,23 +30,60 @@
 </template>
 
 <style scoped>
-.card-container {
-    /*align-items: flex-start;*/
-    /*background-color: var(--white); */
-    background-color: white;
-    border: 1px none;
-    margin-left:auto;
-    margin-right:auto;
-    border-radius: 8px;
-    box-shadow: 0px 4px 4px #00000040;
-    display: flex;
-    height: 480px;
-    width: 400px;
-    min-width: 300px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
 
+.dimension-name {
+    font-family: "Aleo";
+    font-weight: bold;
+    border-bottom: 1px solid #779886;
+
+}
+
+.dimension-value {
+    font-family: sans-serif;
+    margin-left: 5px;
+}
+
+.dimension-row {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.simple-school-name {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: "Libre Baskerville" ;
+}
+
+.simple-school-borough {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 14px;
+}
+.simple-img-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.simple-img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 10px;
+    border: 2px solid #779886;
+}
+
+.card-container {
+  width: 400px;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #ecf0f3;
+  box-shadow: 14px 14px 20px #779886, -14px -14px 20px white;
+  font-family: "Aleo";
 }
 .img-top-card {
     height:250px;
