@@ -21,22 +21,18 @@ export default {
 
 <template>
   <div class="pref-q-container">
-    <div class="pref-q-name">
-      {{question.Name}}
-    </div>
-    <div class="pref-q-question">
-      {{question.Text}}
-    </div>
+    <div class="pref-q-name">{{question.Name}}</div>
+    <div class="pref-q-question">{{question.Text}}</div>
     <div class="pref-opt-label">
-    <select :name="question.Name" :id="question.Name" v-model="value"
-      class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" 
-      style="background-color:#ebf3e6;font-weight:900;width:100%;color:black;font-size: 18px;"
-    >
+      <select :name="question.Name" :id="question.Name" v-model="value"
+        class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" 
+        style="background-color:#ebf3e6;font-weight:900;width:100%;color:black;font-size: 18px;"
+      >
         <option class="dropdown-item" value="default" ></option>
         <template v-for="opt, optindex in question.Options" :key="optindex">
           <option class="dropdown-item" :value="opt">{{opt}}</option>
         </template>
-    </select>
+      </select>
     </div>
   </div>
 </template>
