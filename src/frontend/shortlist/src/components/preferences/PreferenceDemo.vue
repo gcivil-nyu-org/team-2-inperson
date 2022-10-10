@@ -85,8 +85,8 @@ export default {
     results:
     <pre>{{prefResults}}</pre>
   </div>
-  <div class="stage-container">
-    <div class="stage-component" v-if="!prefResults.submitted">
+  <div class="preference-demo-container">
+    <div class="preference-demo-component" v-if="!prefResults.submitted">
 
       <PreferenceManager v-if="!prefResults.submitted" title="Set Preferences" @preferenceSubmitted="prefResults.submitted = true">
 
@@ -110,7 +110,7 @@ export default {
 </template>
 
 <style scoped>
-.stage-container {
+.preference-demo-container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -119,8 +119,7 @@ export default {
   align-items: center;
 }
 
-.stage-component {
-  /* border: 10px solid black; */
+.preference-demo-component {
   width: 600px;
 }
 </style>
