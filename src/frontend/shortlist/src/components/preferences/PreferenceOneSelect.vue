@@ -21,10 +21,12 @@ export default {
     <div class="pref-q-question">
       {{questionText}}
     </div>
+    <div style="font-size: 14px;">
     <template v-for="opt, optindex in questionOptions" :key="optindex">
-      <input type="radio" :id="optindex+''+opt" :name="questionId" :value="opt">
-      <label class="pref-opt-label" :for="optindex+''+opt"> {{opt}}</label><br>
+      <input type="radio" class="form-check-input" :id="optindex+''+opt" :name="questionId" :value="opt">&nbsp;
+      <label class="form-check-label" :for="optindex+''+opt"> {{opt}}</label><br>
     </template>
+  </div>
   </div>
 </template>
 
