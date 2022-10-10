@@ -1,31 +1,16 @@
 <script>
-import SimpleView from "../components/school/simple/SimpleView.vue";
-import DetailView from "../components/school/detail/DetailView.vue";
+import PreferenceDemo from "../components/preferences/PreferenceDemo.vue";
 
 export default {
-    name: "StageView",
-    components: { SimpleView, DetailView }
+  components: {
+    PreferenceDemo
+  }
 }
 </script>
 
-<template>
-    <div class="container">
-      <!--<DetailView></DetailView>-->
-      <simple-view></simple-view>
-
-    </div>
+<template> 
+  <PreferenceDemo/>
 </template>
 
 <style scoped>
-.container {
-  width: 550px;
-  height: 100%;
-  display: flex;
-  margin-left:auto;
-  margin-right:auto;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  background-color:green;
-}
 </style>
