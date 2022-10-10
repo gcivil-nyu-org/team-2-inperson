@@ -86,7 +86,7 @@ export default {
     <pre>{{prefResults}}</pre>
   </div>
   <div class="stage-container">
-    <div class="stage-component">
+    <div class="stage-component" v-if="!prefResults.submitted">
 
       <PreferenceManager v-if="!prefResults.submitted" title="Set Preferences" @preferenceSubmitted="prefResults.submitted = true">
 
