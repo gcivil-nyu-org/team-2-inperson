@@ -24,8 +24,10 @@ export default {
     <div class="pref-q-name">{{question.Name}}</div>
     <div class="pref-q-question">{{question.Text}}</div>
     <template v-for="opt, optindex in question.Options" :key="optindex">
-      <input type="radio" class="form-check-input" :value="opt" name="radio" v-model="value">
-      <label class="form-check-label" :for="optindex">{{opt}}</label>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" :value="opt" :name="optindex" v-model="value"/>
+        <label class="form-check-label" :for="optindex">{{opt}}</label>
+      </div>
     </template>
   </div>
 </template>
