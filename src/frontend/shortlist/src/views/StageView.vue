@@ -90,9 +90,12 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-
 .stage-component {
-  border: 10px solid black;
   width: 600px;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #ecf0f3;
+  box-shadow: 14px 14px 20px #779886, -14px -14px 20px white;
 }
 </style>
