@@ -20,12 +20,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'm#c)juz-3ypoqyf1yf(lefzohnowe-nv&s2ivo(&oi(_avwi3&'
+SECRET_KEY = os.getenv("SHORTLIST_DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1"
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost",
+    "http://*.elb.amazonaws.com"
+]
 
 
 # Application definition
@@ -75,9 +83,28 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get("SHORTLIST_RDS_DB"),
+        "USER": os.environ.get("SHORTLIST_RDS_USER"),
+        "PASSWORD": os.environ.get("SHORTLIST_RDS_PASSWORD"),
+        "HOST": os.environ.get("SHORTLIST_RDS_ENDPOINT"),
+        "PORT": os.environ.get("SHORTLIST_RDS_PORT")
     }
+}
+
+XRAY_RECORDER = {
+    'AWS_XRAY_DAEMON_ADDRESS': '127.0.0.1:2000',
+    # If turned on built-in database queries and template rendering will be recorded as subsegments
+    'AUTO_INSTRUMENT': True,
+    'AWS_XRAY_CONTEXT_MISSING': 'LOG_ERROR',
+    'PLUGINS': (),
+    'SAMPLING': True,
+    'SAMPLING_RULES': None,
+    # the segment name for segments generated from incoming requests
+    'AWS_XRAY_TRACING_NAME': "Shortlist",
+    'DYNAMIC_NAMING': None,  # defines a pattern that host names should match
+    # defines when a segment starts to stream out its children subsegments
+    'STREAMING_THRESHOLD': None,
 }
 
 
@@ -117,4 +144,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+STATIC_ROOT = "static"
 STATIC_URL = '/static/'
