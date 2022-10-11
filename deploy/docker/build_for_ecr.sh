@@ -6,8 +6,6 @@ set +a
 cp ~/.shortlist/.env .
 git clone github:gcivil-nyu-org/team-2-inperson _repository
 cd _repository
-# until this gets pushed... JFC
-git checkout issue-78
 cd ..
 cp -R _repository/src/backend/server ./root/app
 rm -rf _repository
@@ -18,7 +16,7 @@ then
 else
   SHORTLIST_REPO_TAG=$1
 fi
-
+# --platform linux/amd64,linux/arm64 \
 docker buildx build \
   --tag ${SHORTLIST_ECR_REGISTRY}/${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG} \
   --platform linux/amd64,linux/arm64 \

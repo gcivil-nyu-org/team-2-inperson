@@ -11,8 +11,10 @@ systemctl start nginx
 # xray-dameon for aws xray
 xray-daemon -f /var/log/xray-daemon.log &
 
-cd /app/
+cd /app/server
 python3 manage.py collectstatic
+cp -R /app/frontend/* /app/server/static/.
+
 gunicorn $1.wsgi -b localhost:8080
 
 # BLOCKING.... fails/exits if gunicorn goes down

@@ -1,3 +1,3 @@
 .env
 _repository
-./root/app
+docker/root/app

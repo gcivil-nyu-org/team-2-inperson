@@ -3,14 +3,7 @@ set -a
 source ~/.shortlist/.env
 set +a
 
-cp ~/.shortlist/.env .
-git clone github:gcivil-nyu-org/team-2-inperson _repository
-cd _repository
-# until this gets pushed... JFC
-git checkout issue-78
-cd ..
-cp -R _repository/src/backend/server ./root/app
-rm -rf _repository
+source clone_and_build.sh
 
 if [ $# -eq 0 ]
 then
@@ -23,4 +16,4 @@ docker build . -t ${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG}
 rm -rf .env
 rm -rf ./root/app/
 docker run --rm -p 9000:80 ${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG} 
-# docker run --rm -it --entrypoint=/bin/bash -p 9000:80 shortlist-repo:latest
+# docker run --rm -it --entrypoint=/bin/bash shortlist-repo:latest
