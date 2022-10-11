@@ -12,18 +12,44 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+import environ
+
+
+# from django.core.exceptions import ImproperlyConfigured
+
+
+#Handle KeyError exceptions
+# def get_env_value(env_variable):
+#     try:
+#       	return os.environ[env_variable]
+#     except KeyError:
+#         error_msg = 'Set the {} environment variable'.format(var_name)
+#         raise ImproperlyConfigured(error_msg)
+
+
+root = environ.Path(__file__) - 3  # get root of the project
+env = environ.Env()
+environ.Env.read_env()  # reading .env file
+
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SITE_ROOT = root()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SHORTLIST_DJANGO_SECRET")
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
+
+TEMPLATE_DEBUG = DEBUG
+
+
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -39,6 +65,7 @@ CSRF_TRUSTED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -81,16 +108,12 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.environ.get("SHORTLIST_RDS_DB"),
-        "USER": os.environ.get("SHORTLIST_RDS_USER"),
-        "PASSWORD": os.environ.get("SHORTLIST_RDS_PASSWORD"),
-        "HOST": os.environ.get("SHORTLIST_RDS_ENDPOINT"),
-        "PORT": os.environ.get("SHORTLIST_RDS_PORT")
-    }
-}
+# sample DATABASE_URL=postgresql_psycopg2://SHORTLIST_RDS_USER:SHORTLIST_RDS_PASSWORD@SHORTLIST_RDS_ENDPOINT:SHORTLIST_RDS_PORT/SHORTLIST_RDS_DB_NAME?sslmode=require
+
+DATABASES = {'default': env.db('DATABASE_URL')}
+
+
+
 
 XRAY_RECORDER = {
     'AWS_XRAY_DAEMON_ADDRESS': '127.0.0.1:2000',
@@ -141,8 +164,17 @@ USE_L10N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = "static"
-STATIC_URL = '/static/'
+public_root = root.path('public/')
+MEDIA_ROOT = public_root('media')
+MEDIA_URL = env.str('MEDIA_URL', default='media/')
+
+STATIC_ROOT = public_root('static')
+STATIC_URL = env.str('STATIC_URL', default='static/')
+
+
+# CACHES = {'default': env.cache('REDIS_CACHE_URL')}
+
