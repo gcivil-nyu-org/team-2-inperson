@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 # Set the name of the wsgi app (the django directory)
-ENV SHORTLIST_APP_NAME=hello
+ENV SHORTLIST_APP_NAME=server
 
 RUN apt-get update
 
@@ -26,5 +26,7 @@ RUN cp /xray/xray /usr/bin/xray-daemon
 # copy app to root
 COPY ./root/ /
 # todo... clone the repository into /root/app/...
+
+COPY .env /.env
 
 ENTRYPOINT /bin/bash init.sh $SHORTLIST_APP_NAME
