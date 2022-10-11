@@ -1,5 +1,5 @@
 <template>
-      <img id = "center" class="img-left-card" height = 20, width=10 src="../../../image/trash-can.png" 
+      <img id = "center" class="img-left-card" height = 20, width=10 src="/alice-trash-can.png" 
         alt="img-left-card" />
 </template>
 
