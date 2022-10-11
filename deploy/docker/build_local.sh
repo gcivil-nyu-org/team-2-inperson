@@ -9,7 +9,7 @@ cd _repository
 # until this gets pushed... JFC
 git checkout issue-78
 cd ..
-cp -R _repository/src/backend/server ./root/server
+cp -R _repository/src/backend/server ./root/app
 rm -rf _repository
 
 if [ $# -eq 0 ]
@@ -19,8 +19,8 @@ else
   SHORTLIST_REPO_TAG=$1
 fi
 
-# docker build . -t ${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG}
-# rm -rf .env
-# rm -rf ./root/server/
-
-# docker run --rm -p 9000:80 ${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG} 
+docker build . -t ${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG}
+rm -rf .env
+rm -rf ./root/app/
+docker run --rm -p 9000:80 ${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG} 
+docker run --rm -it --entrypoint=/bin/bash -p 9000:80 shortlist-repo:latest
