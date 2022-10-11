@@ -3,12 +3,7 @@ set -a
 source ~/.shortlist/.env
 set +a
 
-cp ~/.shortlist/.env .
-git clone github:gcivil-nyu-org/team-2-inperson _repository
-cd _repository
-cd ..
-cp -R _repository/src/backend/server ./root/app
-rm -rf _repository
+source clone_and_build.sh
 
 if [ $# -eq 0 ]
 then

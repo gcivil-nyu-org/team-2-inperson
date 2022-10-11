@@ -19,4 +19,4 @@ npm run build
 cp -R dist/* $MYROOT/root/app/frontend
 
 cd $MYROOT
-# rm -rf _repository
+rm -rf _repository

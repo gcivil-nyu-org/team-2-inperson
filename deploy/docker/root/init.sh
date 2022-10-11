@@ -12,8 +12,8 @@ systemctl start nginx
 xray-daemon -f /var/log/xray-daemon.log &
 
 cd /app/server
+python3 manage.py migrate
 python3 manage.py collectstatic
-cp -R /app/frontend/* /app/server/static/.
 
 gunicorn $1.wsgi -b localhost:8080
 
