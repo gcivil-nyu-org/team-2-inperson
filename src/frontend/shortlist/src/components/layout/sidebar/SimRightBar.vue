@@ -18,6 +18,6 @@ export default {
   float: right;
   justify-content: space-between;
   align-items: right;
-  background-color:gray;
+  background-color:rgb(10, 10, 10, .2);
 }
 </style>
