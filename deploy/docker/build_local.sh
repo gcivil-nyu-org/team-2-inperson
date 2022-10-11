@@ -23,4 +23,4 @@ docker build . -t ${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG}
 rm -rf .env
 rm -rf ./root/app/
 docker run --rm -p 9000:80 ${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG} 
-docker run --rm -it --entrypoint=/bin/bash -p 9000:80 shortlist-repo:latest
+# docker run --rm -it --entrypoint=/bin/bash -p 9000:80 shortlist-repo:latest
