@@ -11,13 +11,15 @@ export default {
 </script>
 
 <template>
-  Week of 2022-10-05:<br>
-  List of demos<br>
+  <!--<h1>Week of 2022-10-05:</h1>
+  List of demos<br>-->
   <SimpleBarView>
     <div class="middle-wrapper">
       <SimCardDemo/>
     </div>
   </SimpleBarView>
+
+  
 </template>
 
 <style scoped>
