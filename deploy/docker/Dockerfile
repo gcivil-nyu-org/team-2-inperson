@@ -28,7 +28,6 @@ RUN cp /xray/xray /usr/bin/xray-daemon
 
 # copy app to root
 COPY ./root/ /
-# todo... clone the repository into /root/app/...
 
 COPY .env /.env
 
