@@ -11,8 +11,13 @@ export default {
 
 <template>
   <div class="bar-container" >
-      <SimRightBar></SimRightBar>
       <SimLeftBar></SimLeftBar>
+      <div style="height: 100%; flex-grow: 1"></div>
+      <div style="height: 100%; display: flex; flex-direction: column; justify-content: space-around;">
+        <slot></slot>
+      </div>
+      <div style="height: 100%; flex-grow: 1"></div>
+      <SimRightBar></SimRightBar>
   </div>
 </template>
 
@@ -20,13 +25,9 @@ export default {
 .bar-container {
   width: 100%;
   height: 100%;
-  float:left;
-  margin-left:auto;
-  margin-right:auto;
+  display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  background-color:green;
+  
 }
 
 </style>

@@ -1,5 +1,5 @@
 <script>
-import SimCard from "./SimCard.vue"
+import SimCard from "../../school/simple/SimCard.vue"
 
 export default {
   name: "SimCardDemo",
