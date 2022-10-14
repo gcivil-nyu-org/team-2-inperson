@@ -38,6 +38,9 @@ export default {
     align-items: center;
     */
     width: 400px;
+    height: 600px; 
+    /* align-self: center;  */
+    margin: auto; 
     border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
@@ -46,7 +49,8 @@ export default {
     font-family: "Aleo";
 }
 .detail-title {
-    align-self: center;
+    /* align-self: center; */
+    margin: auto; 
     letter-spacing: 0;
     margin-right: 1px;
     min-height: 50px;
