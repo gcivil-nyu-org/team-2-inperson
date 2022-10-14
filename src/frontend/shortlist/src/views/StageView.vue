@@ -1,3 +1,12 @@
+<!--
+<script>
+    export default {
+        name: "stage-view",
+    }
+</script>
+
 <template>
-    <div>Stage</div>
+    <your-view></your-view>
 </template>
+
+-->
