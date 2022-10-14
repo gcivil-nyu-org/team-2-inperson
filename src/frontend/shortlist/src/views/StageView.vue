@@ -1,15 +1,15 @@
 <script>
-import DetailCard from "../components/school/detail/DetailCard.vue";
+import DetailCardDemo from "../components/school/detail/DetailCard.vue";
 import SimCardDemo from "../components/school/simple/SimCardDemo.vue";
 export default {
     name: "StageView",
-    components: { DetailCard, SimCardDemo }
+    components: { DetailCardDemo, SimCardDemo }
 }
 </script>
 
 <template>
     <div class="container">
-      <DetailCard></DetailCard>
+      <DetailCardDemo></DetailCardDemo>
       <!-- <SimCardDemo></SimCardDemo> -->
     </div>
 </template>
