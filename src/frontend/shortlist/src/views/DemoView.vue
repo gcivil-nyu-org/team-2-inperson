@@ -1,6 +1,6 @@
 <script>
 import SimpleBarView from "../components/layout/sidebar/SimpleBarView.vue";
-import SimCardDemo from "../components/school/simple/SimCardDemo.vue";
+import SimCardDemo from "../components/layout/composite/CompositeView.vue";
 
 export default {
   components: {
@@ -11,8 +11,8 @@ export default {
 </script>
 
 <template>
-  <!--<h1>Week of 2022-10-05:</h1>
-  List of demos<br>-->
+  <h1>Week of 2022-10-13 (TBD)</h1>
+  <!--List of demos<br>-->
   <SimpleBarView>
     <div class="middle-wrapper">
       <SimCardDemo/>
