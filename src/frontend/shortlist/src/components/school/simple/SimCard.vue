@@ -47,6 +47,7 @@
     width: 100%;
     margin-bottom: 10px;
 }
+
 .simple-school-name {
     display: flex;
     align-items: center;

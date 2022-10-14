@@ -6,7 +6,7 @@ export default {
   components: {DetailProp},
   setup() {
     const props = [
-      {text: "Dimension1:", href2: "http://www.google.com"},
+      {text: "School Name: Stevaughsan High School", href2: "https://stuy.enschool.org/"},
       {text: "Dimension2:", href2: "http://www.google.com"},
       {text: "Dimension3:", href2: "http://www.google.com"},
       {text: "Dimension4:", href2: "http://www.google.com"},
