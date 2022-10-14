@@ -7,11 +7,21 @@ export default {
   setup() {
     const props = [
       {text: "School Name: Stevaughsan High School", href2: "https://stuy.enschool.org/"},
-      {text: "Dimension2:", href2: "http://www.google.com"},
-      {text: "Dimension3:", href2: "http://www.google.com"},
-      {text: "Dimension4:", href2: "http://www.google.com"},
-      {text: "Dimension5:", href2: "http://www.google.com"},
-      {text: "Dimension6:", href2: "http://www.google.com"}
+      {text: "School ID:", },
+      {text: "Students Enrolled:", },
+      {text: "Borough name:", },
+      {text: "Phone #:", },
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
+      {text: "Address:", }, 
     ];
     return {props};
   }
