@@ -15,7 +15,7 @@ export default {
   <!--List of demos<br>-->
   <SimpleBarView>
     <div class="middle-wrapper">
-      <SimCardDemo/>
+      <SimCardDemo></SimCardDemo>
     </div>
   </SimpleBarView>
 
