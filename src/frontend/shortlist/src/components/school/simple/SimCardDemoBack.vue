@@ -1,12 +1,9 @@
 <script>
-import SimCard from "../../school/simple/SimCard.vue";
-import SimLeftBar from "../sidebar/SimLeftBar.vue";
-import SimRightBar from "../sidebar/SimRightBar.vue";
-import Navbar from "../navigation/Navbar.vue"; 
+import SimCard from "../simple/SimCard.vue";
+
 export default {
-  name: "CompositeView",
-  components: { SimCard, SimLeftBar, SimRightBar, Navbar },
-  //Here's the code to set up data import, currently hard coded data below
+  name: "SimCardDemo",
+  components: { SimCard },
   setup() {
     const schoolData = {
       img: 
@@ -44,11 +41,7 @@ export default {
 </script>
 
 <template>
-  <div class="composite-container">
-    <div class="leftbox">
-      <SimLeftBar></SimLeftBar>
-    </div>
-    
+  <div class="sim-outer">
     <div class="sim-container">
       <div class="topbox">
         <SimCard :schoolData="schoolData"/>
@@ -60,29 +53,23 @@ export default {
         <SimCard :schoolData="schoolData"/>
       </div>
     </div>
-    <div class="rightbox">
-      <SimRightBar></SimRightBar>
-    </div>
   </div>
 </template>
 
 <style scoped>
-.composite-container {
+.sim-outer {
   width: 100%; 
   height: 100%; 
   display: flex; 
   justify-content: space-around; 
   align-items: center;
 }
-.topbox {
-}
-.leftbox {
-}
 .sim-container {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
 }
+
 .topbox {
   grid-column: 1 / 1;
   grid-row: 1 / 1;
@@ -90,18 +77,18 @@ export default {
   margin-left: 30px;
   margin-top: 0px;
 }
+
 .secondbox {
   grid-area: 1 / 1 / 1 / 1;
   z-index: 300;
   margin-left: 15px;
   margin-top: 15px;
 }
+
 .thirdbox {
   grid-area: 1 / 1 / 1 / 1;
   z-index: 200;
   margin-left: 0px;
   margin-top: 30px;
-}
-.rightbox {
 }
 </style>
