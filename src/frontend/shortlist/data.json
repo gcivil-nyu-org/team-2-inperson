@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Cabbage"
+    },
+    {
+      "id": 0,
+      "name": "Cakes"
+    },
+    {
+      "name": "Donut",
+      "id": 2,
+      "bought": true
+    },
+    {
+      "name": "Ice",
+      "id": 3,
+      "bought": true
+    }
+  ]
+}

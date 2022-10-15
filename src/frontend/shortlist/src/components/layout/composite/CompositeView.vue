@@ -1,4 +1,3 @@
-<script id="json_data" type="application/json">{"hello": "world"}</script>
 <script>
 import SimCard from "../../school/simple/SimCard.vue";
 import SimLeftBar from "../sidebar/SimLeftBar.vue";
