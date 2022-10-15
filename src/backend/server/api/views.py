@@ -12,6 +12,13 @@ def get_schools(request):
     return HttpResponse(data, content_type="application/json")
 
 
+#get schools by borough_choices
+def get_schools_by_filters(request):
+    qs = School.objects.all()
+    data = serialize("json", qs, fields=('dbn', 'school_name', 'school_type', 'num_enrollment', 'borough_name', 'borough_code', 'phone_number', 'primary_address', 'city', 'state', 'zip_code', 'district_code', 'neighborhood'))
+    return HttpResponse(data, content_type="application/json")
+
+
 
 
 
