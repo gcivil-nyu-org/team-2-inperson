@@ -5,9 +5,9 @@ echo $MYROOT
 cp ~/.shortlist/.env .
 mkdir -p ./root/app/frontend
 
-git clone github:gcivil-nyu-org/team-2-inperson _repository
+git clone git@github.com:gcivil-nyu-org/team-2-inperson.git _repository
 cd _repository
-git checkout demo1
+git checkout 82-dragging-elements
 
 # pure copy of server
 cp -R src/backend/server $MYROOT/root/app
