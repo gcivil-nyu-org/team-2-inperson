@@ -9,19 +9,20 @@ export default {
   data() {
     return {
     items: [],
-    itemName: "",
+    picked: Math.floor(Math.random() * 3)
     };
+    
   },
   
   async created() {
     try {
-    const res = await axios.get(`http://localhost:3000/items`);
-    this.items = res.data;
+    const jsonFile = await axios.get(`http://localhost:3000/schools`);
+    this.items = jsonFile.data;
     } catch (error) {
     console.log(error);
     }
   },
-  
+  /*
   methods: {
     
     async boughtItem(id) {
@@ -50,6 +51,7 @@ export default {
         this.itemName = "";
     },
   },
+  */
   setup() {
     const schoolData = {
       img: 
@@ -69,18 +71,10 @@ export default {
           name: "Athletic Conference",
           value: "PSAL"
         },
-        studentRatio: {
-          name: "Student-to-Teacher Ratio",
-          value: "21.6:1",
-        },
-        colors: {
-          name: "School Colors",
-          value: "Red, Blue, White",
-        },
       }
     }
     return {
-      schoolData
+      schoolData,
     }
   },
 }
@@ -88,31 +82,23 @@ export default {
 
 <template>
   <div class="sim-outer">
+    <!--
     <div class="add-list">
-        <input v-model="itemName" @keyup.enter="addItem" type="text" /><br />
+        <input v-model="itemName" @keyup.enter="addItem" type="text" /><br /> 
         <button @click="addItem()">Add Item</button>
         
     </div>
-    <ul>
-        <li
-            v-for="item of items"
-            :class="{ bought: item.bought }"
-            :key="item.id"
-            @click="boughtItem(item.id)"
-            @dblclick="removeItem(item.id)"
-        >
-            {{ item.name }}
-        </li>
-    </ul>
+    -->
     <div class="sim-container">
+        {{picked}}
       <div class="topbox">
-        <SimCard :schoolData="schoolData"/>
+        <SimCard :schoolData="this.items[picked]"/>
       </div>
       <div class="secondbox">
-        <SimCard :schoolData="schoolData"/> 
+        <SimCard :schoolData="this.items[picked]"/> 
       </div>
       <div class="thirdbox">
-        <SimCard :schoolData="schoolData"/>
+        <SimCard :schoolData="this.items[picked]"/>
       </div>
     </div>
   </div>
