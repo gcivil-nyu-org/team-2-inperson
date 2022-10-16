@@ -16,13 +16,13 @@ export default {
         },
         {
           id: 1,
-          text: 'Simple View',
-          page:'/demo'
+          text: 'Set Preferences',
+          page:'/setprefs'
         },
         {
           id: 2,
-          text: 'Set Preferences',
-          page:'/setprefs'
+          text: 'Simple View',
+          page:'/demo'
         }
       ],
       //logo: require("../../image/shortlist.sm")

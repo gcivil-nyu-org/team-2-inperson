@@ -1,12 +1,17 @@
 <script>
-import SimCard from "../../school/simple/SimCard.vue"
+import SimCard from "../../school/simple/SimCard.vue";
+import SimLeftBar from "../sidebar/SimLeftBar.vue";
+import SimRightBar from "../sidebar/SimRightBar.vue";
+import Navbar from "../navigation/Navbar.vue"; 
 
 export default {
-  name: "SimCardDemo",
-  components: { SimCard },
+  name: "CompositeView",
+  components: { SimCard, SimLeftBar, SimRightBar, Navbar },
+  //Here's the code to set up data import, currently hard coded data below
   setup() {
     const schoolData = {
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg/2560px-Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg",
+      img: 
+"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg/2560px-Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg",
       name: "Stuyvesant High School",
       borough: "West Village, Manhattan",
       dimensions: {
@@ -36,14 +41,15 @@ export default {
       schoolData
     }
   },
-  apiExample(schoolId) {
-    // return call_api(schoolId); 
-  }
 }
 </script>
 
 <template>
-  <div class="sim-outer">
+  <div class="composite-container">
+    <div class="leftbox">
+      <SimLeftBar></SimLeftBar>
+    </div>
+    
     <div class="sim-container">
       <div class="topbox">
         <SimCard :schoolData="schoolData"/>
@@ -55,16 +61,25 @@ export default {
         <SimCard :schoolData="schoolData"/>
       </div>
     </div>
+    <div class="rightbox">
+      <SimRightBar></SimRightBar>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.sim-outer {
+.composite-container {
   width: 100%; 
   height: 100%; 
   display: flex; 
   justify-content: space-around; 
   align-items: center;
+}
+.topbox {
+
+}
+.leftbox {
+
 }
 .sim-container {
   display: grid;
@@ -93,4 +108,8 @@ export default {
   margin-left: 0px;
   margin-top: 30px;
 }
+.rightbox {
+
+}
+
 </style>
