@@ -52,31 +52,6 @@ export default {
     },
   },
   */
-  setup() {
-    const schoolData = {
-      img: 
-"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg/2560px-Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg",
-      name: "Stuyvesant High School",
-      borough: "West Village, Manhattan",
-      dimensions: {
-        enrollment: {
-          name: "Enrollment",
-          value: "3,344"
-        },
-        faculty: {
-          name: "Faculty Count",
-          value: "155"
-        },
-        athletics: {
-          name: "Athletic Conference",
-          value: "PSAL"
-        },
-      }
-    }
-    return {
-      schoolData,
-    }
-  },
 }
 </script>
 
