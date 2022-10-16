@@ -12,7 +12,7 @@ RUN apt-get -y install python3 python3-pip
 RUN apt-get -y install postgresql libpq-dev
 
 # python3 django dependencies
-RUN pip3 install django psycopg2 gunicorn python-dotenv
+RUN pip3 install django psycopg2 gunicorn python-dotenv django-environ==0.9.0
 
 # systemctl and nginx for sidecar
 RUN apt-get -y install systemctl nginx
