@@ -27,6 +27,19 @@ export default {
       ]
     }
   },
+  setup() {
+    const onDrop = (evt, list) => {
+    //const itemID = evt.dataTransfer.getData('itemID')
+    //const item = this.items.find((item) => item.id == itemID)
+    //item.list = list
+    console.log("drop-listbar", " ", list)
+    }
+
+    return {
+      onDrop,
+    }
+  }
+  
 }
 </script>
 
@@ -36,6 +49,7 @@ export default {
           :key="list.id"
           :listName="list.name"
           :listItems="list.items" 
+          @drop="onDrop($event, list.id)" @dragenter.prevent @dragover.prevent
           >
     </List>
   </div>
