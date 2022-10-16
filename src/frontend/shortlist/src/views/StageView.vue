@@ -1,13 +1,10 @@
+<!--
 <script>
-
-import SimCardDemo from '../components/school/simple/SimCardDemo.vue';
-
     export default {
-    components: {
-        SimCardDemo,
-    },
-}
+        name: "stage-view",
+    }
 </script>
 <template>
-    <SimCardDemo></SimCardDemo>
+    <your-view></your-view>
 </template>
+-->

@@ -45,9 +45,6 @@ export default {
 
 <template>
   <div class="composite-container">
-    <div class="navbox">
-      <Navbar></Navbar>
-    </div>
     <div class="leftbox">
       <SimLeftBar></SimLeftBar>
     </div>
