@@ -7,7 +7,7 @@ source clone_and_build.sh
 
 if [ $# -eq 0 ]
 then
-  SHORTLIST_REPO_TAG=latest-test
+  SHORTLIST_REPO_TAG=latest
 else
   SHORTLIST_REPO_TAG=$1
 fi
