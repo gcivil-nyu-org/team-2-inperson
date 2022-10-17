@@ -1,11 +1,14 @@
 <script>
 import SimCard from "../../school/simple/SimCard.vue";
 import SimLeftBar from "../sidebar/SimLeftBar.vue";
-import SimRightBar from "../sidebar/SimRightBar.vue";
+//import SimRightBar from "../sidebar/SimRightBar.vue";
+//import SimList from "../sidebar/SimList.vue";
 import Navbar from "../navigation/Navbar.vue"; 
+import ListBar from "../sidebar/ListBar.vue";
+
 export default {
   name: "CompositeView",
-  components: { SimCard, SimLeftBar, SimRightBar, Navbar },
+  components: { SimCard, SimLeftBar, Navbar, ListBar }, // SimRightBar, SimList,
   //Here's the code to set up data import, currently hard coded data below
   setup() {
     const schoolData = {
@@ -36,8 +39,25 @@ export default {
         },
       }
     }
+
+    const startDrag = (event, item) => {
+      //event.dataTransfer.dropEffect = 'move'
+      //event.dataTransfer.effectAllowed = 'move'
+      //event.dataTransfer.setData('itemID', item.id)
+      console.log("start drag")
+    }
+
+    const onDrop = (evt, list) => {
+      //const itemID = evt.dataTransfer.getData('itemID')
+      //const item = this.items.find((item) => item.id == itemID)
+      //item.list = list
+      console.log("drop")
+    }
+
     return {
-      schoolData
+      schoolData,
+      startDrag,
+      onDrop,
     }
   },
 }
@@ -49,8 +69,8 @@ export default {
       <SimLeftBar></SimLeftBar>
     </div>
     
-    <div class="sim-container">
-      <div class="topbox">
+    <div class="sim-container" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>
+      <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
         <SimCard :schoolData="schoolData"/>
       </div>
       <div class="secondbox">
@@ -60,8 +80,10 @@ export default {
         <SimCard :schoolData="schoolData"/>
       </div>
     </div>
+
     <div class="rightbox">
-      <SimRightBar></SimRightBar>
+      <!-- <SimList></SimList> -->
+      <ListBar/>
     </div>
   </div>
 </template>
@@ -103,5 +125,11 @@ export default {
   margin-top: 30px;
 }
 .rightbox {
+  width: 28%;
+  height: 100%;
+  float: right;
+  justify-content: space-between;
+  align-items: right;
+  background-color:rgb(10, 10, 10, .2);
 }
 </style>
