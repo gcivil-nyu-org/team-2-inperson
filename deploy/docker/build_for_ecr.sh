@@ -14,7 +14,7 @@ fi
 # --platform linux/amd64,linux/arm64 \
 docker buildx build \
   --tag ${SHORTLIST_ECR_REGISTRY}/${SHORTLIST_ECR_REPO}:${SHORTLIST_REPO_TAG} \
-  --platform linux/arm64 \
+  --platform linux/amd64,linux/arm64 \
   --push .
 
 rm -rf .env
