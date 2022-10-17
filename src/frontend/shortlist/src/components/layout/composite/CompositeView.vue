@@ -1,6 +1,6 @@
 <script>
 import SimCard from "../../school/simple/SimCard.vue";
-import SimLeftBar from "../sidebar/SimLeftBar.vue";
+import TrashBar from "../sidebar/TrashBar.vue";
 //import SimRightBar from "../sidebar/SimRightBar.vue";
 //import SimList from "../sidebar/SimList.vue";
 import Navbar from "../navigation/Navbar.vue"; 
@@ -8,7 +8,7 @@ import ListBar from "../sidebar/ListBar.vue";
 
 export default {
   name: "CompositeView",
-  components: { SimCard, SimLeftBar, Navbar, ListBar }, // SimRightBar, SimList,
+  components: { SimCard, TrashBar, Navbar, ListBar }, // SimRightBar, SimList,
   //Here's the code to set up data import, currently hard coded data below
   setup() {
     const schoolData = {
@@ -66,7 +66,7 @@ export default {
 <template>
   <div class="composite-container">
     <div class="leftbox">
-      <SimLeftBar></SimLeftBar>
+      <TrashBar/>
     </div>
     
     <div class="sim-container" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>

@@ -1,11 +1,11 @@
 <template>
-      <img id = "center" class="img-left-card" height = 20, width=10 src="/alice-trash-can.png" 
+      <img id = "center" class="left-button" height = 20, width=10 src="/alice-trash-can.png" 
         alt="img-left-card" />
 </template>
 
 <script>
 export default {
-    name: "SimButton",
+    name: "TrashButton",
   //   data() {
   //   return {
   //     disabled: false
@@ -14,7 +14,7 @@ export default {
 }
 </script>
 <style scoped>
-.img-left-card {
+.left-button {
     height:60px;
     width: 75px;
     margin-left: 50%;

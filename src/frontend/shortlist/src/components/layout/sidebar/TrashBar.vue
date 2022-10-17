@@ -1,19 +1,19 @@
 <script>
-import SimButton from './SimButton.vue'
+import TrashButton from './TrashButton.vue'
 export default {
-  name: "SimLetfBar",
-  components: {SimButton},
+  name: "TrashBar",
+  components: {TrashButton},
 }
 </script>
 
 <template>
-  <div class="simLeftBar-container" >
-      <SimButton></SimButton>
+  <div class="trash-container" >
+      <TrashButton></TrashButton>
   </div>
 </template>
 
 <style scoped>
-.simLeftBar-container {
+.trash-container {
   width: 28%;
   height: 100%;
   float:left;
