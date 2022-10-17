@@ -35,7 +35,6 @@
     font-family: "Aleo";
     font-weight: bold;
     border-bottom: 1px solid #779886;
-
 }
 
 .dimension-value {
@@ -47,6 +46,7 @@
     width: 100%;
     margin-bottom: 10px;
 }
+
 .simple-school-name {
     display: flex;
     align-items: center;
@@ -85,6 +85,7 @@
   box-shadow: 14px 14px 20px #779886, -14px -14px 20px white;
   font-family: "Aleo";
 }
+
 .img-top-card {
     height:250px;
     width:380px;
