@@ -1,6 +1,5 @@
 <script>
 import CompositeView from "../components/layout/composite/CompositeView.vue";
-
 export default {
   components: {
     CompositeView,
@@ -16,5 +15,4 @@ export default {
 </template>
 
 <style scoped>
-
 </style>

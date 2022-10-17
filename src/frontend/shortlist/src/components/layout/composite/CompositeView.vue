@@ -3,7 +3,6 @@ import SimCard from "../../school/simple/SimCard.vue";
 import SimLeftBar from "../sidebar/SimLeftBar.vue";
 import SimRightBar from "../sidebar/SimRightBar.vue";
 import Navbar from "../navigation/Navbar.vue"; 
-
 export default {
   name: "CompositeView",
   components: { SimCard, SimLeftBar, SimRightBar, Navbar },
@@ -76,17 +75,14 @@ export default {
   align-items: center;
 }
 .topbox {
-
 }
 .leftbox {
-
 }
 .sim-container {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
 }
-
 .topbox {
   grid-column: 1 / 1;
   grid-row: 1 / 1;
@@ -94,14 +90,12 @@ export default {
   margin-left: 30px;
   margin-top: 0px;
 }
-
 .secondbox {
   grid-area: 1 / 1 / 1 / 1;
   z-index: 300;
   margin-left: 15px;
   margin-top: 15px;
 }
-
 .thirdbox {
   grid-area: 1 / 1 / 1 / 1;
   z-index: 200;
@@ -109,7 +103,5 @@ export default {
   margin-top: 30px;
 }
 .rightbox {
-
 }
-
 </style>
