@@ -18,7 +18,8 @@ export default {
     return {
       items: [],
       picked: Math.floor(Math.random() * 3),
-      showSimple: true
+      showSimple: true,
+      // showAlert: false,
     };
   },
   
@@ -73,7 +74,7 @@ export default {
           name: "Address",
           value: "345 Chambers St, New York, NY 10282"
         },
-        rigorious_instruction: {
+        description: {
           name: "Rigorous Instruction Rating",
           value: "89%"
         },
@@ -107,14 +108,14 @@ export default {
       //event.dataTransfer.dropEffect = 'move'
       //event.dataTransfer.effectAllowed = 'move'
       //event.dataTransfer.setData('itemID', item.id)
-      console.log("start drag")
+      // console.log("start drag")
     }
 
-    const onDrop = (evt, list) => {
+    const onDrop = (evt, zone) => {
       //const itemID = evt.dataTransfer.getData('itemID')
       //const item = this.items.find((item) => item.id == itemID)
       //item.list = list
-      console.log("drop")
+      console.log("dropped in", zone)
     }
 
     return {
@@ -129,7 +130,8 @@ export default {
 
 <template>
   <div class="composite-container">
-    <div class="leftbox">
+    <div class="leftbox" @drop="onDrop($event, 'trash')" 
+                @dragenter.prevent @dragover.prevent >
       <TrashBar/>
     </div>
     
@@ -139,13 +141,13 @@ export default {
       {{picked}}
       
       <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
-        <template v-if="showSimple">
+        <div v-if="showSimple">
         <SimCard :schoolData="this.items[picked]"/>
-        </template>
-        <template v-else>
+        </div>
+        <div v-else>
           <DetailCard :schoolDetailData="detailData"/>
           <!--<DetailCardDemo/> draggable="true" @dragstart="startDrag($event, item)"/> -->
-        </template>
+        </div>
       </div>
     
       <div class="secondbox">
