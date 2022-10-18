@@ -59,8 +59,8 @@ export default {
 <style scoped>
 .list {
   margin-left: 5%;
-  margin-top: 10%;
-  margin-bottom: 20px;
+  margin-top: 5%;
+  margin-bottom: auto;
 
   /* background: #1f6b40; */
 }
