@@ -1,5 +1,8 @@
 <script>
 import SimCard from "../../school/simple/SimCard.vue";
+// import SimCardDemo from "../../school/simple/SimCardDemo.vue";
+import DetailCard from "../../school/detail/DetailCard.vue";
+// import DetailCardDemo from "../../school/detail/DetailCardDemo.vue";
 import TrashBar from "../sidebar/TrashBar.vue";
 import Navbar from "../navigation/Navbar.vue"; 
 import ListBar from "../sidebar/ListBar.vue";
@@ -9,12 +12,13 @@ import axios from "axios";
 
 export default {
   name: "CompositeView",
-  components: { SimCard, TrashBar, Navbar, ListBar, SimCardDemo },
+  components: { SimCard, DetailCard, TrashBar, Navbar, ListBar }, //SimCardDemo, DetailCardDemo,
   //Here's the code to set up data import, currently hard coded data below
   data() {
     return {
       items: [],
-      picked: Math.floor(Math.random() * 3)
+      picked: Math.floor(Math.random() * 3),
+      showSimple: true
     };
   },
   
@@ -57,6 +61,48 @@ export default {
       }
     }
 
+    const detailData = {
+      name: "Stuyvesant High School",
+      borough: "West Village, Manhattan",
+      dimensions: {
+        phone: {
+          name: "Phone Number",
+          value: "(212)-312-4800"
+        },
+        address: {
+          name: "Address",
+          value: "345 Chambers St, New York, NY 10282"
+        },
+        rigorious_instruction: {
+          name: "Rigorous Instruction Rating",
+          value: "89%"
+        },
+        collaborative_teachers:{
+          name: "Collaborative Teachers Rating",
+          value: "85%",
+        },
+        supportive_environment: {
+          name: "Supportive Environment",
+          value: "83%",
+        },
+        effective_school_leadership: {
+          name: "Effective School Leadership",
+          value: "93%",
+        },
+        strong_family_community_ties: {
+          name: "Strong Family Community Ties",
+          value: "87%",
+        },
+        trust: {
+          name: "Trust",
+          value: "92%",
+        },
+        curriculum_quality: {
+          name: "Curriculum Quality",
+          value: "Well Developed",
+        },
+      }
+    }
     const startDrag = (event, item) => {
       //event.dataTransfer.dropEffect = 'move'
       //event.dataTransfer.effectAllowed = 'move'
@@ -73,6 +119,7 @@ export default {
 
     return {
       schoolData,
+      detailData,
       startDrag,
       onDrop,
     }
@@ -86,11 +133,21 @@ export default {
       <TrashBar/>
     </div>
     
-    <div class="sim-container" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>
+    <div class="sim-container" @drop="onDrop($event, 1)" 
+                @dragenter.prevent @dragover.prevent
+                @click="showSimple=!showSimple">
       {{picked}}
+      
       <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
+        <template v-if="showSimple">
         <SimCard :schoolData="this.items[picked]"/>
+        </template>
+        <template v-else>
+          <DetailCard :schoolDetailData="detailData"/>
+          <!--<DetailCardDemo/> draggable="true" @dragstart="startDrag($event, item)"/> -->
+        </template>
       </div>
+    
       <div class="secondbox">
         <SimCard :schoolData="this.items[picked]"/> 
       </div>
