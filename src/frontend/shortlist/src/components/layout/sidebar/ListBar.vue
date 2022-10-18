@@ -1,9 +1,10 @@
 <script>
 import List from "./List.vue"
+import TrashButton from "./TrashButton.vue"
 
 export default {
   name: "ListBar",
-  components: { List },
+  components: { List, TrashButton },
   data() {
     return {
       lists: [
@@ -32,7 +33,7 @@ export default {
     //const itemID = evt.dataTransfer.getData('itemID')
     //const item = this.items.find((item) => item.id == itemID)
     //item.list = list
-    console.log("Add to", list)
+    alert("Add to "+list+"!")
     }
 
     return {
@@ -44,8 +45,8 @@ export default {
 </script>
 
 <template>
-  <div class="list" >
-    <List v-for="list in lists"
+  <div class="Listbar">
+    <List class="list" style="margin:40px;" v-for="list in lists"
           :key="list.id"
           :listName="list.name"
           :listItems="list.items" 
@@ -58,10 +59,22 @@ export default {
 
 <style scoped>
 .list {
-  margin-left: 5%;
-  margin-top: 5%;
-  margin-bottom: auto;
+  position: relative;
+  transform: translate(-50%,-50%);
+  left:50%;
+  bottom:60%;
+  background: rgba(25, 138, 61, 0.3);
+  border-radius: 20px;
+  border-left: 1px solid rgba(255,255,255,0.3);
+  border-top: 1px solid rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 20px 20px 40px -6px 
+  rgba(0,0,0,0.2);
+  text-align: center;
+}
 
-  /* background: #1f6b40; */
+.Listbar{
+  margin-top:40%;
+  margin-right:10%;
 }
 </style>
