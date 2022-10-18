@@ -206,10 +206,10 @@ export default {
 }
 .rightbox {
   width: 28%;
-  height: 100%;
+  height: auto;
   float: right;
   justify-content: space-between;
   align-items: right;
-  background-color:rgb(10, 10, 10, .2);
+  background-color:white;
 }
 </style>
