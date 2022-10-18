@@ -32,7 +32,7 @@ export default {
     //const itemID = evt.dataTransfer.getData('itemID')
     //const item = this.items.find((item) => item.id == itemID)
     //item.list = list
-    console.log("drop-listbar", " ", list)
+    console.log("Add to", list)
     }
 
     return {
@@ -49,7 +49,7 @@ export default {
           :key="list.id"
           :listName="list.name"
           :listItems="list.items" 
-          @drop="onDrop($event, list.id)" @dragenter.prevent @dragover.prevent
+          @drop="onDrop($event, list.name)" @dragenter.prevent @dragover.prevent
           >
     </List>
   </div>
