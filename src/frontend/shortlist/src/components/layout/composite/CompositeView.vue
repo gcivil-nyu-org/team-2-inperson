@@ -3,11 +3,30 @@ import SimCard from "../../school/simple/SimCard.vue";
 import TrashBar from "../sidebar/TrashBar.vue";
 import Navbar from "../navigation/Navbar.vue"; 
 import ListBar from "../sidebar/ListBar.vue";
+import SimCardDemo from "../../school/simple/SimCardDemo.vue";
+
+import axios from "axios";
 
 export default {
   name: "CompositeView",
-  components: { SimCard, TrashBar, Navbar, ListBar },
+  components: { SimCard, TrashBar, Navbar, ListBar, SimCardDemo },
   //Here's the code to set up data import, currently hard coded data below
+  data() {
+    return {
+      items: [],
+      picked: Math.floor(Math.random() * 3)
+    };
+  },
+  
+  async created() {
+    try {
+      const jsonFile = await axios.get(`http://localhost:3000/schools`);
+      this.items = jsonFile.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
   setup() {
     const schoolData = {
       img: 
@@ -68,14 +87,15 @@ export default {
     </div>
     
     <div class="sim-container" @drop="onDrop($event, 1)" @dragenter.prevent @dragover.prevent>
+      {{picked}}
       <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
-        <SimCard :schoolData="schoolData"/>
+        <SimCard :schoolData="this.items[picked]"/>
       </div>
       <div class="secondbox">
-        <SimCard :schoolData="schoolData"/> 
+        <SimCard :schoolData="this.items[picked]"/> 
       </div>
       <div class="thirdbox">
-        <SimCard :schoolData="schoolData"/>
+        <SimCard :schoolData="this.items[picked]"/>
       </div>
     </div>
 
