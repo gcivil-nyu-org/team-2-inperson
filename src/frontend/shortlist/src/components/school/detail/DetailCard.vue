@@ -7,7 +7,7 @@
 
 <template>
     <div class="card-container">
-        <div style="width: 100%; diplay: flex; flex-wrap: wrap; justify-content:flex-end; padding: 15px;">
+        <div class="card-header">
             <a href="https://stuy.enschool.org/"><div class="detail-school-name">
                 {{schoolDetailData.name}}
             </div></a>
@@ -16,14 +16,14 @@
             </div>
         </div>
         <!-- <div class="column_wrapper"> -->
-            <div class = "dimension-rows">
-                <template v-for="dimension in schoolDetailData.dimensions" :key="dimension">
-                    <div class="dimension-row">
-                        <div class="dimension-name">{{dimension.name}}</div>
-                        <div class="dimension-value">{{dimension.value}}</div>
-                    </div>
-                </template>
-            </div>
+        <div class = "dimension-rows">
+            <template v-for="dimension in schoolDetailData.dimensions" :key="dimension">
+                <div class="dimension-row">
+                    <div class="dimension-name">{{dimension.name}}</div>
+                    <div class="dimension-value">{{dimension.value}}</div>
+                </div>
+            </template>
+        </div>
         <!-- </div> -->
     </div>
 </template>
@@ -51,6 +51,7 @@
     font-family: sans-serif;
     font-size: 14px;
     margin-left: 5px;
+    padding-bottom: 5px;
 }
 
 .dimension-row {
@@ -76,14 +77,23 @@
 
 .card-container {
     width: 400px;
-    height: 600px; 
+    height: 500px; 
     margin: auto; 
     border-radius: 20px;
     padding: 40px;
+    overflow-y:auto;
     box-sizing: border-box;
     background: #ecf0f3;
     box-shadow: 14px 14px 20px #779886, -14px -14px 20px white;
     font-family: "Aleo";
+}
+
+.card-header {
+    width: 100%; 
+    diplay: flex; 
+    flex-wrap: wrap; 
+    justify-content:flex-end; 
+    padding: 15px
 }
 /* 
 .column_wrapper {
