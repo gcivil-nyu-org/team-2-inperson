@@ -7,20 +7,10 @@ export default {
 </script>
 
 <template>
-  <div class="trash-container" >
-      <TrashButton></TrashButton>
+<div class="TrashBar">
+    <img src="/bin.png" style="width: 100px;
+    left: 15px;" alt="shortlist" /> 
   </div>
 </template>
 
-<style scoped>
-.trash-container {
-  width: 28%;
-  height: 100%;
-  float:left;
-  /* display: left; */
-  /* flex-wrap: wrap; */
-  justify-content: space-between;
-  align-items: left;
-  background-color:rgb(40, 40, 0, .1);
-}
-</style>
+<style scoped></style>
