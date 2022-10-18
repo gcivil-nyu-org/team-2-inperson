@@ -21,6 +21,6 @@ export default {
   /* flex-wrap: wrap; */
   justify-content: space-between;
   align-items: left;
-  background-color:rgb(40, 40, 0, .1);
+  background-color:white;
 }
 </style>
