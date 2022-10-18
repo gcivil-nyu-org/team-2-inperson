@@ -90,7 +90,7 @@
 
 .card-header {
     width: 100%; 
-    diplay: flex; 
+    display: flex; 
     flex-wrap: wrap; 
     justify-content:flex-end; 
     padding: 15px
