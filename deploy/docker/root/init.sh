@@ -5,7 +5,6 @@ set +a
 
 cat /.env
 
-json-server /data.json --port 3000 &
 
 # TODO(waltage): verify that nginx is actually running after this
 systemctl start nginx

@@ -16,8 +16,8 @@ RUN pip3 install django psycopg2 gunicorn python-dotenv
 
 # systemctl and nginx for sidecar
 RUN apt-get -y install systemctl nginx
-RUN apt-get -y install nodejs npm systemd
-RUN npm install json-server -g
+# RUN apt-get -y install nodejs npm
+# RUN npm install json-server -g
 
 # dameon for aws-xray monitor
 RUN pip3 install aws-xray-sdk
