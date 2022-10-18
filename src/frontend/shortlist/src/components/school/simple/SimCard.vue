@@ -45,7 +45,23 @@ export default {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+}
+.simple-img {
+    max-width: 200px;
+    max-height: 160px;
+    border-radius: 10px;
+    border: 2px solid #779886;
+}
 
+.card-container {
+  width: 400px;
+  height: 500px;
+  border-radius: 20px;
+  padding: 40px;
+  box-sizing: border-box;
+  background: #ecf0f3;
+  box-shadow: 14px 14px 20px #779886, -14px -14px 20px white;
+  font-family: "Aleo";
 }
 .img-top-card {
     height:250px;
