@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <h1>Week of 2022-10-13 (TBD)</h1>
+  <!-- <h1>Week of 2022-10-13 (TBD)</h1> -->
   <!--List of demos<br>-->
   <SimpleBarView>
     <div class="middle-wrapper">
