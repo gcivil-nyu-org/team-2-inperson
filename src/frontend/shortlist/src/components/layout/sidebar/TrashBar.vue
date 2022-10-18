@@ -13,4 +13,15 @@ export default {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.trash-container {
+  width: 28%;
+  height: 100%;
+  float:left;
+  /* display: left; */
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  align-items: left;
+  background-color:white;
+}
+</style>
