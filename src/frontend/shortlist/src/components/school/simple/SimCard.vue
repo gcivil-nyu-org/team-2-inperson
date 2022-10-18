@@ -10,7 +10,7 @@
         <div class="simple-img-container">
             <img class="simple-img" :src="schoolData.img"/>
         </div>
-        <div style="width: 100%; diplay: flex; flex-wrap: wrap; justify-content:flex-end; padding: 15px;">
+        <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content:flex-end; padding: 15px;">
             <div class="simple-school-name">
                 {{schoolData.name}}
             </div>
