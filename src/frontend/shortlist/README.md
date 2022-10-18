@@ -5,6 +5,8 @@
 1. To serve this app locally, please install `npm`
 2. Within the `src/frontend/shortlist/` directory, run:
   - `npm install`
+  - `npm install json-server -g` (second terminal)
+  - `json-server data.json`(second terminal-keep it running)
   - `npm run dev`
   - Open a browser and go to: `http://localhost:5173`
   - Any changes made to the code should cause the browser to live-reload.
