@@ -118,7 +118,7 @@ export default {
       //const itemID = evt.dataTransfer.getData('itemID')
       //const item = this.items.find((item) => item.id == itemID)
       //item.list = list
-      alert("Dropped in "+zone+"..Let's check next!")
+      alert("Dropped in " + zone)
     }
 
     return {
@@ -141,15 +141,14 @@ export default {
     <div class="sim-container" @drop="onDrop($event, 1)" 
                 @dragenter.prevent @dragover.prevent
                 @click="showSimple=!showSimple">
-      {{picked}}
+      <!-- {{picked}} -->
       
       <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
         <div v-if="showSimple">
-        <SimCard :schoolData="this.items[picked]"/>
+          <SimCard :schoolData="this.items[picked]"/>
         </div>
         <div v-else>
           <DetailCard :schoolDetailData="detailData"/>
-          <!--<DetailCardDemo/> draggable="true" @dragstart="startDrag($event, item)"/> -->
         </div>
       </div>
     
@@ -175,10 +174,16 @@ export default {
   justify-content: space-around; 
   align-items: center;
 }
+
+.leftbox {
+  padding-left: 100px;
+}
+
 .sim-container {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
+  padding-left: 70px;
 }
 .topbox {
   grid-column: 1 / 1;
@@ -202,7 +207,7 @@ export default {
 .rightbox {
   width: 28%;
   height: auto;
-  float: right;
+  /* float: center; */
   justify-content: space-between;
   align-items: right;
   background-color:white;

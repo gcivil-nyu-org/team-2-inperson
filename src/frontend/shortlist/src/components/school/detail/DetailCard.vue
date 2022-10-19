@@ -33,7 +33,7 @@
 .dimension-name {
     font-family: "Aleo";
     font-weight: bold;
-    font-size: 14px;
+    font-size: 18px;
     border-bottom: 1px solid #779886;
 }
 
@@ -49,9 +49,9 @@
 
 .dimension-value {
     font-family: sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     margin-left: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 20px;
 }
 
 .dimension-row {
@@ -76,8 +76,8 @@
 }
 
 .card-container {
-    width: 400px;
-    height: 500px; 
+    width: 450px;
+    height: 600px; 
     margin: auto; 
     border-radius: 20px;
     padding: 40px;
@@ -90,7 +90,7 @@
 
 .card-header {
     width: 100%; 
-    diplay: flex; 
+    display: flex; 
     flex-wrap: wrap; 
     justify-content:flex-end; 
     padding: 15px

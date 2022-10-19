@@ -10,7 +10,7 @@
         <div class="simple-img-container">
             <img class="simple-img" :src="schoolData.img"/>
         </div>
-        <div style="width: 100%; diplay: flex; flex-wrap: wrap; justify-content:flex-end; padding: 15px;">
+        <div style="width: 100%; display: flex; flex-wrap: wrap; justify-content:flex-end; padding: 15px;">
             <div class="simple-school-name">
                 {{schoolData.name}}
             </div>
@@ -35,16 +35,18 @@
     font-family: "Aleo";
     font-weight: bold;
     border-bottom: 1px solid #779886;
+    font-size: 18px;
 }
 
 .dimension-value {
     font-family: sans-serif;
     margin-left: 5px;
+    font-size: 18px;
 }
 
 .dimension-row {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .simple-school-name {
@@ -52,7 +54,7 @@
     align-items: center;
     justify-content: flex-end;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 24px;
     font-family: "Libre Baskerville" ;
 }
 
@@ -60,7 +62,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    font-size: 14px;
+    font-size: 20px;
 }
 .simple-img-container {
     width: 100%;
@@ -77,8 +79,8 @@
 }
 
 .card-container {
-  width: 400px;
-  height: 500px;
+  width: 450px;
+  height: 600px;
   border-radius: 20px;
   padding: 40px;
   box-sizing: border-box;
