@@ -28,6 +28,7 @@ export default {
       // const jsonFile = await axios.get(`http://localhost:3000/schools`);
       const jsonFile = await axios.get(`http://localhost:3000/data.json`);
       this.items = jsonFile.data;
+      console.log("GOT:", jsonFile);
     } catch (error) {
       console.log(error);
     }
