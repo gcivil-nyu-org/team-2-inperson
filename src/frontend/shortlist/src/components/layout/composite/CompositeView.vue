@@ -26,9 +26,11 @@ export default {
       // for local json-server
       // const jsonFile = await axios.get(`http://localhost:3000/schools`);
       // this.items = jsonFile.data;
-      
+
       // for direct json
-      const jsonFile = await axios.get(`http://localhost:3000/data.json`);
+      // const jsonFile = await axios.get(`http://localhost:3000/data.json`);
+      const jsonFile = await axios.get(`http://shortlist-lb-demo-24059950.us-east-1.elb.amazonaws.com:3000/data.json`);
+      
       this.items = jsonFile.data.schools;
 
       let picked = Math.floor(Math.random() * 3);
