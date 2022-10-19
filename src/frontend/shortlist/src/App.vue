@@ -1,6 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import Navbar from "./components/layout/navigation/Navbar.vue"
+
+console.log("Version B");
 </script>
 
 <template>
