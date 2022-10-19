@@ -147,16 +147,15 @@ export default {
     <div class="sim-container" @drop="onDrop($event, 1)" 
                 @dragenter.prevent @dragover.prevent
                 @click="showSimple=!showSimple">
-      {{picked}}
       
       <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
-        <div v-if="showSimple">
+        <template v-if="showSimple">
         <SimCard :schoolData="this.items[picked]"/>
-        </div>
-        <div v-else>
+        </template>
+        <template v-if="!showSimple">
           <DetailCard :schoolDetailData="detailData"/>
           <!--<DetailCardDemo/> draggable="true" @dragstart="startDrag($event, item)"/> -->
-        </div>
+        </template>
       </div>
     
       <div class="secondbox">
