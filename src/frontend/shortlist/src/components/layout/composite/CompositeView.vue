@@ -19,6 +19,7 @@ export default {
       items: [],
       picked: Math.floor(Math.random() * 3),
       showSimple: true,
+      jsonValues: "",
       // showAlert: false,
     };
   },
@@ -28,6 +29,7 @@ export default {
       // const jsonFile = await axios.get(`http://localhost:3000/schools`);
       const jsonFile = await axios.get(`http://localhost:3000/data.json`);
       this.items = jsonFile.data;
+      this.jsonValues = jsonFile.data;
       console.log("GOT:", jsonFile);
     } catch (error) {
       console.log(error);
@@ -135,6 +137,7 @@ export default {
 </script>
 
 <template>
+  {{jsonValues}}
   <div class="composite-container">
     <div class="leftbox" @drop="onDrop($event, 'trash')" 
                 @dragenter.prevent @dragover.prevent >
