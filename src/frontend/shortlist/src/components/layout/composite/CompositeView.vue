@@ -5,7 +5,6 @@ import DetailCard from "../../school/detail/DetailCard.vue";
 // import DetailCardDemo from "../../school/detail/DetailCardDemo.vue";
 import TrashBar from "../sidebar/TrashBar.vue";
 import ListBar from "../sidebar/ListBar.vue";
-//import SimCardDemo from "../../school/simple/SimCardDemo.vue";
 
 import axios from "axios";
 
@@ -24,9 +23,14 @@ export default {
   
   async created() {
     try {
+      // for local json-server
       // const jsonFile = await axios.get(`http://localhost:3000/schools`);
+      // this.items = jsonFile.data;
+      
+      // for direct json
       const jsonFile = await axios.get(`http://localhost:3000/data.json`);
       this.items = jsonFile.data.schools;
+
       let picked = Math.floor(Math.random() * 3);
       this.selectedSchool = this.items[picked];
     } catch (error) {
@@ -147,18 +151,25 @@ export default {
       <!-- {{picked}} -->
       
       <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
-        <div v-if="showSimple">
-          <SimCard :schoolData="this.items[picked]"/>
-        </div>
-        <div v-else>
+        <template v-if="showSimple">
+          <SimCard :schoolData="selectedSchool"/>
+        </template>
+        <template v-else>
           <DetailCard :schoolDetailData="detailData"/>
-        </div>
+        </template>
       </div>
       <div class="secondbox">
+<<<<<<< HEAD
         <SimCard :schoolData="selectedSchool"/> 
       </div>
       <div class="thirdbox">
         <SimCard :schoolData="selectedSchool"/>
+=======
+        <SimCard :schoolData="selectedSchool"/>  
+      </div>
+      <div class="thirdbox">
+        <SimCard :schoolData="selectedSchool"/> 
+>>>>>>> a302809 (incorporate demo-week6-walt deploy changes)
       </div>
     </div>
 
