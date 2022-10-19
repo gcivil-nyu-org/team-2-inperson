@@ -25,7 +25,8 @@ export default {
   
   async created() {
     try {
-      const jsonFile = await axios.get(`http://localhost:3000/schools`);
+      // const jsonFile = await axios.get(`http://localhost:3000/schools`);
+      const jsonFile = await axios.get(`http://localhost:3000/data.json`);
       this.items = jsonFile.data;
     } catch (error) {
       console.log(error);
