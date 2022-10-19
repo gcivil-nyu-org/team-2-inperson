@@ -29,9 +29,6 @@ export default {
       this.items = jsonFile.data.schools;
       let picked = Math.floor(Math.random() * 3);
       this.selectedSchool = this.items[picked];
-      console.log("GOT:", jsonFile);
-      console.log("SELECTED", this.selectedSchool)
-      console.log("PICKED", picked)
     } catch (error) {
       console.log(error);
     }
