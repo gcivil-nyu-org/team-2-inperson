@@ -7,8 +7,9 @@ export default {
 </script>
 
 <template>
-  <div class="trash-container" >
-      <TrashButton></TrashButton>
+<div class="TrashBar">
+    <img src="/bin.png" style="width: 100px;
+    left: 15px;" alt="shortlist" /> 
   </div>
 </template>
 

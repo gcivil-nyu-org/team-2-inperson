@@ -4,15 +4,14 @@ import SimCard from "../../school/simple/SimCard.vue";
 import DetailCard from "../../school/detail/DetailCard.vue";
 // import DetailCardDemo from "../../school/detail/DetailCardDemo.vue";
 import TrashBar from "../sidebar/TrashBar.vue";
-import Navbar from "../navigation/Navbar.vue"; 
 import ListBar from "../sidebar/ListBar.vue";
-import SimCardDemo from "../../school/simple/SimCardDemo.vue";
+//import SimCardDemo from "../../school/simple/SimCardDemo.vue";
 
 import axios from "axios";
 
 export default {
   name: "CompositeView",
-  components: { SimCard, DetailCard, TrashBar, Navbar, ListBar }, //SimCardDemo, DetailCardDemo,
+  components: { SimCard, DetailCard, TrashBar, ListBar }, //SimCardDemo, DetailCardDemo,
   //Here's the code to set up data import, currently hard coded data below
   data() {
     return {
@@ -119,7 +118,7 @@ export default {
       //const itemID = evt.dataTransfer.getData('itemID')
       //const item = this.items.find((item) => item.id == itemID)
       //item.list = list
-      console.log("dropped in", zone)
+      alert("Dropped in "+zone+"..Let's check next!")
     }
 
     return {
@@ -175,10 +174,6 @@ export default {
   display: flex; 
   justify-content: space-around; 
   align-items: center;
-}
-.topbox {
-}
-.leftbox {
 }
 .sim-container {
   display: grid;
