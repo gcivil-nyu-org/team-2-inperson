@@ -26,7 +26,7 @@ export default {
     try {
       // const jsonFile = await axios.get(`http://localhost:3000/schools`);
       const jsonFile = await axios.get(`http://localhost:3000/data.json`);
-      this.items = jsonFile.data;
+      this.items = jsonFile.data.schools;
       let picked = Math.floor(Math.random() * 3);
       this.selectedSchool = this.items[picked];
       console.log("GOT:", jsonFile);
@@ -147,26 +147,20 @@ export default {
     <div class="sim-container" @drop="onDrop($event, 1)" 
                 @dragenter.prevent @dragover.prevent
                 @click="showSimple=!showSimple">
-      
-      <div class="topbox">
-        <SimCard :schoolData="this.selectedSchool"/>
-      </div>
-      <!--
 
       <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
         <template v-if="showSimple">
-        <SimCard :schoolData="this.items[picked]"/>
+        <SimCard :schoolData="selectedSchool"/>
         </template>
         <template v-if="!showSimple">
           <DetailCard :schoolDetailData="detailData"/>
         </template>
       </div>
-    -->
       <div class="secondbox">
-        <SimCard :schoolData="this.items[picked]"/> 
+        <SimCard :schoolData="selectedSchool"/> 
       </div>
       <div class="thirdbox">
-        <SimCard :schoolData="this.items[picked]"/>
+        <SimCard :schoolData="selectedSchool"/>
       </div>
     </div>
 
