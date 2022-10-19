@@ -17,7 +17,6 @@ export default {
   data() {
     return {
       items: [],
-      picked: Math.floor(Math.random() * 3),
       showSimple: true,
       selectedSchool: {},
       // showAlert: false,
@@ -29,8 +28,11 @@ export default {
       // const jsonFile = await axios.get(`http://localhost:3000/schools`);
       const jsonFile = await axios.get(`http://localhost:3000/data.json`);
       this.items = jsonFile.data;
-      this.selectedSchool = this.items[this.picked];
+      let picked = Math.floor(Math.random() * 3);
+      this.selectedSchool = this.items[picked];
       console.log("GOT:", jsonFile);
+      console.log("SELECTED", this.selectedSchool)
+      console.log("PICKED", picked)
     } catch (error) {
       console.log(error);
     }
@@ -148,7 +150,7 @@ export default {
                 @click="showSimple=!showSimple">
       
       <div class="topbox">
-        <SimCard :schoolData="selectedSchool"/>
+        <SimCard :schoolData="this.selectedSchool"/>
       </div>
       <!--
 
