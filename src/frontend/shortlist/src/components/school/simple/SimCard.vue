@@ -6,8 +6,6 @@
 </script>
 
 <template>
-    {{schoolData}}
-    <!--
     <div class="card-container" v-if="schoolData.img">
         <div class="simple-img-container">
             <img class="simple-img" :src="schoolData.img"/>
@@ -29,7 +27,6 @@
             </template>
         </div>
     </div>
-    -->
 </template>
 
 <style scoped>
