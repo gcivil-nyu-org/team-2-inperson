@@ -1,8 +1,24 @@
 {
   "items": [
     {
-      "id": 1,
-      "name": "Cabbage"
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg/2560px-Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg",
+      "id": 0,
+      "name": "Cabbage High School",
+      "borough": "Manhattan",
+      "dimensions": {
+        "quality1": {
+          "name": "Rigorous Instruction",
+          "value": 0.96
+        },
+        "quality2": {
+          "name": "Collaborative Teachers",
+          "value": 0.85
+        },
+        "quality3": {
+          "name": "Supportive Environment",
+          "value": 0.39
+        }
+      }
     },
     {
       "id": 0,

@@ -33,7 +33,7 @@ export default {
     //const itemID = evt.dataTransfer.getData('itemID')
     //const item = this.items.find((item) => item.id == itemID)
     //item.list = list
-    alert("Add to "+list+"!")
+    alert("Added to " + list)
     }
 
     return {
@@ -74,7 +74,7 @@ export default {
 }
 
 .Listbar{
-  margin-top:40%;
+  margin-top:30%;
   margin-right:10%;
 }
 </style>

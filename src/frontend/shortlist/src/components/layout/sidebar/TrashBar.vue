@@ -8,7 +8,7 @@ export default {
 
 <template>
 <div class="TrashBar">
-    <img src="/bin.png" style="width: 100px;
+    <img src="/trash-can.png" style="width: 100px;
     left: 15px;" alt="shortlist" /> 
   </div>
 </template>
