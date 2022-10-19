@@ -6,7 +6,7 @@
 </script>
 
 <template>
-    <div class="card-container">
+    <div class="card-container" v-if="schoolData.img">
         <div class="simple-img-container">
             <img class="simple-img" :src="schoolData.img"/>
         </div>

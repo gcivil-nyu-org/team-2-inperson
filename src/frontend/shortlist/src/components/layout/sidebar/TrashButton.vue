@@ -1,6 +1,6 @@
 <template>
-  <img id = "center" class="left-button" height = 20, width=10 src="/alice-trash-can.png" 
-    alt="img-left-card" />
+  <!-- <img id = "center" class="left-button" height = 20, width=10 src="/alice-trash-can.png" 
+    alt="img-left-card" /> -->
 </template>
 
 <script>
