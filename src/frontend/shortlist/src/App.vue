@@ -3,14 +3,14 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <Navbar/>
+  <Navbar />
   <div class="app-container">
     <RouterView />
   </div>
 </template>
 
 <style scoped>
-.app-container{
+.app-container {
   width: 100vw;
   height: 100vh;
 }

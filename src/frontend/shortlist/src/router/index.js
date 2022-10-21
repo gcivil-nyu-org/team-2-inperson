@@ -13,7 +13,7 @@ const router = createRouter({
     {
       path: "/demo",
       name: "demos",
-      component: DemoView
+      component: DemoView,
     },
     {
       path: "/stage",

@@ -1,26 +1,25 @@
 <script>
-import SimCard from "../simple/SimCard.vue";
+import SimCard from "./SchoolSimple.vue";
 import axios from "axios";
 
 export default {
   name: "SimCardDemo",
   components: { SimCard },
-  
+
   data() {
     return {
-    items: [],
-    picked: Math.floor(Math.random() * 3)
+      items: [],
+      picked: Math.floor(Math.random() * 3),
     };
-    
   },
-  
+
   async created() {
     try {
-    // const jsonFile = await axios.get(`http://localhost:3000/schools`);
-    const jsonFile = await axios.get(`http://localhost:3000/data.json`);
-    this.items = jsonFile.data;
+      // const jsonFile = await axios.get(`http://localhost:3000/schools`);
+      const jsonFile = await axios.get(`http://localhost:3000/data.json`);
+      this.items = jsonFile.data;
     } catch (error) {
-    console.log(error);
+      console.log(error);
     }
   },
   /*
@@ -53,7 +52,7 @@ export default {
     },
   },
   */
-}
+};
 </script>
 
 <template>
@@ -66,15 +65,15 @@ export default {
     </div>
     -->
     <div class="sim-container">
-        {{picked}}
+      {{ picked }}
       <div class="topbox">
-        <SimCard :schoolData="this.items[picked]"/>
+        <SimCard :schoolData="this.items[picked]" />
       </div>
       <div class="secondbox">
-        <SimCard :schoolData="this.items[picked]"/> 
+        <SimCard :schoolData="this.items[picked]" />
       </div>
       <div class="thirdbox">
-        <SimCard :schoolData="this.items[picked]"/>
+        <SimCard :schoolData="this.items[picked]" />
       </div>
     </div>
   </div>
@@ -82,10 +81,10 @@ export default {
 
 <style scoped>
 .sim-outer {
-  width: 100%; 
-  height: 100%; 
-  display: flex; 
-  justify-content: space-around; 
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 .sim-container {

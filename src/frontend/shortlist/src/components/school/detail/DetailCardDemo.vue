@@ -1,5 +1,5 @@
 <script>
-import DetailCard from "./DetailCard.vue"
+import DetailCard from "./DetailCard.vue";
 
 export default {
   name: "DetailCardDemo",
@@ -11,17 +11,17 @@ export default {
       dimensions: {
         phone: {
           name: "Phone Number",
-          value: "(212)-312-4800"
+          value: "(212)-312-4800",
         },
         address: {
           name: "Address",
-          value: "345 Chambers St, New York, NY 10282"
+          value: "345 Chambers St, New York, NY 10282",
         },
         rigorious_instruction: {
           name: "Rigorous Instruction Rating",
-          value: "89%"
+          value: "89%",
         },
-        collaborative_teachers:{
+        collaborative_teachers: {
           name: "Collaborative Teachers Rating",
           value: "85%",
         },
@@ -45,23 +45,23 @@ export default {
           name: "Curriculum Quality",
           value: "Well Developed",
         },
-      }
-    }
+      },
+    };
     return {
-      schoolDetailData
-    }
+      schoolDetailData,
+    };
   },
-//   apiExample(schoolId) {
-//     // return call_api(schoolId); 
-//   }
-}
+  //   apiExample(schoolId) {
+  //     // return call_api(schoolId);
+  //   }
+};
 </script>
 
 <template>
   <div class="detail-outer">
     <div class="detail-container">
       <div class="topbox">
-        <DetailCard :schoolDetailData="schoolDetailData"/>
+        <DetailCard :schoolDetailData="schoolDetailData" />
       </div>
       <!-- <div class="secondbox">
         <DetailCard :schoolDetailData="schoolDetailData"/> 
@@ -74,7 +74,6 @@ export default {
 </template>
 
 <style scoped>
-
 /* .detail-outer {
   width: 100%; 
   height: 100%; 
