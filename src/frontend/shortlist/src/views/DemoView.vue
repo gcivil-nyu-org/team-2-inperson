@@ -5,7 +5,7 @@ import SimCardDemo from "../components/layout/composite/CompositeView.vue";
 export default {
   components: {
     SimpleBarView,
-    SimCardDemo
+    SimCardDemo,
   },
 }
 </script>
