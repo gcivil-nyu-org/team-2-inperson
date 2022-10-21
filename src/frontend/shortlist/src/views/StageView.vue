@@ -1,8 +1,8 @@
 <script>
-import SchoolSimple from "../components/school/simple/SchoolSimple.vue";
+import SchoolCard from "../components/school/SchoolCard.vue";
 
 export default {
-  components: { SchoolSimple },
+  components: { SchoolCard },
   setup() {
     const schoolList = [
       {
@@ -10,18 +10,43 @@ export default {
         id: 0,
         name: "Cabbage High School",
         borough: "Manhattan",
+        link: "https://stuy.enschool.org/",
         dimensions: [
           {
             name: "Rigorous Instruction",
             value: 0.96,
+            simple: true,
           },
           {
             name: "Collaborative Teachers",
             value: 0.85,
+            simple: true,
           },
           {
             name: "Supportive Environment",
             value: 0.39,
+            simple: true,
+          },
+          {
+            name: "Phone Number",
+            value: "212-312-4800",
+            simple: false,
+          },
+          {
+            name: "Address",
+            value: "345 Chambers St, New York, NY 10282",
+            simple: false,
+          },
+          {
+            name: "School Description",
+            value:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at magna ut magna condimentum facilisis. Nunc sodales ullamcorper tortor eu pharetra. Fusce efficitur iaculis lorem in pharetra. Maecenas eros orci, ultrices in porttitor vel, pharetra quis dolor. Sed sagittis sagittis orci at dignissim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc vitae velit eros. Phasellus laoreet quam diam, vel rutrum diam venenatis quis.",
+            simple: false,
+          },
+          {
+            name: "Curriculum Quality",
+            value: "Well Developed",
+            simple: false,
           },
         ],
       },
@@ -30,18 +55,43 @@ export default {
         id: 1,
         name: "Kale High School",
         borough: "Queens",
+        link: "https://stuy.enschool.org/",
         dimensions: [
           {
             name: "Rigorous Instruction",
-            value: 0.12,
+            value: 0.96,
+            simple: true,
           },
           {
             name: "Collaborative Teachers",
-            value: 0.35,
+            value: 0.85,
+            simple: true,
           },
           {
             name: "Supportive Environment",
-            value: 0.3,
+            value: 0.39,
+            simple: true,
+          },
+          {
+            name: "Phone Number",
+            value: "212-312-4800",
+            simple: false,
+          },
+          {
+            name: "Address",
+            value: "345 Chambers St, New York, NY 10282",
+            simple: false,
+          },
+          {
+            name: "School Description",
+            value:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at magna ut magna condimentum facilisis. Nunc sodales ullamcorper tortor eu pharetra. Fusce efficitur iaculis lorem in pharetra. Maecenas eros orci, ultrices in porttitor vel, pharetra quis dolor. Sed sagittis sagittis orci at dignissim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc vitae velit eros. Phasellus laoreet quam diam, vel rutrum diam venenatis quis.",
+            simple: false,
+          },
+          {
+            name: "Curriculum Quality",
+            value: "Well Developed",
+            simple: false,
           },
         ],
       },
@@ -50,18 +100,43 @@ export default {
         id: 2,
         name: "Spinach High School",
         borough: "Brooklyn",
+        link: "https://stuy.enschool.org/",
         dimensions: [
           {
             name: "Rigorous Instruction",
-            value: 0.34,
+            value: 0.96,
+            simple: true,
           },
           {
             name: "Collaborative Teachers",
-            value: 0.65,
+            value: 0.85,
+            simple: true,
           },
           {
             name: "Supportive Environment",
-            value: 0.97,
+            value: 0.39,
+            simple: true,
+          },
+          {
+            name: "Phone Number",
+            value: "212-312-4800",
+            simple: false,
+          },
+          {
+            name: "Address",
+            value: "345 Chambers St, New York, NY 10282",
+            simple: false,
+          },
+          {
+            name: "School Description",
+            value:
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at magna ut magna condimentum facilisis. Nunc sodales ullamcorper tortor eu pharetra. Fusce efficitur iaculis lorem in pharetra. Maecenas eros orci, ultrices in porttitor vel, pharetra quis dolor. Sed sagittis sagittis orci at dignissim. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc vitae velit eros. Phasellus laoreet quam diam, vel rutrum diam venenatis quis.",
+            simple: false,
+          },
+          {
+            name: "Curriculum Quality",
+            value: "Well Developed",
+            simple: false,
           },
         ],
       },
@@ -74,7 +149,7 @@ export default {
 </script>
 <template>
   <div :class="[$style['stage-container']]">
-    <SchoolSimple :schoolData="schoolList[0]"></SchoolSimple>
+    <SchoolCard :schoolData="schoolList[0]"></SchoolCard>
   </div>
 </template>
 <style module>
