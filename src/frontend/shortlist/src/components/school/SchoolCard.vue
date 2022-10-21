@@ -9,7 +9,6 @@ export default {
   },
   methods: {
     swapDetail() {
-      console.log(this.isDetail);
       this.isDetail = !this.isDetail;
     },
   },
@@ -27,7 +26,7 @@ export default {
     <div class="school-simple-name-row">
       <div class="school-simple-name-name">
         <template v-if="isDetail">
-          <a href="schoolData.link">{{ schoolData.name }}</a>
+          <a :href="schoolData.link">{{ schoolData.name }}</a>
         </template>
         <template v-if="!isDetail">
           {{ schoolData.name }}
