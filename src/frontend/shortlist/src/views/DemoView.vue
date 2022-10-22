@@ -1,8 +1,5 @@
-<script>
-</script>
+<script></script>
 
-<template>
-</template>
+<template>demo</template>
 
-<style scoped>
-</style>
+<style scoped></style>

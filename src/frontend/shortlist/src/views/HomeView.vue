@@ -1,8 +1,5 @@
 <script setup>
 import MaterialIcon from "../components/icons/MaterialIcon.vue";
-export default {
-  components: { MaterialIcon },
-};
 </script>
 
 <template>

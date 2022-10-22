@@ -4,7 +4,6 @@ export default {
   props: ["src", "color", "size"],
   computed: {
     style() {
-      console.log(this.color, this.size);
       return "font-size: " + this.size + "px; " + "color: " + this.color + ";";
     },
   },
