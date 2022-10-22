@@ -53,6 +53,11 @@ export default {
   justify-content: start;
   align-items: center;
 }
+.layout-list-row-icon {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
 .layout-list-row-header {
   width: 100%;
