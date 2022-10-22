@@ -1,9 +1,7 @@
-<!-- <script>
-    export default {
-    name: "stage-view",
-    components: { }
-}
-</script>
+<script></script>
+
 <template>
-     <your-view></your-view>
-</template> -->
+  <div>Stage</div>
+</template>
+
+<style></style>
