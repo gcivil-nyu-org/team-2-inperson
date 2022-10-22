@@ -6,56 +6,43 @@ export default {
   name: "ShortlistManager",
   props: ["studentShortlists"],
   components: { ShortlistRow },
-  emits: ["listItemDetailClick"],
-  /*
-  setup() {
-    const onDrop = (evt, list) => {
-    //const itemID = evt.dataTransfer.getData('itemID')
-    //const item = this.items.find((item) => item.id == itemID)
-    //item.list = list
-    alert("Added to " + list)
-    }
-
-    return {
-      onDrop,
-    }
-  }
-  */
-}
+  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
+  methods: {
+    listItemDetailClick(e, id) {
+      this.$emit("listItemDetailClick", {
+        schoolId: e,
+        listId: id,
+      });
+    },
+    itemDragOver(e, id) {
+      this.$emit("itemDragOver", { event: e, listId: id });
+    },
+    itemDragDrop(e, id) {
+      this.$emit("itemDragDrop", { event: e, listId: id });
+    },
+  },
+};
 </script>
 
 <template>
   <div class="layout-list-section">
-    <template v-for="(list, listNum) in studentShortlists" :key="listNum">
+    <template v-for="(list, listNum) in studentShortlists" :key="list">
       <ShortlistRow
+        :listId="listNum"
         :listSettings="list.settings"
         :listSchools="list.schools"
-        @listItemDetailClick="
-          (e) => $emit('listItemDetailClick', { schoolId: e, listId: list.id })
-        "
+        @listItemDetailClick="(e) => listItemDetailClick(e, list.id)"
+        @itemDragOver="(e) => itemDragOver(e, listNum)"
+        @itemDragDrop="(e) => itemDragDrop(e, listNum)"
       />
     </template>
   </div>
-
-
-<!--
-<List
-class="list"
-style="margin: 40px"
-v-for="list in lists"
-:key="list.id"
-:listName="list.name"
-:listItems="list.items"
-@drop="onDrop($event, list.name)"
-@dragenter.prevent
-@dragover.prevent
->
-</List>
---></template>
+</template>
 
 <style scoped>
 .layout-list-section {
   height: 100%;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

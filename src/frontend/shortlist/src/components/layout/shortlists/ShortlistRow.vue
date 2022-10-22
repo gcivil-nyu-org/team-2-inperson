@@ -2,14 +2,31 @@
 import MaterialIcon from "../../icons/MaterialIcon.vue";
 export default {
   name: "ShortlistRow",
-  props: ["listSettings", "listSchools"],
-  emits: ["listItemDetailClick"],
+  props: ["listId", "listSettings", "listSchools"],
+  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
   components: { MaterialIcon },
+  methods: {
+    logEmit(e) {
+      console.log(e);
+    },
+    itemDragOver(e) {
+      e.preventDefault();
+      this.$emit("itemDragOver", e);
+    },
+    itemDragDrop(e) {
+      this.$emit("itemDragDrop", e);
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="layout-list-row" :style="{ backgroundColor: listSettings.color }">
+  <div
+    class="layout-list-row"
+    :style="{ backgroundColor: listSettings.color }"
+    @dragover="(e) => itemDragOver(e)"
+    @drop="(e) => itemDragDrop(e)"
+  >
     <div class="layout-list-header-row">
       <div class="layout-list-row-icon">
         <MaterialIcon
