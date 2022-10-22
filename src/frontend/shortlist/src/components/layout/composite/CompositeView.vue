@@ -1,8 +1,6 @@
 <script>
 import SimCard from "../../school/simple/SimCard.vue";
-// import SimCardDemo from "../../school/simple/SimCardDemo.vue";
 import DetailCard from "../../school/detail/DetailCard.vue";
-// import DetailCardDemo from "../../school/detail/DetailCardDemo.vue";
 import TrashBar from "../sidebar/TrashBar.vue";
 import ListBar from "../sidebar/ListBar.vue";
 
@@ -20,7 +18,7 @@ export default {
       // showAlert: false,
     };
   },
-  
+
   async created() {
     try {
       // for local json-server
@@ -30,7 +28,7 @@ export default {
       // for direct json
       // const jsonFile = await axios.get(`http://localhost:3000/data.json`);
       // const jsonFile = await axios.get(`http://shortlist-lb-demo-24059950.us-east-1.elb.amazonaws.com:3000/data.json`);
-      const jsonFile = await axios.get(`http://35.171.3.210:3000/data.json'`)
+      const jsonFile = await axios.get(`http://35.171.3.210:3000/data.json'`);
       this.items = jsonFile.data.schools;
 
       let picked = Math.floor(Math.random() * 3);
@@ -42,22 +40,21 @@ export default {
 
   setup() {
     const schoolData = {
-      img: 
-"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg/2560px-Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg/2560px-Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg",
       name: "Stuyvesant High School",
       borough: "West Village, Manhattan",
       dimensions: {
         enrollment: {
           name: "Enrollment",
-          value: "3,344"
+          value: "3,344",
         },
         faculty: {
           name: "Faculty Count",
-          value: "155"
+          value: "155",
         },
         athletics: {
           name: "Athletic Conference",
-          value: "PSAL"
+          value: "PSAL",
         },
         studentRatio: {
           name: "Student-to-Teacher Ratio",
@@ -67,8 +64,8 @@ export default {
           name: "School Colors",
           value: "Red, Blue, White",
         },
-      }
-    }
+      },
+    };
 
     const detailData = {
       name: "Stuyvesant High School",
@@ -76,21 +73,22 @@ export default {
       dimensions: {
         phone: {
           name: "Phone Number",
-          value: "(212)-312-4800"
+          value: "(212)-312-4800",
         },
         address: {
           name: "Address",
-          value: "345 Chambers St, New York, NY 10282"
+          value: "345 Chambers St, New York, NY 10282",
         },
         description: {
           name: "School Description",
-          value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+          value:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
         },
         rigorous_instruction: {
           name: "Rigorous Instruction Rating",
-          value: "89%"
+          value: "89%",
         },
-        collaborative_teachers:{
+        collaborative_teachers: {
           name: "Collaborative Teachers Rating",
           value: "85%",
         },
@@ -114,79 +112,80 @@ export default {
           name: "Curriculum Quality",
           value: "Well Developed",
         },
-      }
-    }
+      },
+    };
     const startDrag = (event, item) => {
       //event.dataTransfer.dropEffect = 'move'
       //event.dataTransfer.effectAllowed = 'move'
       //event.dataTransfer.setData('itemID', item.id)
       // console.log("start drag")
-    }
+    };
 
     const onDrop = (evt, zone) => {
       //const itemID = evt.dataTransfer.getData('itemID')
       //const item = this.items.find((item) => item.id == itemID)
       //item.list = list
-      alert("Dropped in " + zone)
-    }
+      alert("Dropped in " + zone);
+    };
 
     return {
       schoolData,
       detailData,
       startDrag,
       onDrop,
-    }
+    };
   },
-}
+};
 </script>
 
 <template>
   <div class="composite-container">
-    <div class="leftbox" @drop="onDrop($event, 'trash')" 
-                @dragenter.prevent @dragover.prevent >
-      <TrashBar/>
+    <div
+      class="leftbox"
+      @drop="onDrop($event, 'trash')"
+      @dragenter.prevent
+      @dragover.prevent
+    >
+      <TrashBar />
     </div>
-    
-    <div class="sim-container" @drop="onDrop($event, 1)" 
-                @dragenter.prevent @dragover.prevent
-                @click="showSimple=!showSimple">
+
+    <div
+      class="sim-container"
+      @drop="onDrop($event, 1)"
+      @dragenter.prevent
+      @dragover.prevent
+      @click="showSimple = !showSimple"
+    >
       <!-- {{picked}} -->
-      
+
       <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
         <template v-if="showSimple">
-          <SimCard :schoolData="selectedSchool"/>
+          <SimCard :schoolData="selectedSchool" />
         </template>
         <template v-else>
-          <DetailCard :schoolDetailData="detailData"/>
+          <DetailCard :schoolDetailData="detailData" />
         </template>
       </div>
       <div class="secondbox">
-<<<<<<< HEAD
-        <SimCard :schoolData="selectedSchool"/> 
+        <SimCard :schoolData="selectedSchool" />
       </div>
       <div class="thirdbox">
-        <SimCard :schoolData="selectedSchool"/>
-=======
-        <SimCard :schoolData="selectedSchool"/>  
-      </div>
-      <div class="thirdbox">
-        <SimCard :schoolData="selectedSchool"/> 
->>>>>>> a302809 (incorporate demo-week6-walt deploy changes)
+        <SimCard :schoolData="selectedSchool" />
       </div>
     </div>
 
     <div class="rightbox">
-      <ListBar/>
+      <ListBar />
     </div>
   </div>
 </template>
 
 <style scoped>
 .composite-container {
-  width: 100%; 
-  height: 100%; 
-  display: flex; 
-  justify-content: space-around; 
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -225,5 +224,9 @@ export default {
   /* float: center; */
   justify-content: space-between;
   align-items: right;
+<<<<<<< HEAD
+=======
+  background-color:white;
+>>>>>>> develop
 }
 </style>
