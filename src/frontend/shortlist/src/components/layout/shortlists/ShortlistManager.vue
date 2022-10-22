@@ -1,11 +1,11 @@
 
 <script>
-import List from "./ListRow.vue";
+import ShortlistRow from "./ShortlistRow.vue";
 
 export default {
-  name: "ListBar",
-  props: ["studentLists"],
-  components: { List },
+  name: "ShortlistManager",
+  props: ["studentShortlists"],
+  components: { ShortlistRow },
   emits: ["listItemDetailClick"],
   /*
   setup() {
@@ -21,15 +21,14 @@ export default {
     }
   }
   */
-  
 }
 </script>
 
 <template>
   <div class="layout-list-section">
-    <template v-for="(list, listNum) in studentLists" :key="listNum">
-      <List
-        :listName="list.name"
+    <template v-for="(list, listNum) in studentShortlists" :key="listNum">
+      <ShortlistRow
+        :listSettings="list.settings"
         :listSchools="list.schools"
         @listItemDetailClick="
           (e) => $emit('listItemDetailClick', { schoolId: e, listId: list.id })

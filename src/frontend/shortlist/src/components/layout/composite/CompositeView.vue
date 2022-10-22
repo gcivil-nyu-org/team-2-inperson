@@ -2,7 +2,7 @@
 import SimCard from "../../school/simple/SimCard.vue";
 import DetailCard from "../../school/detail/DetailCard.vue";
 import TrashBar from "../sidebar/TrashBar.vue";
-import ListBar from "../sidebar/ListBar.vue";
+import ListBar from "../sidebar/ShortlistManager.vue";
 
 import axios from "axios";
 

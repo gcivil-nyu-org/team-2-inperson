@@ -1,14 +1,24 @@
 <script>
+import MaterialIcon from "../../icons/MaterialIcon.vue";
 export default {
-  name: "ListRow",
-  props: ["listName", "listSchools"],
+  name: "ShortlistRow",
+  props: ["listSettings", "listSchools"],
   emits: ["listItemDetailClick"],
+  components: { MaterialIcon },
 };
 </script>
 
 <template>
-  <div class="layout-list-row">
-    <div class="layout-list-row-header">{{ listName }}</div>
+  <div class="layout-list-row" :style="{ backgroundColor: listSettings.color }">
+    <div class="layout-list-header-row">
+      <div class="layout-list-row-icon">
+        <MaterialIcon
+          :src="listSettings.icon.value"
+          :color="listSettings.icon.color"
+        />
+      </div>
+      <div class="layout-list-row-header">{{ listSettings.name }}</div>
+    </div>
     <div class="layout-list-row-contents">
       <template v-for="school in listSchools" :key="school.id">
         <div
@@ -37,9 +47,17 @@ export default {
   justify-content: start;
 }
 
+.layout-list-header-row {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 .layout-list-row-header {
   width: 100%;
   margin-left: 10px;
+  font-weight: bold;
 }
 
 .layout-list-row-contents {
@@ -49,7 +67,6 @@ export default {
   justify-content: space-around;
   align-items: center;
   padding: 20px;
-
 }
 .layout-list-row-item {
   width: 100%;
@@ -62,6 +79,5 @@ export default {
   align-items: center;
   justify-content: space-around;
   font-size: 10px;
-
 }
 </style>
