@@ -4,6 +4,7 @@ import SchoolCard from "../../school/SchoolCard.vue";
 export default {
   name: "RecommendationStack",
   props: ["recommendations"],
+  emits: ["schoolCardDragStart"],
   components: { SchoolCard },
   created() {
     //constants for the offset factors
@@ -14,27 +15,36 @@ export default {
 
 <template>
   <div class="reco-stack-container">
-    <template v-for="(reco, idx) in recommendations" :key="idx">
+    <template v-for="(reco, idx) in recommendations" :key="reco">
       <template v-if="idx == 0">
         <div
           class="reco-stack-grid-position"
           :style="{
-            marginLeft:
+            paddingLeft:
               offsetFactor * (recommendations.length - idx + 1) + 'px',
-            marginTop: offsetFactor * idx + 'px',
+            paddingTop: offsetFactor * idx + 'px',
             zIndex: 200 * (recommendations.length - idx + 1),
           }"
         >
-          <SchoolCard :schoolData="reco" />
+          <SchoolCard
+            :schoolData="reco"
+            @schoolCardDragStart="
+              (e) =>
+                $emit('schoolCardDragStart', {
+                  index: idx,
+                  event: e,
+                })
+            "
+          />
         </div>
       </template>
       <template v-else>
         <div
           class="reco-stack-grid-position"
           :style="{
-            marginLeft:
+            paddingLeft:
               offsetFactor * (recommendations.length - idx + 1) + 'px',
-            marginTop: offsetFactor * idx + 'px',
+            paddingTop: offsetFactor * idx + 'px',
             zIndex: 200 * (recommendations.length - idx + 1),
           }"
         >
@@ -45,7 +55,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .reco-stack-container {
   display: grid;
 }
