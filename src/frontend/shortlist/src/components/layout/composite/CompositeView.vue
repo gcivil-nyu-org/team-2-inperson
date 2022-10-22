@@ -1,12 +1,45 @@
 <script>
 import SimCard from "../../school/simple/SimCard.vue";
-import SimLeftBar from "../sidebar/SimLeftBar.vue";
-import SimRightBar from "../sidebar/SimRightBar.vue";
-import Navbar from "../navigation/Navbar.vue"; 
+// import SimCardDemo from "../../school/simple/SimCardDemo.vue";
+import DetailCard from "../../school/detail/DetailCard.vue";
+// import DetailCardDemo from "../../school/detail/DetailCardDemo.vue";
+import TrashBar from "../sidebar/TrashBar.vue";
+import ListBar from "../sidebar/ListBar.vue";
+
+import axios from "axios";
+
 export default {
   name: "CompositeView",
-  components: { SimCard, SimLeftBar, SimRightBar, Navbar },
+  components: { SimCard, DetailCard, TrashBar, ListBar }, //SimCardDemo, DetailCardDemo,
   //Here's the code to set up data import, currently hard coded data below
+  data() {
+    return {
+      items: [],
+      showSimple: true,
+      selectedSchool: {},
+      // showAlert: false,
+    };
+  },
+  
+  async created() {
+    try {
+      // for local json-server
+      // const jsonFile = await axios.get(`http://localhost:3000/schools`);
+      // this.items = jsonFile.data;
+
+      // for direct json
+      // const jsonFile = await axios.get(`http://localhost:3000/data.json`);
+      // const jsonFile = await axios.get(`http://shortlist-lb-demo-24059950.us-east-1.elb.amazonaws.com:3000/data.json`);
+      const jsonFile = await axios.get(`http://35.171.3.210:3000/data.json'`)
+      this.items = jsonFile.data.schools;
+
+      let picked = Math.floor(Math.random() * 3);
+      this.selectedSchool = this.items[picked];
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
   setup() {
     const schoolData = {
       img: 
@@ -36,8 +69,72 @@ export default {
         },
       }
     }
+
+    const detailData = {
+      name: "Stuyvesant High School",
+      borough: "West Village, Manhattan",
+      dimensions: {
+        phone: {
+          name: "Phone Number",
+          value: "(212)-312-4800"
+        },
+        address: {
+          name: "Address",
+          value: "345 Chambers St, New York, NY 10282"
+        },
+        description: {
+          name: "School Description",
+          value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+        },
+        rigorous_instruction: {
+          name: "Rigorous Instruction Rating",
+          value: "89%"
+        },
+        collaborative_teachers:{
+          name: "Collaborative Teachers Rating",
+          value: "85%",
+        },
+        supportive_environment: {
+          name: "Supportive Environment",
+          value: "83%",
+        },
+        effective_school_leadership: {
+          name: "Effective School Leadership",
+          value: "93%",
+        },
+        strong_family_community_ties: {
+          name: "Strong Family Community Ties",
+          value: "87%",
+        },
+        trust: {
+          name: "Trust",
+          value: "92%",
+        },
+        curriculum_quality: {
+          name: "Curriculum Quality",
+          value: "Well Developed",
+        },
+      }
+    }
+    const startDrag = (event, item) => {
+      //event.dataTransfer.dropEffect = 'move'
+      //event.dataTransfer.effectAllowed = 'move'
+      //event.dataTransfer.setData('itemID', item.id)
+      // console.log("start drag")
+    }
+
+    const onDrop = (evt, zone) => {
+      //const itemID = evt.dataTransfer.getData('itemID')
+      //const item = this.items.find((item) => item.id == itemID)
+      //item.list = list
+      alert("Dropped in " + zone)
+    }
+
     return {
-      schoolData
+      schoolData,
+      detailData,
+      startDrag,
+      onDrop,
     }
   },
 }
@@ -45,23 +142,35 @@ export default {
 
 <template>
   <div class="composite-container">
-    <div class="leftbox">
-      <SimLeftBar></SimLeftBar>
+    <div class="leftbox" @drop="onDrop($event, 'trash')" 
+                @dragenter.prevent @dragover.prevent >
+      <TrashBar/>
     </div>
     
-    <div class="sim-container">
-      <div class="topbox">
-        <SimCard :schoolData="schoolData"/>
+    <div class="sim-container" @drop="onDrop($event, 1)" 
+                @dragenter.prevent @dragover.prevent
+                @click="showSimple=!showSimple">
+      <!-- {{picked}} -->
+      
+      <div class="topbox" draggable="true" @dragstart="startDrag($event, item)">
+        <template v-if="showSimple">
+          <SimCard :schoolData="selectedSchool"/>
+        </template>
+        <template v-else>
+          <DetailCard :schoolDetailData="detailData"/>
+        </template>
       </div>
+    
       <div class="secondbox">
-        <SimCard :schoolData="schoolData"/> 
+        <SimCard :schoolData="selectedSchool"/>  
       </div>
       <div class="thirdbox">
-        <SimCard :schoolData="schoolData"/>
+        <SimCard :schoolData="selectedSchool"/> 
       </div>
     </div>
+
     <div class="rightbox">
-      <SimRightBar></SimRightBar>
+      <ListBar/>
     </div>
   </div>
 </template>
@@ -74,14 +183,16 @@ export default {
   justify-content: space-around; 
   align-items: center;
 }
-.topbox {
-}
+
 .leftbox {
+  padding-left: 100px;
 }
+
 .sim-container {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
+  padding-left: 70px;
 }
 .topbox {
   grid-column: 1 / 1;
@@ -103,5 +214,11 @@ export default {
   margin-top: 30px;
 }
 .rightbox {
+  width: 28%;
+  height: auto;
+  /* float: center; */
+  justify-content: space-between;
+  align-items: right;
+  background-color:white;
 }
 </style>

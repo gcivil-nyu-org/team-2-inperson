@@ -21,7 +21,7 @@ export default {
         },
         {
           id: 2,
-          text: 'Simple View',
+          text: 'Schools',
           page:'/demo'
         }
       ],
@@ -34,7 +34,7 @@ export default {
 <template>
     <nav class="navbar navbar-expand-lg static-top" style="background-color:white;">
       
-    <router-link to="/" class="reset-style"><img src="/short-list-logo-light-navbar.png" style="width: 170px;
+    <router-link to="/" class="reset-style"><img src="/shortlistname.png" style="width: 170px;
     left: 15px;" alt="shortlist" /></router-link>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#shortlistmenu" aria-controls="shortlistmenu" aria-expanded="false" aria-label="Toggle navigation">
