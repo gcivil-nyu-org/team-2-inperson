@@ -10,6 +10,7 @@ export default {
   },
 };
 </script>
+
 <template>
   <span class="material-symbols-outlined" :style="style">
     {{ src }}

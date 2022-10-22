@@ -1,12 +1,15 @@
 <script setup>
 import MaterialIcon from "../components/icons/MaterialIcon.vue";
+export default {
+  components: { MaterialIcon },
+};
 </script>
 
 <template>
   <main>
     <div class="home-container">
       <div class="logo-row">
-        <img src="logo.png" />
+        <img src="/logo.png"/>
       </div>
       <div class="icons-row">
         <div class="icon-container">
