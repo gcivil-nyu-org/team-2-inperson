@@ -1,5 +1,8 @@
 <script setup>
 import MaterialIcon from "../components/icons/MaterialIcon.vue";
+export default {
+  components: { MaterialIcon },
+};
 </script>
 
 <template>
@@ -10,9 +13,13 @@ import MaterialIcon from "../components/icons/MaterialIcon.vue";
       </div>
       <div class="icons-row">
         <div class="icon-container">
-          <MaterialIcon src="home" color="rgba(55, 126, 64, .9)" size="50"/>
-          <MaterialIcon src="library_add" color="rgba(55, 126, 64, .9)" size="50"/>
-          <MaterialIcon src="login" color="rgba(55, 126, 64, .9)" size="50"/>
+          <MaterialIcon src="home" color="rgba(55, 126, 64, .9)" size="50" />
+          <MaterialIcon
+            src="library_add"
+            color="rgba(55, 126, 64, .9)"
+            size="50"
+          />
+          <MaterialIcon src="login" color="rgba(55, 126, 64, .9)" size="50" />
         </div>
       </div>
     </div>
@@ -20,8 +27,7 @@ import MaterialIcon from "../components/icons/MaterialIcon.vue";
 </template>
 
 <style scoped>
-
-.home-container{
+.home-container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -55,9 +61,8 @@ import MaterialIcon from "../components/icons/MaterialIcon.vue";
   align-items: center;
   border-radius: 15px;
   border: 2px rgba(55, 125, 64) solid;
-  box-shadow: 0 0 8px 5px rgba(10, 10, 10, .1);
+  box-shadow: 0 0 8px 5px rgba(10, 10, 10, 0.1);
   padding: 15px;
-  background-color: rgba(55, 125, 64, .2);
+  background-color: rgba(55, 125, 64, 0.2);
 }
-
 </style>
