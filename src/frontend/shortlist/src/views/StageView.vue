@@ -39,9 +39,9 @@ export default {
     },
     // TODO: fill in delete call to remove from list
     deleteSchool(e) {
-        //delete this.myShortlists[e.listId].schools[0];
-        console.log(this.myShortlists[e.listId].schools[e.schoolIndex]);
-        //console.log(e.schoolIndex);
+       
+        this.myShortlists[e.listId].schools.splice(e.schoolIndex, 1);
+        //TODO: send to api
     },
   },
   data() {
