@@ -1,5 +1,6 @@
 <script>
 import MaterialIcon from "../../icons/MaterialIcon.vue";
+// import "main.css"; 
 export default {
   name: "ShortlistRow",
   data() {
@@ -30,36 +31,37 @@ export default {
 </script>
 
 <template>
-
-  <div class="layout-list-section" v-bind:class = "currentColor">
-{{currentColor}}
-  </div>
-    <div class = "color-options">
-      <div id = "color-white" 
-      v-bind: class = "{'active': currentColor === 'color-white'}"
-      v-on: click = "switchColor('color-white')"></div>
-      <div id = "color-green"
-      v-bind: class = "{'active': currentColor === 'color-green'}"
-      v-on: click = "switchColor('color-green')"></div>
-      <div id = "color-pink"
-      v-bind: class = "{'active': currentColor === 'color-pink'}"
-      v-on: click = "switchColor('color-pink')"></div>
-      <div id = "color-blue"
-      v-bind: class = "{'active': currentColor === 'color-blue'}"
-      v-on: click = "switchColor('color-blue')"></div>
-      <div id = "color-yellow"
-      v-bind: class = "{'active': currentColor === 'color-yellow'}"
-      v-on: click = "switchColor('color-yellow')"></div>
-      <div id = "color-orange"
-      v-bind: class = "{'active': currentColor === 'color-orange'}"
-      v-on: click = "switchColor('color-orange')"></div></div>
-    </div>
   <div
     class="layout-list-row"
     :style="{ backgroundColor: listSettings.color }"
     @dragover="(e) => itemDragOver(e)"
     @drop="(e) => itemDragDrop(e)"
-  >
+    >
+    <div id = "color-box"  class = "color-orange"
+v-bind:class = "currentColor">
+{{currentColor}}
+    
+    <div class = "color-options">
+      <div id = "color-white" 
+      v-bind:class = "{'active': currentColor === 'color-white'}"
+      v-on:click = "switchColor('color-white')"></div>
+      <div id = "color-green"
+      v-bind:class = "{'active': currentColor === 'color-green'}"
+      v-on:click = "switchColor('color-green')"></div>
+      <div id = "color-pink"
+      v-bind:class = "{'active': currentColor === 'color-pink'}"
+      v-on:click = "switchColor('color-pink')"></div>
+      <div id = "color-blue"
+      v-bind:class = "{'active': currentColor === 'color-blue'}"
+      v-on:click = "switchColor('color-blue')"></div>
+      <div id = "color-yellow"
+      v-bind:class = "{'active': currentColor === 'color-yellow'}"
+      v-on:click = "switchColor('color-yellow')"></div>
+      <div id = "color-orange"
+      v-bind:class = "{'active': currentColor === 'color-orange'}"
+      v-on:click = "switchColor('color-orange')"></div>
+    </div>
+    </div>
     <div class="layout-list-header-row">
       <div class="layout-list-row-icon">
         <MaterialIcon
@@ -82,7 +84,13 @@ export default {
   </div>
 </template>
 
+
 <style>
+#color-box {
+  font-family: sans-serif; 
+  height: 100%; 
+  padding: 20px; 
+}
 .layout-list-section {
   color: #2c3e50; 
   margin-top: 60px; 
@@ -108,6 +116,7 @@ export default {
   justify-content: start;
   align-items: center;
 }
+
 .layout-list-row-icon {
   display: flex;
   align-items: center;
@@ -128,6 +137,7 @@ export default {
   align-items: center;
   padding: 20px;
 }
+
 .layout-list-row-item {
   width: 100%;
   padding: 10px;
@@ -141,12 +151,38 @@ export default {
   font-size: 10px;
 }
 
+html {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0; 
+  height: 100%; 
+}
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%; 
+}
+
+body {
+  background-color: #fff;
+  color: #222; 
+  height: 100vh; 
+}
+
+.txt-center {
+  text-align: center; 
+}
+
 .color-options {
   max-width: 800px;
   margin: 0 auto;
   text-align: right;
   padding: 20px 0;
-  /* div {
+  div {
     cursor: pointer; 
     width: 20px; 
     height: 20px;
@@ -157,7 +193,7 @@ export default {
     opacity: 0.5; 
     &.active {
       opacity: 1; 
-    }*/
+    }
     }
     #color-white {
       background-color: #eee; 
@@ -177,26 +213,12 @@ export default {
     #color-orange {
       background-color: #b64b1e;
     }
+  }
 
-/* .layout-list-row {
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgb(214, 255, 214);
-  box-shadow: 5px 5px 10px #779886, -5px -5px 10px white;
-  font-family: "Aleo" sans-serif;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: start;
-} */
-
-#app.color-orange {
+#color-box.color-orange {
   background-color: #f4c9b7;
   .layout-list-row {
     background-color: #f4c9b7;
-    h3, 
     h5 {
       color: #b64b1e; 
     }
@@ -206,7 +228,7 @@ export default {
   }
 }
 
-#app.color-green {
+#color-box.color-green {
   background-color: #9da79c;
   .layout-list-row {
     background-color: #c3e3c1;
@@ -220,7 +242,7 @@ export default {
   }
 }
 
-#app.color-black {
+#color-box.color-black {
   background-color: #5c5c5c;
   .layout-list-row {
     background-color: #333;
@@ -234,7 +256,7 @@ export default {
   }
 }
 
-#app.color-blue {
+#color-box.color-blue {
   background-color: #bec7e7;
   .layout-list-row {
     background-color: #d8def4;
@@ -248,7 +270,7 @@ export default {
   }
 }
 
-#app.color-pink {
+#color-box.color-pink {
   background-color: #bec7e7;
   .layout-list-row {
     background-color: #d8def4;
@@ -262,7 +284,7 @@ export default {
   }
 }
 
-#app.color-while {
+#color-box.color-while {
   background-color: #bec7e7;
   .layout-list-row {
     background-color: #d8def4;

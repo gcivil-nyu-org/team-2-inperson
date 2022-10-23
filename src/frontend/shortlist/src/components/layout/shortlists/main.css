@@ -1,0 +1,149 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%; 
+}
+
+body {
+  background-color: #fff;
+  color: #222; 
+  height: 100vh; 
+}
+
+.txt-center {
+  text-align: center; 
+}
+
+.color-options {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: right;
+  padding: 20px 0;
+  div {
+    cursor: pointer; 
+    width: 20px; 
+    height: 20px;
+    border-radius: 4px; 
+    margin: 2px 10px;
+    border: 1px solid #fff;
+    display: inline-block; 
+    opacity: 0.5; 
+    &.active {
+      opacity: 1; 
+    }
+    }
+
+
+    #color-white {
+      background-color: #eee; 
+      /* cursor: pointer; 
+      width: 20px; 
+      height: 20px;
+      border-radius: 4px; 
+      margin: 2px 10px;
+      border: 1px solid #fff;
+      display: inline-block; 
+      opacity: 0.5;  */
+    }
+    #color-green {
+      background-color: #5faf3b;
+    }
+    #color-blue {
+      background-color: #68819F; 
+    }
+    #color-pink {
+      background-color: #FFB6C1; 
+    }
+    #color-yellow {
+      background-color: #FFFFE0;
+    }
+    #color-orange {
+      background-color: #b64b1e;
+    }
+  }
+
+#color-orange {
+  background-color: #f4c9b7;
+  .layout-list-row {
+    background-color: #f4c9b7;
+    h3, 
+    h5 {
+      color: #b64b1e; 
+    }
+    p {
+      color: #000; 
+    }
+  }
+}
+
+#color-green {
+  background-color: #9da79c;
+  .layout-list-row {
+    background-color: #c3e3c1;
+    h3, 
+    h5 {
+      color: #5faf3b; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
+#color-black {
+  background-color: #5c5c5c;
+  .layout-list-row {
+    background-color: #333;
+    h3, 
+    h5 {
+      color: #ffffff; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
+#color-blue {
+  background-color: #bec7e7;
+  .layout-list-row {
+    background-color: #d8def4;
+    h3, 
+    h5 {
+      color: #1e41c1; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
+#color-pink {
+  background-color: #bec7e7;
+  .layout-list-row {
+    background-color: #d8def4;
+    h3, 
+    h5 {
+      color: #FFB6C1; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
+#color-while {
+  background-color: #bec7e7;
+  .layout-list-row {
+    background-color: #d8def4;
+    h3, 
+    h5 {
+      color: #eee; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
