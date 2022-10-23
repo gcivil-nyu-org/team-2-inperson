@@ -31,12 +31,13 @@ export default {
 
 <template>
   <div
-    id="layout-list-row"
+    id="layout-list-row" 
     @dragover="(e) => itemDragOver(e)"
     @drop="(e) => itemDragDrop(e)"
     v-bind:class = "currentColor" 
     :style="{ backgroundColor: currentColor }"
   >
+  {{currentColor}}
     <div class = "color-options">
       <div id = "color-green"
       v-bind:class = "{'active': currentColor === 'color-green'}"
@@ -82,7 +83,7 @@ export default {
   max-width: 400px;
   padding: 10px;
   border-radius: 10px;
-  background: rgb(214, 255, 214);
+  /* background: currentColor;  */
   box-shadow: 5px 5px 10px #779886, -5px -5px 10px white;
   font-family: "Aleo" sans-serif;
   display: flex;
@@ -90,7 +91,6 @@ export default {
   flex-wrap: wrap;
   justify-content: start;
 }
-
 .layout-list-header-row {
   width: 100%;
   display: flex;
@@ -102,22 +102,19 @@ export default {
   align-items: center;
   height: 100%;
 }
-
 .layout-list-row-header {
   width: 100%;
   margin-left: 10px;
   font-weight: bold;
 }
-
 .layout-list-row-contents {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding: 20px;
+  padding: 5px;
 }
-
 .layout-list-row-item {
   width: 100%;
   padding: 10px;
@@ -130,13 +127,12 @@ export default {
   justify-content: space-around;
   font-size: 10px;
 }
-
 .color-options {
   max-width: 800px;
   margin: auto 0;
   padding: 5px 0;
 }
-    #color-green {
+#color-green {
       background-color: #5faf3b;
       cursor: pointer; 
       width: 20px; 
@@ -147,7 +143,7 @@ export default {
       display: inline-block; 
       opacity: 0.5; 
     }
-    #color-blue {
+#color-blue {
       background-color: #68819F; 
       cursor: pointer; 
       width: 20px; 
@@ -158,7 +154,7 @@ export default {
       display: inline-block; 
       opacity: 0.5; 
     }
-    #color-pink {
+#color-pink {
       background-color: #FFB6C1; 
       cursor: pointer; 
       width: 20px; 
@@ -169,8 +165,8 @@ export default {
       display: inline-block; 
       opacity: 0.5; 
     }
-    #color-yellow {
-      background-color: #FFFFE0;
+#color-yellow {
+      background-color: #FFFF00;
       cursor: pointer; 
       width: 20px; 
       height: 20px;
@@ -180,8 +176,8 @@ export default {
       display: inline-block; 
       opacity: 0.5; 
     }
-    #color-orange {
-      background-color: #b64b1e;
+#color-orange {
+      background-color: #FFA500;
       cursor: pointer; 
       width: 20px; 
       height: 20px;
@@ -191,4 +187,20 @@ export default {
       display: inline-block; 
       opacity: 0.5; 
     }
+#layout-list-row.color-blue {
+  background-color: #bec7e7;
+}
+#layout-list-row.color-green {
+  background-color: #5faf3b;
+}
+#layout-list-row.color-yellow {
+  background-color: #FFFF00;
+}
+#layout-list-row.color-orange {
+  background-color: #FFA500;
+}
+#layout-list-row.color-pink {
+  background-color: #FFB6C1;
+}
+/* layout-list-row */
 </style>
