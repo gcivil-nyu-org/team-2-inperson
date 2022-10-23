@@ -114,6 +114,7 @@ export default {
   width: 100%;
   margin-top: auto;
   display: flex;
+  align-self: auto; 
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
