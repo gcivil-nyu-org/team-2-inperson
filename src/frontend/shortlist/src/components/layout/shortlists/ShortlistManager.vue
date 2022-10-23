@@ -22,7 +22,7 @@ export default {
     },
     listItemDeleteClick(e, id) {
       this.$emit("listItemDeleteClick", {
-        schoolId: e,
+        schoolIndex: e,
         listId: id,
       });
     },

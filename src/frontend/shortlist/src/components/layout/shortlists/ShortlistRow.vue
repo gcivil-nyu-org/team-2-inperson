@@ -38,11 +38,11 @@ export default {
       <div class="layout-list-row-header">{{ listSettings.name }}</div>
     </div>
     <div class="layout-list-row-contents">
-      <template v-for="school in listSchools" :key="school.id">
+      <template v-for="(school, schoolIndex) in listSchools" :key="school.id">
         <div
           class="layout-list-row-item"
           @click="$emit('listItemDetailClick', school.id)"
-          @dblclick="$emit('listItemDeleteClick', school.id)"
+          @dblclick="$emit('listItemDeleteClick', schoolIndex)"
         >
           <!--Modify to display school pics-->
           <div>{{ school.name }}</div>
