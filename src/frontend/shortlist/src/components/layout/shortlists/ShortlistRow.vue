@@ -31,16 +31,15 @@ export default {
 
 <template>
   <div
-    class="layout-list-row"
-    :style="{ backgroundColor: listSettings.color }"
+    id="layout-list-row"
     @dragover="(e) => itemDragOver(e)"
     @drop="(e) => itemDragDrop(e)"
-    v-bind:class = "currentColor"
+    v-bind:class = "currentColor" 
+    :style="{ backgroundColor: currentColor }"
   >
-{{currentColor}}
     <div class = "color-options">
       <div id = "color-green"
-      v-bind:class = "{'active': currentColor}"
+      v-bind:class = "{'active': currentColor === 'color-green'}"
       v-on:click = "switchColor('color-green')"></div>
       <div id = "color-pink"
       v-bind:class = "{'active': currentColor === 'color-pink'}"
@@ -78,7 +77,7 @@ export default {
 </template>
 
 <style>
-.layout-list-row {
+#layout-list-row {
   width: 100%;
   max-width: 400px;
   padding: 10px;

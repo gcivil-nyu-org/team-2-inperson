@@ -1,12 +1,11 @@
 
 <script>
 import ShortlistRow from "./ShortlistRow.vue";
-import ColorPanel from "./ColorPanle.vue"; 
 
 export default {
   name: "ShortlistManager",
   props: ["studentShortlists"],
-  components: { ShortlistRow, ColorPanel},
+  components: { ShortlistRow},
   emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
   methods: {
     listItemDetailClick(e, id) {
