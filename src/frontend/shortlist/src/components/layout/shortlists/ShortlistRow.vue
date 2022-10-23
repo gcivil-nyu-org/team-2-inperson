@@ -42,7 +42,7 @@ export default {
         <div
           class="layout-list-row-item"
           @click="$emit('listItemDetailClick', school.id)"
-          @doubleClick="$emit('listItemDeleteClick', school.id)"
+          @dblclick="$emit('listItemDeleteClick', school.id)"
         >
           <!--Modify to display school pics-->
           <div>{{ school.name }}</div>

@@ -39,8 +39,10 @@ export default {
     },
     // TODO: fill in delete call to remove from list
     deleteSchool(e) {
-        delete this.myShortlists[e.listId].schools[e.school.id];
-    }
+        //delete this.myShortlists[e.listId].schools[0];
+        //console.log(this.myShortlists[e.listId].schools.indexOf(e.schoolId));
+        console.log(e.schoolId);
+    },
   },
   data() {
     let myShortlists = shortLists;
