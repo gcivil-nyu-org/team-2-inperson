@@ -112,11 +112,12 @@ export default {
 }
 .layout-list-row-contents {
   width: 100%;
+  margin-top: auto;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding: 5px;
+  padding: 1px;
 }
 .layout-list-row-item {
   width: 100%;
@@ -181,7 +182,7 @@ export default {
       opacity: 0.5; 
     }
 #color-yellow {
-      background-color: #FFFF00;
+      background-color: #FFFFA7;
       cursor: pointer; 
       width: 20px; 
       height: 20px;
@@ -192,7 +193,7 @@ export default {
       opacity: 0.5; 
     }
 #color-orange {
-      background-color: #FFA500;
+      background-color: #FFD580;
       cursor: pointer; 
       width: 20px; 
       height: 20px;
@@ -212,10 +213,10 @@ export default {
   background-color: #bcd6a2;
 }
 #layout-list-row.color-yellow {
-  background-color: #FFFF00;
+  background-color: #FFFFA7;
 }
 #layout-list-row.color-orange {
-  background-color: #FFA500;
+  background-color: #FFD580;
 }
 #layout-list-row.color-pink {
   background-color: #FADADD;
