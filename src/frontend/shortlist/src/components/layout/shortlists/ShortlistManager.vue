@@ -1,4 +1,3 @@
-
 <script>
 import ShortlistRow from "./ShortlistRow.vue";
 
@@ -25,7 +24,7 @@ export default {
 </script>
 
 <template>
-  <div class="layout-list-section">
+<div>
     <template v-for="(list, listNum) in studentShortlists" :key="list">
       <ShortlistRow
         :listId="listNum"
@@ -47,5 +46,5 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-}
+};
 </style>

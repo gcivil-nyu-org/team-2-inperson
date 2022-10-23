@@ -2,6 +2,11 @@
 import MaterialIcon from "../../icons/MaterialIcon.vue";
 export default {
   name: "ShortlistRow",
+  data() {
+    return {
+      currentColor: localStorage.getItem('color-options')
+    }; 
+  },
   props: ["listId", "listSettings", "listSchools"],
   emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
   components: { MaterialIcon },
@@ -16,11 +21,39 @@ export default {
     itemDragDrop(e) {
       this.$emit("itemDragDrop", e);
     },
+    switchColor(colorChoice) {
+        localStorage.setItem('color-options', colorChoice); 
+        this.currentColor = localStorage.getItem('color-options')
+      }
   },
 };
 </script>
 
 <template>
+
+  <div class="layout-list-section" v-bind:class = "currentColor">
+{{currentColor}}
+  </div>
+    <div class = "color-options">
+      <div id = "color-white" 
+      v-bind: class = "{'active': currentColor === 'color-white'}"
+      v-on: click = "switchColor('color-white')"></div>
+      <div id = "color-green"
+      v-bind: class = "{'active': currentColor === 'color-green'}"
+      v-on: click = "switchColor('color-green')"></div>
+      <div id = "color-pink"
+      v-bind: class = "{'active': currentColor === 'color-pink'}"
+      v-on: click = "switchColor('color-pink')"></div>
+      <div id = "color-blue"
+      v-bind: class = "{'active': currentColor === 'color-blue'}"
+      v-on: click = "switchColor('color-blue')"></div>
+      <div id = "color-yellow"
+      v-bind: class = "{'active': currentColor === 'color-yellow'}"
+      v-on: click = "switchColor('color-yellow')"></div>
+      <div id = "color-orange"
+      v-bind: class = "{'active': currentColor === 'color-orange'}"
+      v-on: click = "switchColor('color-orange')"></div></div>
+    </div>
   <div
     class="layout-list-row"
     :style="{ backgroundColor: listSettings.color }"
@@ -50,6 +83,11 @@ export default {
 </template>
 
 <style>
+.layout-list-section {
+  color: #2c3e50; 
+  margin-top: 60px; 
+}
+
 .layout-list-row {
   width: 100%;
   max-width: 400px;
@@ -102,4 +140,140 @@ export default {
   justify-content: space-around;
   font-size: 10px;
 }
+
+.color-options {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: right;
+  padding: 20px 0;
+  /* div {
+    cursor: pointer; 
+    width: 20px; 
+    height: 20px;
+    border-radius: 4px; 
+    margin: 2px 10px;
+    border: 1px solid #fff;
+    display: inline-block; 
+    opacity: 0.5; 
+    &.active {
+      opacity: 1; 
+    }*/
+    }
+    #color-white {
+      background-color: #eee; 
+    }
+    #color-green {
+      background-color: #5faf3b;
+    }
+    #color-blue {
+      background-color: #68819F; 
+    }
+    #color-pink {
+      background-color: #FFB6C1; 
+    }
+    #color-yellow {
+      background-color: #FFFFE0;
+    }
+    #color-orange {
+      background-color: #b64b1e;
+    }
+
+/* .layout-list-row {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgb(214, 255, 214);
+  box-shadow: 5px 5px 10px #779886, -5px -5px 10px white;
+  font-family: "Aleo" sans-serif;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+} */
+
+#app.color-orange {
+  background-color: #f4c9b7;
+  .layout-list-row {
+    background-color: #f4c9b7;
+    h3, 
+    h5 {
+      color: #b64b1e; 
+    }
+    p {
+      color: #000; 
+    }
+  }
+}
+
+#app.color-green {
+  background-color: #9da79c;
+  .layout-list-row {
+    background-color: #c3e3c1;
+    h3, 
+    h5 {
+      color: #5faf3b; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
+#app.color-black {
+  background-color: #5c5c5c;
+  .layout-list-row {
+    background-color: #333;
+    h3, 
+    h5 {
+      color: #ffffff; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
+#app.color-blue {
+  background-color: #bec7e7;
+  .layout-list-row {
+    background-color: #d8def4;
+    h3, 
+    h5 {
+      color: #1e41c1; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
+#app.color-pink {
+  background-color: #bec7e7;
+  .layout-list-row {
+    background-color: #d8def4;
+    h3, 
+    h5 {
+      color: #FFB6C1; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
+#app.color-while {
+  background-color: #bec7e7;
+  .layout-list-row {
+    background-color: #d8def4;
+    h3, 
+    h5 {
+      color: #eee; 
+    }
+    p { 
+      color: #000; 
+    }
+  }
+}
+
 </style>
