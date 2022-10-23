@@ -37,14 +37,17 @@ export default {
     v-bind:class = "currentColor" 
     :style="{ backgroundColor: currentColor }"
   >
-  {{currentColor}}
+  <!-- {{currentColor}} -->
     <div class = "color-options">
-      <div id = "color-green"
-      v-bind:class = "{'active': currentColor === 'color-green'}"
-      v-on:click = "switchColor('color-green')"></div>
+      <div id = "color-default"
+      v-bind:class = "{'active': currentColor === 'color-default'}"
+      v-on:click = "switchColor('color-default')"></div>
       <div id = "color-pink"
       v-bind:class = "{'active': currentColor === 'color-pink'}"
       v-on:click = "switchColor('color-pink')"></div>
+      <div id = "color-green"
+      v-bind:class = "{'active': currentColor === 'color-green'}"
+      v-on:click = "switchColor('color-green')"></div>
       <div id = "color-blue"
       v-bind:class = "{'active': currentColor === 'color-blue'}"
       v-on:click = "switchColor('color-blue')"></div>
@@ -132,8 +135,20 @@ export default {
   margin: auto 0;
   padding: 5px 0;
 }
+
+#color-default {
+      background-color: #ecf0f3;
+      cursor: pointer; 
+      width: 20px; 
+      height: 20px;
+      border-radius: 4px; 
+      margin: 2px 10px;
+      border: 1px solid #fff;
+      display: inline-block; 
+      opacity: 0.5; 
+}
 #color-green {
-      background-color: #5faf3b;
+      background-color: #bcd6a2;
       cursor: pointer; 
       width: 20px; 
       height: 20px;
@@ -155,7 +170,7 @@ export default {
       opacity: 0.5; 
     }
 #color-pink {
-      background-color: #FFB6C1; 
+      background-color: #FADADD; 
       cursor: pointer; 
       width: 20px; 
       height: 20px;
@@ -187,11 +202,14 @@ export default {
       display: inline-block; 
       opacity: 0.5; 
     }
+#layout-list-row.color-default {
+  background-color: #ecf0f3;
+}
 #layout-list-row.color-blue {
   background-color: #bec7e7;
 }
 #layout-list-row.color-green {
-  background-color: #5faf3b;
+  background-color: #bcd6a2;
 }
 #layout-list-row.color-yellow {
   background-color: #FFFF00;
@@ -200,7 +218,7 @@ export default {
   background-color: #FFA500;
 }
 #layout-list-row.color-pink {
-  background-color: #FFB6C1;
+  background-color: #FADADD;
 }
 /* layout-list-row */
 </style>
