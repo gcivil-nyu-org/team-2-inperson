@@ -1,16 +1,15 @@
 <script>
 import MaterialIcon from "../../icons/MaterialIcon.vue";
-// import "main.css"; 
 export default {
   name: "ShortlistRow",
+  props: ["listId", "listSettings", "listSchools"],
+  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
+  components: { MaterialIcon },
   data() {
     return {
       currentColor: localStorage.getItem('color-options')
     }; 
   },
-  props: ["listId", "listSettings", "listSchools"],
-  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
-  components: { MaterialIcon },
   methods: {
     logEmit(e) {
       console.log(e);
@@ -22,6 +21,10 @@ export default {
     itemDragDrop(e) {
       this.$emit("itemDragDrop", e);
     },
+    switchColor(colorChoice) {
+      localStorage.setItem('color-options', colorChoice); 
+      this.currentColor = localStorage.getItem('color-options')
+  }
   },
 };
 </script>
@@ -32,7 +35,26 @@ export default {
     :style="{ backgroundColor: listSettings.color }"
     @dragover="(e) => itemDragOver(e)"
     @drop="(e) => itemDragDrop(e)"
-    >
+    v-bind:class = "currentColor"
+  >
+{{currentColor}}
+    <div class = "color-options">
+      <div id = "color-green"
+      v-bind:class = "{'active': currentColor}"
+      v-on:click = "switchColor('color-green')"></div>
+      <div id = "color-pink"
+      v-bind:class = "{'active': currentColor === 'color-pink'}"
+      v-on:click = "switchColor('color-pink')"></div>
+      <div id = "color-blue"
+      v-bind:class = "{'active': currentColor === 'color-blue'}"
+      v-on:click = "switchColor('color-blue')"></div>
+      <div id = "color-yellow"
+      v-bind:class = "{'active': currentColor === 'color-yellow'}"
+      v-on:click = "switchColor('color-yellow')"></div>
+      <div id = "color-orange"
+      v-bind:class = "{'active': currentColor === 'color-orange'}"
+      v-on:click = "switchColor('color-orange')"></div>
+    </div>
     <div class="layout-list-header-row">
       <div class="layout-list-row-icon">
         <MaterialIcon
@@ -55,13 +77,7 @@ export default {
   </div>
 </template>
 
-
 <style>
-.layout-list-section {
-  color: #2c3e50; 
-  margin-top: 60px; 
-}
-
 .layout-list-row {
   width: 100%;
   max-width: 400px;
@@ -82,7 +98,6 @@ export default {
   justify-content: start;
   align-items: center;
 }
-
 .layout-list-row-icon {
   display: flex;
   align-items: center;
@@ -117,4 +132,64 @@ export default {
   font-size: 10px;
 }
 
+.color-options {
+  max-width: 800px;
+  margin: auto 0;
+  padding: 5px 0;
+}
+    #color-green {
+      background-color: #5faf3b;
+      cursor: pointer; 
+      width: 20px; 
+      height: 20px;
+      border-radius: 4px; 
+      margin: 2px 10px;
+      border: 1px solid #fff;
+      display: inline-block; 
+      opacity: 0.5; 
+    }
+    #color-blue {
+      background-color: #68819F; 
+      cursor: pointer; 
+      width: 20px; 
+      height: 20px;
+      border-radius: 4px; 
+      margin: 2px 10px;
+      border: 1px solid #fff;
+      display: inline-block; 
+      opacity: 0.5; 
+    }
+    #color-pink {
+      background-color: #FFB6C1; 
+      cursor: pointer; 
+      width: 20px; 
+      height: 20px;
+      border-radius: 4px; 
+      margin: 2px 10px;
+      border: 1px solid #fff;
+      display: inline-block; 
+      opacity: 0.5; 
+    }
+    #color-yellow {
+      background-color: #FFFFE0;
+      cursor: pointer; 
+      width: 20px; 
+      height: 20px;
+      border-radius: 4px; 
+      margin: 2px 10px;
+      border: 1px solid #fff;
+      display: inline-block; 
+      opacity: 0.5; 
+    }
+    #color-orange {
+      background-color: #b64b1e;
+      cursor: pointer; 
+      width: 20px; 
+      height: 20px;
+      border-radius: 4px; 
+      margin: 2px 10px;
+      border: 1px solid #fff;
+      display: inline-block; 
+      opacity: 0.5; 
+    }
 </style>

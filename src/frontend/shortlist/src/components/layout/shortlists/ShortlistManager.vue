@@ -1,10 +1,12 @@
+
 <script>
 import ShortlistRow from "./ShortlistRow.vue";
+import ColorPanel from "./ColorPanle.vue"; 
 
 export default {
   name: "ShortlistManager",
   props: ["studentShortlists"],
-  components: { ShortlistRow },
+  components: { ShortlistRow, ColorPanel},
   emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
   methods: {
     listItemDetailClick(e, id) {
@@ -24,7 +26,7 @@ export default {
 </script>
 
 <template>
-<div>
+  <div class="layout-list-section">
     <template v-for="(list, listNum) in studentShortlists" :key="list">
       <ShortlistRow
         :listId="listNum"
@@ -34,6 +36,7 @@ export default {
         @itemDragOver="(e) => itemDragOver(e, listNum)"
         @itemDragDrop="(e) => itemDragDrop(e, listNum)"
       />
+
     </template>
   </div>
 </template>
@@ -46,5 +49,5 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-};
+}
 </style>
