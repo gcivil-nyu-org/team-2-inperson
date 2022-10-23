@@ -6,7 +6,7 @@ export default {
   name: "ShortlistManager",
   props: ["studentShortlists"],
   components: { ShortlistRow },
-  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
+  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop", "listItemDeleteClick"],
   methods: {
     listItemDetailClick(e, id) {
       this.$emit("listItemDetailClick", {
@@ -19,6 +19,12 @@ export default {
     },
     itemDragDrop(e, id) {
       this.$emit("itemDragDrop", { event: e, listId: id });
+    },
+    listItemDeleteClick(e, id) {
+      this.$emit("listItemDeleteClick", {
+        schoolId: e,
+        listId: id,
+      });
     },
   },
 };
@@ -34,6 +40,7 @@ export default {
         @listItemDetailClick="(e) => listItemDetailClick(e, list.id)"
         @itemDragOver="(e) => itemDragOver(e, listNum)"
         @itemDragDrop="(e) => itemDragDrop(e, listNum)"
+        @listItemDeleteClick="(e) => listItemDeleteClick(e, listNum)"
       />
     </template>
   </div>
