@@ -3,9 +3,11 @@ import ShortlistManager from "../components/layout/shortlists/ShortlistManager.v
 import RecommendationStack from "../components/layout/recommendations/RecommendationStack.vue";
 import TrashCan from "../components/layout/shortlists/TrashCan.vue";
 
-import { shortLists } from "../api/examples/shortlists.js";
-import { recommendations } from "../api/examples/recommendations.js";
+//import { shortLists } from "../api/examples/shortlists.js";
+//import { recommendations } from "../api/examples/recommendations.js";
 import { assignSchoolToList } from "../api/assignSchoolToList.js";
+
+import axios from "axios";
 
 export default {
   components: { ShortlistManager, RecommendationStack, TrashCan },
@@ -33,20 +35,26 @@ export default {
         // categorize it
         this.myShortlists[e.listId].schools.push(this.myRecommendations[0]);
         // TODO: send to api
+        axios.put(`http://18.213.115.239/api/shortlists`,{schools: this.myShortlists[e.listId].schools});
       }
       // remove from recomendation stack
       this.myRecommendations.splice(0, 1);
     },
     // TODO: fill in delete call to remove from list
     deleteSchool(e) {
-       
-        this.myShortlists[e.listId].schools.splice(e.schoolIndex, 1);
-        //TODO: send to api
+      this.myShortlists[e.listId].schools.splice(e.schoolIndex, 1);
+      //TODO: send to api
+      axios.put(`http://18.213.115.239/api/shortlists`, {
+        schools: this.myShortlists[e.listId].schools,
+      });
     },
   },
   data() {
-    let myShortlists = shortLists;
-    let myRecommendations = recommendations;
+    const shortListJS = axios.get(`http://18.213.115.239/api/shortlists`);
+    const recommendationJS = axios.get(`http://18.213.115.239/api/schools`);
+    //let myShortlists = shortLists;
+    let myShortlists = shortListJS.data;
+    let myRecommendations = recommendationJS.data;
     let draggingCurrent = {
       position: null,
       data: null,
