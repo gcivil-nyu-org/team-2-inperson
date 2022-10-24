@@ -3,12 +3,50 @@ import MaterialIcon from "../../icons/MaterialIcon.vue";
 export default {
   name: "ShortlistRow",
   props: ["listId", "listSettings", "listSchools"],
-  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
+  emits: [
+    "listItemDetailClick",
+    "itemDragOver",
+    "itemDragDrop",
+    "changeListSettings",
+    "shareList",
+  ],
   components: { MaterialIcon },
   data() {
     return {
-      currentColor: localStorage.getItem('color-options')
-    }; 
+      inEditMode: false,
+      localSettings: { ...this.listSettings },
+      allowedColors: {
+        "#ecf0f3": { deselect: "#BBBBBB", select: "#000000" },
+        "#bec7e7": { deselect: "#52569e", select: "#FFFF00" },
+        "#bcd6a2": { deselect: "#42803b", select: "#FFFF00" },
+        "#ffffa7": { deselect: "#cad40f", select: "#333333" },
+        "#ffd580": { deselect: "#d1672e", select: "#FFFF00" },
+        "#fadadd": { deselect: "#8c1d1d", select: "#FFFF00" },
+      },
+      allowedIcons: [
+        "queue_music",
+        "theater_comedy",
+        "accessible",
+        "directions_car",
+        "sports_soccer",
+        "sports_basketball",
+        "sports_tennis",
+        "pool",
+        "sailing",
+        "local_taxi",
+        "sports_gymnastics",
+        "train",
+        "directions_bike",
+        "science",
+        "calculate",
+        "engineering",
+        "code_blocks",
+        "palette",
+        "keyboard",
+        "token",
+        "favorite",
+      ],
+    };
   },
   methods: {
     logEmit(e) {
