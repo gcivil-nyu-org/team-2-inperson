@@ -3,7 +3,7 @@ export const shortLists = [
     id: 56658,
     settings: {
       name: "stem exams",
-      color: "#ffa7a1",
+      color: "#ecf0f3",
       icon: {
         value: "token",
         color: "black",
@@ -24,7 +24,7 @@ export const shortLists = [
     id: 234,
     settings: {
       name: "favorites",
-      color: "#779886",
+      color: "#ffd580",
       icon: {
         value: "favorite",
         color: "black",
@@ -45,7 +45,7 @@ export const shortLists = [
     id: 4357568,
     settings: {
       name: "transit",
-      color: "#f5ff8a",
+      color: "#fadadd",
       icon: {
         value: "train",
         color: "black",

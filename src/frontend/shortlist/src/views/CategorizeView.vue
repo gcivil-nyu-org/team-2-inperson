@@ -37,6 +37,17 @@ export default {
       // remove from recomendation stack
       this.myRecommendations.splice(0, 1);
     },
+    changeListSettings(e) {
+      // update UI
+      this.myShortlists[e.listId].settings = JSON.parse(
+        JSON.stringify(e.settings)
+      );
+      // TODO: send update to api
+      console.log("SEND UPDATE SETTINGS:", e.settings);
+    },
+    shareList(e) {
+      console.log("SHARED LIST #:", e);
+    },
   },
   data() {
     let myShortlists = shortLists;
@@ -70,6 +81,8 @@ export default {
         :studentShortlists="myShortlists"
         @listItemDetailClick="(e) => logEmit(e)"
         @itemDragDrop="(e) => assignSchool(e)"
+        @changeListSettings="(e) => changeListSettings(e)"
+        @shareList="(e) => shareList(e)"
       />
     </div>
   </div>
