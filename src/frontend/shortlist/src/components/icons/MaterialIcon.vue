@@ -4,7 +4,15 @@ export default {
   props: ["src", "color", "size"],
   computed: {
     style() {
-      return "font-size: " + this.size + "px; " + "color: " + this.color + ";";
+      return (
+        "font-size: " +
+        this.size +
+        "px; " +
+        "color: " +
+        this.color +
+        ";" +
+        "user-select: none;"
+      );
     },
   },
 };
