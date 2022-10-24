@@ -59,9 +59,14 @@ export default {
     itemDragDrop(e) {
       this.$emit("itemDragDrop", e);
     },
-    switchColor(colorChoice) {
-      localStorage.setItem('color-options', colorChoice); 
-      this.currentColor = localStorage.getItem('color-options');
+    startChangeSettings() {
+      // deep copy so we don't accidentally break state in the parents
+      this.localSettings = JSON.parse(JSON.stringify(this.listSettings));
+      this.inEditMode = true;
+    },
+    changeListSettings() {
+      this.$emit("changeListSettings", this.localSettings);
+      this.inEditMode = false;
     },
   },
 };
