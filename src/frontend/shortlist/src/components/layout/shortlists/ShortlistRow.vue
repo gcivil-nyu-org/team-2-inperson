@@ -166,6 +166,38 @@ export default {
         </button>
       </div>
     </template>
+
+    <template v-else>
+      <div class="layout-list-header-row">
+        <div class="layout-list-row-icon">
+          <MaterialIcon
+            :src="listSettings.icon.value"
+            :color="listSettings.icon.color"
+          />
+        </div>
+        <div class="layout-list-row-name">{{ listSettings.name }}</div>
+        <div style="flex-grow: 1"></div>
+        <div class="layout-list-row-actions">
+          <div style="cursor: pointer">
+            <MaterialIcon src="tune" size="18" @click="startChangeSettings" />
+          </div>
+          <div style="width: 10px"></div>
+          <div style="cursor: pointer">
+            <MaterialIcon src="share" size="18" @click="$emit('shareList')" />
+          </div>
+        </div>
+      </div>
+      <div class="layout-list-row-schools">
+        <template v-for="school in listSchools" :key="school.id">
+          <div
+            class="layout-list-row-item"
+            @click="$emit('listItemDetailClick', school.id)"
+          >
+            <div>{{ school.name }}</div>
+          </div>
+        </template>
+      </div>
+    </template>
   </div>
 </template>
 
