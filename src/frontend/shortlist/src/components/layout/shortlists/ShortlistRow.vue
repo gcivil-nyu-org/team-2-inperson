@@ -206,11 +206,10 @@ export default {
   max-width: 400px;
   padding: 10px;
   border-radius: 10px;
-  /* background: currentColor;  */
   box-shadow: 5px 5px 10px #779886, -5px -5px 10px white;
   font-family: "Aleo" sans-serif;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: start;
 }
@@ -219,18 +218,23 @@ export default {
   display: flex;
   justify-content: start;
   align-items: center;
+  margin-bottom: 15px;
 }
 .layout-list-row-icon {
   display: flex;
   align-items: center;
   height: 100%;
 }
-.layout-list-row-header {
+.layout-list-row-name {
   width: 100%;
   margin-left: 10px;
   font-weight: bold;
 }
-.layout-list-row-contents {
+.layout-list-row-actions {
+  display: flex;
+}
+
+.layout-list-row-schools {
   width: 100%;
   margin-top: auto;
   display: flex;
@@ -251,95 +255,48 @@ export default {
   justify-content: space-around;
   font-size: 10px;
 }
-.color-options {
-  max-width: 800px;
-  margin: auto 0;
-  padding: 5px 0;
+
+.layout-list-settings-row {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid white;
+}
+.layout-list-settings-row-prompt {
+  width: 100%;
 }
 
-#color-default {
-      background-color: #ecf0f3;
-      cursor: pointer; 
-      width: 20px; 
-      height: 20px;
-      border-radius: 4px; 
-      margin: 2px 10px;
-      border: 1px solid #fff;
-      display: inline-block; 
-      opacity: 0.5; 
+.layout-list-settings-name-input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font-family: sans-serif;
+  font-weight: bold;
 }
-#color-green {
-      background-color: #bcd6a2;
-      cursor: pointer; 
-      width: 20px; 
-      height: 20px;
-      border-radius: 4px; 
-      margin: 2px 10px;
-      border: 1px solid #fff;
-      display: inline-block; 
-      opacity: 0.5; 
-    }
-#color-blue {
-      background-color: #68819F; 
-      cursor: pointer; 
-      width: 20px; 
-      height: 20px;
-      border-radius: 4px; 
-      margin: 2px 10px;
-      border: 1px solid #fff;
-      display: inline-block; 
-      opacity: 0.5; 
-    }
-#color-pink {
-      background-color: #FADADD; 
-      cursor: pointer; 
-      width: 20px; 
-      height: 20px;
-      border-radius: 4px; 
-      margin: 2px 10px;
-      border: 1px solid #fff;
-      display: inline-block; 
-      opacity: 0.5; 
-    }
-#color-yellow {
-      background-color: #FFFFA7;
-      cursor: pointer; 
-      width: 20px; 
-      height: 20px;
-      border-radius: 4px; 
-      margin: 2px 10px;
-      border: 1px solid #fff;
-      display: inline-block; 
-      opacity: 0.5; 
-    }
-#color-orange {
-      background-color: #FFD580;
-      cursor: pointer; 
-      width: 20px; 
-      height: 20px;
-      border-radius: 4px; 
-      margin: 2px 10px;
-      border: 1px solid #fff;
-      display: inline-block; 
-      opacity: 0.5; 
-    }
-#layout-list-row.color-default {
-  background-color: #ecf0f3;
+.layout-list-settings-name-input:focus {
+  border: 1px solid white;
+  outline: none;
 }
-#layout-list-row.color-blue {
-  background-color: #bec7e7;
+
+.layout-list-settings-row-options {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  overflow-x: auto;
 }
-#layout-list-row.color-green {
-  background-color: #bcd6a2;
+
+.layout-list-settings-edit-color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid white;
 }
-#layout-list-row.color-yellow {
-  background-color: #FFFFA7;
+
+.layout-list-settings-edit-color-swatch-selected {
+  border: 3px solid black;
 }
-#layout-list-row.color-orange {
-  background-color: #FFD580;
-}
-#layout-list-row.color-pink {
-  background-color: #FADADD;
-}
-/* layout-list-row */
 </style>
