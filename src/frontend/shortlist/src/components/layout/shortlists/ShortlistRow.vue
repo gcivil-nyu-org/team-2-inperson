@@ -74,7 +74,7 @@ export default {
 
 <template>
   <div
-    id="layout-list-row"
+    class="layout-list-row"
     @dragover="(e) => itemDragOver(e)"
     @drop="(e) => itemDragDrop(e)"
     :style="{ backgroundColor: listSettings.color }"
@@ -201,7 +201,7 @@ export default {
 </template>
 
 <style>
-#layout-list-row {
+.layout-list-row {
   width: 100%;
   max-width: 400px;
   padding: 10px;
