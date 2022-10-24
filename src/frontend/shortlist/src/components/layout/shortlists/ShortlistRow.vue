@@ -80,46 +80,92 @@ export default {
     v-bind:class = "currentColor" 
     :style="{ backgroundColor: currentColor }"
   >
-  <!-- {{currentColor}} -->
-    <div class = "color-options">
-      <div id = "color-default"
-      v-bind:class = "{'active': currentColor === 'color-default'}"
-      v-on:click = "switchColor('color-default')"></div>
-      <div id = "color-pink"
-      v-bind:class = "{'active': currentColor === 'color-pink'}"
-      v-on:click = "switchColor('color-pink')"></div>
-      <div id = "color-green"
-      v-bind:class = "{'active': currentColor === 'color-green'}"
-      v-on:click = "switchColor('color-green')"></div>
-      <div id = "color-blue"
-      v-bind:class = "{'active': currentColor === 'color-blue'}"
-      v-on:click = "switchColor('color-blue')"></div>
-      <div id = "color-yellow"
-      v-bind:class = "{'active': currentColor === 'color-yellow'}"
-      v-on:click = "switchColor('color-yellow')"></div>
-      <div id = "color-orange"
-      v-bind:class = "{'active': currentColor === 'color-orange'}"
-      v-on:click = "switchColor('color-orange')"></div>
-    </div>
-    <div class="layout-list-header-row">
-      <div class="layout-list-row-icon">
-        <MaterialIcon
-          :src="listSettings.icon.value"
-          :color="listSettings.icon.color"
-        />
-      </div>
-      <div class="layout-list-row-header">{{ listSettings.name }}</div>
-    </div>
-    <div class="layout-list-row-contents">
-      <template v-for="school in listSchools" :key="school.id">
-        <div
-          class="layout-list-row-item"
-          @click="$emit('listItemDetailClick', school.id)"
-        >
-          <div>{{ school.name }}</div>
+    <template v-if="inEditMode">
+      <!-- Name -->
+      <div class="layout-list-settings-row">
+        <div class="layout-list-settings-row-prompt">Name the List:</div>
+        <div class="layout-list-settings-row-options">
+          <input
+            class="layout-list-settings-name-input"
+            v-model="localSettings.name"
+            autofocus
+          />
         </div>
-      </template>
-    </div>
+      </div>
+
+      <!-- Color -->
+      <div class="layout-list-settings-row">
+        <div class="layout-list-settings-row-prompt">Choose a Color:</div>
+        <div class="layout-list-settings-row-options">
+          <div v-for="(colorAtts, colorKey) in allowedColors" :key="colorAtts">
+            <div
+              :class="{
+                'layout-list-settings-edit-color-swatch': true,
+                'layout-list-settings-edit-color-swatch-selected':
+                  colorKey == localSettings.color,
+              }"
+              :style="{ backgroundColor: colorKey, cursor: 'pointer' }"
+              @click="localSettings.color = colorKey"
+            ></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Icon -->
+      <div class="layout-list-settings-row">
+        <div class="layout-list-settings-row-prompt">Choose an Icon:</div>
+        <div
+          class="layout-list-settings-row-options"
+          style="cursor: all-scroll"
+        >
+          <div
+            v-for="icon in allowedIcons"
+            :key="icon"
+            :style="{ cursor: 'pointer' }"
+          >
+            <MaterialIcon
+              size="40"
+              :src="icon"
+              :color="
+                icon == localSettings.icon.value
+                  ? this.allowedColors[listSettings.color].select
+                  : this.allowedColors[listSettings.color].deselect
+              "
+              @click="localSettings.icon.value = icon"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Action -->
+      <div class="layout-list-settings-row">
+        <button
+          @click="changeListSettings"
+          style="
+            border: none;
+            background-color: green;
+            color: white;
+            padding: 5px;
+            border-radius: 10px;
+          "
+        >
+          Change
+        </button>
+        <button
+          @click="inEditMode = false"
+          style="
+            border: none;
+            background-color: red;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+          "
+        >
+          Cancel
+        </button>
+      </div>
+    </template>
   </div>
 </template>
 
