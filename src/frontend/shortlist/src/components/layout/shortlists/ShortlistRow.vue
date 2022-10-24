@@ -3,7 +3,7 @@ import MaterialIcon from "../../icons/MaterialIcon.vue";
 export default {
   name: "ShortlistRow",
   props: ["listId", "listSettings", "listSchools"],
-  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
+  emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop", "changeToColor"],
   components: { MaterialIcon },
   data() {
     return {
@@ -21,10 +21,14 @@ export default {
     itemDragDrop(e) {
       this.$emit("itemDragDrop", e);
     },
-    switchColor(colorChoice) {
+    switchColor(colorChoice, listSettings) {
       localStorage.setItem('color-options', colorChoice); 
-      this.currentColor = localStorage.getItem('color-options')
-  }
+      this.currentColor = localStorage.getItem('color-options');
+      //not clear how colorChoice is used to get color value out
+      listSettings.color = colorChoice;
+      console.log("this color: ", colorChoice);
+      this.$emit("changeToColor", colorChoice);
+    },
   },
 };
 </script>
@@ -41,22 +45,22 @@ export default {
     <div class = "color-options">
       <div id = "color-default"
       v-bind:class = "{'active': currentColor === 'color-default'}"
-      v-on:click = "switchColor('color-default')"></div>
+      v-on:click = "switchColor('color-default', listSettings)"></div>
       <div id = "color-pink"
       v-bind:class = "{'active': currentColor === 'color-pink'}"
-      v-on:click = "switchColor('color-pink')"></div>
+      v-on:click = "switchColor('color-pink', listSettings)"></div>
       <div id = "color-green"
       v-bind:class = "{'active': currentColor === 'color-green'}"
-      v-on:click = "switchColor('color-green')"></div>
+      v-on:click = "switchColor('color-green', listSettings)"></div>
       <div id = "color-blue"
       v-bind:class = "{'active': currentColor === 'color-blue'}"
-      v-on:click = "switchColor('color-blue')"></div>
+      v-on:click = "switchColor('color-blue', listSettings)"></div>
       <div id = "color-yellow"
       v-bind:class = "{'active': currentColor === 'color-yellow'}"
-      v-on:click = "switchColor('color-yellow')"></div>
+      v-on:click = "switchColor('color-yellow', listSettings)"></div>
       <div id = "color-orange"
       v-bind:class = "{'active': currentColor === 'color-orange'}"
-      v-on:click = "switchColor('color-orange')"></div>
+      v-on:click = "switchColor('color-orange', listSettings)"></div>
     </div>
     <div class="layout-list-header-row">
       <div class="layout-list-row-icon">

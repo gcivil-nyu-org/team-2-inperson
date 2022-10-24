@@ -5,7 +5,7 @@ import ShortlistRow from "./ShortlistRow.vue";
 export default {
   name: "ShortlistManager",
   props: ["studentShortlists"],
-  components: { ShortlistRow},
+  components: { ShortlistRow },
   emits: ["listItemDetailClick", "itemDragOver", "itemDragDrop"],
   methods: {
     listItemDetailClick(e, id) {
