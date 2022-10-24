@@ -74,11 +74,10 @@ export default {
 
 <template>
   <div
-    id="layout-list-row" 
+    id="layout-list-row"
     @dragover="(e) => itemDragOver(e)"
     @drop="(e) => itemDragDrop(e)"
-    v-bind:class = "currentColor" 
-    :style="{ backgroundColor: currentColor }"
+    :style="{ backgroundColor: listSettings.color }"
   >
     <template v-if="inEditMode">
       <!-- Name -->
