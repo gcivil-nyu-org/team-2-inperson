@@ -65,10 +65,10 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://18.213.115.239/api/shortlists").then((response) => {
+    axios.get("https://1rct87m2md.execute-api.us-east-1.amazonaws.com/api/shortlists").then((response) => {
       this.myShortlists = response.data;
     });
-    axios.get("http://18.213.115.239/api/schools").then((response) => {
+    axios.get("https://1rct87m2md.execute-api.us-east-1.amazonaws.com/api/schools").then((response) => {
       this.myRecommendations = response.data;
     });
   },
