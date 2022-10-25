@@ -50,20 +50,27 @@ export default {
     },
   },
   data() {
-    const shortListJS = axios.get(`http://18.213.115.239/api/shortlists`);
-    const recommendationJS = axios.get(`http://18.213.115.239/api/schools`);
     //let myShortlists = shortLists;
-    let myShortlists = shortListJS.data;
-    let myRecommendations = recommendationJS.data;
+    //let myRecommendations = recommendations
     let draggingCurrent = {
       position: null,
       data: null,
     };
     return {
-      myShortlists,
-      myRecommendations,
+      //myShortlists,
+      //myRecommendations,
+      myShortlists: [],
+      myRecommendations: [],
       draggingCurrent,
     };
+  },
+  mounted() {
+    axios.get("http://18.213.115.239/api/shortlists").then((response) => {
+      this.myShortlists = response.data;
+    });
+    axios.get("http://18.213.115.239/api/schools").then((response) => {
+      this.myRecommendations = response.data;
+    });
   },
 };
 </script>
