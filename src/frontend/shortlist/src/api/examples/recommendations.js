@@ -39,7 +39,7 @@ export const recommendations = [
   },
   {
     img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg/2560px-Stuyvesant_HS_main_entrance_on_Chambers_Street.jpg",
-    name: "Stuyvesant High School",
+    name: "Stuyvesant High School Super Long School Name",
     borough: "West Village, Manhattan",
     dimensions: [
       {

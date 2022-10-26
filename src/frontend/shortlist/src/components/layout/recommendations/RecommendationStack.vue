@@ -1,14 +1,27 @@
 <script>
 import SchoolCard from "../../school/SchoolCard.vue";
+import { dragStateStore } from "../../../states/categorizeDragAndDrop";
 
 export default {
   name: "RecommendationStack",
   props: ["recommendations"],
   emits: ["schoolCardDragStart"],
   components: { SchoolCard },
+  setup() {
+    const dragState = dragStateStore();
+    return { dragState };
+  },
   created() {
     //constants for the offset factors
     this.offsetFactor = 15;
+  },
+  methods: {
+    dragStart(e, itemIdx) {
+      this.dragState.startCategorize(this.recommendations[itemIdx], itemIdx);
+    },
+    dragEnd() {
+      this.dragState.endCategorize();
+    },
   },
 };
 </script>
@@ -28,13 +41,9 @@ export default {
         >
           <SchoolCard
             :schoolData="reco"
-            @schoolCardDragStart="
-              (e) =>
-                $emit('schoolCardDragStart', {
-                  index: idx,
-                  event: e,
-                })
-            "
+            draggable="true"
+            @dragstart="(e) => dragStart(e, idx)"
+            @dragend="(e) => dragEnd()"
           />
         </div>
       </template>

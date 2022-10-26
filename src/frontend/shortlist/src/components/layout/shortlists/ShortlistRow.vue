@@ -1,27 +1,28 @@
 <script>
 import MaterialIcon from "../../icons/MaterialIcon.vue";
+import SchoolIcon from "./ShortlistSchoolIcon.vue";
+import { dragStateStore } from "../../../states/categorizeDragAndDrop";
+
 export default {
   name: "ShortlistRow",
   props: ["listId", "listSettings", "listSchools"],
-  emits: [
-    "listItemDetailClick",
-    "itemDragOver",
-    "itemDragDrop",
-    "changeListSettings",
-    "shareList",
-  ],
-  components: { MaterialIcon },
+  emits: ["listItemDetailClick", "changeListSettings", "shareList"],
+  components: { MaterialIcon, SchoolIcon },
+  setup() {
+    const dragState = dragStateStore();
+    return { dragState };
+  },
   data() {
     return {
       inEditMode: false,
       localSettings: { ...this.listSettings },
       allowedColors: {
-        "#ecf0f3": { deselect: "#BBBBBB", select: "#000000" },
-        "#bec7e7": { deselect: "#52569e", select: "#FFFF00" },
-        "#bcd6a2": { deselect: "#42803b", select: "#FFFF00" },
-        "#ffffa7": { deselect: "#cad40f", select: "#333333" },
-        "#ffd580": { deselect: "#d1672e", select: "#FFFF00" },
-        "#fadadd": { deselect: "#8c1d1d", select: "#FFFF00" },
+        "#ecf0f3": { deselect: "#AAAAAA", select: "#000000" },
+        "#bec7e7": { deselect: "#6E80BE", select: "#DE6B00" },
+        "#bcd6a2": { deselect: "#698B46", select: "#CD2676" },
+        "#ffffa7": { deselect: "#DFDF58", select: "#EC6439" },
+        "#ffd580": { deselect: "#D1A241", select: "#C114ED" },
+        "#fadadd": { deselect: "#C3888E", select: "#53BA4A" },
       },
       allowedIcons: [
         "queue_music",
@@ -48,17 +49,52 @@ export default {
       ],
     };
   },
+  computed: {
+    colorDeselect() {
+      return this.allowedColors[this.listSettings.color].deselect;
+    },
+    colorSelect() {
+      return this.allowedColors[this.listSettings.color].select;
+    },
+  },
   methods: {
-    logEmit(e) {
-      console.log(e);
+    dragStart(e, itemIdx) {
+      e.stopPropagation();
+      this.dragState.startReorderSchoolInList(
+        this.listSettings.name,
+        this.listSchools[itemIdx],
+        itemIdx
+      );
     },
-    itemDragOver(e) {
-      e.preventDefault();
-      this.$emit("itemDragOver", e);
+    dragEnter(e, itemIdx) {
+      if (this.dragState.dragType == "reorderSchoolInList") {
+        if (
+          this.dragState.reorderSchoolInListState.listName ==
+          this.listSettings.name
+        ) {
+          e.preventDefault();
+          this.dragState.reorderSchoolInListState.schoolOverIdx = itemIdx;
+          this.dragState.reorderSchoolInListState.activeDrop = true;
+        }
+      }
     },
-    itemDragDrop(e) {
-      this.$emit("itemDragDrop", e);
+    dragOver(e, itemIdx) {
+      if (this.dragState.dragType == "reorderSchoolInList") {
+        this.dragEnter(e, itemIdx);
+        return;
+      }
     },
+    dragLeave() {
+      if (this.dragState.dragType == "reorderSchoolInList") {
+        this.dragState.reorderSchoolInListState.schoolOverIdx = null;
+        this.dragState.reorderSchoolInListState.activeDrop = false;
+        return;
+      }
+    },
+    dragEnd() {
+      this.dragState.endReorderSchoolInList();
+    },
+
     startChangeSettings() {
       // deep copy so we don't accidentally break state in the parents
       this.localSettings = JSON.parse(JSON.stringify(this.listSettings));
@@ -73,13 +109,8 @@ export default {
 </script>
 
 <template>
-  <div
-    class="layout-list-row"
-    @dragover="(e) => itemDragOver(e)"
-    @drop="(e) => itemDragDrop(e)"
-    :style="{ backgroundColor: listSettings.color }"
-  >
-    <template v-if="inEditMode">
+  <div class="layout-list-row" :style="{ backgroundColor: listSettings.color }">
+    <div v-if="inEditMode" style="width: 100%; height: 100%">
       <!-- Name -->
       <div class="layout-list-settings-row">
         <div class="layout-list-settings-row-prompt">Name the List:</div>
@@ -115,20 +146,25 @@ export default {
         <div class="layout-list-settings-row-prompt">Choose an Icon:</div>
         <div
           class="layout-list-settings-row-options"
-          style="cursor: all-scroll"
+          style="cursor: all-scroll; padding: 5px"
         >
           <div
             v-for="icon in allowedIcons"
             :key="icon"
-            :style="{ cursor: 'pointer' }"
+            :style="{
+              cursor: 'pointer',
+              marginRight: '20px',
+              padding: '5px',
+              border: '1px solid ' + colorDeselect,
+              borderRadius: '8px',
+              boxShadow: '0 0 2px 0px' + colorDeselect,
+            }"
           >
             <MaterialIcon
-              size="40"
+              size="30"
               :src="icon"
               :color="
-                icon == localSettings.icon.value
-                  ? this.allowedColors[listSettings.color].select
-                  : this.allowedColors[listSettings.color].deselect
+                icon == localSettings.icon.value ? colorSelect : colorDeselect
               "
               @click="localSettings.icon.value = icon"
             />
@@ -139,64 +175,74 @@ export default {
       <!-- Action -->
       <div class="layout-list-settings-row">
         <button
+          class="layout-list-settings-button"
           @click="changeListSettings"
-          style="
-            border: none;
-            background-color: green;
-            color: white;
-            padding: 5px;
-            border-radius: 10px;
-          "
+          style="background-color: green; color: white"
         >
           Change
         </button>
         <button
+          class="layout-list-settings-button"
           @click="inEditMode = false"
-          style="
-            border: none;
-            background-color: red;
-            color: white;
-            padding: 10px;
-            border-radius: 10px;
-            font-weight: bold;
-          "
+          style="background-color: red; color: white"
         >
           Cancel
         </button>
       </div>
-    </template>
-
-    <template v-else>
+    </div>
+    <div v-if="!inEditMode">
       <div class="layout-list-header-row">
         <div class="layout-list-row-icon">
           <MaterialIcon
             :src="listSettings.icon.value"
-            :color="listSettings.icon.color"
+            size="30"
+            :color="colorDeselect"
           />
         </div>
-        <div class="layout-list-row-name">{{ listSettings.name }}</div>
+        <div
+          class="layout-list-row-name shortlist-fnt-sketch"
+          :style="{ color: colorDeselect }"
+        >
+          {{ listSettings.name }}
+        </div>
         <div style="flex-grow: 1"></div>
         <div class="layout-list-row-actions">
-          <div style="cursor: pointer">
-            <MaterialIcon src="tune" size="18" @click="startChangeSettings" />
+          <div class="layout-list-row-action-button" style="cursor: pointer">
+            <MaterialIcon
+              src="tune"
+              :color="colorDeselect"
+              size="18"
+              @click="startChangeSettings"
+            />
           </div>
           <div style="width: 10px"></div>
-          <div style="cursor: pointer">
-            <MaterialIcon src="share" size="18" @click="$emit('shareList')" />
+          <div class="layout-list-row-action-button" style="cursor: pointer">
+            <MaterialIcon
+              src="share"
+              :color="colorDeselect"
+              size="18"
+              @click="$emit('shareList')"
+            />
           </div>
         </div>
       </div>
       <div class="layout-list-row-schools">
-        <template v-for="school in listSchools" :key="school.id">
-          <div
-            class="layout-list-row-item"
-            @click="$emit('listItemDetailClick', school.id)"
-          >
-            <div>{{ school.name }}</div>
-          </div>
+        <template v-for="(school, schoolIdx) in listSchools" :key="school">
+          <SchoolIcon
+            :schoolData="school"
+            :bgColor="colorDeselect"
+            @click="$emit('listItemDetailClick', schoolIdx)"
+            draggable="true"
+            @dragstart="(e) => dragStart(e, schoolIdx)"
+            @dragenter="(e) => dragEnter(e, schoolIdx)"
+            @dragover="(e) => dragOver(e, schoolIdx)"
+            @dragleave="dragLeave"
+            @dragend="dragEnd"
+          />
         </template>
       </div>
-    </template>
+      <div style="width: 100%; height: 20px"></div>
+    </div>
   </div>
 </template>
 
@@ -206,8 +252,7 @@ export default {
   max-width: 400px;
   padding: 10px;
   border-radius: 10px;
-  box-shadow: 5px 5px 10px #779886, -5px -5px 10px white;
-  font-family: "Aleo" sans-serif;
+  box-shadow: 0px 0px 7px -1px grey;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -229,6 +274,8 @@ export default {
   width: 100%;
   margin-left: 10px;
   font-weight: bold;
+  user-select: none;
+  font-size: 25px;
 }
 .layout-list-row-actions {
   display: flex;
@@ -236,26 +283,12 @@ export default {
 
 .layout-list-row-schools {
   width: 100%;
-  margin-top: auto;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  padding: 1px;
 }
-.layout-list-row-item {
-  width: 100%;
-  padding: 10px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50px;
-  background-color: rgba(2, 2, 255, 0.242);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  font-size: 10px;
-}
-
 .layout-list-settings-row {
   width: 100%;
   display: flex;
@@ -263,10 +296,10 @@ export default {
   justify-content: space-around;
   padding-bottom: 10px;
   margin-bottom: 25px;
-  border-bottom: 1px solid white;
 }
 .layout-list-settings-row-prompt {
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .layout-list-settings-name-input {
@@ -290,13 +323,51 @@ export default {
 }
 
 .layout-list-settings-edit-color-swatch {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   border-radius: 4px;
   border: 1px solid white;
 }
 
 .layout-list-settings-edit-color-swatch-selected {
   border: 3px solid black;
+}
+
+.layout-list-settings-button {
+  border: 2px solid white;
+  padding: 5px 20px;
+  border-radius: 8px;
+}
+
+.layout-list-row-action-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.layout-list-row-action-button:hover {
+  background-color: rgba(100, 100, 100, 0.1);
+}
+
+.edit-transition-enter-active,
+.edit-transition-leave-active {
+  transition: opacity 0.5s;
+}
+
+.edit-transition-enter-from,
+.edit-transition-leave-to {
+  opacity: 0;
+}
+
+.edit-transition2-enter-active,
+.edit-transition2-leave-active {
+  transition: opacity 0.5s;
+}
+
+.edit-transition2-enter-from,
+.edit-transition2-leave-to {
+  opacity: 0;
 }
 </style>
