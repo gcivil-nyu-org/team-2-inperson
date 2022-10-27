@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Aleo:wght@300&family=Cabin+Sketch:wght@400;700&family=Klee+One&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Sacramento&display=swap');
-
-
-
+@import url('https://fonts.googleapis.com/css2?family=Aleo:wght@300;400;700');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700');
+@import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400');
+@import url('https://fonts.googleapis.com/css2?family=Sacramento');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 body {
   margin: 0px;
@@ -9,4 +11,48 @@ body {
   font-family: 'Aleo', sans-serif;
   font-size: 30px;
   font-weight: 200;
+  overscroll-behavior: none;
 }
+
+.shortlist-fnt-serif {
+  font-family: "Aleo";
+}
+
+.shortlist-fnt-serif-med {
+  font-family: "Aleo";
+  font-weight: 400;
+}
+
+.shortlist-fnt-serif-light {
+  font-family: "Aleo";
+  font-weight: 300;
+}
+
+.shortlist-fnt-serif-bold {
+  font-family: "Aleo";
+  font-weight: 700;
+}
+
+.shortlist-fnt-sketch {
+  font-family: "Cabin Sketch";
+}
+
+.shortlist-fnt-sketch-light {
+  font-family: "Cabin Sketch";
+  font-weight: 400;
+}
+
+.shortlist-fnt-sketch-bold {
+  font-family: "Cabin Sketch";
+  font-weight: 700;
+}
+
+.shortlist-fnt-pen {
+  font-family: "Klee One";
+  font-weight: 400;
+}
+
+
+
+
+

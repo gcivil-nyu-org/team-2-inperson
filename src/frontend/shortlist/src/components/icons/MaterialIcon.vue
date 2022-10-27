@@ -26,6 +26,6 @@ export default {
 
 <style scoped>
 .material-symbols-outlined {
-  font-variation-settings: "FILL" 1, "wght" 200, "GRAD" 0, "opsz" 48;
+  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 200, "opsz" 48;
 }
 </style>

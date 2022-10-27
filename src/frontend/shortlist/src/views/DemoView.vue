@@ -1,5 +1,7 @@
 <script></script>
 
-<template>demo</template>
+<template>
+  <div>DEMO</div>
+</template>
 
 <style scoped></style>

@@ -1,0 +1,39 @@
+<script>
+export default {
+  props: ["schoolData", "bgColor"],
+};
+</script>
+<template>
+  <div
+    class="school-icon-container"
+    :style="{ boxShadow: '0 0 5px -1px ' + bgColor }"
+  >
+    <img class="school-icon-img" :src="schoolData.img" />
+    <div class="school-icon-name shortlist-fnt-serif-bold">
+      {{ schoolData.name }}
+    </div>
+  </div>
+</template>
+<style scoped>
+.school-icon-container {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 5px;
+  user-select: none;
+  margin: 10px;
+}
+.school-icon-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: none;
+  background-color: white;
+}
+.school-icon-name {
+  width: 60px;
+  font-size: 8px;
+  margin-left: 10px;
+}
+</style>

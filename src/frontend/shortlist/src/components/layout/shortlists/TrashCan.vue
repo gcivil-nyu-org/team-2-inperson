@@ -1,14 +1,32 @@
 <script>
+import MaterialIcon from "../../icons/MaterialIcon.vue";
+import { dragStateStore } from "../../../states/categorizeDragAndDrop";
+
 export default {
   name: "TrashCan",
-  emits: ["itemDragDrop", "itemDragOver"],
+  components: { MaterialIcon },
+  setup() {
+    const dragState = dragStateStore();
+    return { dragState };
+  },
   methods: {
-    itemDragOver(e) {
-      e.preventDefault();
-      this.$emit("itemDragOver", e);
+    dragEnter(e) {
+      if (this.dragState.dragType == "categorize") {
+        e.preventDefault();
+        this.dragState.categorizeState.schoolOverListIdx = -1;
+        this.dragState.categorizeState.activeDrop = true;
+      }
     },
-    itemDragDrop(e) {
-      this.$emit("itemDragDrop", { event: e, listId: -1 });
+    dragOver(e) {
+      if (this.dragState.dragType == "categorize") {
+        this.dragEnter(e);
+      }
+    },
+    dragLeave() {
+      if (this.dragState.dragType == "categorize") {
+        this.dragState.categorizeState.schoolOverListIdx = null;
+        this.dragState.categorizeState.activeDrop = false;
+      }
     },
   },
 };
@@ -17,10 +35,11 @@ export default {
 <template>
   <div
     class="shortlist-trashcan-container"
-    @dragover="(e) => itemDragOver(e)"
-    @drop="(e) => itemDragDrop(e)"
+    @dragenter="dragEnter"
+    @dragover="dragOver"
+    @dragleave="dragLeave"
   >
-    TRASH
+    <MaterialIcon src="delete_sweep" size="60" color="rgba(50, 50, 50, 0.80)" />
   </div>
 </template>
 
@@ -30,7 +49,7 @@ export default {
   height: 150px;
   padding: 10px;
   border-radius: 5px;
-  background: rgb(222, 222, 222);
+  box-shadow: 0px 0px 6px 01px rgba(50, 50, 50, 0.25);
   font-family: "Aleo" sans-serif;
   display: flex;
   justify-content: center;
