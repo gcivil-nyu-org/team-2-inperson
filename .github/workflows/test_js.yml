@@ -6,7 +6,7 @@ on:
 # Github uses ubuntu-20.04 as 'latest' 
 
 jobs:
-  run_js_linter:
+  run_js_unit:
     runs-on: ubuntu-latest
 
     steps:
