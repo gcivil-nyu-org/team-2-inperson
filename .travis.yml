@@ -1,1 +1,18 @@
-language: python
+language: generic
+
+jobs:
+  include:
+    - name: Backend
+      if: branch in (main,develop)
+      env: TARGET=src/backend
+      language: python
+      python: 3.8.5
+      script:
+        - travis/scripts/travis-backend.sh
+
+    - name: Frontend
+      if: branch in (main,develop)
+      env: TARGET=src/frontend
+      script: 
+        - travis/scripts/travis-frontend.sh
+    
