@@ -12,5 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: psf/black@stable
-        options: "--check --verbose"
-        src: "./src/backend/server"
+        with:
+          options: "--check --verbose"
+          src: "./src/backend/server"
