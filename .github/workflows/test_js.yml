@@ -18,4 +18,4 @@ jobs:
 
       - name: NPM test:unit (vitest)
         working-directory: ./src/frontend/shortlist
-        run: npm run test:unit -- --coverage --passWithNoTests
+        run: npm run test:unit -- --run --coverage --passWithNoTests

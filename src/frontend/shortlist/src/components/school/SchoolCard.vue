@@ -21,6 +21,7 @@ export default {
     draggable="true"
     @dragstart="$emit('schoolCardDragStart', this.schoolData)"
     style="select: none"
+    v-if="schoolData != null"
   >
     <div class="school-simple-container" @click="swapDetail">
       <template v-if="!isDetail">
