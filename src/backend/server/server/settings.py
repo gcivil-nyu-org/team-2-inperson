@@ -88,7 +88,8 @@ DATABASES = {
 
 XRAY_RECORDER = {
     "AWS_XRAY_DAEMON_ADDRESS": "127.0.0.1:2000",
-    # If turned on built-in database queries and template rendering will be recorded as subsegments
+    # If turned on built-in database queries and template
+    #   rendering will be recorded as subsegments
     "AUTO_INSTRUMENT": True,
     "AWS_XRAY_CONTEXT_MISSING": "LOG_ERROR",
     "PLUGINS": (),
@@ -107,16 +108,16 @@ XRAY_RECORDER = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa:E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa:E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa:E501
     },
     {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa:E501
     },
 ]
 
