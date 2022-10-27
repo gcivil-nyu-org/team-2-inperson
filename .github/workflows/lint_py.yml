@@ -21,7 +21,7 @@ jobs:
       - name: Black Linter
         uses: psf/black@stable
         with:
-          options: "--check --verbose"
+          options: "--check --verbose --target-version py38 --color --diff"
           src: "./src/backend/server"
 
       - name: Flake8 Linter
