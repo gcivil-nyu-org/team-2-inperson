@@ -1,5 +1,5 @@
 <script>
-import { ref, provide } from 'vue'
+import { ref, provide } from "vue";
 
 export default {
   name: "PreferenceManager",
@@ -7,19 +7,17 @@ export default {
   emits: ["preferenceSubmitted"],
   methods: {
     clicker(event) {
-      
       if (event == "Next") {
-        this.selectedPage == this.numPages - 1 ? this.selectedPage = this.selectedPage : this.selectedPage++;
+        if (this.selectedPage < this.numPages - 1) this.selectedPage++;
       } else if (event == "Back") {
-        this.selectedPage == 0 ? this.selectedPage = this.selectedPage : this.selectedPage--;
+        if (this.selectedPage > 0) this.selectedPage--;
       } else {
         this.$emit("preferenceSubmitted");
-        this.$router.push('/');
+        this.$router.push("/");
       }
-      
+
       if (this.selectedPage > 0) {
         this.actions.back.enabled = true;
-        
       } else {
         this.actions.back.enabled = false;
       }
@@ -31,7 +29,7 @@ export default {
         this.actions.next.enabled = true;
         this.actions.submit.enabled = false;
       }
-    }
+    },
   },
   data() {
     const actions = {
@@ -49,7 +47,7 @@ export default {
         text: "Submit",
         enabled: false,
         type: "submit",
-      }
+      },
     };
 
     if (this.numPages == 1) {
@@ -59,10 +57,10 @@ export default {
     }
 
     return {
-      actions
-    }
+      actions,
+    };
   },
-  setup(props, { slots }, ) {
+  setup(props, { slots }) {
     let preferencePages = ref(slots.default());
 
     let numPages = preferencePages.value.length;
@@ -73,25 +71,21 @@ export default {
     return {
       preferencePages,
       numPages,
-      selectedPage
-    }
+      selectedPage,
+    };
   },
-  
-}
+};
 </script>
 
 <template>
-
   <div class="pref-container">
-    <div class="pref-title">
-      {{title}}<br>
-    </div>
-    
+    <div class="pref-title">{{ title }}<br /></div>
+
     <div class="pref-main">
       <slot></slot>
     </div>
 
-    <div style="flex-grow: 1;">&nbsp;</div>
+    <div style="flex-grow: 1">&nbsp;</div>
     <div class="pref-actions-line">
       <template v-if="actions.back.enabled">
         <button class="pref-actions" @click="clicker('Back')">Back</button>
@@ -103,8 +97,17 @@ export default {
       </template>
       <template v-if="actions.submit.enabled">
         <div style="flex-grow: 1"></div>
-        <button class="pref-actions" style="background-color: #008037; font-weight:900; box-shadow: 0 0 0 6px rgba(44,187,99,.35) inset;"
-          @click="clicker('Submit')">Submit</button>
+        <button
+          class="pref-actions"
+          style="
+            background-color: #008037;
+            font-weight: 900;
+            box-shadow: 0 0 0 6px rgba(44, 187, 99, 0.35) inset;
+          "
+          @click="clicker('Submit')"
+        >
+          Submit
+        </button>
       </template>
     </div>
   </div>
@@ -128,7 +131,7 @@ export default {
   font-size: 2.5rem;
   padding-bottom: None;
   line-height: 2rem;
-  color:#067418;
+  color: #067418;
 }
 
 .pref-main {
@@ -141,8 +144,8 @@ export default {
   min-height: 500px;
   overflow: scroll;
 }
-.pref-actions-line{
-  width:100%;
+.pref-actions-line {
+  width: 100%;
   justify-content: space-between;
   display: flex;
 }
@@ -150,13 +153,16 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   font-weight: 500;
-  background-color:black;
+  background-color: black;
   border-radius: 100px;
-  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
+    rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px,
+    rgba(44, 187, 99, 0.15) 0 16px 32px;
   color: white;
   cursor: pointer;
   display: inline-block;
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
   padding: 7px 20px;
   text-align: center;
   text-decoration: none;
@@ -169,15 +175,16 @@ export default {
 }
 
 .pref-actions:hover {
-  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
+    rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
+    rgba(44, 187, 99, 0.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
-  background-color:#008037;
+  background-color: #008037;
 }
 
 .pref-actions button {
   padding: 20px;
   background-color: #008037;
 }
-
 </style>
-

@@ -1,32 +1,35 @@
 <script>
 export default {
   name: "PreferenceMultiSelect",
-  props: [
-    "question",
-    "modelValue",
-  ],
+  props: ["question", "modelValue"],
   emits: ["update:modelValue"],
   computed: {
     value: {
       get() {
-        return this.modelValue
+        return this.modelValue;
       },
       set(value) {
-        this.$emit("update:modelValue", value)
-      }
-    }
-  }
-}
+        this.$emit("update:modelValue", value);
+      },
+    },
+  },
+};
 </script>
 
 <template>
   <div class="pref-q-container">
-    <div class="pref-q-name">{{question.Name}}</div>
-    <div class="pref-q-question">{{question.Text}}</div>
-    <template v-for="opt, optindex in question.Options" :key="optindex">
+    <div class="pref-q-name">{{ question.Name }}</div>
+    <div class="pref-q-question">{{ question.Text }}</div>
+    <template v-for="(opt, optindex) in question.Options" :key="optindex">
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" :value="opt" :name="optindex" v-model="value">
-        <label class="form-check-label" :for="optindex"> {{opt}}</label>
+        <input
+          type="checkbox"
+          class="form-check-input"
+          :value="opt"
+          :name="optindex"
+          v-model="value"
+        />
+        <label class="form-check-label" :for="optindex"> {{ opt }}</label>
       </div>
     </template>
   </div>
@@ -37,7 +40,7 @@ export default {
   padding: 10px;
   width: 100%;
   min-width: 450px;
-  font-family: 'Klee One', cursive;
+  font-family: "Klee One", cursive;
   font-weight: bold;
 }
 
@@ -45,7 +48,7 @@ export default {
   width: 100%;
   font-size: 24px;
   font-weight: 500;
-  font-family: 'Cabin Sketch', cursive;
+  font-family: "Cabin Sketch", cursive;
 }
 
 .pref-q-question {
@@ -54,7 +57,7 @@ export default {
 }
 
 .form-check-input:checked {
-    background-color:#56865a;
-    border-color:#56865a;
+  background-color: #56865a;
+  border-color: #56865a;
 }
 </style>
