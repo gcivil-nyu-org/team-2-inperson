@@ -1,12 +1,18 @@
 name: LINTER - PYTHON
 
+# Lint on all pushes anywhere
+# Lint on pull requests to develop
 on:
-  push
-
-# Github uses ubuntu-20.04 as 'latest' 
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   run_py_linter:
+    # Github uses ubuntu-20.04 as 'latest' 
     runs-on: ubuntu-latest
 
     steps:
