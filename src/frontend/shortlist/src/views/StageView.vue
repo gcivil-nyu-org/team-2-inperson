@@ -8,7 +8,7 @@ export default {
 
 <template>
   <ModalFullScreen visible="true">
-    <div>Welcome</div>
+    <div>Welcome Back</div>
   </ModalFullScreen>
   <div>Background;</div>
 </template>
