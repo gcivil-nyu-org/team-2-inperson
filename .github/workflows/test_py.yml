@@ -1,0 +1,25 @@
+name: UNIT TESTS - PYTHON
+
+
+# Test on all pushes anywhere
+# Test on pull requests to develop
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  run_py_unit:
+    # Github uses ubuntu-20.04 as 'latest' 
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"

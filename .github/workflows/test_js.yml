@@ -1,12 +1,18 @@
 name: UNIT TESTS - JAVASCRIPT
 
+# Test on all pushes anywhere
+# Test on pull requests to develop
 on:
-  push
-
-# Github uses ubuntu-20.04 as 'latest' 
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   run_js_unit:
+    # Github uses ubuntu-20.04 as 'latest' 
     runs-on: ubuntu-latest
 
     steps:
