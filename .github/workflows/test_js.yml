@@ -1,0 +1,21 @@
+name: UNIT TESTS - JAVASCRIPT
+
+on:
+  push
+
+# Github uses ubuntu-20.04 as 'latest' 
+
+jobs:
+  run_js_linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: NPM Install
+        working-directory: ./src/frontend/shortlist
+        run: npm install
+
+      - name: NPM test:unit (vitest)
+        working-directory: ./src/frontend/shortlist
+        run: npm run test:unit -- --run --coverage --passWithNoTests
