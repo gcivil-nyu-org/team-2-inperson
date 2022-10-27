@@ -1,1 +1,21 @@
+name: LINTER - JAVASCRIPT
 
+on:
+  push
+
+# Github uses ubuntu-20.04 as 'latest' 
+
+jobs:
+  run_js_linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: NPM Install
+        working_directory: ./src/frontend/shortlist
+        run: npm install
+
+      - name: ESLint
+        working_directory: ./src/frontend/shortlist
+        run: npm run lint -- --no-fix src/.
