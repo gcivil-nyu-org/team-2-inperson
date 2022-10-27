@@ -13,9 +13,9 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: NPM Install
-        working_directory: ./src/frontend/shortlist
+        working-directory: ./src/frontend/shortlist
         run: npm install
 
       - name: ESLint
-        working_directory: ./src/frontend/shortlist
+        working-directory: ./src/frontend/shortlist
         run: npm run lint -- --no-fix src/.
