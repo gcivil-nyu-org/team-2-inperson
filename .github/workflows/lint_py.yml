@@ -1,0 +1,32 @@
+name: LINTER - PYTHON
+
+on:
+  push
+
+# Github uses ubuntu-20.04 as 'latest' 
+
+jobs:
+  run_py_linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+        
+      - name: Github Checkout
+        uses: actions/checkout@v3
+
+      - name: Black Linter
+        uses: psf/black@stable
+        with:
+          options: "--check --verbose --target-version py38 --color --diff"
+          src: "./src/backend/server"
+
+      - name: Flake8 Linter
+        uses: py-actions/flake8@v2
+        with:
+          path: "./src/backend/server"
+          plugins: "flake8-black"
+      

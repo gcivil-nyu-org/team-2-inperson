@@ -25,86 +25,81 @@ SECRET_KEY = os.getenv("SHORTLIST_DJANGO_SECRET")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1"
-]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost",
-    "http://*.elb.amazonaws.com"
-]
+CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://*.elb.amazonaws.com"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'server.urls'
+ROOT_URLCONF = "server.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'server.wsgi.application'
+WSGI_APPLICATION = "server.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": os.environ.get("SHORTLIST_RDS_DB"),
         "USER": os.environ.get("SHORTLIST_RDS_USER"),
         "PASSWORD": os.environ.get("SHORTLIST_RDS_PASSWORD"),
         "HOST": os.environ.get("SHORTLIST_RDS_ENDPOINT"),
-        "PORT": os.environ.get("SHORTLIST_RDS_PORT")
+        "PORT": os.environ.get("SHORTLIST_RDS_PORT"),
     }
 }
 
 XRAY_RECORDER = {
-    'AWS_XRAY_DAEMON_ADDRESS': '127.0.0.1:2000',
-    # If turned on built-in database queries and template rendering will be recorded as subsegments
-    'AUTO_INSTRUMENT': True,
-    'AWS_XRAY_CONTEXT_MISSING': 'LOG_ERROR',
-    'PLUGINS': (),
-    'SAMPLING': True,
-    'SAMPLING_RULES': None,
+    "AWS_XRAY_DAEMON_ADDRESS": "127.0.0.1:2000",
+    # If turned on built-in database queries and template
+    #   rendering will be recorded as subsegments
+    "AUTO_INSTRUMENT": True,
+    "AWS_XRAY_CONTEXT_MISSING": "LOG_ERROR",
+    "PLUGINS": (),
+    "SAMPLING": True,
+    "SAMPLING_RULES": None,
     # the segment name for segments generated from incoming requests
-    'AWS_XRAY_TRACING_NAME': "Shortlist",
-    'DYNAMIC_NAMING': None,  # defines a pattern that host names should match
+    "AWS_XRAY_TRACING_NAME": "Shortlist",
+    "DYNAMIC_NAMING": None,  # defines a pattern that host names should match
     # defines when a segment starts to stream out its children subsegments
-    'STREAMING_THRESHOLD': None,
+    "STREAMING_THRESHOLD": None,
 }
 
 
@@ -113,16 +108,16 @@ XRAY_RECORDER = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa:E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",  # noqa:E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",  # noqa:E501
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",  # noqa:E501
     },
 ]
 
@@ -130,9 +125,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -145,4 +140,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_ROOT = "static"
-STATIC_URL = 'api/static/'
+STATIC_URL = "api/static/"
