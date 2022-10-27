@@ -10,8 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: psf/black@stable
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+        
+      - name: Github Checkout
+        uses: actions/checkout@v3
+
+      - name: Black Linter
+        uses: psf/black@stable
         with:
           options: "--check --verbose"
           src: "./src/backend/server"
+
+      - name: Flake8 Linter
+        uses: py-actions/flake8@v2
+        with:
+          path: "./src/backend/server"
+          plugins: "flake8-black"
+      
