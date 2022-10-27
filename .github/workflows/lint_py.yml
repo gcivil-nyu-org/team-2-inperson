@@ -1,0 +1,16 @@
+name: LINTER - PYTHON
+
+on:
+  push
+
+# Github uses ubuntu-20.04 as 'latest' 
+
+jobs:
+  run_py_linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: psf/black@stable
+        options: "--check --verbose"
+        src: "./src/backend/server"
