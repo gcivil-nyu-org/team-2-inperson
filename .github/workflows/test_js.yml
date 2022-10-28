@@ -25,3 +25,8 @@ jobs:
       - name: NPM test:unit (vitest)
         working-directory: ./src/frontend/shortlist
         run: npm run test:unit -- --run --coverage --passWithNoTests
+        
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
