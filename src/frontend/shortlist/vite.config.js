@@ -9,7 +9,8 @@ export default defineConfig({
   test: {
     coverage: {
       reporter:['lcov']
-    },
+    }
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
