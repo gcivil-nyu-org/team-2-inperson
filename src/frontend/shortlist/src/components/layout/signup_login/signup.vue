@@ -55,11 +55,11 @@ export default {
   <div id="nav">
   <nav class="container navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#"> <img src="/favicon.ico" id="favicon_img" ></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- for mobile (if necessary) -->
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
-
+    </button> -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navbar-nav mr-auto">
             <router-link to="/" class="nav-item nav-link">Home</router-link>
@@ -78,7 +78,7 @@ export default {
   <router-view/>
 
   <div id="logo_image_container">
-        <img src="/logo.png" id="logo_img" />
+    <router-link to="/" class="nav-item nav-link"> <img src="/logo.png" id="logo_img"/></router-link>
   </div>
  <div id="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
@@ -201,27 +201,30 @@ input {
   width: 30px; 
 }
 
-.d-flex {
-  padding-right: 100px;
-  padding-left: 30px;
-  display: right; 
+#nav{
+background: whitesmoke;
 }
-
 #nav {
   padding: 30px;
   text-align: center;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: whitesmoke;
   background: crimson;
   border-radius: .5rem;
 }
+
+
+
+/* 
+.d-flex {
+  display: float;
+  margin-right: 0; 
+} */
 
 
 </style>
