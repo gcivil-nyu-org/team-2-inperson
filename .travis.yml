@@ -13,6 +13,10 @@ jobs:
     - name: Frontend
       if: branch in (main,develop)
       env: TARGET=src/frontend
+      language: node_js
+      node_js:
+        - 16
+        
       script: 
         - travis/scripts/travis-frontend.sh
     

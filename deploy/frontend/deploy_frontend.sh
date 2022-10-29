@@ -18,6 +18,7 @@ else
   export VITE_BASE_URL="/"
 fi
 
+npm install
 npm run build
 
 cp -R dist/* $ORIGINAL/artifacts/.
