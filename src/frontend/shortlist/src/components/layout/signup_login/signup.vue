@@ -14,8 +14,6 @@ export default {
       passwordVerify: "",
       alert_signup: "",
       alert_login: "", 
-      // inEditMode: false,
-      // localSettings: { ...this.listSettings },
     };
   },
   methods: {
@@ -39,23 +37,14 @@ export default {
       signupWithSSO() {
         Userfront.signup({ method: "google" });
       },
-    login() {
+    loginWithPassword() {
       this.alert_login = "";
-      // if (this.password !== this.passwordVerify) {
-      //   this.alert = "Your Passwords do not match!";
-      //   return;
-      // }
-        if((this.input.emailaddress != "" || this.input.username != "") && this.input.password != "") {            
-          if((this.input.emailaddress == this.$parent.mockAccount.emailaddress || this.input.username == this.$parent.mockAccount.username) && this.input.password == this.$parent.mockAccount.password) {
-                            this.$emit("authenticated", true);
-                            this.$router.replace({ name: "secure" });
-                } else {
-                            this.alert_login = "Your Passwords do not match!";
-                            return;
-                }
-                } else {
-                    this.alert_login = "You have successfully logged in.";
-                    return; 
+        if((this.input.emailaddress != "" || this.input.username != "") && this.input.password != "") {   
+          this.alert_login = "You have successfully logged in.";
+                    return; }         
+                else {
+                    this.alert_login = "Your Passwords do not match!";
+                    return;
                 }
             }
     },
@@ -67,7 +56,7 @@ export default {
         <img src="/logo.png" id="logo_img" />
   </div>
  <div id="signup_components_container">
-    <div id="alert" v-if="alert">{{ alert }}</div>
+    <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
     <form @submit.prevent="signupWithPassword">
       <div id = "email_address_signup">
       <label>
@@ -97,8 +86,8 @@ export default {
     </form>
   </div>
   <div id="login_components_container">
-        <div id="alert" v-if="alert">{{ alert }}</div>
-    <form @submit.prevent="login">
+        <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
+    <form @submit.prevent="loginWithPassword">
         <div id = "emailaddress_login">
           <label>
             email address
@@ -119,7 +108,7 @@ export default {
         </div>
         <div>
         <button type="button" 
-        v-on:click="login()">Login</button>
+        v-on:click="loginWithPassword()">Login</button>
         </div>
         </form>
   </div>
@@ -181,12 +170,4 @@ input {
   margin-bottom: 10px;
 }
 
-/* #login {
-        width: 500px;
-        border: 1px solid #CCCCCC;
-        background-color: #006400;
-        margin: auto;
-        margin-top: 200px;
-        padding: 20px;
-    } */
 </style>
