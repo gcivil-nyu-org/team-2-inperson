@@ -176,6 +176,7 @@ export default {
       <div class="layout-list-settings-row">
         <button
           class="layout-list-settings-button"
+          id="changeButton"
           @click="changeListSettings"
           style="background-color: green; color: white"
         >
@@ -183,6 +184,7 @@ export default {
         </button>
         <button
           class="layout-list-settings-button"
+          id="cancelButton"
           @click="inEditMode = false"
           style="background-color: red; color: white"
         >
