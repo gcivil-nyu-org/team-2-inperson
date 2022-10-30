@@ -46,13 +46,13 @@ export default {
   margin: auto;
 }
 #nav {
-  padding: 15px;
+  padding: 10px;
   text-align: center;
 }
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-  padding: 15px;
+  padding: 20px;
 }
 #nav a.router-link-exact-active {
   color: whitesmoke;
