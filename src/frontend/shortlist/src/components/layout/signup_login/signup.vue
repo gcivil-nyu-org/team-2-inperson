@@ -1,65 +1,62 @@
 <script>
 export default {
-  name: "signup",
+  name: "signup_login",
   data() {
     return {
-      input: {
-        username: "",
-        password: "",
-        emailaddress: "",
-      },
-      email: "",
-      accountName: "",
-      password: "",
-      passwordVerify: "",
-      alert_signup: "",
+      // For log in 
+      username_login: "",
+      password_login: "",
+      email_login: "",
+      
+      // For sign up
+      email_signup: "",
+      username_signup: "",
+      password_signup: "",
+      passwordVerify_signup: "",
+
+      // Alerts
       alert_login: "", 
+      alert_signup: "",
     };
   },
   methods: {
-    signupWithPassword() {
+      signupWithPassword() {
       this.alert_signup = "";
-      if (this.password !== this.passwordVerify) {
+      if (this.password_signup !== this.passwordVerify_signup) {
         this.alert_signup = "Your Passwords do not match!";
         return;
+      }else {
+        this.alert_signup = "You have successfully signed up an account!";
+        return 
       }
-      Userfront.signup({
-        method: "password",
-        email: this.email,
-        password: this.password,
-        data: {
-          accountName: this.accountName
-        }
-      }).catch((error) => {
-        this.alert_signup = error.message;
-      });
     },
       signupWithSSO() {
         Userfront.signup({ method: "google" });
       },
+
     loginWithPassword() {
       this.alert_login = "";
-        if((this.input.emailaddress != "" || this.input.username != "") && this.input.password != "") {   
-          this.alert_login = "You have successfully logged in.";
-                    return; }         
-                else {
-                    this.alert_login = "Your Passwords do not match!";
-                    return;
-                }
-            }
+      if((this.email_login != "" || this.username_login != "") && this.password_login != "") {   
+        this.alert_login = "You have successfully logged in.";
+        return; }         
+          else {
+              this.alert_login = "Your Passwords do not match!";                
+              return;
+        }
     },
+      loginWithSSO() {
+        Userfront.login({ method: "google" });
+      },
+
+    }, 
 };
 </script>
 
 <template>
   <div id="nav">
+    <!-- Nav Bar -->
   <nav class="container navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#"> <img src="/favicon.ico" id="favicon_img" ></a>
-    <!-- for mobile (if necessary) -->
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button> -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <div class="navbar-nav mr-auto">
             <router-link to="/" class="nav-item nav-link">Home</router-link>
@@ -76,64 +73,70 @@ export default {
 </nav>
  </div>
   <router-view/>
-
+  <!-- Logo  -->
   <div id="logo_image_container">
     <router-link to="/" class="nav-item nav-link"> <img src="/logo.png" id="logo_img"/></router-link>
   </div>
- <div id="signup_components_container">
+  <!-- Sign Up -->
+ <div class="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
     <form @submit.prevent="signupWithPassword">
+      <h1 id = "sign_up_sign"> Sign Up </h1>
       <div id = "email_address_signup">
       <label>
         Email address
-        <input type="email" v-model="email" />
+        <input type="email" v-model="email_signup" />
       </label>
       </div>
-      <div id = "account_name_signup">
+      <div id = "username_signup">
       <label>
         Username 
-        <input type="text" v-model="accountName" />
+        <input type="text" v-model="username_signup" />
       </label>
       </div>
       <div id = "password_signup">
       <label>
         Password
-      <input type="password" v-model="password" />
+      <input type="password" v-model="password_signup" />
       </label>
       </div>
       <label>
         Verify Password
-      <input type="password" v-model="passwordVerify" />
+      <input type="password" v-model="passwordVerify_signup" />
       </label>
       <button type="submit">Sign up</button>
       <p> or </p>
     <button @click.prevent="signupWithSSO">Sign up with Google</button>
     </form>
   </div>
-  <div id="login_components_container">
+  <!-- Log in  -->
+  <div class="login_components_container">
         <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
     <form @submit.prevent="loginWithPassword">
+    <h1 id = "log_in_sign"> Log In </h1>
         <div id = "emailaddress_login">
-          <label>
-            email address
-          <input type="text" name="emailaddress" v-model="input.eamiladdress" />
-          </label>
+        <label>
+        Email address
+        <input type="email" v-model="email_login" />
+      </label>
         </div>
         <div id = "username_login">
           <label>
             Username
-          <input type="text" name="username" v-model="input.username"/>
+          <input type="text" name="username" v-model="username_login"/>
           </label>
         </div>
         <div id = "password_login">
           <label>
             Password
-          <input type="password" name="password" v-model="input.password"/>
+          <input type="password" name="password" v-model="password_login"/>
           </label>
         </div>
         <div>
         <button type="button" 
         v-on:click="loginWithPassword()">Login</button>
+        <p> or </p>
+    <button @click.prevent="loginWithSSO">Log In with Google</button>
         </div>
         </form>
   </div>
@@ -146,13 +149,13 @@ input {
   margin-bottom: 10px;
 }
 
-#signup_components_container {
+.signup_components_container {
   position: absolute;
   left: 35%;
   top: 50%;
-  height: 400px;
+  height: 450px;
   margin-top: -150px; 
-  width: 400px;
+  width: 450px;
   margin-left: -80px;
   display: flex;
   align-items: center;
@@ -160,18 +163,19 @@ input {
   background-color: #bcd6a2; 
 }
 
-#login_components_container {
+.login_components_container {
   position: absolute;
   left: 65%;
   top: 50%;
-  height: 400px;
+  height: 450px;
   margin-top: -150px; 
-  width: 400px;
+  width: 450px;
   margin-right: -80px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #006400; 
+
 }
 
 #logo_img {
@@ -202,29 +206,37 @@ input {
 }
 
 #nav{
-background: whitesmoke;
+  background: whitesmoke;
+  margin: auto; 
 }
 #nav {
-  padding: 30px;
+  padding: 15px;
   text-align: center;
 }
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  padding: 15px; 
 }
 #nav a.router-link-exact-active {
   color: whitesmoke;
   background: crimson;
   border-radius: .5rem;
+  padding: 15px;
 }
 
+#log_in_sign{
+  position: relative; 
+  top: 0;
+}
 
+#sign_up_sign {
+  position: relative; 
+  top: 0;
+}
 
-/* 
 .d-flex {
-  display: float;
-  margin-right: 0; 
-} */
-
+  margin-left: auto;
+}
 
 </style>
