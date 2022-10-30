@@ -1,14 +1,14 @@
 <script>
-import signup from "../components/layout/signup_login/signup.vue";
+import Homepage from "../components/layout/signup_login/Homepage.vue";
 export default {
   components: {
-    signup,
+    Homepage,
   },
-  }
+};
 </script>
 
 <template>
-  <div><signup/></div>
+  <div><Homepage /></div>
 </template>
 
 <style scoped></style>
