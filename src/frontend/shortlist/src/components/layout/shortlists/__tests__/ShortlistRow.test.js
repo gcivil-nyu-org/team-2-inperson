@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { mount } from "@vue/test-utils";
+import { mount, shallowMount } from "@vue/test-utils";
 import ShortlistRow from "../ShortlistManager.vue";
 import { listDataTest } from "../../../../api/examples/shortlistsTest.js";
 import { dragStateStore } from "../../../../states/categorizeDragAndDrop";
@@ -37,7 +37,7 @@ describe("ShortlistRow.vue", () => {
   });
 
   it("enter edit mode with button clicked", async () => {
-    const componentWrapper = mount(ShortlistRow, {
+    const componentWrapper = shallowMount(ShortlistRow, {
       props: {
         listId: 0,
         listSettings: listDataTest.settings,
@@ -45,14 +45,11 @@ describe("ShortlistRow.vue", () => {
       },
     });
 
+    expect(componentWrapper.vm.inEditMode, "not in edit mode").toBe(false);
     const editButton = componentWrapper.find("#editButton");
-
     expect(editButton.exists()).toBe(true);
-
     await editButton.trigger("click");
     expect(componentWrapper.vm.inEditMode, "show edit mode").toBe(true);
-    expect(componentWrapper.find(".layout-list-row-action-button").element)
-      .exist;
   });
 
   it("cancel changes with cancel button clicked", () => {
@@ -67,6 +64,10 @@ describe("ShortlistRow.vue", () => {
     //directly change setting without button click
     componentWrapper.vm.localSettings.color = "#000000";
     componentWrapper.vm.localSettings.icon = "science";
+
+    expect(componentWrapper.vm.inEditMode, "not in edit mode").toBe(false);
+    const editButton = componentWrapper.find("#editButton");
+    editButton.trigger("click");
 
     const cancelButton = componentWrapper.find("#cancelButton");
     cancelButton.trigger("click");
@@ -91,6 +92,10 @@ describe("ShortlistRow.vue", () => {
     });
 
     //directly change setting without button click
+    expect(componentWrapper.vm.inEditMode, "not in edit mode").toBe(false);
+    const editButton = componentWrapper.find("#editButton");
+    editButton.trigger("click");
+
     componentWrapper.vm.localSettings.color = "#000000";
     componentWrapper.vm.localSettings.icon = "science";
     const changeButton = componentWrapper.find("#changeButton");
