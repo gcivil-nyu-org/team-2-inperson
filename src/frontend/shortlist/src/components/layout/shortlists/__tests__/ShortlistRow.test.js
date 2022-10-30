@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { mount, shallowMount } from "@vue/test-utils";
-import ShortlistRow from "../ShortlistManager.vue";
+import ShortlistRow from "../ShortlistRow.vue";
 import { listDataTest } from "../../../../api/examples/shortlistsTest.js";
 import { dragStateStore } from "../../../../states/categorizeDragAndDrop";
 import { config } from "@vue/test-utils";
