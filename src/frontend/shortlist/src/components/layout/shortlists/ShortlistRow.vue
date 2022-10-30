@@ -209,15 +209,12 @@ export default {
         </div>
         <div style="flex-grow: 1"></div>
         <div class="layout-list-row-actions">
-          <div
-            class="layout-list-row-action-button"
-            id="editButton"
-            style="cursor: pointer"
-          >
+          <div class="layout-list-row-action-button" style="cursor: pointer">
             <MaterialIcon
               src="tune"
               :color="colorDeselect"
               size="18"
+              id="editButton"
               @click="startChangeSettings"
             />
           </div>
