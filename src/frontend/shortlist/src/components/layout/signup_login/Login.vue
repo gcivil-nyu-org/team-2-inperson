@@ -1,10 +1,10 @@
 <script>
-import Navbar from "./Navbar.vue";
+import NavbarLogin from "./NavbarLogin.vue";
 import Logo from "./Logo.vue";
 
 export default {
-  name: "Loginview",
-  components: { Navbar, Logo },
+  name: "Login",
+  components: { NavbarLogin, Logo },
   data() {
     return {
       // For log in
@@ -36,7 +36,7 @@ export default {
 
 <template>
   <!-- Navbar -->
-  <Navbar />
+  <NavbarLogin />
   <!-- Logo  -->
   <div class="logo">
     <Logo />
