@@ -46,7 +46,7 @@ export default {
   margin: auto;
 }
 #nav {
-  padding: 8px;
+  padding: 10px;
   text-align: center;
 }
 #nav a {

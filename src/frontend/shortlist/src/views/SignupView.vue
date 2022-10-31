@@ -1,5 +1,5 @@
 <script>
-import Signupview from "../components/layout/signup_login/switchViews/Signupview.vue";
+import Signupview from "../components/layout/signup_login/Signupview.vue";
 export default {
   components: {
     Signupview,

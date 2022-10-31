@@ -1,6 +1,6 @@
 <script>
-import Navbar from "./../Navbar.vue";
-import Logo from "./../Logo.vue";
+import Navbar from "./Navbar.vue";
+import Logo from "./Logo.vue";
 
 export default {
   name: "Loginview",
@@ -35,7 +35,6 @@ export default {
 </script>
 
 <template>
-  <!-- <div class="homepage"> -->
   <!-- Navbar -->
   <Navbar />
   <!-- Logo  -->
@@ -86,7 +85,7 @@ input {
 .login_components_container {
   position: absolute;
   left: 65%;
-  top: 40%;
+  top: 38%;
   height: 575px;
   margin-top: -150px;
   width: 450px;

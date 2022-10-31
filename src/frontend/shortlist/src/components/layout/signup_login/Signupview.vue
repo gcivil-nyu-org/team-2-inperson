@@ -1,6 +1,10 @@
 <script>
+import Navbar from "./Navbar.vue";
+import Logo from "./Logo.vue";
+
 export default {
-  name: "signup_login",
+  name: "Signupview",
+  components: { Navbar, Logo },
   data() {
     return {
       // For sign up
@@ -28,10 +32,18 @@ export default {
 </script>
 
 <template>
+  <!-- <div class="homepage"> -->
+  <!-- Navbar -->
+  <Navbar />
+  <!-- Logo  -->
+  <div class="logo">
+    <Logo />
+  </div>
+  <!-- Sign Up -->
   <div class="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
     <form @submit.prevent="signupWithPassword">
-      <h1 id="sign_up_sign">Sign Up</h1>
+      <h1 class="instructions" id="big">Sign Up</h1>
       <div id="email_address_signup">
         <label>
           Email address
@@ -55,8 +67,10 @@ export default {
         <input type="password" v-model="passwordVerify_signup" />
       </label>
       <button type="submit">Sign up</button>
-      <p>or</p>
+      <p class="instructions" id="small">or</p>
       <button @click.prevent="signupWithSSO">Sign up with Google</button>
+      <p class="instructions" id="small">Have an account already?</p>
+      <button @click="$router.push('/login')">Log me in!</button>
     </form>
   </div>
 </template>
@@ -69,9 +83,9 @@ input {
 }
 .signup_components_container {
   position: absolute;
-  left: 35%;
-  top: 50%;
-  height: 450px;
+  left: 70%;
+  top: 38%;
+  height: 575px;
   margin-top: -150px;
   width: 450px;
   margin-left: -80px;
@@ -79,13 +93,35 @@ input {
   align-items: center;
   justify-content: center;
   background-color: #bcd6a2;
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 40px;
+  box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
 #alert_signup {
   color: red;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
 }
 #sign_up_sign {
   position: relative;
   top: 0;
+}
+.logo {
+  position: relative;
+  left: 20%;
+  width: 700px;
+  height: 700px;
+  margin-top: 80px;
+}
+#small.instructions {
+  font-size: 24px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+}
+#big.instructions {
+  font-size: 50px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
 }
 </style>
