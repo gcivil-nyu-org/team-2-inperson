@@ -11,12 +11,20 @@ module.exports = {
     "eslint:recommended",
     "@vue/eslint-config-prettier",
   ],
-  overrides: [{
-    files: ["cypress/e2e/**.{cy,spec}.{js,ts,jsx,tsx}"],
-    extends: ["plugin:cypress/recommended"],
-  }, ],
+  overrides: [
+    {
+      files: ["cypress/e2e/**.{cy,spec}.{js,ts,jsx,tsx}"],
+      extends: ["plugin:cypress/recommended"],
+    },
+  ],
   ignorePatterns: ["cypress.config.js", "*.css"],
   parserOptions: {
     ecmaVersion: "latest",
+    "sourceType": "module",
   },
+  parser: "@babel/eslint-parser",
+  "env": {
+    "browser": true,
+    "es2021": true
+},
 };
