@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-  <div><PreferenceDemo /></div>
+  <div><PreferenceDemo/></div>
 </template>
 
 <style scoped></style>
