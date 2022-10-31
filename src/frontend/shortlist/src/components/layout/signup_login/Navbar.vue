@@ -46,19 +46,22 @@ export default {
   margin: auto;
 }
 #nav {
-  padding: 10px;
+  padding: 8px;
   text-align: center;
 }
 #nav a {
   font-weight: bold;
   color: #2c3e50;
   padding: 20px;
+  font-size: 24px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
 }
 #nav a.router-link-exact-active {
   color: whitesmoke;
   background: crimson;
   border-radius: 0.5rem;
-  padding: 15px;
+  padding: 10px;
 }
 .d-flex {
   margin-left: auto;
