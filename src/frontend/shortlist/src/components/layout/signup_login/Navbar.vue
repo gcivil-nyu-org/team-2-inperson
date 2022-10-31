@@ -52,7 +52,7 @@ export default {
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-  padding: 20px;
+  padding: 10px;
   font-size: 24px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
@@ -61,7 +61,7 @@ export default {
   color: whitesmoke;
   background: crimson;
   border-radius: 0.5rem;
-  padding: 10px;
+  padding: 15px;
 }
 .d-flex {
   margin-left: auto;

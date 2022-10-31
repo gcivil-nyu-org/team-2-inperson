@@ -18,11 +18,16 @@ module.exports = {
     },
   ],
   ignorePatterns: ["cypress.config.js", "*.css"],
-  parserOptions: {
-    ecmaVersion: "latest",
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "ecmaVersion": 2022,
     "sourceType": "module",
+    "ecmaFeatures": {
+        "jsx": true,
+        "modules": true,
+        "experimentalObjectRestSpread": true
+    }
   },
-  parser: "@babel/eslint-parser",
   "env": {
     "browser": true,
     "es2021": true
