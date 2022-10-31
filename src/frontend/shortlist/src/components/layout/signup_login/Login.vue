@@ -26,9 +26,6 @@ export default {
         return;
       }
     },
-    loginWithSSO() {
-      Userfront.login({ method: "google" });
-    },
   },
 };
 </script>

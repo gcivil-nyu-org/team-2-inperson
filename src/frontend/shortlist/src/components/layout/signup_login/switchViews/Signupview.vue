@@ -27,26 +27,23 @@ export default {
         return;
       }
     },
-    signupWithSSO() {
-      Userfront.signup({ method: "google" });
-    },
   },
 };
 </script>
 
 <template>
   <!-- <div class="homepage"> -->
-    <!-- Navbar -->
-    <Navbar />
-    <!-- Logo  -->
-    <div class = "logo">
-      <Logo />
-    </div>
-    <!-- Sign Up -->
-    <div class="signup_components_container">
+  <!-- Navbar -->
+  <Navbar />
+  <!-- Logo  -->
+  <div class="logo">
+    <Logo />
+  </div>
+  <!-- Sign Up -->
+  <div class="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
     <form @submit.prevent="signupWithPassword">
-      <h1 class = "instructions" id = "big">Sign Up</h1>
+      <h1 class="instructions" id="big">Sign Up</h1>
       <div id="email_address_signup">
         <label>
           Email address
@@ -70,10 +67,10 @@ export default {
         <input type="password" v-model="passwordVerify_signup" />
       </label>
       <button type="submit">Sign up</button>
-      <p class = "instructions" id = "small">or</p>
+      <p class="instructions" id="small">or</p>
       <button @click.prevent="signupWithSSO">Sign up with Google</button>
-      <p class = "instructions" id = "small">Have an account already?</p>
-        <button @click="$router.push('/login')">Log me in!</button>
+      <p class="instructions" id="small">Have an account already?</p>
+      <button @click="$router.push('/login')">Log me in!</button>
     </form>
   </div>
 </template>
@@ -97,10 +94,10 @@ input {
   justify-content: center;
   background-color: #bcd6a2;
   padding: 3em;
-	display: flex;
-	flex-direction: column;
-	border-radius: 40px;
-	box-shadow: 0 0 3em hsl(231deg 62% 80%);
+  display: flex;
+  flex-direction: column;
+  border-radius: 40px;
+  box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
 #alert_signup {
   color: red;

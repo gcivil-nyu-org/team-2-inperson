@@ -4,7 +4,7 @@ require("@rushstack/eslint-patch/modern-module-resolution");
 module.exports = {
   root: true,
   rules: {
-    'vue/multi-word-component-names': 0,
+    "vue/multi-word-component-names": 0,
   },
   extends: [
     "plugin:vue/vue3-essential",
@@ -18,18 +18,18 @@ module.exports = {
     },
   ],
   ignorePatterns: ["cypress.config.js", "*.css"],
-  "parserOptions": {
-    "parser": "@babel/eslint-parser",
-    "ecmaVersion": 2022,
-    "sourceType": "module",
-    "ecmaFeatures": {
-        "jsx": true,
-        "modules": true,
-        "experimentalObjectRestSpread": true
-    }
+  parserOptions: {
+    parser: "@babel/eslint-parser",
+    ecmaVersion: 2022,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+      modules: true,
+      experimentalObjectRestSpread: true,
+    },
   },
-  "env": {
-    "browser": true,
-    "es2021": true
-},
+  env: {
+    browser: true,
+    es2021: true,
+  },
 };

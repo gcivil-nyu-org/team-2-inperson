@@ -30,26 +30,23 @@ export default {
         return;
       }
     },
-    loginWithSSO() {
-      Userfront.login({ method: "google" });
-    },
   },
 };
 </script>
 
 <template>
   <!-- <div class="homepage"> -->
-    <!-- Navbar -->
-    <Navbar />
-    <!-- Logo  -->
-    <div class = "logo">
-      <Logo />
-    </div>
-    <!-- Log In -->
-    <div class="login_components_container">
+  <!-- Navbar -->
+  <Navbar />
+  <!-- Logo  -->
+  <div class="logo">
+    <Logo />
+  </div>
+  <!-- Log In -->
+  <div class="login_components_container">
     <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
     <form @submit.prevent="loginWithPassword">
-      <h1 class = "instructions" id = "big">Log In</h1>
+      <h1 class="instructions" id="big">Log In</h1>
       <div id="emailaddress_login">
         <label>
           Email address
@@ -70,9 +67,9 @@ export default {
       </div>
       <div>
         <button type="button" v-on:click="loginWithPassword()">Login</button>
-        <p class = "instructions" id = "small">or</p>
+        <p class="instructions" id="small">or</p>
         <button @click.prevent="loginWithSSO">Log In with Google</button>
-        <p class = "instructions" id = "small">Don't have an account yet?</p>
+        <p class="instructions" id="small">Don't have an account yet?</p>
         <button @click="$router.push('/signup')">Sign me up!</button>
       </div>
     </form>
@@ -97,12 +94,12 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #8fbc8f; 
-	padding: 3em;
-	display: flex;
-	flex-direction: column;
-	border-radius: 40px;
-	box-shadow: 0 0 3em hsl(231deg 62% 80%);
+  background-color: #8fbc8f;
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  border-radius: 40px;
+  box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
 
 #alert_login {

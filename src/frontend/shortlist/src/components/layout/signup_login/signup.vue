@@ -23,9 +23,6 @@ export default {
         return;
       }
     },
-    signupWithSSO() {
-      Userfront.signup({ method: "google" });
-    },
   },
 };
 </script>
