@@ -1,10 +1,15 @@
 <script>
-import NavbarLogin from "./NavbarLogin.vue";
+import NavBar from "../../layout/navigation/NavBar.vue";
 import Logo from "./Logo.vue";
+import { userLoginStore } from "../../../states/userLogin";
 
 export default {
   name: "Signup",
-  components: { NavbarLogin, Logo },
+  components: { NavBar, Logo },
+  setup() {
+    const loginState = userLoginStore();
+    return { loginState };
+  },
   data() {
     return {
       // For sign up
@@ -23,7 +28,8 @@ export default {
         this.alert_signup = "Your Passwords do not match!";
         return;
       } else {
-        this.alert_signup = "You have successfully signed up an account!";
+        this.loginState.userEmail = this.email_signup;
+        this.loginState.userPassword = this.password_signup;
         return;
       }
     },
@@ -34,7 +40,7 @@ export default {
 <template>
   <!-- <div class="homepage"> -->
   <!-- Navbar -->
-  <NavbarLogin />
+  <NavBar />
   <!-- Logo  -->
   <div class="logo">
     <Logo />
@@ -66,7 +72,7 @@ export default {
         Verify Password
         <input type="password" v-model="passwordVerify_signup" />
       </label>
-      <button type="submit">Sign up</button>
+      <button type="submit" @click.prevent="signupWithPassword">Sign up</button>
       <p class="instructions" id="small">or</p>
       <button @click.prevent="signupWithSSO">Sign up with Google</button>
       <p class="instructions" id="small">Have an account already?</p>

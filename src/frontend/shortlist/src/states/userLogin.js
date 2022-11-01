@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 
-export const userLoginStore = defineStore('loginState', {
+export const userLoginStore = defineStore("loginState", {
   state: () => {
     return {
       loggedIn: false,
       userID: "Test User",
-      userName: null
-    }
-  }
-})
+      userEmail: null,
+      userPassword: null,
+    };
+  },
+});

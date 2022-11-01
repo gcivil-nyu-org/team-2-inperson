@@ -1,10 +1,15 @@
 <script>
 import NavBar from "../../layout/navigation/NavBar.vue";
 import Logo from "./Logo.vue";
+import { userLoginStore } from "../../../states/userLogin";
 
 export default {
   name: "Login",
   components: { NavBar, Logo },
+  setup() {
+    const loginState = userLoginStore();
+    return { loginState };
+  },
   data() {
     return {
       // For log in
@@ -19,14 +24,12 @@ export default {
   methods: {
     loginWithPassword() {
       this.alert_login = "";
-      if (
-        (this.email_login != "" || this.username_login != "") &&
-        this.password_login != ""
-      ) {
+      if (this.email_login==this.loginState.userEmail  && this.password_login==this.loginState.userPassword)
+      {
         this.alert_login = "You have successfully logged in.";
         return;
       } else {
-        this.alert_login = "Your Passwords do not match!";
+        this.alert_login = "Either Email or Password does not correct!";
         return;
       }
     },
