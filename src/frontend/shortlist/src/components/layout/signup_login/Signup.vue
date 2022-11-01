@@ -1,11 +1,10 @@
 <script>
-import NavBar from "../../layout/navigation/NavBar.vue";
 import Logo from "./Logo.vue";
 import { userLoginStore } from "../../../states/userLogin";
 
 export default {
   name: "Signup",
-  components: { NavBar, Logo },
+  components: { Logo },
   setup() {
     const loginState = userLoginStore();
     return { loginState };
@@ -38,9 +37,6 @@ export default {
 </script>
 
 <template>
-  <!-- <div class="homepage"> -->
-  <!-- Navbar -->
-  <NavBar />
   <!-- Logo  -->
   <div class="logo">
     <Logo />
