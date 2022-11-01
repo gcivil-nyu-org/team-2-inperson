@@ -45,6 +45,11 @@ const router = createRouter({
       component: () => import("../views/PreferencesView.vue"),
     },
     {
+      path: "/about",
+      name: "shortlist-about",
+      component: () => import("../views/ShortlistAbout.vue"),
+    },
+    {
       path: "/logout",
       name: "logout-page",
       component: () => import("../components/layout/signup_login/LoggedOut.vue"),
