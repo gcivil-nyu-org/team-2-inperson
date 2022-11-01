@@ -143,4 +143,11 @@ export default {
 .reset-style * {
   all: revert;
 }
+
+ul {
+  position: absolute;
+  right: 70px;
+  top: 14px;
+  z-index: 1;
+}
 </style>
