@@ -12,8 +12,9 @@ export default {
   data() {
     return {
       // For sign up
+      first_name: "",
+      last_name: "",
       email_signup: "",
-      username_signup: "",
       password_signup: "",
       passwordVerify_signup: "",
       // Alerts
@@ -27,6 +28,7 @@ export default {
         this.alert_signup = "Your Passwords do not match!";
         return;
       } else {
+        this.loginState.userFirstName = this.first_name;
         this.loginState.userEmail = this.email_signup;
         this.loginState.userPassword = this.password_signup;
         return;
@@ -46,16 +48,22 @@ export default {
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
     <form @submit.prevent="signupWithPassword">
       <h1 class="instructions" id="big">Sign Up</h1>
-      <div id="email_address_signup">
+      <div id="first_name">
         <label>
-          Email address
-          <input type="email" v-model="email_signup" />
+          First Name
+          <input type="text" v-model="first_name" />
         </label>
       </div>
-      <div id="username_signup">
+      <div id="last_name">
         <label>
-          Username
-          <input type="text" v-model="username_signup" />
+          Last Name
+          <input type="text" v-model="last_name" />
+        </label>
+      </div>
+      <div id="email_address_signup">
+        <label>
+          Email
+          <input type="email" v-model="email_signup" />
         </label>
       </div>
       <div id="password_signup">

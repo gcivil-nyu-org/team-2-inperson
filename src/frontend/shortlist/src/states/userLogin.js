@@ -4,7 +4,7 @@ export const userLoginStore = defineStore("loginState", {
   state: () => {
     return {
       loggedIn: false,
-      userID: "Test User",
+      userFirstName: null,
       userEmail: null,
       userPassword: null,
     };

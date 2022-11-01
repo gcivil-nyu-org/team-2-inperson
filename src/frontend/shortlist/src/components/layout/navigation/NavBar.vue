@@ -64,7 +64,7 @@ export default {
           v-if="loginState.loggedIn"
           style="color: #ffffff; background-color: black"
         >
-          Welcome {{ loginState.userID }} !&nbsp;
+          Welcome {{ loginState.userFirstName }} !&nbsp;
         </span>
       </router-link>
 

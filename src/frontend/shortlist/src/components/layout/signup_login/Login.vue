@@ -53,12 +53,6 @@ export default {
             <input type="email" v-model="email_login" />
           </label>
         </div>
-        <div id="username_login">
-          <label>
-            Username
-            <input type="text" name="username" v-model="username_login" />
-          </label>
-        </div>
         <div id="password_login">
           <label>
             Password
