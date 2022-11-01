@@ -1,14 +1,15 @@
 <script>
+import { userLoginStore } from "../../../states/userLogin";
+
 export default {
   name: "NavBar",
+  setup() {
+    const loginState = userLoginStore();
+    return { loginState };
+  },
   data() {
     return {
       links: [
-        /*{
-          id: 0,
-          text: 'Demo',
-          page:'/demo'
-        },*/
         {
           id: 0,
           text: "Home",
@@ -62,11 +63,15 @@ export default {
           style="display: inline; text-decoration: none"
           v-for="routes in links"
           v-bind:key="routes.id"
-          :to="`${routes.page}`"
-          ><li class="nav-link active" aria-current="page">
+          :to="`${routes.page}`" >
+          <li class="nav-link active" aria-current="page">
             {{ routes.text }}
-          </li></router-link
-        >
+          </li>
+        </router-link>
+        
+        <li v-if="loginState.loggedIn">
+          {{ loginState.userID }}
+        </li>
       </ul>
     </div>
   </nav>
