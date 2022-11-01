@@ -85,10 +85,6 @@ export default {
       >
         Sign up
       </button>
-      <p class="instructions" id="small">or</p>
-      <button @click.prevent="signupWithSSO" class="btn btn-outline-dark">
-        Sign up with Google
-      </button>
       <p class="instructions" id="small">Have an account already?</p>
       <button @click="$router.push('/login')" class="btn btn-outline-dark">
         Log me in!
