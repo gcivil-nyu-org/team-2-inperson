@@ -19,31 +19,31 @@ export default {
         },
         {
           id: 1,
-          text: "About",
-          page: "/about",
-          always: true,
-          requireLogIn: true,
-        },
-        {
-          id: 2,
-          text: "Sign Up",
-          page: "/signup",
-          always: false,
-          requireLogIn: false,
-        },
-        {
-          id: 3,
           text: "Set Preferences",
           page: "/preferences",
           always: false,
           requireLogIn: true,
         },
         {
-          id: 4,
+          id: 2,
           text: "Schools",
           page: "/categorize",
           always: false,
           requireLogIn: true,
+        },
+        {
+          id: 3,
+          text: "About",
+          page: "/about",
+          always: true,
+          requireLogIn: true,
+        },
+        {
+          id: 4,
+          text: "LogIn",
+          page: "/login",
+          always: false,
+          requireLogIn: false,
         },
         {
           id: 5,
@@ -86,22 +86,21 @@ export default {
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="shortlistmenu" >
+      <div class="collapse navbar-collapse" id="shortlistmenu">
         <ul class="navbar-nav ms-auto nav">
           <template v-for="link in links">
             <router-link
-            class="nav-item"
-            style="display: inline; text-decoration: none"
-            v-if="link.always || (link.requireLogIn == this.loginState.loggedIn)"
-            v-bind:key="link.id"
-            :to="`${link.page}`"
-          >
-            <li class="nav-link active" aria-current="page">
-              {{ link.text }}
-            </li>
-          </router-link>
+              class="nav-item"
+              style="display: inline; text-decoration: none"
+              v-if="link.always || link.requireLogIn == this.loginState.loggedIn"
+              v-bind:key="link.id"
+              :to="`${link.page}`"
+            >
+              <li class="nav-link active" aria-current="page">
+                {{ link.text }}
+              </li>
+            </router-link>
           </template>
-          
         </ul>
       </div>
     </nav>
