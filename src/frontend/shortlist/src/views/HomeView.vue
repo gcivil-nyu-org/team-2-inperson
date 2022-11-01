@@ -7,43 +7,53 @@ export default {
     const loginState = userLoginStore();
     return { loginState };
   },
-}
-
+};
 </script>
 
 <template>
   <main>
-    <div class="home-container" v-if="loginState.loggedIn==false">
+    <div class="home-container" v-if="loginState.loggedIn == false">
       <div class="shortlist-fnt-serif-med">
         <h1>Welcome to Shortlist</h1>
       </div>
       <div class="start-btn-container">
-        <button class="btn-big" 
-          @click="$router.push('signup')">Get Started</button>
+        <button
+          class="btn btn-big btn-outline-dark"
+          @click="$router.push('signup')"
+        >
+          Get Started
+        </button>
       </div>
       <div class="login-link-container">
         <router-link to="/login">
-          Already have an account?
+          <span class="shortlist-fnt-serif-med">Already have an account?</span>
         </router-link>
       </div>
     </div>
     <div class="dash-container" v-else>
       <h1>{{ loginState.userFirstName }}'s Dashboard</h1>
       <div class="dash-actions-container">
-          <div class="action">
-            <button class="btn btn-outline-success"
-              @click="$router.push('categorize')">Get Matches</button>
-          </div>
-          <div class="action">
-            <button class="btn btn-outline-success">My Students</button>
-          </div>
-          <div class="action">
-            <button  class="btn btn-outline-success"
-              @click="$router.push('preferences')">My Preferences</button>
-          </div>
+        <div class="action">
+          <button
+            class="btn btn-outline-success"
+            @click="$router.push('categorize')"
+          >
+            Get Matches
+          </button>
+        </div>
+        <div class="action">
+          <button class="btn btn-outline-success">My Students</button>
+        </div>
+        <div class="action">
+          <button
+            class="btn btn-outline-success"
+            @click="$router.push('preferences')"
+          >
+            My Preferences
+          </button>
+        </div>
       </div>
     </div>
-
   </main>
 </template>
 
@@ -51,13 +61,14 @@ export default {
 .home-container {
   width: 100%;
   height: 100%;
-  padding: 20%;
   display: grid;
   flex-wrap: wrap;
-  /* justify-content: space-around; */
-  /* align-items: center; */
+  justify-content: space-around;
+  align-items: center;
   text-align: center;
   background-color: #bcd6a2;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .start-btn-container {
@@ -69,14 +80,14 @@ export default {
   width: 200px;
   height: 80px;
   font-family: "Cabin Sketch";
-  font-size: 30px;
-  font-color: green;
 }
 
 .dash-container {
-  width: 80%;
+  margin: auto;
+  width: 50%;
   height: 100%;
-  padding: 20%;
+  border: 3px solid green;
+  padding: 10px;
 }
 .dash-actions-container {
   display: grid;
@@ -85,5 +96,8 @@ export default {
 .action {
   padding: 20px;
 }
-</style>
 
+a:link {
+  text-decoration: none;
+}
+</style>
