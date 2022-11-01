@@ -25,8 +25,8 @@ export default {
       this.alert_login = "";
       if (this.email_login==this.loginState.userEmail  && this.password_login==this.loginState.userPassword)
       {
-        this.alert_login = "You have successfully logged in.";
-        return;
+        this.loginState.loggedIn = true;
+        this.$router.push('/')
       } else {
         this.alert_login = "Either Email or Password does not correct!";
         return;

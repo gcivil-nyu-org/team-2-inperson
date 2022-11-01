@@ -31,6 +31,8 @@ export default {
         this.loginState.userFirstName = this.first_name;
         this.loginState.userEmail = this.email_signup;
         this.loginState.userPassword = this.password_signup;
+
+        this.alert_signup = "Thanks for signing up! Please go to login."
         return;
       }
     },
