@@ -23,10 +23,12 @@ export default {
   methods: {
     loginWithPassword() {
       this.alert_login = "";
-      if (this.email_login==this.loginState.userEmail  && this.password_login==this.loginState.userPassword)
-      {
+      if (
+        this.email_login == this.loginState.userEmail &&
+        this.password_login == this.loginState.userPassword
+      ) {
         this.loginState.loggedIn = true;
-        this.$router.push('/')
+        this.$router.push("/");
       } else {
         this.alert_login = "Either Email or Password does not correct!";
         return;
@@ -60,11 +62,21 @@ export default {
           </label>
         </div>
         <div>
-          <button type="button" v-on:click="loginWithPassword()">Login</button>
+          <button
+            type="button"
+            v-on:click="loginWithPassword()"
+            class="btn btn-outline-dark"
+          >
+            Login
+          </button>
           <p class="instructions" id="small">or</p>
-          <button @click.prevent="loginWithSSO">Log In with Google</button>
+          <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+            Log In with Google
+          </button>
           <p class="instructions" id="small">Don't have an account yet?</p>
-          <button @click="$router.push('/signup')">Sign me up!</button>
+          <button @click="$router.push('/signup')" class="btn btn-outline-dark">
+            Sign me up!
+          </button>
         </div>
       </form>
     </div>
