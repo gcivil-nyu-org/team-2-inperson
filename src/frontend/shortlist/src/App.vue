@@ -15,5 +15,8 @@ import NavBar from "./components/layout/navigation/NavBar.vue";
 .app-container {
   width: 100vw;
   height: 100vh;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
 </style>

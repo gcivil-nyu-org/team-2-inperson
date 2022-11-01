@@ -32,7 +32,7 @@ export default {
         this.loginState.userEmail = this.email_signup;
         this.loginState.userPassword = this.password_signup;
 
-        this.alert_signup = "Thanks for signing up! Please go to login."
+        this.alert_signup = "Thanks for signing up! Please go to login.";
         return;
       }
     },
@@ -78,11 +78,21 @@ export default {
         Verify Password
         <input type="password" v-model="passwordVerify_signup" />
       </label>
-      <button type="submit" @click.prevent="signupWithPassword">Sign up</button>
+      <button
+        type="submit"
+        @click.prevent="signupWithPassword"
+        class="btn btn-outline-dark"
+      >
+        Sign up
+      </button>
       <p class="instructions" id="small">or</p>
-      <button @click.prevent="signupWithSSO">Sign up with Google</button>
+      <button @click.prevent="signupWithSSO" class="btn btn-outline-dark">
+        Sign up with Google
+      </button>
       <p class="instructions" id="small">Have an account already?</p>
-      <button @click="$router.push('/login')">Log me in!</button>
+      <button @click="$router.push('/login')" class="btn btn-outline-dark">
+        Log me in!
+      </button>
     </form>
   </div>
 </template>
@@ -97,7 +107,7 @@ input {
   position: absolute;
   left: 70%;
   top: 38%;
-  height: 575px;
+  height: auto;
   margin-top: -150px;
   width: 450px;
   margin-left: -80px;
@@ -111,6 +121,7 @@ input {
   border-radius: 40px;
   box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
+
 #alert_signup {
   color: red;
   margin-bottom: 2px;
