@@ -40,7 +40,14 @@ export default {
           src="/shortlistname.png"
           style="width: 170px; left: 15px"
           alt="shortlist"
-      /></router-link>
+        />
+        <span
+          v-if="loginState.loggedIn"
+          style="color: #ffffff; background-color: black"
+        >
+          Welcome {{ loginState.userID }} !&nbsp;
+        </span>
+      </router-link>
 
       <button
         class="navbar-toggler"
@@ -53,9 +60,8 @@ export default {
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="shortlistmenu">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav ms-auto nav">
           <router-link
             class="nav-item"
             style="display: inline; text-decoration: none"
@@ -67,10 +73,6 @@ export default {
               {{ routes.text }}
             </li>
           </router-link>
-
-          <li v-if="loginState.loggedIn">
-            {{ loginState.userID }}
-          </li>
         </ul>
       </div>
     </nav>
