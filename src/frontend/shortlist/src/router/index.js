@@ -44,6 +44,11 @@ const router = createRouter({
       name: "preferences-view",
       component: () => import("../views/PreferencesView.vue"),
     },
+    {
+      path: "/logout",
+      name: "logout-page",
+      component: () => import("../components/layout/signup_login/LoggedOut.vue"),
+    },
   ],
 });
 

@@ -45,6 +45,13 @@ export default {
           always: false,
           requireLogIn: true,
         },
+        {
+          id: 5,
+          text: "Log Out",
+          page: "/logout",
+          always: false,
+          requireLogIn: true,
+        },
       ],
     };
   },
