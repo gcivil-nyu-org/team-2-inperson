@@ -13,20 +13,39 @@ export default {
         {
           id: 0,
           text: "Home",
-          page: "/login",
+          page: "/",
+          always: true,
+          requireLogIn: true,
         },
         {
           id: 1,
-          text: "Set Preferences",
-          page: "/preferences",
+          text: "About",
+          page: "/about",
+          always: true,
+          requireLogIn: true,
         },
         {
           id: 2,
+          text: "Sign Up",
+          page: "/signup",
+          always: false,
+          requireLogIn: false,
+        },
+        {
+          id: 3,
+          text: "Set Preferences",
+          page: "/preferences",
+          always: false,
+          requireLogIn: true,
+        },
+        {
+          id: 4,
           text: "Schools",
-          page: "/demo",
+          page: "/categorize",
+          always: false,
+          requireLogIn: true,
         },
       ],
-      //logo: require("../../image/shortlist.sm")
     };
   },
 };
@@ -60,19 +79,22 @@ export default {
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="shortlistmenu">
+      <div class="collapse navbar-collapse" id="shortlistmenu" >
         <ul class="navbar-nav ms-auto nav">
-          <router-link
+          <template v-for="link in links">
+            <router-link
             class="nav-item"
             style="display: inline; text-decoration: none"
-            v-for="routes in links"
-            v-bind:key="routes.id"
-            :to="`${routes.page}`"
+            v-if="link.always || (link.requireLogIn == this.loginState.loggedIn)"
+            v-bind:key="link.id"
+            :to="`${link.page}`"
           >
             <li class="nav-link active" aria-current="page">
-              {{ routes.text }}
+              {{ link.text }}
             </li>
           </router-link>
+          </template>
+          
         </ul>
       </div>
     </nav>
