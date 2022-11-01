@@ -13,12 +13,12 @@ export default {
         {
           id: 0,
           text: "Home",
-          page: "/",
+          page: "/login",
         },
         {
           id: 1,
           text: "Set Preferences",
-          page: "/setprefs",
+          page: "/preferences",
         },
         {
           id: 2,
@@ -33,48 +33,48 @@ export default {
 </script>
 
 <template>
-  <nav
-    class="navbar navbar-expand-lg static-top"
-    style="background-color: white"
-  >
-    <router-link to="/" class="reset-style"
-      ><img
-        src="/shortlistname.png"
-        style="width: 170px; left: 15px"
-        alt="shortlist"
-    /></router-link>
+  <div id="nav">
+    <nav class="navbar navbar-expand-lg static-top">
+      <router-link to="/" class="reset-style">
+        <img
+          src="/shortlistname.png"
+          style="width: 170px; left: 15px"
+          alt="shortlist"
+      /></router-link>
 
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#shortlistmenu"
-      aria-controls="shortlistmenu"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#shortlistmenu"
+        aria-controls="shortlistmenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="shortlistmenu">
-      <ul class="navbar-nav ms-auto">
-        <router-link
-          class="nav-item"
-          style="display: inline; text-decoration: none"
-          v-for="routes in links"
-          v-bind:key="routes.id"
-          :to="`${routes.page}`" >
-          <li class="nav-link active" aria-current="page">
-            {{ routes.text }}
+      <div class="collapse navbar-collapse" id="shortlistmenu">
+        <ul class="navbar-nav ms-auto">
+          <router-link
+            class="nav-item"
+            style="display: inline; text-decoration: none"
+            v-for="routes in links"
+            v-bind:key="routes.id"
+            :to="`${routes.page}`"
+          >
+            <li class="nav-link active" aria-current="page">
+              {{ routes.text }}
+            </li>
+          </router-link>
+
+          <li v-if="loginState.loggedIn">
+            {{ loginState.userID }}
           </li>
-        </router-link>
-        
-        <li v-if="loginState.loggedIn">
-          {{ loginState.userID }}
-        </li>
-      </ul>
-    </div>
-  </nav>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <style>

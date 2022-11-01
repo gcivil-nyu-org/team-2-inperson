@@ -1,10 +1,10 @@
 <script>
-import NavbarLogin from "./NavbarLogin.vue";
+import NavBar from "../../layout/navigation/NavBar.vue";
 import Logo from "./Logo.vue";
 
 export default {
   name: "Login",
-  components: { NavbarLogin, Logo },
+  components: { NavBar, Logo },
   data() {
     return {
       // For log in
@@ -35,43 +35,45 @@ export default {
 </script>
 
 <template>
-  <!-- Navbar -->
-  <NavbarLogin />
-  <!-- Logo  -->
-  <div class="logo">
-    <Logo />
-  </div>
-  <!-- Log In -->
-  <div class="login_components_container">
-    <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
-    <form @submit.prevent="loginWithPassword">
-      <h1 class="instructions" id="big">Log In</h1>
-      <div id="emailaddress_login">
-        <label>
-          Email address
-          <input type="email" v-model="email_login" />
-        </label>
-      </div>
-      <div id="username_login">
-        <label>
-          Username
-          <input type="text" name="username" v-model="username_login" />
-        </label>
-      </div>
-      <div id="password_login">
-        <label>
-          Password
-          <input type="password" name="password" v-model="password_login" />
-        </label>
-      </div>
-      <div>
-        <button type="button" v-on:click="loginWithPassword()">Login</button>
-        <p class="instructions" id="small">or</p>
-        <button @click.prevent="loginWithSSO">Log In with Google</button>
-        <p class="instructions" id="small">Don't have an account yet?</p>
-        <button @click="$router.push('/signup')">Sign me up!</button>
-      </div>
-    </form>
+  <div>
+    <!-- Navbar -->
+    <NavBar />
+    <!-- Logo  -->
+    <div class="logo">
+      <Logo />
+    </div>
+    <!-- Log In -->
+    <div class="login_components_container">
+      <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
+      <form @submit.prevent="loginWithPassword">
+        <h1 class="instructions" id="big">Log In</h1>
+        <div id="emailaddress_login">
+          <label>
+            Email address
+            <input type="email" v-model="email_login" />
+          </label>
+        </div>
+        <div id="username_login">
+          <label>
+            Username
+            <input type="text" name="username" v-model="username_login" />
+          </label>
+        </div>
+        <div id="password_login">
+          <label>
+            Password
+            <input type="password" name="password" v-model="password_login" />
+          </label>
+        </div>
+        <div>
+          <button type="button" v-on:click="loginWithPassword()">Login</button>
+          <p class="instructions" id="small">or</p>
+          <button @click.prevent="loginWithSSO">Log In with Google</button>
+          <p class="instructions" id="small">Don't have an account yet?</p>
+          <button @click="$router.push('/signup')">Sign me up!</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
