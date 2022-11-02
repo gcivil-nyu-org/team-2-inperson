@@ -92,7 +92,9 @@ export default {
             <router-link
               class="nav-item"
               style="display: inline; text-decoration: none"
-              v-if="link.always || link.requireLogIn == this.loginState.loggedIn"
+              v-if="
+                link.always || link.requireLogIn == this.loginState.loggedIn
+              "
               v-bind:key="link.id"
               :to="`${link.page}`"
             >

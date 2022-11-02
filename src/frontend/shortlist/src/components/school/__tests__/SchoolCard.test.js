@@ -24,7 +24,7 @@ describe("SchoolCard.vue", () => {
 
     // exists
     expect(componentWrapper.exists());
-    expect(componentWrapper.vm.isDetail, "starts in simple mode").false;
+    expect(componentWrapper.vm.isDetail, "starts in simple mode").toBe(false);
   });
 
   it("shows detail when clicked", () => {

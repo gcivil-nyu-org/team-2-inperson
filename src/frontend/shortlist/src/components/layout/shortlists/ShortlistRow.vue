@@ -5,7 +5,20 @@ import { dragStateStore } from "../../../states/categorizeDragAndDrop";
 
 export default {
   name: "ShortlistRow",
-  props: ["listId", "listSettings", "listSchools"],
+  props: {
+    listId: [String, Number],
+    listSettings: {
+      default: {
+        name: "MISSING",
+        color: "#ecf0f3",
+        icon: {
+          value: "token",
+          color: "#AAAAAA",
+        },
+      },
+    },
+    listSchools: Array,
+  },
   emits: ["listItemDetailClick", "changeListSettings", "shareList"],
   components: { MaterialIcon, SchoolIcon },
   setup() {
@@ -176,6 +189,7 @@ export default {
       <div class="layout-list-settings-row">
         <button
           class="layout-list-settings-button"
+          id="changeButton"
           @click="changeListSettings"
           style="background-color: green; color: white"
         >
@@ -183,6 +197,7 @@ export default {
         </button>
         <button
           class="layout-list-settings-button"
+          id="cancelButton"
           @click="inEditMode = false"
           style="background-color: red; color: white"
         >
@@ -212,6 +227,7 @@ export default {
               src="tune"
               :color="colorDeselect"
               size="18"
+              id="editButton"
               @click="startChangeSettings"
             />
           </div>
