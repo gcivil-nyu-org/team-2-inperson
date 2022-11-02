@@ -1,0 +1,11 @@
+name: DEPLOY - FRONTEND
+
+on:
+  push:
+    branches:
+      - '*'
+    paths:
+      - 'src/backend'
+  pull_request:
+    branches:
+      - develop

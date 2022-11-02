@@ -1,65 +1,103 @@
-<script setup>
-import MaterialIcon from "../components/icons/MaterialIcon.vue";
+<script>
+import { userLoginStore } from "../states/userLogin";
+
+export default {
+  name: "Home",
+  setup() {
+    const loginState = userLoginStore();
+    return { loginState };
+  },
+};
 </script>
 
 <template>
   <main>
-    <div class="home-container">
-      <div class="logo-row">
-        <img src="/logo.png" />
+    <div class="home-container" v-if="loginState.loggedIn == false">
+      <div class="shortlist-fnt-serif-med">
+        <h1>Welcome to Shortlist</h1>
       </div>
-      <div class="icons-row">
-        <div class="icon-container">
-          <MaterialIcon src="home" color="rgba(55, 126, 64, .9)" size="50" />
-          <MaterialIcon
-            src="library_add"
-            color="rgba(55, 126, 64, .9)"
-            size="50"
-          />
-          <MaterialIcon src="login" color="rgba(55, 126, 64, .9)" size="50" />
+      <div class="start-btn-container">
+        <button
+          class="btn btn-big btn-outline-dark"
+          @click="$router.push('signup')"
+        >
+          Get Started
+        </button>
+      </div>
+      <div class="login-link-container">
+        <router-link to="/login">
+          <span class="shortlist-fnt-serif-med">Already have an account?</span>
+        </router-link>
+      </div>
+    </div>
+    <div class="dash-container" v-else>
+      <h1>{{ loginState.userFirstName }}'s Dashboard</h1>
+      <div class="dash-actions-container">
+        <div class="action">
+          <button
+            class="btn btn-outline-success"
+            @click="$router.push('categorize')"
+          >
+            Get Matches
+          </button>
+        </div>
+        <div class="action">
+          <button class="btn btn-outline-success">My Students</button>
+        </div>
+        <div class="action">
+          <button
+            class="btn btn-outline-success"
+            @click="$router.push('preferences')"
+          >
+            My Preferences
+          </button>
         </div>
       </div>
     </div>
   </main>
 </template>
 
-<style scoped>
+<style>
 .home-container {
   width: 100%;
   height: 100%;
-  display: flex;
+  display: grid;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  text-align: center;
+  background-color: #bcd6a2;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
-.logo-row {
-  margin-top: 10px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+.start-btn-container {
+  margin-top: 10%;
+  margin-bottom: 2%;
 }
 
-.icons-row {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+.btn-big {
+  width: 200px;
+  height: 80px;
+  font-family: "Cabin Sketch";
 }
 
-.icon-container {
-  width: 600px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  border-radius: 15px;
-  border: 2px rgba(55, 125, 64) solid;
-  box-shadow: 0 0 8px 5px rgba(10, 10, 10, 0.1);
-  padding: 15px;
-  background-color: rgba(55, 125, 64, 0.2);
+.dash-container {
+  margin: auto;
+  width: 50%;
+  height: 100%;
+  border: 3px solid green;
+  padding: 10px;
+}
+.dash-actions-container {
+  display: grid;
+}
+
+.action {
+  padding: 20px;
+}
+
+a:link {
+  text-decoration: none;
 }
 </style>

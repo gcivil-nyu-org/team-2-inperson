@@ -5,13 +5,10 @@ then
   echo "$TARGET is being built..."
 
   # install
-  pip install importlib-metadata --upgrade
   pip install -r requirements.txt
 
   # script
-  black ./src/backend
-  flake8 ./src/backend
-  # coverage run src/backend/server/manage.py test api
+  coverage run src/backend/server/manage.py test api
 
   # coveralls
 

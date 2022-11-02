@@ -18,16 +18,21 @@ else
   export VITE_BASE_URL="/"
 fi
 
+npm install
 npm run build
 
 cp -R dist/* $ORIGINAL/artifacts/.
 rm -rf dist/
 cd $ORIGINAL
 
+# Login AWS
+aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+aws configure set region $AWS_DEFAULT_REGION
+
+aws s3 sync artifacts/ $ARTIFACT_PATH/$TRAVIS_BRANCH
 
 echo "Pushing artifacts to s3:"
-echo $ARTIFACT_PATH/$BRANCH
-
-aws --profile=shortlist s3 sync artifacts/ $ARTIFACT_PATH/$BRANCH
+echo $ARTIFACT_PATH/$TRAVIS_BRANCH
 
 rm -rf artifacts

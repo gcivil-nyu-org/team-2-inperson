@@ -9,7 +9,7 @@ then
   unzip awscliv2.zip > /dev/null
   sudo ./aws/install
 
-  deploy/frontend/deploy_frontend.sh
+  ./deploy/frontend/deploy_frontend.sh ./src/frontend/shortlist/
 else 
   echo "no changes; $TARGET is NOT being built"
 fi

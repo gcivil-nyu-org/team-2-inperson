@@ -1,75 +1,110 @@
 <script>
+import { userLoginStore } from "../../../states/userLogin";
+
 export default {
   name: "NavBar",
+  setup() {
+    const loginState = userLoginStore();
+    return { loginState };
+  },
   data() {
     return {
       links: [
-        /*{
-          id: 0,
-          text: 'Demo',
-          page:'/demo'
-        },*/
         {
           id: 0,
           text: "Home",
           page: "/",
+          always: true,
+          requireLogIn: true,
         },
         {
           id: 1,
           text: "Set Preferences",
-          page: "/setprefs",
+          page: "/preferences",
+          always: false,
+          requireLogIn: true,
         },
         {
           id: 2,
           text: "Schools",
-          page: "/demo",
+          page: "/categorize",
+          always: false,
+          requireLogIn: true,
+        },
+        {
+          id: 3,
+          text: "About",
+          page: "/about",
+          always: true,
+          requireLogIn: true,
+        },
+        {
+          id: 4,
+          text: "LogIn",
+          page: "/login",
+          always: false,
+          requireLogIn: false,
+        },
+        {
+          id: 5,
+          text: "Log Out",
+          page: "/logout",
+          always: false,
+          requireLogIn: true,
         },
       ],
-      //logo: require("../../image/shortlist.sm")
     };
   },
 };
 </script>
 
 <template>
-  <nav
-    class="navbar navbar-expand-lg static-top"
-    style="background-color: white"
-  >
-    <router-link to="/" class="reset-style"
-      ><img
-        src="/shortlistname.png"
-        style="width: 170px; left: 15px"
-        alt="shortlist"
-    /></router-link>
-
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#shortlistmenu"
-      aria-controls="shortlistmenu"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="shortlistmenu">
-      <ul class="navbar-nav ms-auto">
-        <router-link
-          class="nav-item"
-          style="display: inline; text-decoration: none"
-          v-for="routes in links"
-          v-bind:key="routes.id"
-          :to="`${routes.page}`"
-          ><li class="nav-link active" aria-current="page">
-            {{ routes.text }}
-          </li></router-link
+  <div id="nav">
+    <nav class="navbar navbar-expand-lg static-top">
+      <router-link to="/" class="reset-style">
+        <img
+          src="/shortlistname.png"
+          style="width: 170px; left: 15px"
+          alt="shortlist"
+        />
+        <span
+          v-if="loginState.loggedIn"
+          style="color: #ffffff; background-color: black"
         >
-      </ul>
-    </div>
-  </nav>
+          Welcome {{ loginState.userFirstName }} !&nbsp;
+        </span>
+      </router-link>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#shortlistmenu"
+        aria-controls="shortlistmenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="shortlistmenu">
+        <ul class="navbar-nav ms-auto nav">
+          <template v-for="link in links">
+            <router-link
+              class="nav-item"
+              style="display: inline; text-decoration: none"
+              v-if="link.always || link.requireLogIn == this.loginState.loggedIn"
+              v-bind:key="link.id"
+              :to="`${link.page}`"
+            >
+              <li class="nav-link active" aria-current="page">
+                {{ link.text }}
+              </li>
+            </router-link>
+          </template>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <style>
@@ -107,5 +142,12 @@ export default {
 .reset-style,
 .reset-style * {
   all: revert;
+}
+
+ul {
+  position: absolute;
+  right: 70px;
+  top: 14px;
+  z-index: 1;
 }
 </style>

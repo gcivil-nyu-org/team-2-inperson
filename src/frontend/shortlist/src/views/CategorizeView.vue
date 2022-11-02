@@ -4,13 +4,10 @@ import RecommendationStack from "../components/layout/recommendations/Recommenda
 import TrashCan from "../components/layout/shortlists/TrashCan.vue";
 import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
 import SchoolCard from "../components/school/SchoolCard.vue";
-
 import { dragStateStore } from "../states/categorizeDragAndDrop";
-
 import { shortLists } from "../api/examples/shortlists.js";
 import { recommendations } from "../api/examples/recommendations.js";
 import axios from "axios";
-
 export default {
   components: {
     ShortlistManager,
