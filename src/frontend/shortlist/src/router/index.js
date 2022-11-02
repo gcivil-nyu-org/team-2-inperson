@@ -52,7 +52,8 @@ const router = createRouter({
     {
       path: "/logout",
       name: "logout-page",
-      component: () => import("../components/layout/signup_login/LoggedOut.vue"),
+      component: () =>
+        import("../components/layout/signup_login/LoggedOut.vue"),
     },
   ],
 });
