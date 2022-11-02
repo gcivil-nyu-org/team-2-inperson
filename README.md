@@ -35,7 +35,6 @@
     <td>Deploy</td>
     <td>
       [![Build Status](https://app.travis-ci.com/gcivil-nyu-org/team-2-inperson.svg?branch=develop)](https://app.travis-ci.com/gcivil-nyu-org/team-2-inperson)
-      (Travis)
     </td>
   </tr>
   <tr>
