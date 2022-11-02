@@ -78,17 +78,9 @@ export default {
         Verify Password
         <input type="password" v-model="passwordVerify_signup" />
       </label>
-      <button
-        type="submit"
-        @click.prevent="signupWithPassword"
-        class="btn btn-outline-dark"
-      >
-        Sign up
-      </button>
+      <button type="submit" class="btn btn-outline-dark">Sign up</button>
       <p class="instructions" id="small">Have an account already?</p>
-      <button @click="$router.push('/login')" class="btn btn-outline-dark">
-        Log me in!
-      </button>
+      <button @click="$router.push('/login')" class="btn btn-outline-dark">Log me in!</button>
     </form>
   </div>
 </template>
