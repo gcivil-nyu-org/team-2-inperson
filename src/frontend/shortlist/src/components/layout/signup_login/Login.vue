@@ -1,10 +1,14 @@
 <script>
-import NavbarLogin from "./NavbarLogin.vue";
 import Logo from "./Logo.vue";
+import { userLoginStore } from "../../../states/userLogin";
 
 export default {
   name: "Login",
-  components: { NavbarLogin, Logo },
+  components: { Logo },
+  setup() {
+    const loginState = userLoginStore();
+    return { loginState };
+  },
   data() {
     return {
       // For log in
@@ -20,13 +24,13 @@ export default {
     loginWithPassword() {
       this.alert_login = "";
       if (
-        (this.email_login != "" || this.username_login != "") &&
-        this.password_login != ""
+        this.email_login == this.loginState.userEmail &&
+        this.password_login == this.loginState.userPassword
       ) {
-        this.alert_login = "You have successfully logged in.";
-        return;
+        this.loginState.loggedIn = true;
+        this.$router.push("/");
       } else {
-        this.alert_login = "Your Passwords do not match!";
+        this.alert_login = "Either Email or Password does not correct!";
         return;
       }
     },
@@ -35,8 +39,6 @@ export default {
 </script>
 
 <template>
-  <!-- Navbar -->
-  <NavbarLogin />
   <!-- Logo  -->
   <div class="logo">
     <Logo />
@@ -52,12 +54,6 @@ export default {
           <input type="email" v-model="email_login" />
         </label>
       </div>
-      <div id="username_login">
-        <label>
-          Username
-          <input type="text" name="username" v-model="username_login" />
-        </label>
-      </div>
       <div id="password_login">
         <label>
           Password
@@ -65,11 +61,21 @@ export default {
         </label>
       </div>
       <div>
-        <button type="button" v-on:click="loginWithPassword()">Login</button>
+        <button
+          type="button"
+          v-on:click="loginWithPassword()"
+          class="btn btn-outline-dark"
+        >
+          Login
+        </button>
         <p class="instructions" id="small">or</p>
-        <button @click.prevent="loginWithSSO">Log In with Google</button>
+        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+          Log In with Google
+        </button>
         <p class="instructions" id="small">Don't have an account yet?</p>
-        <button @click="$router.push('/signup')">Sign me up!</button>
+        <button @click="$router.push('/signup')" class="btn btn-outline-dark">
+          Sign me up!
+        </button>
       </div>
     </form>
   </div>

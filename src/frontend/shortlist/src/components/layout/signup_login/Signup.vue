@@ -1,15 +1,20 @@
 <script>
-import NavbarLogin from "./NavbarLogin.vue";
 import Logo from "./Logo.vue";
+import { userLoginStore } from "../../../states/userLogin";
 
 export default {
   name: "Signup",
-  components: { NavbarLogin, Logo },
+  components: { Logo },
+  setup() {
+    const loginState = userLoginStore();
+    return { loginState };
+  },
   data() {
     return {
       // For sign up
+      first_name: "",
+      last_name: "",
       email_signup: "",
-      username_signup: "",
       password_signup: "",
       passwordVerify_signup: "",
       // Alerts
@@ -23,7 +28,11 @@ export default {
         this.alert_signup = "Your Passwords do not match!";
         return;
       } else {
-        this.alert_signup = "You have successfully signed up an account!";
+        this.loginState.userFirstName = this.first_name;
+        this.loginState.userEmail = this.email_signup;
+        this.loginState.userPassword = this.password_signup;
+
+        this.alert_signup = "Thanks for signing up! Please go to login.";
         return;
       }
     },
@@ -32,9 +41,6 @@ export default {
 </script>
 
 <template>
-  <!-- <div class="homepage"> -->
-  <!-- Navbar -->
-  <NavbarLogin />
   <!-- Logo  -->
   <div class="logo">
     <Logo />
@@ -44,16 +50,22 @@ export default {
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
     <form @submit.prevent="signupWithPassword">
       <h1 class="instructions" id="big">Sign Up</h1>
-      <div id="email_address_signup">
+      <div id="first_name">
         <label>
-          Email address
-          <input type="email" v-model="email_signup" />
+          First Name
+          <input type="text" v-model="first_name" />
         </label>
       </div>
-      <div id="username_signup">
+      <div id="last_name">
         <label>
-          Username
-          <input type="text" v-model="username_signup" />
+          Last Name
+          <input type="text" v-model="last_name" />
+        </label>
+      </div>
+      <div id="email_address_signup">
+        <label>
+          Email
+          <input type="email" v-model="email_signup" />
         </label>
       </div>
       <div id="password_signup">
@@ -66,11 +78,9 @@ export default {
         Verify Password
         <input type="password" v-model="passwordVerify_signup" />
       </label>
-      <button type="submit">Sign up</button>
-      <p class="instructions" id="small">or</p>
-      <button @click.prevent="signupWithSSO">Sign up with Google</button>
+      <button type="submit" class="btn btn-outline-dark">Sign up</button>
       <p class="instructions" id="small">Have an account already?</p>
-      <button @click="$router.push('/login')">Log me in!</button>
+      <button @click="$router.push('/login')" class="btn btn-outline-dark">Log me in!</button>
     </form>
   </div>
 </template>
@@ -85,7 +95,7 @@ input {
   position: absolute;
   left: 70%;
   top: 38%;
-  height: 575px;
+  height: auto;
   margin-top: -150px;
   width: 450px;
   margin-left: -80px;
@@ -99,6 +109,7 @@ input {
   border-radius: 40px;
   box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
+
 #alert_signup {
   color: red;
   margin-bottom: 2px;
