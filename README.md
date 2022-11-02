@@ -34,7 +34,7 @@
     <td></td>
     <td>Deploy</td>
     <td>
-      [![Build Status](https://app.travis-ci.com/gcivil-nyu-org/team-2-inperson.svg?branch=develop)](https://app.travis-ci.com/gcivil-nyu-org/team-2-inperson)
+      <a href='https://app.travis-ci.com/gcivil-nyu-org/team-2-inperson'><img src='https://app.travis-ci.com/gcivil-nyu-org/team-2-inperson.svg?branch=develop' alt='Travis Build Status' /></a>
     </td>
   </tr>
   <tr>
