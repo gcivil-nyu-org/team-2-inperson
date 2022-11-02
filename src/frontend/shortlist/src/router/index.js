@@ -46,8 +46,8 @@ const router = createRouter({
     },
     {
       path: "/about",
-      name: "shortlist-about",
-      component: () => import("../views/ShortlistAbout.vue"),
+      name: "about-view",
+      component: () => import("../views/AboutView.vue"),
     },
     {
       path: "/logout",
