@@ -5,7 +5,20 @@ import { dragStateStore } from "../../../states/categorizeDragAndDrop";
 
 export default {
   name: "ShortlistRow",
-  props: ["listId", "listSettings", "listSchools"],
+  props: {
+    listId: [String, Number],
+    listSettings: {
+      default: {
+        name: "MISSING",
+        color: "#ecf0f3",
+        icon: {
+          value: "token",
+          color: "#AAAAAA",
+        },
+      },
+    },
+    listSchools: Array,
+  },
   emits: ["listItemDetailClick", "changeListSettings", "shareList"],
   components: { MaterialIcon, SchoolIcon },
   setup() {
