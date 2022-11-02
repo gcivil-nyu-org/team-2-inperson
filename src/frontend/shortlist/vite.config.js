@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [vue()],
   test: {
     coverage: {
-      reporter: ["lcov"],
+      reporter: ["lcov", "text"],
     },
   },
   resolve: {
