@@ -39,47 +39,45 @@ export default {
 </script>
 
 <template>
-  <div>
-    <!-- Logo  -->
-    <div class="logo">
-      <Logo />
-    </div>
-    <!-- Log In -->
-    <div class="login_components_container">
-      <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
-      <form @submit.prevent="loginWithPassword">
-        <h1 class="instructions" id="big">Log In</h1>
-        <div id="emailaddress_login">
-          <label>
-            Email address
-            <input type="email" v-model="email_login" />
-          </label>
-        </div>
-        <div id="password_login">
-          <label>
-            Password
-            <input type="password" name="password" v-model="password_login" />
-          </label>
-        </div>
-        <div>
-          <button
-            type="button"
-            v-on:click="loginWithPassword()"
-            class="btn btn-outline-dark"
-          >
-            Login
-          </button>
-          <p class="instructions" id="small">or</p>
-          <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
-            Log In with Google
-          </button>
-          <p class="instructions" id="small">Don't have an account yet?</p>
-          <button @click="$router.push('/signup')" class="btn btn-outline-dark">
-            Sign me up!
-          </button>
-        </div>
-      </form>
-    </div>
+  <!-- Logo  -->
+  <div class="logo">
+    <Logo />
+  </div>
+  <!-- Log In -->
+  <div class="login_components_container">
+    <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
+    <form @submit.prevent="loginWithPassword">
+      <h1 class="instructions" id="big">Log In</h1>
+      <div id="emailaddress_login">
+        <label>
+          Email address
+          <input type="email" v-model="email_login" />
+        </label>
+      </div>
+      <div id="password_login">
+        <label>
+          Password
+          <input type="password" name="password" v-model="password_login" />
+        </label>
+      </div>
+      <div>
+        <button
+          type="button"
+          v-on:click="loginWithPassword()"
+          class="btn btn-outline-dark"
+        >
+          Login
+        </button>
+        <p class="instructions" id="small">or</p>
+        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+          Log In with Google
+        </button>
+        <p class="instructions" id="small">Don't have an account yet?</p>
+        <button @click="$router.push('/signup')" class="btn btn-outline-dark">
+          Sign me up!
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 
