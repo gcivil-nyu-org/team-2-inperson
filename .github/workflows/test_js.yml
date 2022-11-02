@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - '*'
+    paths:
+      - 'src/frontend/'
   pull_request:
     branches:
       - develop
@@ -25,3 +27,9 @@ jobs:
       - name: NPM test:unit (vitest)
         working-directory: ./src/frontend/shortlist
         run: npm run test:unit -- --run --coverage --passWithNoTests
+      
+      - name: Coveralls
+        working-directory: ./src/frontend/shortlist
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: npm run coveralls

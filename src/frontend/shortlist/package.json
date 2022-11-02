@@ -8,7 +8,8 @@
     "test:unit": "vitest --environment jsdom",
     "test:e2e": "start-server-and-test preview http://localhost:4173/ 'cypress open --e2e'",
     "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "coveralls": "cat coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
@@ -25,6 +26,7 @@
     "@vitest/coverage-c8": "^0.24.3",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/test-utils": "^2.0.2",
+    "coveralls": "^3.1.1",
     "cypress": "^10.7.0",
     "eslint": "^8.22.0",
     "eslint-plugin-cypress": "^2.12.1",
