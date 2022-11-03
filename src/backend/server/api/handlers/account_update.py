@@ -1,5 +1,4 @@
 """Provides metadata about a loggedin account."""
-import json
 
 from api.handlers.shortlist_request import ShortlistRequest
 from api.models.account import Account
@@ -25,7 +24,7 @@ def account_update(request: HttpRequest):
 
     try:
         account = Account.objects.get(pk=sr.account)
-    except:
+    except Exception:
         return HttpResponseServerError("cannot find user record")
 
     try:
@@ -46,7 +45,7 @@ def account_update(request: HttpRequest):
             if k == "preferences":
                 account.preferences = sr.body[k]
         account.save()
-    except:
+    except Exception:
         return HttpResponseServerError("could not update")
 
     return HttpResponse(account.metadataJson())

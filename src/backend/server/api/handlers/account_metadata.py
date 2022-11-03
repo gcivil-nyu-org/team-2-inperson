@@ -1,5 +1,4 @@
 """Provides metadata about a loggedin account."""
-import json
 
 from api.handlers.shortlist_request import ShortlistRequest
 from api.models.account import Account
@@ -23,7 +22,7 @@ def account_metadata(request: HttpRequest):
 
     try:
         account = Account.objects.get(pk=sr.account)
-    except:
+    except Exception:
         return HttpResponseServerError("cannot find user record")
 
     return HttpResponse(account.metadataJson())
