@@ -29,6 +29,4 @@ def main(main_args, remaining_args):
 
 if __name__ == "__main__":
     _args = _parser.parse_known_args()
-    print(_args[0])
-    print(_args[1])
     main(_args[0], _args[1])
