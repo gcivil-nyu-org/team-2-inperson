@@ -1,14 +1,15 @@
+# Testing Update
+POST http://localhost:8000/account/update
+content-type: application/json
+X-Shortlist-Account: 52217da5ba514e6fa2a626419d782c72
 
-
-curl -X POST http://localhost:8000/account/update \
-  -H "X-Shortlist-Account: 52217da5ba514e6fa2a626419d782c72" \
-  -d '{
-    "email": "technicallyModifiable@nope.com",
-    "preferences": {
-      "preferredName": "NEW NAME2 "
-    },
-    "associates": [
-      "fbb6f31391324b7fa8abca6150e4afb4",
-      "ae6d0046df9b4e0c8d04f8d0f1f17d6e"
-    ]
-  }'
+{
+  "email": "technicallyModifiasdfable@nope.com",
+  "preferences": {
+    "preferredName": "NEW NAME2 "
+  },
+  "associates": [
+    "fbb6f31391324b7fa8abca6150e4afb4",
+    "ae6d0046df9b4e0c8d04f8d0f1f17d6e"
+  ]
+}

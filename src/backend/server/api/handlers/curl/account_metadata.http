@@ -1,4 +1,3 @@
-
-# Get Account Metadata
-curl -X GET http://localhost:8000/account/metadata \
-  -H "X-Shortlist-Account: 52217da5ba514e6fa2a626419d782c72"
+# Testing Account Metadata
+GET http://localhost:8000/account/metadata
+x-shortlist-account: 52217da5ba514e6fa2a626419d782c72
