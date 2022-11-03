@@ -35,4 +35,5 @@ jobs:
         with:
           path: "./src/backend/server"
           plugins: "flake8-black"
+          ignore: "E501"
       
