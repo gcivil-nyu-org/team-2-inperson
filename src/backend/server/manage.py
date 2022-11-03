@@ -2,11 +2,19 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import argparse
+from django.core.management.base import BaseCommand
+from django.core.management.base import CommandError
 from dotenv import load_dotenv
 
+_parser = argparse.ArgumentParser()
+_parser.add_argument("--prod", dest="prod", action="store_true")
+_parser.add_argument("--env_path", dest="dot_env", action="store")
 
-def main():
-    load_dotenv()
+
+def main(main_args, remaining_args):
+    load_dotenv(main_args.dot_env)
+
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "server.settings")
     try:
         from django.core.management import execute_from_command_line
@@ -16,8 +24,11 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    execute_from_command_line(sys.argv)
+    execute_from_command_line([sys.argv[0]] + remaining_args)
 
 
 if __name__ == "__main__":
-    main()
+    _args = _parser.parse_known_args()
+    print(_args[0])
+    print(_args[1])
+    main(_args[0], _args[1])
