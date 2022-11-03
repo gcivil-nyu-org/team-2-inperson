@@ -1,0 +1,10 @@
+
+# Create a Parent account
+curl -X POST http://localhost:8000/account/create \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "testEmail2@yahoo.com",
+    "preferredName": "my name is bobbo",
+    "passwordHash": "123",
+    "accountType": "PARENT"
+  }'
