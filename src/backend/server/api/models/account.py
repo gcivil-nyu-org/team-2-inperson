@@ -1,7 +1,9 @@
 from __future__ import annotations
-from django.db import models
+import json
 
 from api.util.generators import gen_uuid
+
+from django.db import models
 
 
 def verification_code():
@@ -42,3 +44,15 @@ class Account(models.Model):
 
     def __str__(self):
         return "ACCNT<{}, {}>".format(self.id[:10], self.account_type)
+
+    def metadataJson(self):
+        obj_repr = dict(
+            accountId=self.id,
+            email=self.email,
+            emailVerified=self.email_is_verified,
+            emailSentTS=self.email_sent_ts,
+            accountType=self.account_type,
+            associates=[_.id for _ in self.associates.all()],
+            preferences=self.preferences,
+        )
+        return json.dumps(obj_repr)

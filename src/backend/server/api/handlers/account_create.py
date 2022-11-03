@@ -1,14 +1,19 @@
+"""Creates an account."""
+from api.handlers.shortlist_request import ShortlistRequest
+from api.models.account import Account
+
 from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
-from api.handlers.shortlist_request import ShortlistRequest
-from api.models.account import Account
 from django.views.decorators.csrf import csrf_exempt
 
 
 @csrf_exempt
 def account_create(request: HttpRequest):
     sr = ShortlistRequest(request)
+    if sr.method != "POST":
+        return HttpResponseBadRequest("bad call")
+
     request_email = sr.body.get("email", None)
     request_preferredName = sr.body.get("preferredName", None)
     request_passwordHash = sr.body.get("passwordHash", None)
