@@ -3,8 +3,6 @@
 import os
 import sys
 import argparse
-from django.core.management.base import BaseCommand
-from django.core.management.base import CommandError
 from dotenv import load_dotenv
 
 _parser = argparse.ArgumentParser()
