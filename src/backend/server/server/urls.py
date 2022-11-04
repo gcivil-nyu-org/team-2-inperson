@@ -24,5 +24,4 @@ urlpatterns = [
     path("account/create", account_create),
     path("account/metadata", account_metadata),
     path("account/update", account_update),
-    path("test/update", account_update),
 ]
