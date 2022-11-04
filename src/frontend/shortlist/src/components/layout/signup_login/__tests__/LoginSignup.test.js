@@ -1,22 +1,35 @@
 import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
-import { createTestingPinia } from "@pinia/testing";
+// import { createTestingPinia } from "@pinia/testing";
 
 import Signup from "../Signup.vue";
 // import { shortLists } from "../../../../api/examples/shortlists";
-
+// Test the button. If button is clicked, see if the results/info is saved to the database. 
+// pinia: global wrapper (will evnetually get rid of it)
+// To test if the signup exists
 describe("Signup.vue", () => {
   it("renders with null props", () => {
     const componentWrapper = mount(Signup, {
-      // props: {},
-      // global: {
-      //   plugins: [createTestingPinia({ createSpy: vi.fn })],
-      // },
     });
-
     // exists
     expect(componentWrapper.exists()).toBe(true);
   });
+  it("check if user exists", () => {
+    const componentWrapper = mount(Signup, {
+    });
+    let newUser = "newUser@gmail.com"; 
+    let newPassword = "new password"; 
+    componentWrapper.vm.email_signup = "newUser@gmail.com";
+    componentWrapper.vm.password_signup = "new password";
+    expect(signUpInfo.email_signup).toBe(newUser); 
+    expect(signUpInfo.password_signup).toBe(newPassword); 
+  });
+
+    // expect(componentWrapper.vm.inEditMode, "not in edit mode").toBe(false);
+    // const editButton = componentWrapper.find("#editButton");
+    // expect(editButton.exists()).toBe(true);
+    // await editButton.trigger("click");
+
 
 //   it("renders with well-formed props", () => {
 //     const componentWrapper = mount(ShortlistRow, {
