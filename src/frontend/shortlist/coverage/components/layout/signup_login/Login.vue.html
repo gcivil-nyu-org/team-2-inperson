@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/layout/signup_login/Signup.vue</title>
+    <title>Code coverage report for components/layout/signup_login/Login.vue</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">components/layout/signup_login</a> Signup.vue</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">components/layout/signup_login</a> Login.vue</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.96% </span>
+                <span class="strong">90.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>119/128</span>
+                <span class='fraction'>114/126</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.96% </span>
+                <span class="strong">90.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>119/128</span>
+                <span class='fraction'>114/126</span>
             </div>
         
             
@@ -189,9 +189,7 @@
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
 <a name='L126'></a><a href='#L126'>126</a>
-<a name='L127'></a><a href='#L127'>127</a>
-<a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L127'></a><a href='#L127'>127</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -199,17 +197,16 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -221,10 +218,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -323,29 +319,31 @@
 import NavbarLogin from "./NavbarLogin.vue";
 import Logo from "./Logo.vue";
 &nbsp;
-&nbsp;
 export default {
-  name: "Signup",
+  name: "Login",
   components: { NavbarLogin, Logo },
   data() {
     return {
-      // For sign up
-      email_signup: "",
-      username_signup: "",
-      password_signup: "",
-      passwordVerify_signup: "",
+      // For log in
+      username_login: "",
+      password_login: "",
+      email_login: "",
+&nbsp;
       // Alerts
-      alert_signup: "",
+      alert_login: "",
     };
   },
   methods: {
-    s<span class="fstat-no" title="function not covered" >ignupWithPassword() {</span>
-<span class="cstat-no" title="statement not covered" >      this.alert_signup = "";</span>
-<span class="cstat-no" title="statement not covered" >      if (this.password_signup !== this.passwordVerify_signup) {</span>
-<span class="cstat-no" title="statement not covered" >        this.alert_signup = "Your Passwords do not match!";</span>
+    l<span class="fstat-no" title="function not covered" >oginWithPassword() {</span>
+<span class="cstat-no" title="statement not covered" >      this.alert_login = "";</span>
+<span class="cstat-no" title="statement not covered" >      if (</span>
+<span class="cstat-no" title="statement not covered" >        (this.email_login != "" || this.username_login != "") &amp;&amp;</span>
+<span class="cstat-no" title="statement not covered" >        this.password_login != ""</span>
+<span class="cstat-no" title="statement not covered" >      ) {</span>
+<span class="cstat-no" title="statement not covered" >        this.alert_login = "You have successfully logged in.";</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
 <span class="cstat-no" title="statement not covered" >      } else {</span>
-<span class="cstat-no" title="statement not covered" >        this.alert_signup = "You have successfully signed up an account!";</span>
+<span class="cstat-no" title="statement not covered" >        this.alert_login = "Your Passwords do not match!";</span>
 <span class="cstat-no" title="statement not covered" >        return;</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" >    },</span>
@@ -354,45 +352,42 @@ export default {
 &lt;/script&gt;
 &nbsp;
 &lt;template&gt;
-  &lt;!-- &lt;div class="homepage"&gt; --&gt;
   &lt;!-- Navbar --&gt;
   &lt;NavbarLogin /&gt;
   &lt;!-- Logo  --&gt;
   &lt;div class="logo"&gt;
     &lt;Logo /&gt;
   &lt;/div&gt;
-  &lt;!-- Sign Up --&gt;
-  &lt;div class="signup_components_container"&gt;
-    &lt;div id="alert_signup" v-if="alert_signup"&gt;{{ alert_signup }}&lt;/div&gt;
-    &lt;form @submit.prevent="signupWithPassword"&gt;
-      &lt;h1 class="instructions" id="big"&gt;Sign Up&lt;/h1&gt;
-      &lt;div id="email_address_signup"&gt;
+  &lt;!-- Log In --&gt;
+  &lt;div class="login_components_container"&gt;
+    &lt;div id="alert_login" v-if="alert_login"&gt;{{ alert_login }}&lt;/div&gt;
+    &lt;form @submit.prevent="loginWithPassword"&gt;
+      &lt;h1 class="instructions" id="big"&gt;Log In&lt;/h1&gt;
+      &lt;div id="emailaddress_login"&gt;
         &lt;label&gt;
           Email address
-          &lt;input type="email" v-model="<span class="fstat-no" title="function not covered" >email_signup" /&gt;</span>
+          &lt;input type="email" v-model="<span class="fstat-no" title="function not covered" >email_login" /&gt;</span>
         &lt;/label&gt;
       &lt;/div&gt;
-      &lt;div id="username_signup"&gt;
+      &lt;div id="username_login"&gt;
         &lt;label&gt;
           Username
-          &lt;input type="text" v-model="<span class="fstat-no" title="function not covered" >username_signup" /&gt;</span>
+          &lt;input type="text" name="username" v-model="<span class="fstat-no" title="function not covered" >username_login" /&gt;</span>
         &lt;/label&gt;
       &lt;/div&gt;
-      &lt;div id="password_signup"&gt;
+      &lt;div id="password_login"&gt;
         &lt;label&gt;
           Password
-          &lt;input type="password" v-model="<span class="fstat-no" title="function not covered" >password_signup" /&gt;</span>
+          &lt;input type="password" name="password" v-model="<span class="fstat-no" title="function not covered" >password_login" /&gt;</span>
         &lt;/label&gt;
       &lt;/div&gt;
-      &lt;label&gt;
-        Verify Password
-        &lt;input type="password" v-model="<span class="fstat-no" title="function not covered" >passwordVerify_signup" /&gt;</span>
-      &lt;/label&gt;
-      &lt;button type="submit"&gt;Sign up&lt;/button&gt;
-      &lt;p class="instructions" id="small"&gt;or&lt;/p&gt;
-      &lt;button @click.prevent="signupWithSSO"&gt;Sign up with Google&lt;/button&gt;
-      &lt;p class="instructions" id="small"&gt;Have an account already?&lt;/p&gt;
-      &lt;button @click<span class="fstat-no" title="function not covered" >="$router.push('/login')"&gt;L</span>og me in!&lt;/button&gt;
+      &lt;div&gt;
+        &lt;button type="button" v-on:click<span class="fstat-no" title="function not covered" >="loginWithPassword()"&gt;L</span>ogin&lt;/button&gt;
+        &lt;p class="instructions" id="small"&gt;or&lt;/p&gt;
+        &lt;button @click.prevent="loginWithSSO"&gt;Log In with Google&lt;/button&gt;
+        &lt;p class="instructions" id="small"&gt;Don't have an account yet?&lt;/p&gt;
+        &lt;button @click<span class="fstat-no" title="function not covered" >="$router.push('/signup')"&gt;S</span>ign me up!&lt;/button&gt;
+      &lt;/div&gt;
     &lt;/form&gt;
   &lt;/div&gt;
 &lt;/template&gt;
@@ -403,32 +398,31 @@ input {
   display: block;
   margin-bottom: 10px;
 }
-.signup_components_container {
+&nbsp;
+.login_components_container {
   position: absolute;
-  left: 70%;
+  left: 65%;
   top: 38%;
   height: 575px;
   margin-top: -150px;
   width: 450px;
-  margin-left: -80px;
+  margin-right: -80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #bcd6a2;
+  background-color: #8fbc8f;
   padding: 3em;
   display: flex;
   flex-direction: column;
   border-radius: 40px;
   box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
-#alert_signup {
+&nbsp;
+#alert_login {
   color: red;
-  margin-bottom: 2px;
+  margin-bottom: 10px;
 }
-#sign_up_sign {
-  position: relative;
-  top: 0;
-}
+&nbsp;
 .logo {
   position: relative;
   left: 20%;

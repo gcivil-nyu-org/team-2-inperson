@@ -1,7 +1,7 @@
 <script>
 import NavbarLogin from "./NavbarLogin.vue";
 import Logo from "./Logo.vue";
-import axios from "axios";
+
 
 export default {
   name: "Signup",
@@ -28,19 +28,6 @@ export default {
         return;
       }
     },
-  },
-   mounted() {
-    axios
-      .get(
-        //"http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/api/shortlists"
-        "https://1rct87m2md.execute-api.us-east-1.amazonaws.com/api/shortlists"
-      )
-      .then((response) => {
-        this.myShortlists = JSON.parse(JSON.stringify(response.data));
-      })
-      .catch((err) => {
-        console.log("AXIOS ERR:", err);
-      });
   },
 };
 </script>
