@@ -34,6 +34,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:9000",
     "http://*.elb.amazonaws.com",
     "http://*.compute-1.amazonaws.com",
+    "https://*.shortlist.nyu",
+    "http://*.shortlist.nyu",
 ]
 
 
