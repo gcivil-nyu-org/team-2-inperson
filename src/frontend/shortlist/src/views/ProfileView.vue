@@ -10,11 +10,36 @@ export default {
 </script>
 <template>
     <main>
-        <UserDetails/>
-        <UserPreference/>
-        <UserRelations/>
+        <div class="profile">
+            <div class="statusdetails"> 
+                <UserDetails/>
+            </div>
+            <div class="prefrel"> 
+                <UserPreference/>
+                <UserRelations/>
+            </div>
+        </div>
     </main>
 </template>
 <style scoped>
+.profile {
+    height:100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 0fr 4fr repeat(2, 0fr);
+    grid-template-rows: 1fr repeat(4, 0fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+}
 
+.statusdetails { 
+    grid-area: 1 / 1 / 2 / 2;
+    padding: 5%;
+    background-color:darkgoldenrod; 
+}
+.prefrel { 
+    grid-area: 1 / 3 / 2 / 4;
+    padding: 5%;
+    background-color:darkgoldenrod; 
+}
 </style>
