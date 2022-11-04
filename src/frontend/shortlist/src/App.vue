@@ -1,9 +1,10 @@
 <script setup>
 import { RouterView } from "vue-router";
+import NavBar from "./components/layout/navigation/NavBar.vue";
 </script>
 
 <template>
-  <Navbar />
+  <NavBar />
   <div class="app-container">
     <RouterView />
   </div>
@@ -13,5 +14,8 @@ import { RouterView } from "vue-router";
 .app-container {
   width: 100vw;
   height: 100vh;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
 </style>

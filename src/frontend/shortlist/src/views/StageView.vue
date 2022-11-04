@@ -1,16 +1,7 @@
-<script>
-import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
-
-export default {
-  components: { ModalFullScreen },
-};
-</script>
+<script></script>
 
 <template>
-  <ModalFullScreen visible="true">
-    <div>Howdy</div>
-  </ModalFullScreen>
-  <div>Background;</div>
+  <h1>Your Work</h1>
 </template>
 
 <style></style>

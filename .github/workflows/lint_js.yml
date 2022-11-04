@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - '*'
+    paths:
+      - 'src/frontend/'
   pull_request:
     branches:
       - develop

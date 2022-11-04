@@ -27,14 +27,14 @@
     <td></td>
     <td>Coverage</td>
     <td>
-      TBD
+      <a href='https://coveralls.io/github/gcivil-nyu-org/team-2-inperson?branch=develop'><img src='https://coveralls.io/repos/github/gcivil-nyu-org/team-2-inperson/badge.svg?branch=develop' alt='Coverage Status' /></a>
     </td>
   </tr>
   <tr>
     <td></td>
     <td>Deploy</td>
     <td>
-      TBD
+      <a href='https://app.travis-ci.com/gcivil-nyu-org/team-2-inperson'><img src='https://app.travis-ci.com/gcivil-nyu-org/team-2-inperson.svg?branch=develop' alt='Travis Build Status' /></a>
     </td>
   </tr>
   <tr>
