@@ -1,5 +1,7 @@
 """Provides metadata about a loggedin account."""
 
+import json
+
 from api.handlers.shortlist_request import ShortlistRequest
 from api.models.account import Account
 
@@ -29,7 +31,8 @@ def account_metadata(request: HttpRequest):
             accounts = Account.objects.filter(email=email_search)
             if accounts.count() != 1:
                 return HttpResponseBadRequest("account not found")
-            return HttpResponse('{"accountId": "{}"}'.format(accounts[0].id))
+            return_obj = dict(accountId=accounts[0].id)
+            return HttpResponse(json.dumps(return_obj))
         else:
             # self, send all data
             account = Account.objects.get(pk=sr.account)
