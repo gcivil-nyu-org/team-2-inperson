@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from api.handlers import account_create
+from api.handlers import account_metadata
+from api.handlers import account_update
 
 urlpatterns = [
-    path("api/admin/", admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("account/create", account_create),
+    path("account/metadata", account_metadata),
+    path("account/update", account_update),
 ]

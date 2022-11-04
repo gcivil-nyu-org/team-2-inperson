@@ -27,7 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost", "http://*.elb.amazonaws.com"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:80",
+    "http://localhost:9000",
+    "http://127.0.01:80",
+    "http://127.0.0.1:9000",
+    "http://*.elb.amazonaws.com",
+    "http://*.compute-1.amazonaws.com",
+]
 
 
 # Application definition
@@ -39,6 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_extensions",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -140,4 +149,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_ROOT = "static"
-STATIC_URL = "api/static/"
+STATIC_URL = "static/"
