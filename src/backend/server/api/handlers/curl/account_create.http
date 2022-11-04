@@ -8,3 +8,14 @@ content-type: application/json
   "passwordHash": "123",
   "accountType": "PARENT"
 }
+
+
+POST https://1rct87m2md.execute-api.us-east-1.amazonaws.com/account/create
+content-type: application/json
+
+{
+  "email": "moreNewEmails@sample.com",
+  "preferredName": "Deployment Example",
+  "passwordHash": "123",
+  "accountType": "STUDENT"
+}
