@@ -20,8 +20,20 @@ def account_metadata(request: HttpRequest):
     if not sr.is_logged_in:
         return HttpResponseForbidden("must be logged in")
 
+    # check if post body has email
+    email_search = sr.body.get("email", None)
+
     try:
-        account = Account.objects.get(pk=sr.account)
+        if email_search:
+            # just send user id
+            accounts = Account.objects.filter(email=email_search)
+            if accounts.count() != 1:
+                return HttpResponseBadRequest("account not found")
+            return HttpResponse('{"accountId": "{}"}'.format(accounts[0].id))
+        else:
+            # self, send all data
+            account = Account.objects.get(pk=sr.account)
+            return HttpResponse(account.metadataJson())
     except Exception:
         return HttpResponseServerError("cannot find user record")
 
