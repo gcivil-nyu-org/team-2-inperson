@@ -1,4 +1,4 @@
-"""Provides metadata about a loggedin account."""
+"""Provides logged-in users metadata about their account (or the ID of an email)."""
 
 import json
 
