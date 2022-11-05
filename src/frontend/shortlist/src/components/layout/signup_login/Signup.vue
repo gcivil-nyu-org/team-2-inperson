@@ -48,7 +48,7 @@ export default {
   <!-- Sign Up -->
   <div class="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
-    <form @submit.prevent="signupWithPassword">
+    <form @submit.prevent="signupWithPassword" id = "signupForm">
       <h1 class="instructions" id="big">Sign Up</h1>
       <div id="first_name">
         <label>
