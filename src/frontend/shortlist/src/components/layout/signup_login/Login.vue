@@ -73,7 +73,11 @@ export default {
           Log In with Google
         </button>
         <p class="instructions" id="small">Don't have an account yet?</p>
-        <button @click="$router.push('/signup')" class="btn btn-outline-dark">
+        <button
+          id="switchToSignupButton"
+          @click="$router.push('/signup')"
+          class="btn btn-outline-dark"
+        >
           Sign me up!
         </button>
       </div>
