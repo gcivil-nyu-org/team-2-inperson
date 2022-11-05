@@ -17,6 +17,29 @@ describe("Login.vue", () => {
     expect(componentWrapper.exists()).toBe(true);
   });
 
+  it("Check if the login_components_container exists", async () => {
+    const componentWrapper = mount(Login, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const login_components_container = componentWrapper.find(
+      ".login_components_container"
+    );
+    expect(login_components_container.exists()).toBe(true);
+  });
+
+  it("Check if the loginForm works", async () => {
+    const componentWrapper = mount(Login, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const loginForm = componentWrapper.find("#loginForm");
+    expect(loginForm.exists()).toBe(true);
+    await loginForm.trigger("submit.prevent");
+  });
+
   it("Check if the switchToSignupButton works", async () => {
     const componentWrapper = mount(Login, {
       global: {
@@ -26,6 +49,16 @@ describe("Login.vue", () => {
     const switchToSignupButton = componentWrapper.find("#switchToSignupButton");
     expect(switchToSignupButton.exists()).toBe(true);
     await switchToSignupButton.trigger("click");
+  });
+
+  it("Check if the small titles work", async () => {
+    const componentWrapper = mount(Signup, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const smallTitles = componentWrapper.find("#small");
+    expect(smallTitles.exists()).toBe(true);
   });
 });
 
@@ -41,7 +74,6 @@ describe("Signup.vue", () => {
   });
 
   // The following are the component tests, all passing
-
   it("Check if the signup_components_container exists", async () => {
     const componentWrapper = mount(Signup, {
       global: {
@@ -74,6 +106,16 @@ describe("Signup.vue", () => {
     const switchToLoginButton = componentWrapper.find("#switchToLoginButton");
     expect(switchToLoginButton.exists()).toBe(true);
     await switchToLoginButton.trigger("click");
+  });
+
+  it("Check if the big titles work", async () => {
+    const componentWrapper = mount(Signup, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const bigTitles = componentWrapper.find("#big");
+    expect(bigTitles.exists()).toBe(true);
   });
 });
 
