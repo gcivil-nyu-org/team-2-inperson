@@ -1,59 +1,53 @@
 """Handlers to manage dimensions and dimension-values."""
+from __future__ import annotations
+
+import json
+
 from api.handlers.shortlist_request import ShortlistRequest
 from api.models.school import SchoolDim
+from api.models.school import SchoolDimValue
 
 from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 
+from typing import Tuple
 
-def _dim_upsert(
-    id: int = None,
-    source: str = None,
-    field: str = None,
-    short: str = None,
-    long: str = None,
-):
-    """Update or Insert a dimension into django db."""
 
-    if id:
-        # this is an update
-        try:
-            dim = SchoolDim.objects.get(pk=id)
-            if source:
-                dim.source = source
-            if field:
-                dim.field = field
-            if short:
-                dim.display_short = short
-            if long:
-                dim.display_long = long
-            dim.save()
-            return HttpResponse()
-        except Exception:
-            return HttpResponseBadRequest("could not find dimension id")
+def _dim_value_upsert(school_id: str, dim_id: str, value: object):
+    """Update or Insert a dimension value into django db.
+
+    Body Example:
+      required: updateDimValues, dimensionValues[], schoolId, dimId, value
+      payload:
+        "updateDimValues": {
+            "dimensionValues": [
+                {
+                    "schoolId": "adf",
+                    "dimId": "asdf",
+                    "value": {" HERE IS A JSON OBJECT THAT GETS PUT IN OUTRIGHT"},
+                },
+            ]
+        }
+    """
+    dim_values = SchoolDimValue.objects.filter(school_id=school_id, dim_id=dim_id)
+    if dim_values.count() == 1:
+        # update
+        dim_value = dim_values[0]
+        dim_value.value = value
+        dim_value.save()
     else:
-        # this is an insert
-        dim = SchoolDim(
-            source=source, field=field, display_short=short, display_long=long
-        )
-        dim.save()
-        return HttpResponse(dim.id)
+        # insert
+        dim_value = SchoolDimValue(school_id=school_id, dim_id=dim_id, value=value)
+        dim_value.save()
+
+    # TODO(?): should this return something?
 
 
+"""
 body = {
-    "updateDim": {
-        "dimensions": [
-            {
-                "id": "blah blah",
-                "source": "asdfasdf",
-                "field": "asdfasdfasdf",
-                "displayShort": "asdfasdf",
-                "displayLong": "asdfasdf",
-            }
-        ],
-    },
+   
     "getDim": {
         "id": "aoilaskhdg",
         "source": "asdfasdf",
@@ -61,15 +55,7 @@ body = {
         "short": "short",
         "long": "long",
     },
-    "updateDimValues": {
-        "dimValues": [
-            {
-                "schoolId": "adf",
-                "dimId": "asdf",
-                "value": {" HERE IS A JSON OBJECT THAT GETS PUT IN OUTRIGHT"},
-            },
-        ]
-    },
+    
     "getDimValues": {
         "id": "lkasjdf",
         "schoolId": "asdfasdf",
@@ -77,10 +63,33 @@ body = {
         "dimField": "asdfasdf",
     },
 }
+"""
 
 
 @csrf_exempt
 def school_dim_manage(request: HttpRequest):
     sr = ShortlistRequest(request)
     if sr.method != "POST":
+        return HttpResponseBadRequest("bad call")
+
+    elif updateDimValues := sr.body.get("updateDimValues", None):
+        # update dim values
+        new_dim_values = updateDimValues.get("dimensionValues", None)
+        if not new_dim_values or not isinstance(new_dim_values, list):
+            return HttpResponseBadRequest("missing parameters")
+        for dim_value in new_dim_values:
+            school_id = dim_value.get("schoolId", None)
+            dim_id = dim_value.get("dimId", None)
+            value = dim_value.get("value", None)
+            if not school_id or not dim_id or not value:
+                return HttpResponseBadRequest("missing parameters")
+            _dim_value_upsert(school_id, dim_id, value)
+        return HttpResponse()
+    elif getDim := sr.body.get("getDim", None):
+        # get dim
+        pass
+    elif getDimValues := sr.body.get("getDimValues", None):
+        # get dim values
+        pass
+    else:
         return HttpResponseBadRequest("bad call")
