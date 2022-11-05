@@ -93,6 +93,16 @@ class SchoolDim(models.Model):
     def __str__(self):
         return "DIM<{}, {}>".format(str(self.id)[:5], self.field[:10])
 
+    def serializeJson(self):
+        obj = dict(
+            id=self.id,
+            source=self.source,
+            field=self.field,
+            displayShort=self.display_short,
+            displayLong=self.display_long,
+        )
+        return json.dumps(obj)
+
 
 class SchoolDimValue(models.Model):
     """SchoolDimValue models relationship between schools, dims, and the value"""
