@@ -44,6 +44,10 @@ def account_update(request: HttpRequest):
                 continue
             if k == "preferences":
                 account.preferences = sr.body[k]
+                continue
+            if k == "passwordHash":
+                account.password_hash = sr.body[k]
+                continue
         account.save()
     except Exception:
         return HttpResponseServerError("could not update")

@@ -17,6 +17,7 @@ fi
 
 S3_BUCKET=nyu-shortlist-backend-artifacts
 BRANCH=$(git branch --show-current)
+BRANCH=backend-api-routes
 ARTIFACT_PATH="s3://${S3_BUCKET}/${BRANCH}"
 
 
