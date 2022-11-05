@@ -4,6 +4,7 @@ import Signup from "../Signup.vue";
 import Login from "../Login.vue";
 import Logo from "../Logo.vue";
 import LoggedOut from "../LoggedOut.vue"; 
+import ModalFullScreen from "./../../ModalFullScreen.vue"; 
 // import axios from "axios";
 import { createTestingPinia } from "@pinia/testing";
 
@@ -160,6 +161,53 @@ describe("LoggedOut.vue", () => {
     const container = componentWrapper.find(".container");
     expect(container.exists()).toBe(true);
   });
+}); 
+
+describe("ModalFullScreen.vue", () => {
+  // Existence
+  it("Check if ModalFullScreen exists", () => {
+    const componentWrapper = mount(ModalFullScreen, {
+      props: {
+        visible: true, 
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    expect(componentWrapper.exists()).toBe(true);
+  });
+
+  it("Check if stopPropagation works", () => {
+    const componentWrapper = mount(ModalFullScreen, {
+      props: {
+        visible: true, 
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+  });
+  const stopPropagation = componentWrapper.find("#stopPropagation");
+  expect(stopPropagation.exists()).toBe(true);
+});
+
+  it("Check if modalOff-emit works", () => {
+    const componentWrapper = mount(ModalFullScreen, {
+      props: {
+        visible: true, 
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+  });
+  const modalOff_emit = componentWrapper.find(".shortlist-modal");
+  expect(modalOff_emit.exists()).toBe(true);
+  expect(
+    componentWrapper.emitted(),
+    "properly emitted change event"
+  ).toBeTruthy(); 
+  });
+
+
 
 
 

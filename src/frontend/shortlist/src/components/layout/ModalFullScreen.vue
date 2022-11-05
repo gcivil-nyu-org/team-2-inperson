@@ -1,5 +1,6 @@
 <script>
 export default {
+  name: "ModalFullScreen",
   props: ["visible"],
   emits: ["modalOff"],
   methods: {
@@ -13,7 +14,7 @@ export default {
   <template v-if="visible">
     <div class="shortlist-modal" @click="$emit('modalOff')">
       <div class="shortlist-modal-inner">
-        <div
+        <div id = "stopPropagation"
           @click="
             (e) => {
               e.stopPropagation();
