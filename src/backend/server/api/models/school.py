@@ -64,6 +64,7 @@ class School(models.Model):
             lon=self.lon,
             latLonHash=self.lat_lon_hash,
         )
+        return json.dumps(obj_repr)
 
 
 class SchoolDim(models.Model):
