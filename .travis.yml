@@ -7,6 +7,7 @@ jobs:
       env: TARGET=src/backend
       language: python
       python: 3.8.5
+      install: pip install -r src/backend/requirements.txt
       script:
         - travis/scripts/travis-backend.sh
 
