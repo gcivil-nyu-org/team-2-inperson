@@ -45,3 +45,4 @@ class Recommendation(models.Model):
             everTrashed=self.ever_trashed,
             associateRecommended=self.associate_recommended,
         )
+        return json.dumps(obj, indent=" ")
