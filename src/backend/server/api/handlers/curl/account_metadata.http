@@ -1,3 +1,12 @@
 # Testing Account Metadata
-GET http://localhost:8000/account/metadata
+POST http://localhost:8000/account/metadata
 x-shortlist-account: 52217da5ba514e6fa2a626419d782c72
+
+
+
+
+POST https://api.shortlist.nyc/account/metadata
+
+{
+  "email": "sampleEmail@email.com"
+}
