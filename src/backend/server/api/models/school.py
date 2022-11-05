@@ -54,7 +54,7 @@ class School(models.Model):
             name=self.name,
             desc=self.desc,
             schoolType=self.school_type,
-            url=self.ur,
+            url=self.url,
             email=self.email,
             phone=self.phone,
             boroughCode=self.borough_code,
