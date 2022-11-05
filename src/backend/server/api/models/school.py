@@ -34,6 +34,8 @@ class School(models.Model):
 
     class Meta:
         indexes = [models.Index(fields=["nyc_id"])]
+        verbose_name = "School"
+        verbose_name_plural = "Schools"
 
     def __str__(self):
         return "SCHOOL<{}, {}>".format(self.id[:10], self.nyc_id)
@@ -84,6 +86,8 @@ class SchoolDim(models.Model):
 
     class Meta:
         indexes = [models.Index(fields=["field"])]
+        verbose_name = "School Dimension"
+        verbose_name_plural = "School Dimensions"
 
     def __str__(self):
         return "DIM<{}, {}>".format(str(self.id)[:5], self.field[:10])
@@ -105,3 +109,7 @@ class SchoolDimValue(models.Model):
     )
 
     value = models.JSONField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = "School Dimension Value"
+        verbose_name_plural = "School Dimension Values"
