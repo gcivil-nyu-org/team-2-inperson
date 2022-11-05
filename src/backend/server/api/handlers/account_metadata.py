@@ -16,7 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def account_metadata(request: HttpRequest):
     sr = ShortlistRequest(request)
-    if sr.method != "GET":
+    if sr.method != "POST":
         return HttpResponseBadRequest("bad call")
 
     if not sr.is_logged_in:
