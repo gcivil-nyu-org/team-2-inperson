@@ -5,11 +5,13 @@ import Login from "../Login.vue";
 import axios from "axios";
 
 describe("Login.vue", () => {
+  // Check if login exists
   it("Check Get", () =>{
     const componentWrapper = mount(Login, {
     });
     expect(componentWrapper.exists()).toBe(true);
   }); 
+
 
   it("Check Axios Get", () => {
     const componentWrapper = mount(Login, {
@@ -54,6 +56,7 @@ describe("Signup.vue", () => {
     // let account_id;
     let signupInfo;
     axios.get("https://1rct87m2md.execute-api.us-east-1.amazonaws.com/api/account/update", {
+      // Ideally, account_id should not be in quotes, but is giving error message for now.
           "x-shortlist-account": "account_id",
           "x-shortlist-session": "null",
           "x-shortlist-token": "null",
