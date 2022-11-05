@@ -50,8 +50,8 @@ def school_dim_upsert(request: HttpRequest):
             db_dim = SchoolDim(
                 source=req_source,
                 field=req_field,
-                display_short=req_short,
-                display_long=req_long,
+                display_short=req_short if req_short else "unset",
+                display_long=req_long if req_long else "unset",
             )
             db_dim.save()
             results.append(db_dim.id)

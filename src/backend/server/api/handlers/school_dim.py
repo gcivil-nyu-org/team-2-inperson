@@ -35,4 +35,6 @@ def school_dim(request: HttpRequest):
     response = []
     for result in results.all():
         response.append(result.serializeJson())
+    # TODO(?): return error if blank?
+
     return HttpResponse("[{}]".format(",".join(response)))
