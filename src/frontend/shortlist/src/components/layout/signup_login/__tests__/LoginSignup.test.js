@@ -2,8 +2,8 @@ import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import Signup from "../Signup.vue";
 import Login from "../Login.vue";
-import Logo from "../Logo.vue"; 
-import axios from "axios";
+import Logo from "../Logo.vue";
+// import axios from "axios";
 import { createTestingPinia } from "@pinia/testing";
 
 describe("Login.vue", () => {
@@ -48,7 +48,9 @@ describe("Signup.vue", () => {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     });
-    const signup_components_container = componentWrapper.find(".signup_components_container");
+    const signup_components_container = componentWrapper.find(
+      ".signup_components_container"
+    );
     expect(signup_components_container.exists()).toBe(true);
   });
 
@@ -75,7 +77,6 @@ describe("Signup.vue", () => {
   });
 });
 
-
 describe("Logo.vue", () => {
   it("Check if Logo exists", () => {
     const componentWrapper = mount(Logo, {
@@ -95,5 +96,4 @@ describe("Logo.vue", () => {
     const logoToHome = componentWrapper.find("#logoToHome");
     expect(logoToHome.exists()).toBe(true);
   });
-
 });

@@ -48,7 +48,7 @@ export default {
   <!-- Sign Up -->
   <div class="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
-    <form @submit.prevent="signupWithPassword" id = "signupForm">
+    <form @submit.prevent="signupWithPassword" id="signupForm">
       <h1 class="instructions" id="big">Sign Up</h1>
       <div id="first_name">
         <label>
@@ -80,7 +80,11 @@ export default {
       </label>
       <button type="submit" class="btn btn-outline-dark">Sign up</button>
       <p class="instructions" id="small">Have an account already?</p>
-      <button id = "switchToLoginButton" @click="$router.push('/login')" class="btn btn-outline-dark">
+      <button
+        id="switchToLoginButton"
+        @click="$router.push('/login')"
+        class="btn btn-outline-dark"
+      >
         Log me in!
       </button>
     </form>
