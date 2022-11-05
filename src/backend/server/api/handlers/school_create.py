@@ -14,7 +14,6 @@ def school_create(request: HttpRequest):
     if sr.method != "POST":
         return HttpResponseBadRequest("bad call")
 
-    request_schoolId = sr.body.get("schoolId", None)
     request_nycId = sr.body.get("nycId", None)
     request_name = sr.body.get("name", None)
     request_desc = sr.body.get("desc", None)
@@ -29,7 +28,6 @@ def school_create(request: HttpRequest):
     request_lon = sr.body.get("lon", None)
 
     required_fields = (
-        request_schoolId,
         request_nycId,
         request_name,
         request_desc,
