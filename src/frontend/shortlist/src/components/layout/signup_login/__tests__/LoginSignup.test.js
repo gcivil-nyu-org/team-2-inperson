@@ -3,6 +3,7 @@ import { mount } from "@vue/test-utils";
 import Signup from "../Signup.vue";
 import Login from "../Login.vue";
 import Logo from "../Logo.vue";
+import LoggedOut from "../LoggedOut.vue"; 
 // import axios from "axios";
 import { createTestingPinia } from "@pinia/testing";
 
@@ -139,3 +140,27 @@ describe("Logo.vue", () => {
     expect(logoToHome.exists()).toBe(true);
   });
 });
+
+describe("LoggedOut.vue", () => {
+  it("Check if LoggedOut exists", () => {
+    const componentWrapper = mount(LoggedOut, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    expect(componentWrapper.exists()).toBe(true);
+  });
+
+  it("Check if container exists", () => {
+    const componentWrapper = mount(LoggedOut, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const container = componentWrapper.find(".container");
+    expect(container.exists()).toBe(true);
+  });
+
+
+
+}); 
