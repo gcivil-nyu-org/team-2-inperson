@@ -47,7 +47,7 @@ class School(models.Model):
         lon_hash = round(self.lon * 200) / 200
         return (lat_hash, lon_hash)
 
-    def metadataJson(self):
+    def serializeJson(self):
         obj_repr = dict(
             schoolId=self.id,
             nycId=self.nyc_id,
@@ -124,3 +124,12 @@ class SchoolDimValue(models.Model):
     class Meta:
         verbose_name = "School Dimension Value"
         verbose_name_plural = "School Dimension Values"
+
+    def serializeJson(self):
+        obj = dict(
+            id=self.id,
+            schoolId=self.school.id,
+            dimensionId=self.dim.id,
+            value=self.value,
+        )
+        return json.dumps(obj)
