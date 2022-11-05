@@ -6,7 +6,7 @@ export default {
 
 <template>
   <div id="logo_image_container">
-    <router-link to="/" class="nav-item nav-link">
+    <router-link id = "logoToHome" to="/" class="nav-item nav-link">
       <img src="/logo.png" id="logo_img"
     /></router-link>
   </div>

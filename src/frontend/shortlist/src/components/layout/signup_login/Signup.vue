@@ -80,7 +80,7 @@ export default {
       </label>
       <button type="submit" class="btn btn-outline-dark">Sign up</button>
       <p class="instructions" id="small">Have an account already?</p>
-      <button @click="$router.push('/login')" class="btn btn-outline-dark">
+      <button id = "switchToLoginButton" @click="$router.push('/login')" class="btn btn-outline-dark">
         Log me in!
       </button>
     </form>

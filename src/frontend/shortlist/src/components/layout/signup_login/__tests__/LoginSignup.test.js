@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import Signup from "../Signup.vue";
 import Login from "../Login.vue";
+import Logo from "../Logo.vue"; 
 import axios from "axios";
 import { createTestingPinia } from "@pinia/testing";
 
@@ -27,7 +28,7 @@ describe("Login.vue", () => {
     expect(signUpInfo.email_login.exists()).toBe(true);
   });
 
-  it("enter edit mode with button clicked", async () => {
+  it("Check if the switchToSignupButton works", async () => {
     const componentWrapper = mount(Login, {
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
@@ -107,4 +108,38 @@ describe("Signup.vue", () => {
   //   expect(signUpInfo.email_signup).toBe(newUser);
   //   expect(signUpInfo.password_signup).toBe(newPassword);
   // });
+
+  it("Check if the switchToLoginButton works", async () => {
+    const componentWrapper = mount(Login, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const switchToLoginButton = componentWrapper.find("#switchToSignupButton");
+    expect(switchToLoginButton.exists()).toBe(true);
+    await switchToLoginButton.trigger("click");
+  });
+});
+
+
+describe("Logo.vue", () => {
+  it("Check if Logo exists", () => {
+    const componentWrapper = mount(Logo, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    expect(componentWrapper.exists()).toBe(true);
+  });
+
+  it("Check if the logoToHome works", async () => {
+    const componentWrapper = mount(Login, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const logoToHome = componentWrapper.find("#logoToHome");
+    expect(logoToHome.exists()).toBe(true);
+  });
+
 });
