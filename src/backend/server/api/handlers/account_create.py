@@ -37,4 +37,4 @@ def account_create(request: HttpRequest):
     account.preferences["preferredName"] = request_preferredName
 
     account.save()
-    return HttpResponse()
+    return HttpResponse(account.id)

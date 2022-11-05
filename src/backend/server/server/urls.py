@@ -18,10 +18,23 @@ from django.urls import path
 from api.handlers import account_create
 from api.handlers import account_metadata
 from api.handlers import account_update
+from api.handlers import school_create
+from api.handlers import school_metadata
+from api.handlers import school_dim
+from api.handlers import school_dim_upsert
+from api.handlers import school_dim_value
+from api.handlers import school_dim_value_upsert
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("account/create", account_create),
     path("account/metadata", account_metadata),
     path("account/update", account_update),
+    path("school/create", school_create),
+    path("school/metadata", school_metadata),
+    path("school/dimension", school_dim),
+    path("school/dimension/upsert", school_dim_upsert),
+    path("school/dimension/value", school_dim_value),
+    path("school/dimension/value/upsert", school_dim_value_upsert),
 ]
