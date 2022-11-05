@@ -22,7 +22,7 @@ def school_dim(request: HttpRequest):
     if req_id:
         try:
             dim = SchoolDim.objects.get(pk=req_id)
-            return HttpResponse(dim.metadataJson())
+            return HttpResponse(dim.serializeJson())
         except Exception:
             return HttpResponseBadRequest("not found")
 
@@ -33,6 +33,6 @@ def school_dim(request: HttpRequest):
         results = results.filter(field=req_field)
 
     response = []
-    for result in results:
+    for result in results.all():
         response.append(result.serializeJson())
     return HttpResponse("[{}]".format(",".join(response)))
