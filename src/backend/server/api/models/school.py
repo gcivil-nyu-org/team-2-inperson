@@ -47,14 +47,14 @@ class School(models.Model):
         lon_hash = round(self.lon * 200) / 200
         return (lat_hash, lon_hash)
 
-    def metadataJson(self):
+    def serializeJson(self):
         obj_repr = dict(
             schoolId=self.id,
             nycId=self.nyc_id,
             name=self.name,
             desc=self.desc,
             schoolType=self.school_type,
-            url=self.ur,
+            url=self.url,
             email=self.email,
             phone=self.phone,
             boroughCode=self.borough_code,
@@ -93,6 +93,16 @@ class SchoolDim(models.Model):
     def __str__(self):
         return "DIM<{}, {}>".format(str(self.id)[:5], self.field[:10])
 
+    def serializeJson(self):
+        obj = dict(
+            id=self.id,
+            source=self.source,
+            field=self.field,
+            displayShort=self.display_short,
+            displayLong=self.display_long,
+        )
+        return json.dumps(obj)
+
 
 class SchoolDimValue(models.Model):
     """SchoolDimValue models relationship between schools, dims, and the value"""
@@ -114,3 +124,12 @@ class SchoolDimValue(models.Model):
     class Meta:
         verbose_name = "School Dimension Value"
         verbose_name_plural = "School Dimension Values"
+
+    def serializeJson(self):
+        obj = dict(
+            id=self.id,
+            schoolId=self.school.id,
+            dimensionId=self.dim.id,
+            value=self.value,
+        )
+        return json.dumps(obj)
