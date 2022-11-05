@@ -3,11 +3,15 @@ import { mount } from "@vue/test-utils";
 import Signup from "../Signup.vue";
 import Login from "../Login.vue"; 
 import axios from "axios";
+import { createTestingPinia } from "@pinia/testing";
 
 describe("Login.vue", () => {
   // Check if login exists
   it("Check Get", () =>{
     const componentWrapper = mount(Login, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
     });
     expect(componentWrapper.exists()).toBe(true);
   }); 
@@ -30,6 +34,9 @@ describe("Signup.vue", () => {
 
   it("renders with null props", () => {
     const componentWrapper = mount(Signup, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
     });
     // exists
     expect(componentWrapper.exists()).toBe(true);
