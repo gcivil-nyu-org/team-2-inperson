@@ -6,10 +6,9 @@ import PreferenceDropdown from "../PreferenceDropdown.vue";
 import PreferenceManagerPage from "../PreferenceManagerPage.vue";
 import PreferenceOneSelect from "../PreferenceOneSelect.vue";
 import PreferenceSlider from "../PreferenceSlider.vue";
-import PreferenceTypeText from "../PreferenceTypeText.vue"; 
+import PreferenceTypeText from "../PreferenceTypeText.vue";
 /* Commented out this file, as it does not pass any tests. Needs review.
 TODO(Contributors need to review)
-import { PreferenceManager } from "../PreferenceDemo.vue";
 import PreferenceManager from "../PreferenceManager.vue";
 */
 import PreferenceMultiSelect from "../PreferenceMultiSelect.vue";
@@ -83,7 +82,7 @@ describe("PreferenceDropdown.vue", () => {
   });
 
   /*
-  TODO(The following tests give error message: Cannot read properties of undefined (reading 'Name'))
+  TODO(The following tests give error message: Cannot read properties of undefined (reading 'Name')) Therefore, no more component tets for this file. 
   it("check if pref_q_container exists", () => {
     const componentWrapper = mount(PreferenceDropdown, {
       global: {
@@ -193,44 +192,6 @@ describe("PreferenceManagerPage.vue", () => {
     const pref_section_header = componentWrapper.find(".pref-section-header");
     expect(pref_section_header.exists()).toBe(true);
   });
-
-  // Changed the tests to false existence to pass the test. Needs contributor's review.
-  it("check pref-q-question existence", () => {
-    const componentWrapper = mount(PreferenceManagerPage, {
-      props: {
-        /*
-      TODO(When API call is clear, we will change this to match API variables)
-     */
-        id: "num",
-        subtitle: "string",
-      },
-      global: {
-        plugins: [createTestingPinia({ createSpy: vi.fn })],
-      },
-    });
-    const pref_q_question = componentWrapper.find(".pref-q-question");
-    expect(pref_q_question.exists()).toBe(false);
-  });
-
-  // Changed the tests to false existence to pass the test. Needs contributor's review.
-  it("check form_check_input_checked existence", () => {
-    const componentWrapper = mount(PreferenceManagerPage, {
-      props: {
-        /*
-      TODO(When API call is clear, we will change this to match API variables)
-     */
-        id: "num",
-        subtitle: "string",
-      },
-      global: {
-        plugins: [createTestingPinia({ createSpy: vi.fn })],
-      },
-    });
-    const form_check_input_checked = componentWrapper.find(
-      ".form-check-input:checked"
-    );
-    expect(form_check_input_checked.exists()).toBe(false);
-  });
 });
 
 describe("PreferenceMultiSelect.vue", () => {
@@ -268,16 +229,25 @@ describe("PreferenceMultiSelect.vue", () => {
 });
 
 /*
-      TODO(This is for next weeks' possible sprint backlog. None of the regular tests in PreferenceManager is passing')
-PreferenceManager, for some reason, this is failing.
+//       TODO(This is for next weeks' possible sprint backlog. None of the regular tests in PreferenceManager is passing')
+// PreferenceManager, for some reason, this is failing.
 describe("PreferenceManager.vue", () => {
-    it("check PreferenceManager exists", () => {
+  it("check PreferenceManager exists", () => {
+    const componentWrapper = mount(PreferenceManager, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    expect(componentWrapper.exists()).toBe(true);
+  });
+
+    it("check .pref-actions exists", () => {
       const componentWrapper = mount(PreferenceManager, {
         global: {
           plugins: [createTestingPinia({ createSpy: vi.fn })],
         },
       });
-      const pref_actions = componentWrapper.find(".pref_actions")
+      const pref_actions = componentWrapper.find(".pref-actions"); 
       expect(pref_actions.exists()).toBe(true);
     });
 
@@ -405,8 +375,6 @@ describe("PreferenceSlider.vue", () => {
   });
 });
 
-
-
 describe("PreferenceTypeText.vue", () => {
   it("renders with props", () => {
     it("renders without api props", () => {
@@ -455,8 +423,8 @@ describe("PreferenceTypeText.vue", () => {
           plugins: [createTestingPinia({ createSpy: vi.fn })],
         },
       });
-      const pref_q_name  = componentWrapper.find(".pref-q-name");
-      expect(pref_q_name .exists()).toBe(true);
+      const pref_q_name = componentWrapper.find(".pref-q-name");
+      expect(pref_q_name.exists()).toBe(true);
     });
 
     it("check pref_q_question exists", () => {
@@ -492,6 +460,5 @@ describe("PreferenceTypeText.vue", () => {
       const pref_input_text = componentWrapper.find(".pref-input-text ");
       expect(pref_input_text.exists()).toBe(true);
     });
-
-  }); 
-  }); 
+  });
+});
