@@ -31,6 +31,14 @@ class Recommendation(models.Model):
     class Meta:
         verbose_name = "Recommendation"
         verbose_name_plural = "Recommendations"
+        indexes = [
+            models.Index(fields=["rank_asc"]),
+            models.Index(fields=["seen_count"]),
+            models.Index(fields=["associate_recommended"]),
+        ]
+
+    def __str__(self):
+        return "RECO<ACC:{}, SCH:{}>".format(self.account.id[:8], self.school.id[:8])
 
     def serializeJson(self):
         obj = dict(

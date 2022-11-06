@@ -11,4 +11,17 @@ admin.site.register(Account)
 admin.site.register(School)
 admin.site.register(SchoolDim)
 admin.site.register(SchoolDimValue)
-admin.site.register(Recommendation)
+
+
+class RecommendationAdmin(admin.ModelAdmin):
+    readonly_fields = (
+        "account",
+        "school",
+        "id",
+    )
+    list_filter = ("account",)
+    list_display = ("account", "school", "rank_asc")
+    list_display_links = ("rank_asc",)
+
+
+admin.site.register(Recommendation, RecommendationAdmin)
