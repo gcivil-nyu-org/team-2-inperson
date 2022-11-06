@@ -69,7 +69,7 @@ export default {
           Login
         </button>
         <p class="instructions" id="small">or</p>
-        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+        <button id="loginWithGoogle" @click.prevent="loginWithSSO" class="btn btn-outline-dark">
           Log In with Google
         </button>
         <p class="instructions" id="small">Don't have an account yet?</p>
