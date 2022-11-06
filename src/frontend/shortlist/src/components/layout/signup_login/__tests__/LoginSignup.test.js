@@ -131,7 +131,7 @@ describe("Logo.vue", () => {
     expect(componentWrapper.exists()).toBe(true);
   });
 
-  it("Check if the logoToHome works", async () => {
+  it("Check if the logoToHome link exists", async () => {
     const componentWrapper = mount(Login, {
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
@@ -139,6 +139,26 @@ describe("Logo.vue", () => {
     });
     const logoToHome = componentWrapper.find("#logoToHome");
     expect(logoToHome.exists()).toBe(true);
+  });
+
+  it("Check if the logo_image_container exists", async () => {
+    const componentWrapper = mount(Login, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const logo_image_container = componentWrapper.find("#logo_image_container");
+    expect(logo_image_container.exists()).toBe(true);
+  });
+
+  it("Check if the logoImage exists", async () => {
+    const componentWrapper = mount(Login, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const logoImage = componentWrapper.find("#logo_img");
+    expect(logoImage.exists()).toBe(true);
   });
 });
 
@@ -177,6 +197,32 @@ describe("ModalFullScreen.vue", () => {
     expect(componentWrapper.exists()).toBe(true);
   });
 
+  it("Check if shortlist_modal works", () => {
+    const componentWrapper = mount(ModalFullScreen, {
+      props: {
+        visible: true, 
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+  });
+  const shortlist_modal = componentWrapper.find(".shortlist-modal");
+  expect(shortlist_modal.exists()).toBe(true);
+});
+
+  it("Check if shortlist_modal_inner works", () => {
+    const componentWrapper = mount(ModalFullScreen, {
+      props: {
+        visible: true, 
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+  });
+  const shortlist_modal_inner = componentWrapper.find(".shortlist-modal-inner");
+  expect(shortlist_modal_inner.exists()).toBe(true);
+});
+
   it("Check if stopPropagation works", () => {
     const componentWrapper = mount(ModalFullScreen, {
       props: {
@@ -206,9 +252,4 @@ describe("ModalFullScreen.vue", () => {
     "properly emitted change event"
   ).toBeTruthy(); 
   });
-
-
-
-
-
 }); 
