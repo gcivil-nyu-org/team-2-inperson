@@ -3,7 +3,7 @@ POST http://localhost:8000/account/create
 content-type: application/json
 
 {
-  "email": "testEmail346@yahoo.com",
+  "email": "checkRecos@email.com",
   "preferredName": "my name is not important",
   "passwordHash": "123",
   "accountType": "PARENT"
