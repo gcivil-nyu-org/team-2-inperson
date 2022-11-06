@@ -4,7 +4,8 @@ import { createTestingPinia } from "@pinia/testing";
 import PreferenceDemo from "../PreferenceDemo.vue";
 import PreferenceDropdown from "../PreferenceDropdown.vue";
 import PreferenceManagerPage from "../PreferenceManagerPage.vue";
-import PreferenceOneSelect from "../PreferenceOneSelect.vue"; 
+import PreferenceOneSelect from "../PreferenceOneSelect.vue";
+import PreferenceSlider from "../PreferenceSlider.vue";
 // import { PreferenceManager } from "../PreferenceDemo.vue";
 // import PreferenceManager from "../PreferenceManager.vue";
 import PreferenceMultiSelect from "../PreferenceMultiSelect.vue";
@@ -108,15 +109,15 @@ describe("PreferenceOneSelect.vue", () => {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-        "question": "string",
-        "modalValue": "string"
+        question: "string",
+        modalValue: "string",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     });
     expect(componentWrapper.exists()).toBe(true);
-  }); 
+  });
 
   it("renders without api props", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
@@ -124,17 +125,17 @@ describe("PreferenceOneSelect.vue", () => {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-        "question": "string",
-        "modalValue": "string"
+        question: "string",
+        modalValue: "string",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     });
-    const pref_q_container = componentWrapper.find(".pref-q-container")
+    const pref_q_container = componentWrapper.find(".pref-q-container");
     expect(pref_q_container.exists()).toBe(true);
     expect(pref_q_container.exists()).toBe(true);
-  }); 
+  });
 
   it("renders without api props", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
@@ -142,19 +143,18 @@ describe("PreferenceOneSelect.vue", () => {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-        "question": "string",
-        "modalValue": "string"
+        question: "string",
+        modalValue: "string",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     });
-    const pref_q_name = componentWrapper.find(".pref-q-name")
+    const pref_q_name = componentWrapper.find(".pref-q-name");
     expect(pref_q_name.exists()).toBe(true);
     expect(pref_q_name.exists()).toBe(true);
   });
-}); 
-
+});
 
 describe("PreferenceManagerPage.vue", () => {
   it("renders without api props", () => {
@@ -163,8 +163,8 @@ describe("PreferenceManagerPage.vue", () => {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-        "id": "num",
-        "subtitle": "string"
+        id: "num",
+        subtitle: "string",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
@@ -179,18 +179,53 @@ describe("PreferenceManagerPage.vue", () => {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-        "id": "num",
-        "subtitle": "string"
+        id: "num",
+        subtitle: "string",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     });
-    const pref_section_header = componentWrapper.find(".pref-section-header")
+    const pref_section_header = componentWrapper.find(".pref-section-header");
     expect(pref_section_header.exists()).toBe(true);
   });
 
-}); 
+  it("check pref-q-question existence", () => {
+    const componentWrapper = mount(PreferenceManagerPage, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+        id: "num",
+        subtitle: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const pref_q_question = componentWrapper.find(".pref-q-question");
+    expect(pref_q_question.exists()).toBe(false);
+  });
+
+  it("check form_check_input_checked existence", () => {
+    const componentWrapper = mount(PreferenceManagerPage, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+        id: "num",
+        subtitle: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const form_check_input_checked = componentWrapper.find(
+      ".form-check-input:checked"
+    );
+    expect(form_check_input_checked.exists()).toBe(false);
+  });
+});
 
 describe("PreferenceMultiSelect.vue", () => {
   it("renders with props", () => {
@@ -256,3 +291,108 @@ describe("PreferenceManager.vue", () => {
   });
 });
 */
+
+describe("PreferenceSlider.vue", () => {
+  it("renders without api props", () => {
+    const componentWrapper = mount(PreferenceSlider, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    expect(componentWrapper.exists()).toBe(true);
+  });
+
+  it("check pref_q_container", () => {
+    const componentWrapper = mount(PreferenceSlider, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const pref_q_container = componentWrapper.find(".pref-q-container ");
+    expect(pref_q_container.exists()).toBe(true);
+  });
+
+  it("check pref_q_name", () => {
+    const componentWrapper = mount(PreferenceSlider, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const pref_q_name = componentWrapper.find(".pref-q-name ");
+    expect(pref_q_name.exists()).toBe(true);
+  });
+
+  it("check pref-opt-label", () => {
+    const componentWrapper = mount(PreferenceSlider, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const pref_opt_label = componentWrapper.find(".pref-opt-label ");
+    expect(pref_opt_label.exists()).toBe(false);
+  });
+
+  it("check slider exists", () => {
+    const componentWrapper = mount(PreferenceSlider, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const slider = componentWrapper.find(".slider ");
+    expect(slider.exists()).toBe(true);
+  });
+
+  it("check slider_webkit_slider_thumb exists", () => {
+    const componentWrapper = mount(PreferenceSlider, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const slider_webkit_slider_thumb = componentWrapper.find(
+      ".slider::-webkit-slider-thumb "
+    );
+    expect(slider_webkit_slider_thumb.exists()).toBe(false);
+  });
+});
