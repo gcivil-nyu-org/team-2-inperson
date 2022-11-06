@@ -18,6 +18,14 @@ describe("Login.vue", () => {
   // Check if login exists
   it("Check Get", () => {
     const componentWrapper = mount(Login, {
+      /*
+      TODO(Need props that will match API calls)
+      props: {
+        username_login: "",
+        password_login: "",
+        email_login: "",
+      }
+      */
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -94,6 +102,16 @@ describe("Login.vue", () => {
 describe("Signup.vue", () => {
   it("renders with null props", () => {
     const componentWrapper = mount(Signup, {
+      /*
+      TODO(Need props to match API Calls)
+      props: {
+          first_name: "",
+          last_name: "",
+          email_signup: "",
+          password_signup: "",
+          passwordVerify_signup: "",
+      }
+      */
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
