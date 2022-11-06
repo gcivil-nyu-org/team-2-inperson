@@ -24,6 +24,7 @@ from api.handlers import school_dim
 from api.handlers import school_dim_upsert
 from api.handlers import school_dim_value
 from api.handlers import school_dim_value_upsert
+from api.handlers import recommendation
 
 
 urlpatterns = [
@@ -37,4 +38,5 @@ urlpatterns = [
     path("school/dimension/upsert", school_dim_upsert),
     path("school/dimension/value", school_dim_value),
     path("school/dimension/value/upsert", school_dim_value_upsert),
+    path("recommendation", recommendation),
 ]
