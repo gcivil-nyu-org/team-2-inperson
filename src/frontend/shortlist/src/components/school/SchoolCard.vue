@@ -20,10 +20,9 @@ export default {
     const myChart = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [
           {
-            label: "Dimensions",
+            label: "School Qualities",
             data: this.schoolData.dimensions,
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
@@ -46,6 +45,11 @@ export default {
         ],
       },
       options: {
+        //indexAxis: 'y',
+        parsing: {
+          xAxisKey: 'name',
+          yAxisKey: 'value',
+        },
         scales: {
           y: {
             beginAtZero: true,
@@ -93,7 +97,7 @@ export default {
         <template v-for="dimension in schoolData.dimensions" :key="dimension">
           <template v-if="!isDetail">
             <template v-if="dimension.simple">
-              <canvas id="myChart" width="400" height="400"></canvas>
+              <canvas id="myChart" width="400" height="00"></canvas>
             </template>
           </template>
           <template v-if="isDetail">

@@ -7,32 +7,32 @@ export const recommendations = [
     dimensions: [
       {
         name: "School Dim 1",
-        value: "alskdf",
+        value: "0.96",
         simple: true,
       },
       {
         name: "School Dim 2",
-        value: "alskdf",
+        value: "0.85",
         simple: true,
       },
       {
         name: "School Dim 3",
-        value: "alskdf",
+        value: "0.24",
         simple: true,
       },
       {
         name: "School Dim 4",
-        value: "alskdf",
+        value: "0.84",
         simple: false,
       },
       {
         name: "School Dim 5",
-        value: "alskdf",
+        value: "0.96",
         simple: false,
       },
       {
         name: "School Dim 6",
-        value: "alskdf",
+        value: "0.77",
         simple: false,
       },
     ],
@@ -44,32 +44,32 @@ export const recommendations = [
     dimensions: [
       {
         name: "School Dim 1",
-        value: "alskdf",
+        value: "0.34",
         simple: true,
       },
       {
         name: "School Dim 2",
-        value: "alskdf",
+        value: "0.66",
         simple: false,
       },
       {
         name: "School Dim 3",
-        value: "alskdf",
+        value: "0.53",
         simple: false,
       },
       {
         name: "School Dim 4",
-        value: "alskdf",
+        value: "0.55",
         simple: false,
       },
       {
         name: "School Dim 5",
-        value: "alskdf",
+        value: "0.36",
         simple: false,
       },
       {
         name: "School Dim 6",
-        value: "alskdf",
+        value: "0.78",
         simple: true,
       },
     ],
@@ -81,32 +81,32 @@ export const recommendations = [
     dimensions: [
       {
         name: "School Dim 1",
-        value: "alskdf",
+        value: "0.36",
         simple: true,
       },
       {
         name: "School Dim 2",
-        value: "alskdf",
+        value: "0.58",
         simple: false,
       },
       {
         name: "School Dim 3",
-        value: "alskdf",
+        value: "0.33",
         simple: true,
       },
       {
         name: "School Dim 4",
-        value: "alskdf",
+        value: "0.76",
         simple: false,
       },
       {
         name: "School Dim 5",
-        value: "alskdf",
+        value: "0.55",
         simple: true,
       },
       {
         name: "School Dim 6",
-        value: "alskdf",
+        value: "0.89",
         simple: true,
       },
     ],
