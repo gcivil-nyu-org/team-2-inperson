@@ -47,8 +47,8 @@ export default {
       options: {
         //indexAxis: 'y',
         parsing: {
-          xAxisKey: 'name',
-          yAxisKey: 'value',
+          xAxisKey: "name",
+          yAxisKey: "value",
         },
         scales: {
           y: {
@@ -94,13 +94,13 @@ export default {
         </div>
       </div>
       <div class="school-simple-dim-container">
-        <template v-for="dimension in schoolData.dimensions" :key="dimension">
-          <template v-if="!isDetail">
-            <template v-if="dimension.simple">
-              <canvas id="myChart" width="400" height="00"></canvas>
-            </template>
-          </template>
-          <template v-if="isDetail">
+        <template v-if="!isDetail">
+          <!-- <template v-if="dimension.simple"> -->
+          <canvas id="myChart" width="400" height="00"></canvas>
+          <!-- </template> -->
+        </template>
+        <template v-if="isDetail">
+          <template v-for="dimension in schoolData.dimensions" :key="dimension">
             <div class="school-simple-dim-row">
               <div class="school-simple-dim-name">{{ dimension.name }}</div>
               <div class="school-simple-dim-value">{{ dimension.value }}</div>
