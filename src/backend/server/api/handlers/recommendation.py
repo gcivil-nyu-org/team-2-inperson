@@ -1,16 +1,4 @@
 """Get Recommendations."""
-
-"""
-TODO TODO TODO
-THIS WHOLE THING NEEDS ADDITIONAL OPTIMIZATIONS FOR SPEED/JOIN-TIME
-
-- Refactor the parts into a separate algorithm folder possibly
-- Actually Implement the Explore-Exploit mix algorithm
-- Implement a preferences' merge that flags fields as 'simple' or not
-- Refactor the "simple" school view into a completely different 
-    "detail" view to reflect the huge size of data we'll have avial
-TODO TODO TODO
-"""
 import json
 import random
 
@@ -21,6 +9,18 @@ from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
+
+"""
+TODO TODO TODO
+THIS WHOLE THING NEEDS ADDITIONAL OPTIMIZATIONS FOR SPEED/JOIN-TIME
+
+- Refactor the parts into a separate algorithm folder possibly
+- Actually Implement the Explore-Exploit mix algorithm
+- Implement a preferences' merge that flags fields as 'simple' or not
+- Refactor the "simple" school view into a completely different
+    "detail" view to reflect the huge size of data we'll have avial
+TODO TODO TODO
+"""
 
 
 def camel_caser(input):
@@ -37,7 +37,7 @@ def dictfetchall(cursor):
 
 
 DIM_QUERY = """
-SELECT	
+SELECT
   -- schoolz.*,
   dimz.id as dim_id,
   -- dimz.source as dim_source,
@@ -53,7 +53,7 @@ FROM
     dimz_valz.school_id = schoolz.id
   inner join api_schooldim as dimz ON
     dimz.id = dimz_valz.dim_id
-    
+
 WHERE schoolz.id='{}'
 """
 
