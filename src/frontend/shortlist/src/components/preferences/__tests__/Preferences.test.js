@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import { createTestingPinia } from "@pinia/testing";
 import PreferenceDemo from "../PreferenceDemo.vue";
+import PreferenceManager from "../PreferenceManager.vue"; 
 import PreferenceMultiSelect from "../PreferenceMultiSelect.vue"; 
 
 // Only exists
@@ -16,7 +17,6 @@ describe("PreferenceDemo.vue", () => {
   }); 
 }); 
 
-//
 describe("PreferenceMultiSelect.vue", () => {
   it("renders with props", () => {
     const componentWrapper = mount(PreferenceMultiSelect, {
@@ -41,13 +41,26 @@ describe("PreferenceMultiSelect.vue", () => {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     }); 
-
-
     expect(
       componentWrapper.emitted(),
       "properly emitted change event"
     ).toBeTruthy();
-
+  }); 
 }); 
 
+// PreferenceManager
+describe("PreferenceManager.vue", () => {
+  it("check PreferenceManager exists", () => {
+    const componentWrapper = mount(PreferenceManager, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    }); 
+
+    // const editButton = componentWrapper.find("#editButton");
+    const pref_actions = componentWrapper.find(".pref_actions")
+    expect(pref_actions.exists()).toBe(true);
+  });
 }); 
+
+ 

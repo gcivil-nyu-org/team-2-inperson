@@ -48,7 +48,6 @@ export default {
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
 }
-
 .pref-q-question {
   width: 100%;
   font-size: 18px;
