@@ -80,7 +80,7 @@ export default {
     <pre>{{ prefResults }}</pre>
   </div>
   <div class="preference-demo-container">
-    <div class="preference-demo-component" v-if="!prefResults.submitted">
+    <div class="preference-demo-component" id = "preference-demo-component" v-if="!prefResults.submitted">
       <PreferenceManager
         title="Set Preferences"
         @preferenceSubmitted="prefResults.submitted = true"
