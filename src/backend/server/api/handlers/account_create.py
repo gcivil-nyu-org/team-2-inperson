@@ -1,6 +1,8 @@
 """Creates an account."""
 from api.handlers.shortlist_request import ShortlistRequest
 from api.models.account import Account
+from api.models.recommendation import Recommendation
+from api.models.school import School
 
 from django.http import HttpRequest
 from django.http import HttpResponse
@@ -34,7 +36,14 @@ def account_create(request: HttpRequest):
         password_hash=request_passwordHash,
         account_type=request_accountType,
     )
-    account.preferences["preferredName"] = request_preferredName
 
+    account.preferences["preferredName"] = request_preferredName
     account.save()
+
+    # setup blank recommendations
+    schools = School.objects.all()
+    for school in schools:
+        reco = Recommendation(account=account, school=school)
+        reco.save()
+
     return HttpResponse(account.id)

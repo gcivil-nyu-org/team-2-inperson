@@ -129,7 +129,7 @@ class SchoolDimValue(models.Model):
         obj = dict(
             id=self.id,
             schoolId=self.school.id,
-            dimensionId=self.dim.id,
+            dimension=json.loads(self.dim.serializeJson()),
             value=self.value,
         )
         return json.dumps(obj)
