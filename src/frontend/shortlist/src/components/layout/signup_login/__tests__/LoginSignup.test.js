@@ -1,3 +1,8 @@
+/*
+TODO(All these vue files do not have props that correspond to the API, needs to be added)
+The following tests conclude all major component testing.
+*/
+
 import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import Signup from "../Signup.vue";
@@ -7,6 +12,7 @@ import LoggedOut from "../LoggedOut.vue";
 import ModalFullScreen from "./../../ModalFullScreen.vue";
 // import axios from "axios";
 import { createTestingPinia } from "@pinia/testing";
+
 
 describe("Login.vue", () => {
   // Check if login exists
@@ -129,6 +135,18 @@ describe("Signup.vue", () => {
     const switchToLoginButton = componentWrapper.find("#switchToLoginButton");
     expect(switchToLoginButton.exists()).toBe(true);
     await switchToLoginButton.trigger("click");
+  });
+
+
+  it("Check if the signupThroughSSO works", async () => {
+    const componentWrapper = mount(Signup, {
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
+    });
+    const signupWithGoogle = componentWrapper.find("#signupWithGoogle");
+    expect(signupWithGoogle.exists()).toBe(true);
+    await signupWithGoogle.trigger("submit.prevent");
   });
 
   it("Check if the big titles work", async () => {
