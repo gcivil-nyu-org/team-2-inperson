@@ -78,6 +78,154 @@ export default {
 </template>
 <style scoped>
 main {
-  background-color: pink;
+  background-color: rgb(236, 236, 236);
 }
-</style> -->
+.profileform {
+  padding: 10px;
+  width: 100%;
+}
+.inputs {
+  padding: 10px;
+}
+.profileimg {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  margin-bottom: 20px;
+}
+.profilefields {
+  width: 100%;
+  padding: 8px 5px;
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: "Aleo", serif;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 20px;
+}
+
+.accountstatus {
+  width: 100%;
+  font-size: 18px;
+  font-family: "Cabin Sketch", cursive;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.pendingstatus:disabled {
+  border: none;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+  color: black;
+  font-weight: bold;
+  border-radius: 5%;
+  background-color: rgb(244, 244, 147);
+  font-size: medium;
+  font-family: "Klee One", cursive;
+  float: left;
+}
+.pendingstatus:hover {
+  background-color: rgb(255, 230, 0);
+  font-family: "Klee One", cursive;
+}
+
+.typestatuslabel {
+  color: white;
+  background-color: rgb(103, 97, 97);
+  border-radius: 5%;
+  font-size: small;
+  padding: 1%;
+  float: left;
+  margin-right: 5px;
+}
+
+.parenttype:disabled {
+  border: none;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  border-radius: 5%;
+  background-color: rgb(108, 154, 185);
+  font-size: medium;
+  font-family: "Klee One", cursive;
+  float: left;
+}
+.parenttype:hover {
+  border: 1px solid #888;
+  background-color: rgb(52, 47, 136);
+  font-family: "Klee One", cursive;
+}
+
+.pref-actions {
+  flex-wrap: wrap;
+  align-items: center;
+  font-weight: 500;
+  background-color: black;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, 0.2) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.15) 0 1px 2px, rgba(44, 187, 99, 0.15) 0 2px 4px,
+    rgba(44, 187, 99, 0.15) 0 4px 8px, rgba(44, 187, 99, 0.15) 0 8px 16px,
+    rgba(44, 187, 99, 0.15) 0 16px 32px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Libre Baskerville", serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.pref-actions:hover {
+  box-shadow: rgba(44, 187, 99, 0.35) 0 -25px 18px -14px inset,
+    rgba(44, 187, 99, 0.25) 0 1px 2px, rgba(44, 187, 99, 0.25) 0 2px 4px,
+    rgba(44, 187, 99, 0.25) 0 4px 8px, rgba(44, 187, 99, 0.25) 0 8px 16px,
+    rgba(44, 187, 99, 0.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+  background-color: #008037;
+}
+
+.pref-actions button {
+  padding: 20px;
+  background-color: #008037;
+}
+
+.upload-file-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.btn input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  display: inline-block;
+}
+
+.fileidlable {
+  color: rgb(137, 137, 137);
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5%;
+  font-size: small;
+  padding: 1%;
+  float: left;
+  margin-right: 5px;
+}
+</style>
