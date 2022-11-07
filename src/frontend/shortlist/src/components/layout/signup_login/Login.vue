@@ -46,7 +46,7 @@ export default {
   <!-- Log In -->
   <div class="login_components_container">
     <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
-    <form @submit.prevent="loginWithPassword" id = "loginForm">
+    <form @submit.prevent="loginWithPassword" id="loginForm">
       <h1 class="instructions" id="big">Log In</h1>
       <div id="emailaddress_login">
         <label>
@@ -69,7 +69,11 @@ export default {
           Login
         </button>
         <p class="instructions" id="small">or</p>
-        <button id="loginWithGoogle" @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+        <button
+          id="loginWithGoogle"
+          @click.prevent="loginWithSSO"
+          class="btn btn-outline-dark"
+        >
           Log In with Google
         </button>
         <p class="instructions" id="small">Don't have an account yet?</p>

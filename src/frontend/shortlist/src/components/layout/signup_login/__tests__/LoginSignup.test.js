@@ -13,19 +13,15 @@ import ModalFullScreen from "./../../ModalFullScreen.vue";
 // import axios from "axios";
 import { createTestingPinia } from "@pinia/testing";
 
-
 describe("Login.vue", () => {
   // Check if login exists
-  it("Check Get", () => {
+  it("Renders with null prop", () => {
     const componentWrapper = mount(Login, {
-      /*
-      TODO(Need props that will match API calls)
       props: {
-        username_login: "",
-        password_login: "",
-        email_login: "",
-      }
-      */
+        /*
+        TODO(Add API variables here)
+        */
+      },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -35,6 +31,7 @@ describe("Login.vue", () => {
 
   it("Check if the login_components_container exists", async () => {
     const componentWrapper = mount(Login, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -47,6 +44,7 @@ describe("Login.vue", () => {
 
   it("Check if the loginForm works", async () => {
     const componentWrapper = mount(Login, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -102,16 +100,11 @@ describe("Login.vue", () => {
 describe("Signup.vue", () => {
   it("renders with null props", () => {
     const componentWrapper = mount(Signup, {
-      /*
-      TODO(Need props to match API Calls)
       props: {
-          first_name: "",
-          last_name: "",
-          email_signup: "",
-          password_signup: "",
-          passwordVerify_signup: "",
-      }
-      */
+        /*
+          TODO(Need to add API tests here)
+        */
+      },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -123,6 +116,7 @@ describe("Signup.vue", () => {
   // The following are the component tests, all passing
   it("Check if the signup_components_container exists", async () => {
     const componentWrapper = mount(Signup, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -135,6 +129,7 @@ describe("Signup.vue", () => {
 
   it("Check if the signupForm works", async () => {
     const componentWrapper = mount(Signup, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -146,6 +141,7 @@ describe("Signup.vue", () => {
 
   it("Check if the switchToLoginButton works", async () => {
     const componentWrapper = mount(Signup, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -155,9 +151,9 @@ describe("Signup.vue", () => {
     await switchToLoginButton.trigger("click");
   });
 
-
   it("Check if the signupThroughSSO works", async () => {
     const componentWrapper = mount(Signup, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -169,6 +165,7 @@ describe("Signup.vue", () => {
 
   it("Check if the big titles work", async () => {
     const componentWrapper = mount(Signup, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -179,8 +176,9 @@ describe("Signup.vue", () => {
 });
 
 describe("Logo.vue", () => {
-  it("Check if Logo exists", () => {
+  it("Renders with null props", () => {
     const componentWrapper = mount(Logo, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -190,6 +188,7 @@ describe("Logo.vue", () => {
 
   it("Check if the logoToHome link exists", async () => {
     const componentWrapper = mount(Login, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -200,6 +199,7 @@ describe("Logo.vue", () => {
 
   it("Check if the logo_image_container exists", async () => {
     const componentWrapper = mount(Login, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -210,6 +210,7 @@ describe("Logo.vue", () => {
 
   it("Check if the logoImage exists", async () => {
     const componentWrapper = mount(Login, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -220,8 +221,9 @@ describe("Logo.vue", () => {
 });
 
 describe("LoggedOut.vue", () => {
-  it("Check if LoggedOut exists", () => {
+  it("Renders with null props", () => {
     const componentWrapper = mount(LoggedOut, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -231,6 +233,7 @@ describe("LoggedOut.vue", () => {
 
   it("Check if container exists", () => {
     const componentWrapper = mount(LoggedOut, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -312,4 +315,3 @@ describe("ModalFullScreen.vue", () => {
     ).toBeTruthy();
   });
 });
-

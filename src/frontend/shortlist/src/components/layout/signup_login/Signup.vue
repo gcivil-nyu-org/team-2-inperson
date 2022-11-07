@@ -80,9 +80,13 @@ export default {
       </label>
       <button type="submit" class="btn btn-outline-dark">Sign up</button>
       <p class="instructions" id="small">or</p>
-        <button id="signupWithGoogle" @click.prevent="loginWithSSO" class="btn btn-outline-dark">
-          Sign Up with Google
-        </button>
+      <button
+        id="signupWithGoogle"
+        @click.prevent="loginWithSSO"
+        class="btn btn-outline-dark"
+      >
+        Sign Up with Google
+      </button>
       <p class="instructions" id="small">Have an account already?</p>
       <button
         id="switchToLoginButton"

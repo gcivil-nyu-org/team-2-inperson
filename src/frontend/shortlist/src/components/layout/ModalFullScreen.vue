@@ -14,7 +14,8 @@ export default {
   <template v-if="visible">
     <div class="shortlist-modal" @click="$emit('modalOff')">
       <div class="shortlist-modal-inner">
-        <div id = "stopPropagation"
+        <div
+          id="stopPropagation"
           @click="
             (e) => {
               e.stopPropagation();
