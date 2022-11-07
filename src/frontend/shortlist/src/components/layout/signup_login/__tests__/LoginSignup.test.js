@@ -74,6 +74,13 @@ describe("Login.vue", () => {
     const switchToSignupButton = componentWrapper.find("#switchToSignupButton");
     expect(switchToSignupButton.exists()).toBe(true);
     await switchToSignupButton.trigger("click");
+
+    /*The next expect needs the API connections to test
+    expect(
+      componentWrapper.vm.localSettings.loginForm,
+      "the login form will switch to signup form"
+    ).toBe(signupForm);
+    */
   });
 
   it("Check if the small titles work", async () => {
@@ -137,6 +144,13 @@ describe("Signup.vue", () => {
     const signupForm = componentWrapper.find("#signupForm");
     expect(signupForm.exists()).toBe(true);
     await signupForm.trigger("submit.prevent");
+
+    /*The next expect needs the API connections to test
+    expect(
+      componentWrapper.vm.localSettings.loginForm,
+      "the login form will switch to signup form"
+    ).toBe(signupForm);
+    */
   });
 
   it("Check if the switchToLoginButton works", async () => {
@@ -149,6 +163,13 @@ describe("Signup.vue", () => {
     const switchToLoginButton = componentWrapper.find("#switchToLoginButton");
     expect(switchToLoginButton.exists()).toBe(true);
     await switchToLoginButton.trigger("click");
+
+    /*The next expect needs the API connections to test
+    expect(
+      componentWrapper.vm.localSettings.loginForm,
+      "the login form will switch to signup form"
+    ).toBe(signupForm);
+    */
   });
 
   it("Check if the signupThroughSSO works", async () => {
@@ -161,6 +182,13 @@ describe("Signup.vue", () => {
     const signupWithGoogle = componentWrapper.find("#signupWithGoogle");
     expect(signupWithGoogle.exists()).toBe(true);
     await signupWithGoogle.trigger("submit.prevent");
+
+    /*The next expect needs the API connections to test
+    expect(
+      componentWrapper.vm.
+      ""
+    ).toBe();
+    */
   });
 
   it("Check if the big titles work", async () => {
