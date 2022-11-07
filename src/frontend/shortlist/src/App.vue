@@ -1,7 +1,7 @@
 <script setup>
 import { RouterView } from "vue-router";
 import NavBar from "./components/layout/navigation/NavBar.vue";
-import EventListener from "./EventListener.vue"
+import EventListener from "./EventListener.vue";
 </script>
 
 <template>

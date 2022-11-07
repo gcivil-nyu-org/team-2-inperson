@@ -113,11 +113,12 @@ export default {
           </template>
         </ul>
       </div>
-      <span><img
+      <span
+        ><img
           src="/default-parent-profile.png"
           alt="Profile-Picture"
           class="profileimg"
-        /></span>
+      /></span>
     </nav>
   </div>
 </template>

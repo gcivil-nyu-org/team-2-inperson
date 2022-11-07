@@ -24,10 +24,19 @@ export default {
     return {
       prefResults: {
         q1: { Question: "Which instruction mode do you prefer?", Response: "" },
-        q2: { Question: "Do you have any Extra-curricular interests?", Response: [] },
-        q3: { Question: "Do you already have a school in mind?", Response: ""},
-        q4: { Question: "Is there a transit bus/train line you're interested in?", Response: ""},
-        q5: { Question: "How would you rank your academic performance so far?", Response: 4 },
+        q2: {
+          Question: "Do you have any Extra-curricular interests?",
+          Response: [],
+        },
+        q3: { Question: "Do you already have a school in mind?", Response: "" },
+        q4: {
+          Question: "Is there a transit bus/train line you're interested in?",
+          Response: "",
+        },
+        q5: {
+          Question: "How would you rank your academic performance so far?",
+          Response: 4,
+        },
       },
       submitted: false,
     };
@@ -66,9 +75,9 @@ export default {
   methods: {
     handleSubmit() {
       this.submitted = true;
-      this.emitter.emit('submitPreferences', this.prefResults)
-    }
-  }
+      this.emitter.emit("submitPreferences", this.prefResults);
+    },
+  },
 };
 </script>
 
@@ -92,7 +101,10 @@ export default {
         @preferenceSubmitted="handleSubmit"
       >
         <PreferenceManagerPage id="0" subtitle="Instruction & Curriculum">
-          <PreferenceOneSelect :question="question1" v-model="prefResults.q1.Response" />
+          <PreferenceOneSelect
+            :question="question1"
+            v-model="prefResults.q1.Response"
+          />
           <PreferenceMultiSelect
             :question="question2"
             v-model="prefResults.q2.Response"
@@ -100,12 +112,21 @@ export default {
         </PreferenceManagerPage>
 
         <PreferenceManagerPage id="1" subtitle="Location/School Specific">
-          <PreferenceTypeText :question="question3" v-model="prefResults.q3.Response" />
-          <PreferenceDropdown :question="question4" v-model="prefResults.q4.Response" />
+          <PreferenceTypeText
+            :question="question3"
+            v-model="prefResults.q3.Response"
+          />
+          <PreferenceDropdown
+            :question="question4"
+            v-model="prefResults.q4.Response"
+          />
         </PreferenceManagerPage>
 
         <PreferenceManagerPage id="2" subtitle="This or that...">
-          <PreferenceSlider :question="question5" v-model="prefResults.q5.Response" />
+          <PreferenceSlider
+            :question="question5"
+            v-model="prefResults.q5.Response"
+          />
         </PreferenceManagerPage>
       </PreferenceManager>
     </div>
