@@ -1,67 +1,28 @@
 <script>
-// //import Vue from "vue";
-// import axios from "axios";
-// //import VueAxios from "vue-axios";
-// //import { getAPI } from "../axios-api";
+import axios from "axios";
 
-// //Vue.useAttrs(VueAxios.axios);
-// export default {
-//   //   data() {
-//   //     return {
-//   //       APIData: [],
-//   //     };
-//   //   },
-//   //   created() {
-//   //     getAPI
-//   //       .get("/account/")
-//   //       .then((response) => {
-//   //         this.APIData = response.data;
-//   //         console.log(response.data);
-//   //       })
-//   //       .catch((err) => {
-//   //         console.log(err);
-//   //       });
-//   //   },
-//   //   mounted() {
-//   //     Vue.axios.get("http://manage.shortlist.nyc/admin/api/account/")
-//   //     .then((resp) => {
-//   //         console.warn(resp);
-//   //       });
-//   //   },
+export default {
+  data() {
+    return {
+      prefs: ""
+    }
 
-//   mounted() {
-//     const config = {
-//       headers: {
-//         email: "poojapatel@nyu.edu",
-//       },
-//     };
-//     const url = "https://api.shortlist.nyc/account/metadata";
-//     axios
-//       .post(url, config)
-//       .then((response) => {
-//         console.log(response);
-//       })
-//       .catch((err) => {
-//         console.log("AXIOS ERR:", err);
-//       });
-//   },
-// };
-// import PreferenceManagerVue from '../../preferences/PreferenceManager.vue';
-// export default {
-//   components:{
-//     PreferenceManagerVue,
-//   },
-//   data() {
-//     return {
-//       profileprefResults: {},
-//     };
-//   },
-//   methods: {
-//             getprefResults ( data ) {
-//                 this.profileprefResults = data;
-//             }
-//         }
-// }
+  },
+  mounted() {
+    axios
+      .post('https://api.shortlist.nyc/account/metadata', {},
+      {
+        headers: {'x-shortlist-account':'e44278fec4984522b156cae1a8b3981d'}
+      })
+      .then((response) => {
+        let alldata = JSON.parse(JSON.stringify(response.data));
+        this.prefs = alldata['preferences']
+      })
+      .catch((err) => {
+        console.log("AXIOS ERR:", err.response.data);
+      });
+  },
+}
 </script>
 
 <template>
