@@ -17,9 +17,6 @@
             <label class="fileidlabel">Student1 Name</label>
             <label class="fileidlabel">Student1 Email</label>
           </p>
-          <button>
-            Remove <img src="del-student.png" class="studentupdateimg" />
-          </button>
         </span>
       </span>
       <span class="studentlistpanel">
@@ -36,9 +33,6 @@
             <label class="fileidlabel">Student2 Name</label>
             <label class="fileidlabel">Student2 Email</label>
           </p>
-          <button>
-            Remove <img src="del-student.png" class="studentupdateimg" />
-          </button>
         </span>
       </span>
     </div>
@@ -98,7 +92,7 @@ body {
   vertical-align: top;
   margin: 10px;
   font-family: "helvetica", san-serif;
-  min-height: 20vh;
+  min-height: 15vh;
   background: #bad1be;
   border: 1px solid #000000;
   text-align: left;
