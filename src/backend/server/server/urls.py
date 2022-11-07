@@ -27,6 +27,7 @@ from api.handlers import school_dim_value_upsert
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from api.handlers import recommendation
 
 
 schema_view = get_schema_view(
@@ -56,4 +57,5 @@ urlpatterns = [
     path("school/dimension/upsert", school_dim_upsert),
     path("school/dimension/value", school_dim_value),
     path("school/dimension/value/upsert", school_dim_value_upsert),
+    path("recommendation", recommendation),
 ]

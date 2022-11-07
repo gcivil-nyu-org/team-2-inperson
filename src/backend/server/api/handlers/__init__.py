@@ -8,3 +8,4 @@ from api.handlers.school_dim import school_dim  # noqa: F401
 from api.handlers.school_dim_upsert import school_dim_upsert  # noqa: F401
 from api.handlers.school_dim_value import school_dim_value  # noqa: F401
 from api.handlers.school_dim_value_upsert import school_dim_value_upsert  # noqa: F401
+from api.handlers.recommendation import recommendation  # noqa: F401
