@@ -11,16 +11,69 @@ export default {
 </script>
 <template>
   <main>
-    <h1>User Details</h1>
+    <form class="profileform">
+      <img
+        src="default-parent-profile.png"
+        alt="Profile-Picture"
+        id="profileimg"
+        class="profileimg"
+      />
+      <img src="edit.png" /><br />
+      <div class="inputs">
+        <div class="accountstatus">
+          <label class="typestatuslabel">Account Type:</label>&nbsp;<button
+            class="parenttype"
+            title="After verification,You can send invite for Student account registration!"
+            disabled
+          >
+            PARENT / GUARDIAN
+          </button>
+        </div>
+        <div class="accountstatus">
+          <label class="typestatuslabel">Verification Status:</label
+          >&nbsp;<button
+            class="pendingstatus"
+            title="Account verification may take some time!"
+            disabled
+          >
+            PENDING
+          </button>
+        </div>
 
-    <div class="profile-pic">
-      <label class="-label" for="file">
-        <span class="glyphicon glyphicon-camera"></span>
-        <span>Change Image</span>
-      </label>
-      <input id="file" type="file" accept="image/png, image/jpeg" onchange="loadFile" />
-      <img id="output" width="200" />
-    </div>
+        <input
+          type="text"
+          class="profilefields"
+          placeholder="FirstNameFromAPI"
+          id="firstname"
+        />
+        <input
+          type="text"
+          class="profilefields"
+          placeholder="LastNameFromAPI"
+          id="lastname"
+        />
+        <input
+          type="text"
+          class="profilefields"
+          placeholder="EmailFromAPI"
+          id="useremail"
+        />
+
+        <lable class="fileidlable"
+          >Current Uploaded ID File Name From API</lable
+        >
+        <div class="upload-file-wrapper">
+          <button class="btn btn-outline-success btn-sm">
+            Upload New ID <input type="file" name="myfile" />
+          </button>
+        </div>
+        <br />
+        <button class="pref-actions" @click="clicker('Back')">
+          Update Changes
+        </button>
+        <div style="flex-grow: 1"></div>
+      </div>
+    </form>
   </main>
 </template>
 <style scoped>
