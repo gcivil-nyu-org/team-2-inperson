@@ -1,8 +1,8 @@
 <script></script>
 <template>
   <main>
-    <label class="pref-title">Student Accounts</label>
-    <div id="students">
+    <label class="relprofiletitle">Student Accounts</label>
+    <div>
       <span class="studentlistpanel">
         <span class="student">
           <h2>
@@ -14,8 +14,8 @@
           </h2>
           <h3>Student 1</h3>
           <p>
-            <lable class="fileidlable">Student1 Name</lable>
-            <lable class="fileidlable">Student1 Email</lable>
+            <label class="fileidlabel">Student1 Name</label>
+            <label class="fileidlabel">Student1 Email</label>
           </p>
           <button>
             Remove <img src="del-student.png" class="studentupdateimg" />
@@ -33,8 +33,8 @@
           </h2>
           <h3>Student 2</h3>
           <p>
-            <lable class="fileidlable">Student2 Name</lable>
-            <lable class="fileidlable">Student2 Email</lable>
+            <label class="fileidlabel">Student2 Name</label>
+            <label class="fileidlabel">Student2 Email</label>
           </p>
           <button>
             Remove <img src="del-student.png" class="studentupdateimg" />
@@ -49,7 +49,7 @@
   </main>
 </template>
 <style scoped>
-.pref-title {
+.relprofiletitle {
   font-family: "Cabin Sketch", cursive;
   font-weight: bold;
   font-size: 2.5rem;
@@ -57,12 +57,7 @@
   line-height: 2rem;
   color: #067418;
 }
-.accounts {
-  border: 1px solid grey;
-  width: 25%;
-  white-space: nowrap;
-  align-content: center;
-}
+
 .studentimg {
   width: 50px;
   height: 50px;
@@ -74,7 +69,7 @@
   height: 25px;
   border-radius: 50%;
 }
-.fileidlable {
+.fileidlabel {
   color: rgb(0, 0, 0);
   font-size: small;
   padding: 1%;

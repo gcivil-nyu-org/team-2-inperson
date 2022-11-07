@@ -59,8 +59,8 @@ export default {
           id="useremail"
         />
 
-        <lable class="fileidlable"
-          >Current Uploaded ID File Name From API</lable
+        <label class="fileidlabel"
+          >Current Uploaded ID File Name From API</label
         >
         <div class="upload-file-wrapper">
           <button class="btn btn-outline-success btn-sm">
@@ -218,7 +218,7 @@ main {
   display: inline-block;
 }
 
-.fileidlable {
+.fileidlabel {
   color: rgb(137, 137, 137);
   background: #ebf3e6;
   border: 1px solid #008037;
