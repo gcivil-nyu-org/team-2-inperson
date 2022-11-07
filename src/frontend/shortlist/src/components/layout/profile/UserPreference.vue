@@ -29,35 +29,16 @@ export default {
   <main>
     <label class="pref-title">Preferences</label>
     <form class="prefprofileform">
-      <label class="pref-q-name">QuestionFromAPI</label>
+      <template v-for="(val, key) in prefs">
+      <label class="pref-q-name">{{ val.Question }}</label>
       <input
         type="text"
         class="profilefields"
-        placeholder="ResponseFromAPI"
-        id="firstname"
-      />
+        :placeholder="val.Response"
 
-      <label class="pref-q-name">QuestionFromAPI</label>
-      <input
-        type="text"
-        class="profilefields"
-        placeholder="ResponseFromAPI"
         id="firstname"
       />
-      <label class="pref-q-name">QuestionFromAPI</label>
-      <input
-        type="text"
-        class="profilefields"
-        placeholder="ResponseFromAPI"
-        id="firstname"
-      />
-      <label class="pref-q-name">QuestionFromAPI</label>
-      <input
-        type="text"
-        class="profilefields"
-        placeholder="ResponseFromAPI"
-        id="firstname"
-      />
+    </template>
     </form>
   </main>
 </template>
