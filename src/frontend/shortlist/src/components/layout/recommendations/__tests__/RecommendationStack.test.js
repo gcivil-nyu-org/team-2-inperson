@@ -17,7 +17,7 @@ describe("RecommendationStack.vue", () => {
   });
 
   // TODO()
-  it("renders with well-formed props", () => {
+  it("renders with proper API props", () => {
     const componentWrapper = mount(RecommendationStack, {
       props: {
         /*
