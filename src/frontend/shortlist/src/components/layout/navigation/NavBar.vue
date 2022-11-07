@@ -85,6 +85,7 @@ export default {
       <button
         class="navbar-toggler"
         type="button"
+        src="/default-profile.png"
         data-bs-toggle="collapse"
         data-bs-target="#shortlistmenu"
         aria-controls="shortlistmenu"
@@ -112,18 +113,25 @@ export default {
           </template>
         </ul>
       </div>
+      <span><img
+          src="/default-parent-profile.png"
+          alt="Profile-Picture"
+          class="profileimg"
+        /></span>
     </nav>
   </div>
 </template>
 
 <style>
-.spacing {
-  margin-right: 10px;
-}
-
 .navbar {
   font-family: "Cabin Sketch", cursive;
   font-weight: bold;
+}
+.profileimg {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 .router-link-active {
   border-radius: 70px;
@@ -137,7 +145,6 @@ export default {
   color: white;
   cursor: pointer;
   display: inline-block;
-  padding: 1px 10px;
   text-align: center;
   text-decoration: none;
   transition: all 250ms;
@@ -155,7 +162,7 @@ export default {
 
 ul {
   position: absolute;
-  right: 70px;
+  right: 50px;
   top: 14px;
   z-index: 1;
 }
