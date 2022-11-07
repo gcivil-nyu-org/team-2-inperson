@@ -63,6 +63,12 @@ export default {
       },
     };
   },
+  methods: {
+    handleSubmit() {
+      this.prefResults.submitted = true;
+      this.emitter.emit('submitPreferences', this.prefResults)
+    }
+  }
 };
 </script>
 
@@ -83,7 +89,7 @@ export default {
     <div class="preference-demo-component" v-if="!prefResults.submitted">
       <PreferenceManager
         title="Set Preferences"
-        @preferenceSubmitted="prefResults.submitted = true"
+        @preferenceSubmitted="handleSubmit"
       >
         <PreferenceManagerPage id="0" subtitle="Instruction & Curriculum">
           <PreferenceOneSelect :question="question1" v-model="prefResults.q1" />
