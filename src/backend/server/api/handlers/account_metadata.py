@@ -22,8 +22,13 @@ def account_metadata(request: HttpRequest):
     if not sr.is_logged_in:
         return HttpResponseForbidden("must be logged in")
 
+    print(sr.body)
+
     # check if post body has email
-    email_search = sr.body.get("email", None)
+    if sr.body:
+        email_search = sr.body.get("email", None)
+    else:
+        email_search = None
 
     try:
         if email_search:
