@@ -52,7 +52,18 @@ export default {
         },
         scales: {
           y: {
-            beginAtZero: true,
+            grid: {
+              display: false
+            },
+            ticks: {
+                    display: false //this will remove only the label
+                }
+            
+          },
+          x: {
+            grid: {
+              display: false
+            }
           },
         },
       },
