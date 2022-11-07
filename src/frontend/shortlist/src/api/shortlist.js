@@ -1,9 +1,18 @@
-import { fluentAccountMetadata } from "./accountMetadata";
-import { fluentRecommendations } from "./recommendations";
+import { fluentAccountCreate } from "./endpoints/accountCreate";
+import { fluentAccountMetadata } from "./endpoints/accountMetadata";
+import { fluentRecommendations } from "./endpoints/recommendations";
 
-const shortlistApi = {
-  getRecommendations: fluentRecommendations,
-  getAccountMetadata: fluentAccountMetadata,
-};
-
-export default shortlistApi;
+export default class ShortlistApi {
+  constructor(baseURL) {
+    this.baseEndpoint = baseURL;
+  }
+  createAccount() {
+    return new fluentAccountCreate(this.baseEndpoint);
+  }
+  getAccountMetadata() {
+    return new fluentAccountMetadata(this.baseEndpoint);
+  }
+  getRecommendations() {
+    return new fluentRecommendations(this.baseEndpoint);
+  }
+}

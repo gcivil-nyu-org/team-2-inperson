@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DemoView from "../views/DemoView.vue";
+import ApiDemo from "../views/ApiDemo.vue";
 // import SignupView from "../views/SignupView.vue";
 
 const router = createRouter({
@@ -24,6 +25,12 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/StageView.vue"),
     },
+    {
+      path: "/apiTest",
+      name: "api-test",
+      component: ApiDemo,
+    },
+
     {
       path: "/categorize",
       name: "categorize-view",
