@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import { createTestingPinia } from "@pinia/testing";
 import RecommendationStack from "../RecommendationStack.vue";
-// import { recommendation } from "../../../server/api/models/recommendation.py"; 
+// import { recommendation } from "src/backend/server/api/models/recommendation.py"; 
 
 describe("RecommendationStack.vue", () => {
   it("renders with null props", () => {
@@ -22,7 +22,6 @@ describe("RecommendationStack.vue", () => {
       props: {
         /*
         TODO(Need to add recommendaton properties here to match API calls)
-        
         */
       },
       global: {
@@ -65,8 +64,5 @@ describe("RecommendationStack.vue", () => {
     const reco_stack_grid_positionr = componentWrapper.find(".reco-stack-grid-position")
     expect(reco_stack_grid_positionr.exists()).toBe(false);
   });
-
-
-
 }); 
 
