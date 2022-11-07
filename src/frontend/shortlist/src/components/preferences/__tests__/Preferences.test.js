@@ -14,8 +14,13 @@ import PreferenceManager from "../PreferenceManager.vue";
 import PreferenceMultiSelect from "../PreferenceMultiSelect.vue";
 
 describe("PreferenceDemo.vue", () => {
-  it("check if PreferenceDemo exists", () => {
+  it("renders with null props", () => {
     const componentWrapper = mount(PreferenceDemo, {
+      props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
+      },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -25,6 +30,7 @@ describe("PreferenceDemo.vue", () => {
 
   it("check if preference_demo_container exists", () => {
     const componentWrapper = mount(PreferenceDemo, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -37,6 +43,7 @@ describe("PreferenceDemo.vue", () => {
 
   it("check if preference_demo_component exists", () => {
     const componentWrapper = mount(PreferenceDemo, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -49,6 +56,7 @@ describe("PreferenceDemo.vue", () => {
 
   it("check preference_demo_component clickable button renders desirable results", () => {
     const componentWrapper = mount(PreferenceDemo, {
+      props: {},
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
@@ -65,7 +73,7 @@ describe("PreferenceDemo.vue", () => {
 
 describe("PreferenceDropdown.vue", () => {
   // Check if component exists
-  it("renders without api props", () => {
+  it("renders with null props", () => {
     const componentWrapper = mount(PreferenceDropdown, {
       props: {
         /*
@@ -83,30 +91,11 @@ describe("PreferenceDropdown.vue", () => {
 
   /*
   TODO(The following tests give error message: Cannot read properties of undefined (reading 'Name')) Therefore, no more component tets for this file. 
-  it("check if pref_q_container exists", () => {
-    const componentWrapper = mount(PreferenceDropdown, {
-      global: {
-        plugins: [createTestingPinia({ createSpy: vi.fn })],
-      },
-    });
-    const pref_q_container = componentWrapper.find(".pref-q-container");
-    expect(pref_q_container.exists()).toBe(true);
-  });
-
-  it("check if pref-q-namer exists", () => {
-    const componentWrapper = mount(PreferenceDropdown, {
-      global: {
-        plugins: [createTestingPinia({ createSpy: vi.fn })],
-      },
-    });
-    const pref_q_name = componentWrapper.find(".pref-q-name");
-    expect(pref_q_name.exists()).toBe(true);
-  });
   */
 });
 
 describe("PreferenceOneSelect.vue", () => {
-  it("renders without api props", () => {
+  it("renders with null props", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
       props: {
         /*
@@ -122,7 +111,7 @@ describe("PreferenceOneSelect.vue", () => {
     expect(componentWrapper.exists()).toBe(true);
   });
 
-  it("renders without api props", () => {
+  it("check if pref_q_container exists", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
       props: {
         /*
@@ -140,7 +129,7 @@ describe("PreferenceOneSelect.vue", () => {
     expect(pref_q_container.exists()).toBe(true);
   });
 
-  it("renders without api props", () => {
+  it("check if pref_q_name exists", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
       props: {
         /*
@@ -160,7 +149,7 @@ describe("PreferenceOneSelect.vue", () => {
 });
 
 describe("PreferenceManagerPage.vue", () => {
-  it("renders without api props", () => {
+  it("renders with null props", () => {
     const componentWrapper = mount(PreferenceManagerPage, {
       props: {
         /*
@@ -195,7 +184,7 @@ describe("PreferenceManagerPage.vue", () => {
 });
 
 describe("PreferenceMultiSelect.vue", () => {
-  it("renders with props", () => {
+  it("renders with null props", () => {
     const componentWrapper = mount(PreferenceMultiSelect, {
       props: {
         /*
@@ -214,6 +203,9 @@ describe("PreferenceMultiSelect.vue", () => {
   it("check updateModelValueEmit", () => {
     const componentWrapper = mount(PreferenceMultiSelect, {
       props: {
+        /*
+      TODO(When API call is clear, we will change this to match API variables)
+     */
         question: "string",
         modelValue: "string",
       },
@@ -229,47 +221,11 @@ describe("PreferenceMultiSelect.vue", () => {
 });
 
 /*
-//       TODO(This is for next weeks' possible sprint backlog. None of the regular tests in PreferenceManager is passing')
-// PreferenceManager, for some reason, this is failing.
-describe("PreferenceManager.vue", () => {
-  it("check PreferenceManager exists", () => {
-    const componentWrapper = mount(PreferenceManager, {
-      global: {
-        plugins: [createTestingPinia({ createSpy: vi.fn })],
-      },
-    });
-    expect(componentWrapper.exists()).toBe(true);
-  });
-
-    it("check .pref-actions exists", () => {
-      const componentWrapper = mount(PreferenceManager, {
-        global: {
-          plugins: [createTestingPinia({ createSpy: vi.fn })],
-        },
-      });
-      const pref_actions = componentWrapper.find(".pref-actions"); 
-      expect(pref_actions.exists()).toBe(true);
-    });
-
-  it("check PreferenceManager clickable button renders desirable results", () => {
-    const componentWrapper = mount(PreferenceManager, {
-      global: {
-        plugins: [createTestingPinia({ createSpy: vi.fn })],
-      },
-    });
-    let clickableElement = componentWrapper.find("#SetPreferences");
-    expect(clickableElement.exists(), "clickable element exists").toBe(true);
-    clickableElement.trigger("preferenceSubmitted");
-    expect(
-      componentWrapper.vm.prefResults.submitted,
-      "show prefResults are submitted"
-    ).toBe(true);
-  });
-});
+  TODO(This is for next weeks' possible sprint backlog. None of the regular tests in PreferenceManager is passing. Therefore, I took out all')
 */
 
 describe("PreferenceSlider.vue", () => {
-  it("renders without api props", () => {
+  it("renders with null props", () => {
     const componentWrapper = mount(PreferenceSlider, {
       props: {
         /*
@@ -376,89 +332,87 @@ describe("PreferenceSlider.vue", () => {
 });
 
 describe("PreferenceTypeText.vue", () => {
-  it("renders with props", () => {
-    it("renders without api props", () => {
-      const componentWrapper = mount(PreferenceTypeText, {
-        props: {
-          /*
+  it("renders with null props", () => {
+    const componentWrapper = mount(PreferenceTypeText, {
+      props: {
+        /*
         TODO(When API call is clear, we will change this to match API variables)
        */
-          question: "string",
-          modalValue: "string",
-        },
-        global: {
-          plugins: [createTestingPinia({ createSpy: vi.fn })],
-        },
-      });
-      expect(componentWrapper.exists()).toBe(true);
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
     });
+    expect(componentWrapper.exists()).toBe(true);
+  });
 
-    it("check pref-q-container exists", () => {
-      const componentWrapper = mount(PreferenceTypeText, {
-        props: {
-          /*
+  it("check pref-q-container exists", () => {
+    const componentWrapper = mount(PreferenceTypeText, {
+      props: {
+        /*
         TODO(When API call is clear, we will change this to match API variables)
        */
-          question: "string",
-          modalValue: "string",
-        },
-        global: {
-          plugins: [createTestingPinia({ createSpy: vi.fn })],
-        },
-      });
-      const pref_q_container = componentWrapper.find(".pref-q-container");
-      expect(pref_q_container.exists()).toBe(true);
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
     });
+    const pref_q_container = componentWrapper.find(".pref-q-container");
+    expect(pref_q_container.exists()).toBe(true);
+  });
 
-    it("check pref-q-name  exists", () => {
-      const componentWrapper = mount(PreferenceTypeText, {
-        props: {
-          /*
+  it("check pref-q-name  exists", () => {
+    const componentWrapper = mount(PreferenceTypeText, {
+      props: {
+        /*
         TODO(When API call is clear, we will change this to match API variables)
        */
-          question: "string",
-          modalValue: "string",
-        },
-        global: {
-          plugins: [createTestingPinia({ createSpy: vi.fn })],
-        },
-      });
-      const pref_q_name = componentWrapper.find(".pref-q-name");
-      expect(pref_q_name.exists()).toBe(true);
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
     });
+    const pref_q_name = componentWrapper.find(".pref-q-name");
+    expect(pref_q_name.exists()).toBe(true);
+  });
 
-    it("check pref_q_question exists", () => {
-      const componentWrapper = mount(PreferenceTypeText, {
-        props: {
-          /*
+  it("check pref_q_question exists", () => {
+    const componentWrapper = mount(PreferenceTypeText, {
+      props: {
+        /*
         TODO(When API call is clear, we will change this to match API variables)
        */
-          question: "string",
-          modalValue: "string",
-        },
-        global: {
-          plugins: [createTestingPinia({ createSpy: vi.fn })],
-        },
-      });
-      const pref_q_question = componentWrapper.find(".pref-q-question ");
-      expect(pref_q_question.exists()).toBe(true);
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
     });
+    const pref_q_question = componentWrapper.find(".pref-q-question ");
+    expect(pref_q_question.exists()).toBe(true);
+  });
 
-    it("check pref-input-text exists", () => {
-      const componentWrapper = mount(PreferenceTypeText, {
-        props: {
-          /*
+  it("check pref-input-text exists", () => {
+    const componentWrapper = mount(PreferenceTypeText, {
+      props: {
+        /*
         TODO(When API call is clear, we will change this to match API variables)
        */
-          question: "string",
-          modalValue: "string",
-        },
-        global: {
-          plugins: [createTestingPinia({ createSpy: vi.fn })],
-        },
-      });
-      const pref_input_text = componentWrapper.find(".pref-input-text ");
-      expect(pref_input_text.exists()).toBe(true);
+        question: "string",
+        modalValue: "string",
+      },
+      global: {
+        plugins: [createTestingPinia({ createSpy: vi.fn })],
+      },
     });
+    const pref_input_text = componentWrapper.find(".pref-input-text ");
+    expect(pref_input_text.exists()).toBe(true);
   });
 });
