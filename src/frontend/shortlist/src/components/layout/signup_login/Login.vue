@@ -9,17 +9,32 @@ export default {
   components: { Logo },
   setup() {
     const loginState = userLoginStore();
-    return { loginState };
+    return { v$: useVuelidate(), loginState };
   },
   data() {
     return {
-      // For log in
-      username_login: "",
-      password_login: "",
-      email_login: "",
-
+      form: {
+        // For log in
+        username_login: "",
+        password_login: "",
+        email_login: "",
+      },
       // Alerts
-      alert_login: "",
+      // alert_login: "",
+    };
+  },
+  validations() {
+    return {
+      form: {
+        email: {
+          required,
+          email,
+        },
+        password: {
+          required,
+          min: minLength(8),
+        },
+      },
     };
   },
   methods: {
