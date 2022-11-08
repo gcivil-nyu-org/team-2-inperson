@@ -79,7 +79,10 @@ export default {
           minLength: minLength(8),
           maxLength: maxLength(15),
         },
-        confirmPassword: { required, sameAsPassword: sameAs("password") },
+        confirmPassword: {
+          required,
+          sameAsPassword: sameAs(this.form.password),
+        },
       },
     };
   },
