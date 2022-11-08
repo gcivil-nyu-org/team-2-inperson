@@ -40,9 +40,9 @@ const router = createRouter({
       component: () => import("../views/LoginView.vue"),
     },
     {
-      path: "/preferences",
-      name: "preferences-view",
-      component: () => import("../views/PreferencesView.vue"),
+      path: "/profile",
+      name: "profile-view",
+      component: () => import("../views/ProfileView.vue"),
     },
     {
       path: "/about",
