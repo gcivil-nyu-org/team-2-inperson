@@ -8,15 +8,7 @@ export default {
 </script>
 
 <template>
-  <main>
-    <label class="prefprofiletitle">Preferences</label>
-    <form class="prefprofileform">
-      <template v-for="val in prefs" :key="val">
-        <label class="pref-q-name">{{ val.Question }}</label>
-        <input type="text" class="profilefields" :placeholder="val.Response" />
-      </template>
-    </form>
-  </main>
+  <PreferenceDemo />
 </template>
 <style scoped>
 .prefprofileform {
