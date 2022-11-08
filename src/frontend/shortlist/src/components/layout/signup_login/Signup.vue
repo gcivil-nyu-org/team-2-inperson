@@ -38,14 +38,14 @@ export default {
     return {
       // For sign up
       form: {
-        first_name: "",
-        last_name: "",
-        email_signup: "",
-        password_signup: "",
-        passwordVerify_signup: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
       },
       // Alerts
-      alert_signup: "",
+      // alert_signup: "",
     };
   },
   validations() {
@@ -84,17 +84,18 @@ export default {
     };
   },
   methods: {
-    signupWithPassword() {
+    submitSignupForm() {
+      this.v$.$validate();
       this.alert_signup = "";
-      if (this.password_signup !== this.passwordVerify_signup) {
-        this.alert_signup = "Your Passwords do not match!";
+      if (this.v$.$error) {
+        this.alert_signup = "Form failed validation";
         return;
       } else {
-        this.loginState.userFirstName = this.first_name;
-        this.loginState.userEmail = this.email_signup;
-        this.loginState.userPassword = this.password_signup;
-
-        this.alert_signup = "Thanks for signing up! Please go to login.";
+        this.loginState.userFirstName = this.form.firstName;
+        this.loginState.userEmail = this.form.email;
+        this.loginState.userPassword = this.form.password;
+        this.$router.push("/login");
+        // this.alert_signup = "Thanks for signing up! Please go to login.";
         return;
       }
     },

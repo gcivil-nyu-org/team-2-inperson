@@ -38,11 +38,13 @@ export default {
     };
   },
   methods: {
-    loginWithPassword() {
+    submitLoginForm() {
       this.alert_login = "";
+      this.v$.$validate();
       if (
-        this.email_login == this.loginState.userEmail &&
-        this.password_login == this.loginState.userPassword
+        this.form.email == this.loginState.userEmail &&
+        this.form.password == this.loginState.userPassword &&
+        !this.v$.$error
       ) {
         this.loginState.loggedIn = true;
         this.$router.push("/");
