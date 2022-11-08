@@ -1,30 +1,8 @@
 <script>
-import axios from "axios";
-
+import PreferenceDemo from "../../preferences/PreferenceDemo.vue";
 export default {
-  data() {
-    return {
-      prefs: "",
-    };
-  },
-  mounted() {
-    axios
-      .post(
-        "https://api.shortlist.nyc/account/metadata",
-        {},
-        {
-          headers: {
-            "x-shortlist-account": "e44278fec4984522b156cae1a8b3981d",
-          },
-        }
-      )
-      .then((response) => {
-        let alldata = JSON.parse(JSON.stringify(response.data));
-        this.prefs = alldata["preferences"];
-      })
-      .catch((err) => {
-        console.log("AXIOS ERR:", err.response.data);
-      });
+  components: {
+    PreferenceDemo,
   },
 };
 </script>
