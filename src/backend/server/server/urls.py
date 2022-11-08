@@ -33,7 +33,7 @@ from api.handlers import recommendation
 schema_view = get_schema_view(
     openapi.Info(
         title="Shortlist Auth APIs",
-        default_version='v1',
+        default_version="v1",
         description="All the apis are gonna be here",
         terms_of_service="https://www.shortlists.nyc/",
         contact=openapi.Contact(email="jain.v@nyu.edu"),
@@ -45,9 +45,8 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('auth/', include('authentication.urls')),
-    path('', schema_view.with_ui('swagger',
-        cache_timeout=0), name='schema-swagger-ui'),
+    path("auth/", include("authentication.urls")),
+    path("", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path("account/create", account_create),
     path("account/metadata", account_metadata),
     path("account/update", account_update),

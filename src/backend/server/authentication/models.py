@@ -2,19 +2,21 @@ from django.db import models
 
 # Create your models here.
 from django.contrib.auth.models import (
-    AbstractBaseUser, BaseUserManager, PermissionsMixin)
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 
 from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class UserManager(BaseUserManager):
-
     def create_user(self, username, email, password=None):
         if username is None:
-            raise TypeError('Users should have a username')
+            raise TypeError("Users should have a username")
         if email is None:
-            raise TypeError('Users should have a Email')
+            raise TypeError("Users should have a Email")
 
         user = self.model(username=username, email=self.normalize_email(email))
         user.set_password(password)
@@ -23,7 +25,7 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, username, email, password=None):
         if password is None:
-            raise TypeError('Password should not be none')
+            raise TypeError("Password should not be none")
 
         user = self.create_user(username, email, password)
         user.is_superuser = True
@@ -32,8 +34,12 @@ class UserManager(BaseUserManager):
         return user
 
 
-AUTH_PROVIDERS = {'facebook': 'facebook', 'google': 'google',
-                  'twitter': 'twitter', 'email': 'email'}
+AUTH_PROVIDERS = {
+    "facebook": "facebook",
+    "google": "google",
+    "twitter": "twitter",
+    "email": "email",
+}
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -45,11 +51,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     auth_provider = models.CharField(
-        max_length=255, blank=False,
-        null=False, default=AUTH_PROVIDERS.get('email'))
+        max_length=255, blank=False, null=False, default=AUTH_PROVIDERS.get("email")
+    )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
 
     objects = UserManager()
 
@@ -58,7 +64,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def tokens(self):
         refresh = RefreshToken.for_user(self)
-        return {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token)
-        }
+        return {"refresh": str(refresh), "access": str(refresh.access_token)}
