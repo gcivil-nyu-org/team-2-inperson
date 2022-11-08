@@ -116,43 +116,6 @@ body {
   color: #b7b7b7;
   margin-top: 5px;
 }
-.studentlistpanel .student button {
-  background: transparent;
-  border: 1px solid #000000;
-  padding: 10px 20px;
-  color: #ffffff;
-  border-radius: 3px;
-  position: relative;
-  transition: all 0.3s ease-in-out;
-  transform: translateY(-40px);
-  opacity: 0;
-  cursor: pointer;
-  overflow: hidden;
-}
-.studentlistpanel .student button:before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 120%;
-  background: #ccacac;
-  top: 0;
-  opacity: 0;
-  left: -140px;
-  border-radius: 0 20px 20px 0;
-  z-index: -1;
-  transition: all 0.3s ease-in-out;
-}
-.studentlistpanel .student:hover button {
-  transform: translateY(5px);
-  opacity: 1;
-}
-.studentlistpanel .student button:hover {
-  color: #000000;
-}
-.studentlistpanel .student button:hover:before {
-  left: 0;
-  opacity: 1;
-}
 .studentlistpanel .student:hover h2 {
   top: 20px;
   opacity: 1;
