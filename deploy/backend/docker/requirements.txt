@@ -13,6 +13,7 @@ djangorestframework-simplejwt==5.2.2
 djangorestframework==3.14.0
 docopt==0.6.2
 drf-yasg==1.21.4
+faker==15.3.1
 flake8==5.0.4
 idna==3.4
 mccabe==0.7.0
