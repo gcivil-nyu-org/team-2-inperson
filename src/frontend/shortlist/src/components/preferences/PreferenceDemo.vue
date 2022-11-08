@@ -82,18 +82,6 @@ export default {
 </script>
 
 <template>
-  <div
-    style="
-      font-size: 12px;
-      width: 300px;
-      background-color: yellow;
-      padding: 15px;
-      position: absolute;
-    "
-  >
-    results:
-    <pre>{{ prefResults }}</pre>
-  </div>
   <div class="preference-demo-container">
     <div class="preference-demo-component" v-if="!submitted">
       <PreferenceManager
@@ -135,20 +123,17 @@ export default {
 
 <style scoped>
 .preference-demo-container {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+  align-items: top;
 }
 
 .preference-demo-component {
-  width: 600px;
+  width: 100%;
   border-radius: 20px;
-  padding: 40px;
+  padding: 0px;
+  margin:0;
   box-sizing: border-box;
-  background: #ecf0f3;
-  box-shadow: 14px 14px 20px #779886, -14px -14px 20px white;
-}
+  background: #fafdff;
+  }
 </style>
