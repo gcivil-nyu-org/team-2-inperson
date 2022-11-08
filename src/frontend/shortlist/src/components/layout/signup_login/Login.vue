@@ -15,9 +15,9 @@ export default {
     return {
       form: {
         // For log in
-        username_login: "",
-        password_login: "",
-        email_login: "",
+        // username_login: "",
+        email: "",
+        password: "",
       },
       // Alerts
       // alert_login: "",
