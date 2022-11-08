@@ -132,8 +132,8 @@ export default {
   width: 100%;
   border-radius: 20px;
   padding: 0px;
-  margin:0;
+  margin: 0;
   box-sizing: border-box;
   background: #fafdff;
-  }
+}
 </style>
