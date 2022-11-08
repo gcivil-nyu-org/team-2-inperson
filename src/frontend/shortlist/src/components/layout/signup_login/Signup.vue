@@ -1,6 +1,15 @@
 <script>
 import Logo from "./Logo.vue";
 import { userLoginStore } from "../../../states/userLogin";
+import useVuelidate from "@vuelidate/core";
+import {
+  required,
+  email,
+  minLength,
+  maxLength,
+  sameAs,
+} from "@vuelidate/validators";
+
 
 export default {
   name: "Signup",
