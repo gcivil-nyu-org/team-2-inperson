@@ -14,13 +14,11 @@ import os
 import environ
 import datetime
 
-root = environ.Path(__file__) - 3  # get root of the project
+root = environ.Path(__file__) - 2  # get root of the project
 env = environ.Env()
-environ.Env.read_env()  # reading .env file
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SITE_ROOT = root()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -29,7 +27,7 @@ SITE_ROOT = root()
 SECRET_KEY = env.str("SHORTLIST_DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = env.bool("SHORTLIST_DJANGO_DEBUG", default=True)
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -194,15 +192,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-public_root = root.path("public/")
-MEDIA_ROOT = public_root("media")
-MEDIA_URL = env.str("MEDIA_URL", default="media/")
-
-STATIC_ROOT = public_root("static")
-STATIC_URL = env.str("STATIC_URL", default="static/")
-
-# CACHES = {'default': env.cache('REDIS_CACHE_URL')}
-
+STATIC_ROOT = "static"
+STATIC_URL = "static/"
 
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
