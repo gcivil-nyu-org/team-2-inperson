@@ -12,12 +12,19 @@ export default {
   },
   methods: {
     swapDetail() {
+      console.log("detail status: ", this.isDetail);
       this.isDetail = !this.isDetail;
     },
   },
   mounted() {
     const ctx = document.getElementById("myChart");
-    const myChart = new Chart(ctx, {
+    
+    let chartStatus = Chart.getChart("myChart");
+    if (chartStatus != undefined) {
+        chartStatus.destroy();
+    }  
+    
+    let myChart = new Chart(ctx, {
       type: "bar",
       data: {
         datasets: [
@@ -53,7 +60,7 @@ export default {
         scales: {
           y: {
             grid: {
-              display: false
+              display: false,
             },
             ticks: {
                     display: false //this will remove only the label
@@ -62,13 +69,13 @@ export default {
           },
           x: {
             grid: {
-              display: false
+              display: false,
             }
           },
         },
       },
     });
-    myChart;
+    myChart
   },
 };
 </script>
@@ -81,6 +88,7 @@ export default {
     v-if="schoolData != null"
   >
     <div class="school-simple-container" @click="swapDetail">
+      <!-- control image only show on simple -->
       <template v-if="!isDetail">
         <div class="school-simple-img-container">
           <img
@@ -90,7 +98,7 @@ export default {
           />
         </div>
       </template>
-
+      <!-- School name and borough, detail is a href -->
       <div class="school-simple-name-row">
         <div class="school-simple-name-name">
           <template v-if="isDetail">
@@ -104,11 +112,11 @@ export default {
           {{ schoolData.borough }}
         </div>
       </div>
+      <!-- other dimension display -->
       <div class="school-simple-dim-container">
         <template v-if="!isDetail">
-          <!-- <template v-if="dimension.simple"> -->
+          <!-- Canvas used to display chart -->
           <canvas id="myChart" width="400" height="00"></canvas>
-          <!-- </template> -->
         </template>
         <template v-if="isDetail">
           <template v-for="dimension in schoolData.dimensions" :key="dimension">
