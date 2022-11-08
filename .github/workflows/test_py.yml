@@ -31,5 +31,14 @@ jobs:
 
       - name: Run Django Tests
         working-directory: ./src/backend/server/
+        env:
+          SHORTLIST_RDS_ENDPOINT: ${{ secrets.SHORTLIST_RDS_ENDPOINT }}
+          SHORTLIST_RDS_PORT: ${{ secrets.SHORTLIST_RDS_PORT }}
+          SHORTLIST_RDS_USER: ${{ secrets.SHORTLIST_RDS_USER }}
+          SHORTLIST_RDS_PASSWORD: ${{ secrets.SHORTLIST_RDS_PASSWORD }}
+          SHORTLIST_DJANGO_SECRET: ${{ secrets.SHORTLIST_DJANGO_SECRET }}
+          SHORTLIST_EMAIL_SMTP_HOST: ${{ secrets.SHORTLIST_EMAIL_SMTP_HOST }}
+          SHORTLIST_EMAIL_HOST_USER: ${{ secrets.SHORTLIST_EMAIL_HOST_USER }}
+          SHORTLIST_EMAIL_HOST_PASSWORD: ${{ secrets.SHORTLIST_EMAIL_HOST_PASSWORD }}
         run: |
           python3 manage.py test
