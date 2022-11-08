@@ -180,4 +180,31 @@ input {
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
 }
+
+.logininput {
+  width: 100%;
+  padding: 8px 5px;
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: "Aleo", serif;
+  outline: none;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.error-msg {
+  color: rgb(117, 28, 28);
+  margin: 0;
+  font-size: 13px;
+  padding-bottom: 7px;
+}
+form {
+  min-width: 100%;
+  max-width: 100%;
+  padding: 1em;
+}
 </style>
