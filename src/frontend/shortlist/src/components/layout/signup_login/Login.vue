@@ -62,37 +62,71 @@ export default {
   </div>
   <!-- Log In -->
   <div class="login_components_container">
+    <h1 class="instructions" id="big">Log In</h1>
     <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
-    <form @submit.prevent="loginWithPassword">
-      <h1 class="instructions" id="big">Log In</h1>
-      <div id="emailaddress_login">
-        <label>
-          Email address
-          <input type="email" v-model="email_login" />
-        </label>
-      </div>
-      <div id="password_login">
-        <label>
-          Password
-          <input type="password" name="password" v-model="password_login" />
-        </label>
-      </div>
-      <div>
-        <button
-          type="button"
-          v-on:click="loginWithPassword()"
-          class="btn btn-outline-dark"
+    <form>
+      <div class="form-group" :class="{ error: v$.form.email.$errors.length }">
+        <div id="emailaddress_login">
+          <!-- <label>
+            Email address -->
+          <input
+            type="email"
+            class="logininput"
+            placeholder="Email"
+            v-model="v$.form.email.$model"
+          />
+          <!-- </label> -->
+          <div
+            class="input-errors"
+            v-for="(error, index) of v$.form.email.$errors"
+            :key="index"
+          >
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </div>
+        <div
+          class="form-group"
+          :class="{ error: v$.form.password.$errors.length }"
         >
-          Login
-        </button>
-        <p class="instructions" id="small">or</p>
-        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
-          Log In with Google
-        </button>
-        <p class="instructions" id="small">Don't have an account yet?</p>
-        <button @click="$router.push('/signup')" class="btn btn-outline-dark">
-          Sign me up!
-        </button>
+          <div id="password_login">
+            <!-- <label>
+              Password -->
+            <input
+              type="password"
+              name="password"
+              v-model="v$.form.password.$model"
+              class="logininput"
+              placeholder="Password"
+            />
+            <!-- </label> -->
+            <div
+              class="input-errors"
+              v-for="(error, index) of v$.form.password.$errors"
+              :key="index"
+            >
+              <div class="error-msg">{{ error.$message }}</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            :disabled="v$.form.$invalid"
+            @click="submitLoginForm"
+          >
+            Login
+          </button>
+          <!-- TODO: Forgot password feature -->
+          <p class="instructions" id="small">or</p>
+          <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+            Log In with Google
+          </button>
+          <p class="instructions" id="small">Don't have an account yet?</p>
+          <button @click="$router.push('/signup')" class="btn btn-outline-dark">
+            Sign me up!
+          </button>
+        </div>
       </div>
     </form>
   </div>
