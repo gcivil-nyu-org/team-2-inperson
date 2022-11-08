@@ -12,7 +12,7 @@ Django==4.1.2
 djangorestframework-simplejwt==5.2.2
 djangorestframework==3.14.0
 docopt==0.6.2
-drg-yasg==1.21.4
+drf-yasg==1.21.4
 flake8==5.0.4
 idna==3.4
 mccabe==0.7.0
