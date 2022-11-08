@@ -73,12 +73,15 @@ export default {
         </button>
       </div>
     </form>
-    <button class="delparent">Delete Account Permanently <img src="/del-parent.png" class="parentdeleteimg" /></button>
+    <button class="delparent">
+      Delete Account Permanently
+      <img src="/del-parent.png" class="parentdeleteimg" />
+    </button>
   </main>
 </template>
 <style scoped>
 main {
-  border-radius:2% ;
+  border-radius: 2%;
   background-color: rgb(236, 236, 236);
 }
 .profileform {
@@ -260,7 +263,7 @@ main {
   z-index: -1;
   transition: all 0.3s ease-in-out;
 }
-.delparent:hover{
+.delparent:hover {
   transform: translateY(5px);
   color: #ffffff;
 }
