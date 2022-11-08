@@ -26,7 +26,7 @@ SITE_ROOT = root()
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str("SECRET_KEY")
+SECRET_KEY = env.str("SHORTLIST_DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
@@ -108,14 +108,23 @@ WSGI_APPLICATION = "server.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES = DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get("SHORTLIST_RDS_DB"),
+        "USER": os.environ.get("SHORTLIST_RDS_USER"),
+        "PASSWORD": os.environ.get("SHORTLIST_RDS_PASSWORD"),
+        "HOST": os.environ.get("SHORTLIST_RDS_ENDPOINT"),
+        "PORT": os.environ.get("SHORTLIST_RDS_PORT"),
+    }
+}
 
 # EMAIL CREDENTIALS
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = env.str("SHORTLIST_EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("SHORTLIST_EMAIL_HOST_PASSWORD")
 
 XRAY_RECORDER = {
     "AWS_XRAY_DAEMON_ADDRESS": "127.0.0.1:2000",
