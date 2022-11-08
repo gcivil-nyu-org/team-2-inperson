@@ -71,13 +71,14 @@ export default {
         <button class="pref-actions" @click="clicker('Back')">
           Update Changes
         </button>
-        <div style="flex-grow: 1"></div>
       </div>
     </form>
+    <button class="delparent">Delete Account Permanently <img src="/del-parent.png" class="parentdeleteimg" /></button>
   </main>
 </template>
 <style scoped>
 main {
+  border-radius:2% ;
   background-color: rgb(236, 236, 236);
 }
 .profileform {
@@ -92,7 +93,6 @@ main {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -227,5 +227,45 @@ main {
   padding: 1%;
   float: left;
   margin-right: 5px;
+}
+
+.parentdeleteimg {
+  vertical-align: middle;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.delparent {
+  background: transparent;
+  border: 1px solid #000000;
+  padding: 5px 5px;
+  color: #000000;
+  border-radius: 3px;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
+  left: 100px;
+}
+.delparent:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 120%;
+  background: #811919;
+  top: 0;
+  left: -140px;
+  border-radius: 0 20px 20px 0;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+.delparent:hover{
+  transform: translateY(5px);
+  color: #ffffff;
+}
+.delparent:hover:before {
+  left: 0;
+  opacity: 1;
 }
 </style>
