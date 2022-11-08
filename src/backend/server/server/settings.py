@@ -28,7 +28,6 @@ SECRET_KEY = env.str("SHORTLIST_DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("SHORTLIST_DJANGO_DEBUG", default=True)
-print("DEBUG:", DEBUG)
 
 TEMPLATE_DEBUG = DEBUG
 
