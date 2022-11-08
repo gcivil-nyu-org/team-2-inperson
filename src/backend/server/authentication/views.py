@@ -52,7 +52,8 @@ class RegisterView(generics.GenericAPIView):
         absurl = "http://www.shortlist.nyc/verifyEmail?token=" + str(token)
         email_body = (
             "Hi "
-            + user.username + ", "
+            + user.username
+            + ", "
             + "\n\nUse the link below to verify your email \n"
             + absurl
         )

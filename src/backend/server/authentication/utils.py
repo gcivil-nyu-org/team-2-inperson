@@ -20,6 +20,6 @@ class Util:
             subject=data["email_subject"],
             body=data["email_body"],
             to=[data["to_email"]],
-            from_email="noreply@messaging.shortlist.nyc"
+            from_email="noreply@messaging.shortlist.nyc",
         )
         EmailThread(email).start()
