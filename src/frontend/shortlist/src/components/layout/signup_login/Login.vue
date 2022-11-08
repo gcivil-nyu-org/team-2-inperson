@@ -161,7 +161,7 @@ input {
 }
 
 #alert_login {
-  color: red;
+  color: rgb(141, 0, 0);
   margin-bottom: 10px;
 }
 

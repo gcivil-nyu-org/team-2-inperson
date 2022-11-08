@@ -251,7 +251,7 @@ input {
 }
 
 #alert_signup {
-  color: red;
+  color: rgb(141, 0, 0);
   margin-bottom: 2px;
 }
 #sign_up_sign {
@@ -275,7 +275,7 @@ input {
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
 }
-.signupinput{
+.signupinput {
   width: 100%;
   padding: 8px 5px;
   background: #ebf3e6;
@@ -290,15 +290,15 @@ input {
   position: relative;
 }
 
-.error-msg{
- color:rgb(117, 28, 28);
- margin:0;
- font-size: 13px;
- padding-bottom: 7px;
+.error-msg {
+  color: rgb(117, 28, 28);
+  margin: 0;
+  font-size: 13px;
+  padding-bottom: 7px;
 }
-form{
+form {
   min-width: 100%;
   max-width: 100%;
-  padding:1em;
+  padding: 1em;
 }
 </style>
