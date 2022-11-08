@@ -38,10 +38,10 @@ export default {
 }
 .statusdetails {
   grid-area: 1 / 1 / 2 / 2;
-  padding: 5%;
+  padding: 2%;
 }
 .prefrel {
   grid-area: 1 / 3 / 2 / 4;
-  padding: 5%;
+  padding:2%;
 }
 </style>
