@@ -18,12 +18,12 @@ export default {
   },
   mounted() {
     const ctx = document.getElementById("myChart");
-    
+
     let chartStatus = Chart.getChart("myChart");
     if (chartStatus != undefined) {
-        chartStatus.destroy();
-    }  
-    
+      chartStatus.destroy();
+    }
+
     let myChart = new Chart(ctx, {
       type: "bar",
       data: {
@@ -63,19 +63,18 @@ export default {
               display: false,
             },
             ticks: {
-                    display: false //this will remove only the label
-                }
-            
+              display: false, //this will remove only the label
+            },
           },
           x: {
             grid: {
               display: false,
-            }
+            },
           },
         },
       },
     });
-    myChart
+    myChart;
   },
 };
 </script>
