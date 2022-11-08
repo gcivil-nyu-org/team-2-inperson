@@ -42,6 +42,6 @@ export default {
 }
 .prefrel {
   grid-area: 1 / 3 / 2 / 4;
-  padding:2%;
+  padding: 2%;
 }
 </style>
