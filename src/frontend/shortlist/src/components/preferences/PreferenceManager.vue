@@ -13,7 +13,7 @@ export default {
         if (this.selectedPage > 0) this.selectedPage--;
       } else {
         this.$emit("preferenceSubmitted");
-        this.$router.push("/");
+        this.$router.push("/categorize");
       }
 
       if (this.selectedPage > 0) {
