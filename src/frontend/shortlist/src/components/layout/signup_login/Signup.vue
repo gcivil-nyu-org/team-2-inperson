@@ -10,24 +10,77 @@ import {
   sameAs,
 } from "@vuelidate/validators";
 
+export function validName(name) {
+  let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+  if (validNamePattern.test(name)) {
+    return true;
+  }
+  return false;
+}
+export function validPassword(password) {
+  let validPasswordPattern = new RegExp(
+    "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
+  );
+  if (validPasswordPattern.test(password)) {
+    return true;
+  }
+  return false;
+}
 
 export default {
   name: "Signup",
   components: { Logo },
   setup() {
     const loginState = userLoginStore();
-    return { loginState };
+    return { v$: useVuelidate(), loginState };
   },
   data() {
     return {
       // For sign up
-      first_name: "",
-      last_name: "",
-      email_signup: "",
-      password_signup: "",
-      passwordVerify_signup: "",
+      form: {
+        first_name: "",
+        last_name: "",
+        email_signup: "",
+        password_signup: "",
+        passwordVerify_signup: "",
+      },
       // Alerts
       alert_signup: "",
+    };
+  },
+  validations() {
+    return {
+      form: {
+        firstName: {
+          required,
+          name_validation: {
+            $validator: validName,
+            $message:
+              "Invalid Name. Valid name only contain letters, dashes (-) and spaces",
+          },
+          maxLength: maxLength(15),
+        },
+        lastName: {
+          name_validation: {
+            $validator: validName,
+            $message:
+              "Invalid Name. Valid name only contain letters, dashes (-) and spaces",
+          },
+          maxLength: maxLength(10),
+        },
+        email: { required, email },
+        password: {
+          required,
+          name_validation: {
+            $validator: validPassword,
+            $message:
+              "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.",
+          },
+          minLength: minLength(8),
+          maxLength: maxLength(15),
+        },
+        confirmPassword: { required, sameAsPassword: sameAs("password") },
+      },
     };
   },
   methods: {
