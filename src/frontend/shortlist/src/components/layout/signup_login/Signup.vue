@@ -113,34 +113,106 @@ export default {
     <form @submit.prevent="signupWithPassword">
       <h1 class="instructions" id="big">Sign Up</h1>
       <div id="first_name">
-        <label>
-          First Name
-          <input type="text" v-model="first_name" />
-        </label>
+        <!-- <label>
+          First Name -->
+        <input
+          type="text"
+          placeholder="First Name"
+          v-model="v$.form.firstName.$model"
+          class="signupinput"
+        />
+        <!-- </label> -->
+        <!-- Error Message -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.firstName.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div id="last_name">
-        <label>
-          Last Name
-          <input type="text" v-model="last_name" />
-        </label>
+        <!-- <label>
+          Last Name -->
+        <input
+          type="text"
+          placeholder="Last Name"
+          v-model="v$.form.lastName.$model"
+          class="signupinput"
+        />
+        <!-- </label> -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.lastName.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div id="email_address_signup">
-        <label>
-          Email
-          <input type="email" v-model="email_signup" />
-        </label>
+        <!-- <label>
+          Email -->
+        <input
+          type="email"
+          placeholder="Email"
+          class="signupinput"
+          v-model="v$.form.email.$model"
+        />
+        <!-- </label> -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.email.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div id="password_signup">
-        <label>
-          Password
-          <input type="password" v-model="password_signup" />
-        </label>
+        <!-- <label>
+          Password -->
+        <input
+          type="password"
+          placeholder="Password"
+          class="signupinput"
+          v-model="v$.form.password.$model"
+        />
+        <!-- </label> -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.password.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
-      <label>
-        Verify Password
-        <input type="password" v-model="passwordVerify_signup" />
-      </label>
-      <button type="submit" class="btn btn-outline-dark">Sign up</button>
+      <div>
+        <!-- <label>
+          Verify Password -->
+        <input
+          type="password"
+          v-model="v$.form.confirmPassword.$model"
+          autocomplete="off"
+          placeholder="Confirm Password"
+          class="signupinput"
+        />
+        <!-- </label> -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.confirmPassword.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        :disabled="v$.form.$invalid"
+        class="btn btn-outline-dark"
+        @click="submitSignupForm"
+      >
+        Sign up
+      </button>
       <p class="instructions" id="small">Have an account already?</p>
       <button @click="$router.push('/login')" class="btn btn-outline-dark">
         Log me in!
