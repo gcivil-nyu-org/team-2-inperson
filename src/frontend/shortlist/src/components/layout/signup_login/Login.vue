@@ -41,7 +41,7 @@ export default {
     submitLoginForm() {
       this.alert_login = "";
       this.v$.$validate();
-      if (
+      if (//TODO: Verify credentials with API
         this.form.email == this.loginState.userEmail &&
         this.form.password == this.loginState.userPassword &&
         !this.v$.$error
