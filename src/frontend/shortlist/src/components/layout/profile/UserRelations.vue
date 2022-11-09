@@ -38,7 +38,7 @@
     </div>
     <span
       ><button type="button" class="btn btn-outline-light">
-        <img src="add-student.png" class="studentupdateimg" /></button
+        <img src="/add-student.png" class="studentupdateimg" /></button
     ></span>
   </main>
 </template>

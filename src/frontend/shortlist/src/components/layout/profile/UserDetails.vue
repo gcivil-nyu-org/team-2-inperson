@@ -13,12 +13,12 @@ export default {
   <main>
     <form class="profileform">
       <img
-        src="default-parent-profile.png"
+        src="/default-parent-profile.png"
         alt="Profile-Picture"
         id="profileimg"
         class="profileimg"
       />
-      <img src="edit.png" /><br />
+      <img src="/edit.png" /><br />
       <div class="inputs">
         <div class="accountstatus">
           <label class="typestatuslabel">Account Type:</label>&nbsp;<button
