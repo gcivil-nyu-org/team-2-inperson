@@ -11,19 +11,25 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
+import datetime
+
+root = environ.Path(__file__) - 2  # get root of the project
+env = environ.Env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SHORTLIST_DJANGO_SECRET")
+SECRET_KEY = env.str("SHORTLIST_DJANGO_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("SHORTLIST_DJANGO_DEBUG", default=True)
+
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -44,6 +50,9 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
+AUTH_USER_MODEL = "authentication.User"
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,12 +63,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_extensions",
+    "corsheaders",
+    "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
+    "drf_yasg",
     "api",
+    "authentication",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -91,7 +106,7 @@ WSGI_APPLICATION = "server.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
+DATABASES = DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": os.environ.get("SHORTLIST_RDS_DB"),
@@ -101,6 +116,13 @@ DATABASES = {
         "PORT": os.environ.get("SHORTLIST_RDS_PORT"),
     }
 }
+
+# EMAIL CREDENTIALS
+EMAIL_USE_TLS = True
+EMAIL_HOST = env.str("SHORTLIST_EMAIL_SMTP_HOST")
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env.str("SHORTLIST_EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("SHORTLIST_EMAIL_HOST_PASSWORD")
 
 XRAY_RECORDER = {
     "AWS_XRAY_DAEMON_ADDRESS": "127.0.0.1:2000",
@@ -118,6 +140,21 @@ XRAY_RECORDER = {
     "STREAMING_THRESHOLD": None,
 }
 
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+    "NON_FIELD_ERRORS_KEY": "error",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=1),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(days=1),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -157,3 +194,9 @@ USE_TZ = True
 
 STATIC_ROOT = "static"
 STATIC_URL = "static/"
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    },
+}

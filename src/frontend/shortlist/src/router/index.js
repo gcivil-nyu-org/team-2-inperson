@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DemoView from "../views/DemoView.vue";
+import ApiDemo from "../views/ApiDemo.vue";
 // import SignupView from "../views/SignupView.vue";
 
 const router = createRouter({
@@ -25,6 +26,12 @@ const router = createRouter({
       component: () => import("../views/StageView.vue"),
     },
     {
+      path: "/apiTest",
+      name: "api-test",
+      component: ApiDemo,
+    },
+
+    {
       path: "/categorize",
       name: "categorize-view",
       component: () => import("../views/CategorizeView.vue"),
@@ -40,9 +47,9 @@ const router = createRouter({
       component: () => import("../views/LoginView.vue"),
     },
     {
-      path: "/preferences",
-      name: "preferences-view",
-      component: () => import("../views/PreferencesView.vue"),
+      path: "/profile",
+      name: "profile-view",
+      component: () => import("../views/ProfileView.vue"),
     },
     {
       path: "/about",
