@@ -1,26 +1,25 @@
 <script>
 import Logo from "./Logo.vue";
-import { userLoginStore } from "../../../states/userLogin";
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
+import { mapState } from "pinia";
+import { sessionStore } from "../../../states/sessionStore";
 
 export default {
   name: "Login",
+  emits: ["appAccountLogin"],
   components: { Logo },
   setup() {
-    const loginState = userLoginStore();
-    return { v$: useVuelidate(), loginState };
+    return { v$: useVuelidate() };
   },
   data() {
     return {
       form: {
-        // For log in
-        // username_login: "",
         email: "",
         password: "",
       },
       // Alerts
-      // alert_login: "",
+      alert_login: "",
     };
   },
   validations() {
@@ -41,18 +40,24 @@ export default {
     submitLoginForm() {
       this.alert_login = "";
       this.v$.$validate();
-      if (//TODO: Verify credentials with API
-        this.form.email == this.loginState.userEmail &&
-        this.form.password == this.loginState.userPassword &&
-        !this.v$.$error
-      ) {
-        this.loginState.loggedIn = true;
-        this.$router.push("/");
-      } else {
-        this.alert_login = "Either Email or Password does not correct!";
+      if (this.v$.$error) {
+        this.alert_signup = "Form failed validation";
         return;
       }
+      this.$emit("appAccountLogin", {
+        email: this.form.email,
+        password: this.form.password,
+      });
     },
+  },
+  computed: {
+    // this also contains a "loginAttemps" state, which we will use to get
+    // the data about whether the login attempt failed
+    ...mapState(sessionStore, {
+      loginState: "loginState",
+      loginAttempts: "loginAttempts",
+      accountMetadata: "accountMetadata",
+    }),
   },
 };
 </script>
@@ -69,15 +74,12 @@ export default {
     <form>
       <div class="form-group" :class="{ error: v$.form.email.$errors.length }">
         <div id="emailaddress_login">
-          <!-- <label>
-            Email address -->
           <input
             type="email"
             class="logininput"
             placeholder="Email"
             v-model="v$.form.email.$model"
           />
-          <!-- </label> -->
           <div
             class="input-errors"
             v-for="(error, index) of v$.form.email.$errors"
@@ -91,8 +93,6 @@ export default {
           :class="{ error: v$.form.password.$errors.length }"
         >
           <div id="password_login">
-            <!-- <label>
-              Password -->
             <input
               type="password"
               name="password"
@@ -100,7 +100,6 @@ export default {
               class="logininput"
               placeholder="Password"
             />
-            <!-- </label> -->
             <div
               class="input-errors"
               v-for="(error, index) of v$.form.password.$errors"
@@ -125,7 +124,10 @@ export default {
             Log In with Google
           </button>
           <p class="instructions" id="small">Don't have an account yet?</p>
-          <button @click="$router.push('/signup')" class="btn btn-outline-dark">
+          <button
+            @click="$router.replace('/signup')"
+            class="btn btn-outline-dark"
+          >
             Sign me up!
           </button>
         </div>

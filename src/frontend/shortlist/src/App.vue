@@ -1,14 +1,33 @@
 <script setup>
-import { RouterView } from "vue-router";
+import { RouterView, useRouter } from "vue-router";
+
 import NavBar from "./components/layout/navigation/NavBar.vue";
-import EventListener from "./EventListener.vue";
+import ShortlistApi from "@/api/shortlist";
+import { sessionStore } from "./states/sessionStore.js";
+
+const apiClient = new ShortlistApi("https://api.shortlist.nyc");
+const router = useRouter();
+const appSessionStore = sessionStore();
+
+function appAccountSignup(payload) {
+  console.log("accountSignup", payload, appSessionStore);
+  router.replace("/login");
+}
+
+function appAccountLogin(payload) {
+  console.log("accountLogin", payload, appSessionStore);
+  appSessionStore.loginState = true;
+  router.replace("/");
+}
 </script>
 
 <template>
-  <EventListener />
   <NavBar />
   <div class="app-container">
-    <RouterView />
+    <RouterView
+      @appAccountLogin="appAccountLogin"
+      @appAccountSignup="appAccountSignup"
+    />
   </div>
 </template>
 

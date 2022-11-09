@@ -1,18 +1,22 @@
 <script>
-import { userLoginStore } from "../states/userLogin";
+import { mapState } from "pinia";
+import { sessionStore } from "../states/sessionStore";
 
 export default {
   name: "Home",
-  setup() {
-    const loginState = userLoginStore();
-    return { loginState };
+  computed: {
+    ...mapState(sessionStore, {
+      loginState: "loginState",
+      accountMetadata: "accountMetadata",
+    }),
   },
 };
 </script>
 
 <template>
   <main>
-    <div class="home-container" v-if="loginState.loggedIn == false">
+    {{ loginState }} {{ accountMetadata }}
+    <div class="home-container" v-if="loginState == false">
       <div class="shortlist-fnt-serif-med">
         <h1>Welcome to Shortlist</h1>
       </div>
@@ -31,7 +35,7 @@ export default {
       </div>
     </div>
     <div class="dash-container" v-else>
-      <h1>{{ loginState.userFirstName }}'s Dashboard</h1>
+      <h1>{{ accountMetadata.userFirstName }}'s Dashboard</h1>
       <div class="dash-actions-container">
         <div class="action">
           <button
@@ -47,7 +51,7 @@ export default {
         <div class="action">
           <button
             class="btn btn-outline-success"
-            @click="$router.push('preferences')"
+            @click="$router.replace('profile')"
           >
             My Preferences
           </button>

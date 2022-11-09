@@ -1,5 +1,5 @@
 <script>
-import { userLoginStore } from "../../../states/userLogin";
+import { userLoginStore } from "../../../states/sessionStore";
 
 export default {
   name: "Home",

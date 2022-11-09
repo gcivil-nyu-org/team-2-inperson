@@ -1,6 +1,5 @@
 <script>
 import Logo from "./Logo.vue";
-import { userLoginStore } from "../../../states/userLogin";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
@@ -11,13 +10,16 @@ import {
 } from "@vuelidate/validators";
 
 export function validName(name) {
+  return true;
   let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
   if (validNamePattern.test(name)) {
     return true;
   }
   return false;
 }
+
 export function validPassword(password) {
+  return true;
   let validPasswordPattern = new RegExp(
     "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
   );
@@ -30,9 +32,9 @@ export function validPassword(password) {
 export default {
   name: "Signup",
   components: { Logo },
+  emits: ["appAccountSignup"],
   setup() {
-    const loginState = userLoginStore();
-    return { v$: useVuelidate(), loginState };
+    return { v$: useVuelidate() };
   },
   data() {
     return {
@@ -45,7 +47,7 @@ export default {
         confirmPassword: "",
       },
       // Alerts
-      // alert_signup: "",
+      alert_signup: "",
     };
   },
   validations() {
@@ -68,7 +70,10 @@ export default {
           },
           maxLength: maxLength(10),
         },
-        email: { required, email },
+        email: {
+          required,
+          //email
+        },
         password: {
           required,
           name_validation: {
@@ -76,7 +81,7 @@ export default {
             $message:
               "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.",
           },
-          minLength: minLength(8),
+          // minLength: minLength(8),
           maxLength: maxLength(15),
         },
         confirmPassword: {
@@ -94,11 +99,13 @@ export default {
         this.alert_signup = "Form failed validation";
         return;
       } else {
-        this.loginState.userFirstName = this.form.firstName;
-        this.loginState.userEmail = this.form.email;
-        this.loginState.userPassword = this.form.password;
-        this.$router.push("/login");
-        // this.alert_signup = "Thanks for signing up! Please go to login.";
+        // TRIGGER SIGNUP EVENT
+        console.log("EMITTED");
+        this.$emit("appAccountSignup", {
+          email: this.form.email,
+          firstName: this.form.firstName,
+          password: this.form.password,
+        });
         return;
       }
     },
@@ -107,26 +114,18 @@ export default {
 </script>
 
 <template>
-  <!-- Logo  -->
-  <div class="logo">
-    <Logo />
-  </div>
-  <!-- Sign Up -->
+  <div class="logo"><Logo /></div>
   <div class="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
-    <form @submit.prevent="signupWithPassword">
+    <div class="signup-form-container">
       <h1 class="instructions" id="big">Sign Up</h1>
       <div id="first_name">
-        <!-- <label>
-          First Name -->
         <input
           type="text"
           placeholder="First Name"
           v-model="v$.form.firstName.$model"
           class="signupinput"
         />
-        <!-- </label> -->
-        <!-- Error Message -->
         <div
           class="input-errors"
           v-for="(error, index) of v$.form.firstName.$errors"
@@ -136,15 +135,12 @@ export default {
         </div>
       </div>
       <div id="last_name">
-        <!-- <label>
-          Last Name -->
         <input
           type="text"
           placeholder="Last Name"
           v-model="v$.form.lastName.$model"
           class="signupinput"
         />
-        <!-- </label> -->
         <div
           class="input-errors"
           v-for="(error, index) of v$.form.lastName.$errors"
@@ -154,15 +150,12 @@ export default {
         </div>
       </div>
       <div id="email_address_signup">
-        <!-- <label>
-          Email -->
         <input
           type="email"
           placeholder="Email"
           class="signupinput"
           v-model="v$.form.email.$model"
         />
-        <!-- </label> -->
         <div
           class="input-errors"
           v-for="(error, index) of v$.form.email.$errors"
@@ -172,15 +165,12 @@ export default {
         </div>
       </div>
       <div id="password_signup">
-        <!-- <label>
-          Password -->
         <input
           type="password"
           placeholder="Password"
           class="signupinput"
           v-model="v$.form.password.$model"
         />
-        <!-- </label> -->
         <div
           class="input-errors"
           v-for="(error, index) of v$.form.password.$errors"
@@ -190,8 +180,6 @@ export default {
         </div>
       </div>
       <div>
-        <!-- <label>
-          Verify Password -->
         <input
           type="password"
           v-model="v$.form.confirmPassword.$model"
@@ -199,7 +187,6 @@ export default {
           placeholder="Confirm Password"
           class="signupinput"
         />
-        <!-- </label> -->
         <div
           class="input-errors"
           v-for="(error, index) of v$.form.confirmPassword.$errors"
@@ -210,10 +197,9 @@ export default {
       </div>
 
       <button
-        type="submit"
         :disabled="v$.form.$invalid"
         class="btn btn-outline-dark"
-        @click="submitSignupForm"
+        @click.prevent="submitSignupForm"
       >
         Sign up
       </button>
@@ -221,7 +207,7 @@ export default {
       <button @click="$router.push('/login')" class="btn btn-outline-dark">
         Log me in!
       </button>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -249,7 +235,11 @@ input {
   border-radius: 40px;
   box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
-
+.signup-form-container {
+  display: inline-block;
+  width: 100%;
+  justify-content: flex-start;
+}
 #alert_signup {
   color: rgb(141, 0, 0);
   margin-bottom: 2px;
