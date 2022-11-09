@@ -1,13 +1,22 @@
 <script>
+import { mapState } from "pinia";
+import { sessionStore } from "../states/sessionStore";
 import UserDetails from "../components/layout/profile/UserDetails.vue";
 import UserPreference from "../components/layout/profile/UserPreference.vue";
 import UserRelations from "../components/layout/profile/UserRelations.vue";
 
 export default {
+  emits: ["appAccountUpdatePreferences"],
   components: {
     UserDetails,
     UserPreference,
     UserRelations,
+  },
+  computed: {
+    ...mapState(sessionStore, {
+      loginState: "loginState",
+      accountMetadata: "accountMetadata",
+    }),
   },
 };
 </script>
@@ -16,11 +25,16 @@ export default {
   <main>
     <div class="profile">
       <div class="statusdetails">
-        <UserDetails />
+        <UserDetails :accountMetadata="accountMetadata" />
       </div>
       <div class="prefrel">
-        <UserPreference />
-        <UserRelations />
+        <UserPreference
+          :accountMetadata="accountMetadata"
+          @appAccountUpdatePreferences="
+            (p) => this.$emit('appAccountUpdatePreferences', p)
+          "
+        />
+        <UserRelations :accountMetadata="accountMetadata" />
       </div>
     </div>
   </main>

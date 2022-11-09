@@ -1,60 +1,51 @@
 <script>
 import PreferenceDemo from "../../preferences/PreferenceDemo.vue";
-import axios from "axios";
 
 export default {
+  emits: ["appAccountUpdatePreferences"],
+  props: ["accountMetadata"],
   components: {
     PreferenceDemo,
   },
   data() {
     return {
-      prefs: {},
-      prefupdateflag: false,
+      preferenceUpdateFlag: false,
     };
   },
   methods: {
-    updateflag() {
-      this.prefupdateflag = !this.prefupdateflag;
+    togglePreferenceForm() {
+      this.prefupdateflag = !this.preferenceUpdateFlag;
     },
-  },
-  mounted() {
-    axios
-      .post(
-        "https://api.shortlist.nyc/account/metadata",
-        {},
-        {
-          headers: {
-            "x-shortlist-account": "e44278fec4984522b156cae1a8b3981d",
-          },
-        }
-      )
-      .then((response) => {
-        let alldata = JSON.parse(JSON.stringify(response.data));
-        this.prefs = alldata["preferences"];
-      })
-      .catch((err) => {
-        console.log("AXIOS ERR:", err.response.data);
-      });
+    updatePref(payload) {
+      console.log("updated!", payload);
+      this.$emit("appAccountUpdatePreferences", payload);
+      this.togglePreferenceForm();
+    },
   },
 };
 </script>
 
 <template>
-  <span v-if="!prefupdateflag">
+  <span v-if="!preferenceUpdateFlag">
     <label class="prefprofiletitle">Preferences</label>
     <form class="prefprofileform">
-      <template v-for="val in prefs" :key="val">
+      <template v-for="val in accountMetadata.preferences" :key="val">
         <label class="pref-q-name">{{ val.Question }}</label>
         <input type="text" class="profilefields" :placeholder="val.Response" />
       </template>
     </form>
-    <button @click="updateflag" class="btn btn-outline-dark">
+    <button @click="togglePreferenceForm" class="btn btn-outline-dark">
       Update Preferences
     </button>
   </span>
   <span v-else>
-    <PreferenceDemo />
-    <button @click="updateflag" class="btn btn-outline-dark">Cancel</button>
+    <PreferenceDemo
+      @submitPreferences="updatePref"
+      :currentPreferences="accountMetadata.preferences"
+    />
+    <button @click="togglePreferenceForm" class="btn btn-outline-dark">
+      Cancel
+    </button>
   </span>
 </template>
 <style scoped>

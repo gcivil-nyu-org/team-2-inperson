@@ -19,6 +19,11 @@ function appAccountLogin(payload) {
   appSessionStore.loginState = true;
   router.replace("/");
 }
+
+function appAccountUpdatePreferences(payload) {
+  console.log("accountUpdatePreferences", payload, appSessionStore);
+  appSessionStore.accountMetadata.preferences = payload;
+}
 </script>
 
 <template>
@@ -27,6 +32,7 @@ function appAccountLogin(payload) {
     <RouterView
       @appAccountLogin="appAccountLogin"
       @appAccountSignup="appAccountSignup"
+      @appAccountUpdatePreferences="appAccountUpdatePreferences"
     />
   </div>
 </template>

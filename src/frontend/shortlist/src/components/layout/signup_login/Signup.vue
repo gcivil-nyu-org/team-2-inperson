@@ -10,7 +10,6 @@ import {
 } from "@vuelidate/validators";
 
 export function validName(name) {
-  return true;
   let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
   if (validNamePattern.test(name)) {
     return true;
@@ -19,7 +18,6 @@ export function validName(name) {
 }
 
 export function validPassword(password) {
-  return true;
   let validPasswordPattern = new RegExp(
     "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
   );
@@ -72,7 +70,7 @@ export default {
         },
         email: {
           required,
-          //email
+          email,
         },
         password: {
           required,
@@ -81,7 +79,7 @@ export default {
             $message:
               "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.",
           },
-          // minLength: minLength(8),
+          minLength: minLength(8),
           maxLength: maxLength(15),
         },
         confirmPassword: {
@@ -100,7 +98,6 @@ export default {
         return;
       } else {
         // TRIGGER SIGNUP EVENT
-        console.log("EMITTED");
         this.$emit("appAccountSignup", {
           email: this.form.email,
           firstName: this.form.firstName,
@@ -204,7 +201,7 @@ export default {
         Sign up
       </button>
       <p class="instructions" id="small">Have an account already?</p>
-      <button @click="$router.push('/login')" class="btn btn-outline-dark">
+      <button @click="$router.replace('/login')" class="btn btn-outline-dark">
         Log me in!
       </button>
     </div>

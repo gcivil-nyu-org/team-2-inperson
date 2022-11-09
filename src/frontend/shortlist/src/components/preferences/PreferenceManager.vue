@@ -13,9 +13,8 @@ export default {
         if (this.selectedPage > 0) this.selectedPage--;
       } else {
         this.$emit("preferenceSubmitted");
-        this.$router.push("/categorize");
+        // this.$router.push("/categorize");
       }
-
       if (this.selectedPage > 0) {
         this.actions.back.enabled = true;
       } else {
@@ -137,10 +136,10 @@ export default {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  align-items:baseline;
+  align-items: baseline;
   max-height: 300px;
   min-height: 300px;
-  margin:0;
+  margin: 0;
   overflow-y: scroll;
 }
 .pref-actions-line {

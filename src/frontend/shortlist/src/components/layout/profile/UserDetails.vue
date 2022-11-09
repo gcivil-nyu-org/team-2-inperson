@@ -1,5 +1,6 @@
 <script>
 export default {
+  props: ["accountMetadata"],
   methods: {
     loadFile: function (event) {
       var image = document.getElementById("output");
@@ -43,19 +44,19 @@ export default {
         <input
           type="text"
           class="profilefields"
-          placeholder="FirstNameFromAPI"
+          :placeholder="'First Name:  ' + accountMetadata.userFirstName"
           id="firstname"
         />
         <input
           type="text"
           class="profilefields"
-          placeholder="LastNameFromAPI"
+          :placeholder="'Last Name:  ' + accountMetadata.userLastName"
           id="lastname"
         />
         <input
           type="text"
           class="profilefields"
-          placeholder="EmailFromAPI"
+          :placeholder="accountMetadata.userEmail"
           id="useremail"
         />
 
