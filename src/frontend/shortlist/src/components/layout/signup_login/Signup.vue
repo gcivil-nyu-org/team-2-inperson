@@ -101,6 +101,7 @@ export default {
         this.$emit("appAccountSignup", {
           email: this.form.email,
           firstName: this.form.firstName,
+          lastName: this.form.lastName,
           password: this.form.password,
         });
         return;

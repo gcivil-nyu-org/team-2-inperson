@@ -10,8 +10,24 @@ const router = useRouter();
 const appSessionStore = sessionStore();
 
 function appAccountSignup(payload) {
+  //router.replace("/login");
   console.log("accountSignup", payload, appSessionStore);
-  router.replace("/login");
+  let apiReq = {
+    email: payload.email,
+    password: payload.password,
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+  };
+
+  let success = () => {
+    router.replace("/login");
+  };
+
+  let failure = (err) => {
+    console.log(err);
+  };
+  let req = apiClient.signupUser(apiReq, success, failure);
+  req.execute();
 }
 
 function appAccountLogin(payload) {

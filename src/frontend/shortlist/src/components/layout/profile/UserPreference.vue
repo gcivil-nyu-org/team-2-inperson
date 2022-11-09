@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     togglePreferenceForm() {
-      this.prefupdateflag = !this.preferenceUpdateFlag;
+      this.preferenceUpdateFlag = !this.preferenceUpdateFlag;
     },
     updatePref(payload) {
       console.log("updated!", payload);
