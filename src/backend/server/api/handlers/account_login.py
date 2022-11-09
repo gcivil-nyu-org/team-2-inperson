@@ -1,5 +1,4 @@
-import json
-
+"""Check a login."""
 from api.handlers.shortlist_request import ShortlistRequest
 from api.models.account import Account
 
@@ -7,7 +6,6 @@ from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseForbidden
-from django.http import HttpResponseServerError
 from django.views.decorators.csrf import csrf_exempt
 
 
