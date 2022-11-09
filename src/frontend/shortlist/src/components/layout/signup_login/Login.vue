@@ -1,31 +1,50 @@
 <script>
 import Logo from "./Logo.vue";
 import { userLoginStore } from "../../../states/userLogin";
+import useVuelidate from "@vuelidate/core";
+import { required, email, minLength } from "@vuelidate/validators";
 
 export default {
   name: "Login",
   components: { Logo },
   setup() {
     const loginState = userLoginStore();
-    return { loginState };
+    return { v$: useVuelidate(), loginState };
   },
   data() {
     return {
-      // For log in
-      username_login: "",
-      password_login: "",
-      email_login: "",
-
+      form: {
+        // For log in
+        // username_login: "",
+        email: "",
+        password: "",
+      },
       // Alerts
-      alert_login: "",
+      // alert_login: "",
+    };
+  },
+  validations() {
+    return {
+      form: {
+        email: {
+          required,
+          email,
+        },
+        password: {
+          required,
+          min: minLength(8),
+        },
+      },
     };
   },
   methods: {
-    loginWithPassword() {
+    submitLoginForm() {
       this.alert_login = "";
-      if (
-        this.email_login == this.loginState.userEmail &&
-        this.password_login == this.loginState.userPassword
+      this.v$.$validate();
+      if (//TODO: Verify credentials with API
+        this.form.email == this.loginState.userEmail &&
+        this.form.password == this.loginState.userPassword &&
+        !this.v$.$error
       ) {
         this.loginState.loggedIn = true;
         this.$router.push("/");
@@ -45,37 +64,71 @@ export default {
   </div>
   <!-- Log In -->
   <div class="login_components_container">
+    <h1 class="instructions" id="big">Log In</h1>
     <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
-    <form @submit.prevent="loginWithPassword">
-      <h1 class="instructions" id="big">Log In</h1>
-      <div id="emailaddress_login">
-        <label>
-          Email address
-          <input type="email" v-model="email_login" />
-        </label>
-      </div>
-      <div id="password_login">
-        <label>
-          Password
-          <input type="password" name="password" v-model="password_login" />
-        </label>
-      </div>
-      <div>
-        <button
-          type="button"
-          v-on:click="loginWithPassword()"
-          class="btn btn-outline-dark"
+    <form>
+      <div class="form-group" :class="{ error: v$.form.email.$errors.length }">
+        <div id="emailaddress_login">
+          <!-- <label>
+            Email address -->
+          <input
+            type="email"
+            class="logininput"
+            placeholder="Email"
+            v-model="v$.form.email.$model"
+          />
+          <!-- </label> -->
+          <div
+            class="input-errors"
+            v-for="(error, index) of v$.form.email.$errors"
+            :key="index"
+          >
+            <div class="error-msg">{{ error.$message }}</div>
+          </div>
+        </div>
+        <div
+          class="form-group"
+          :class="{ error: v$.form.password.$errors.length }"
         >
-          Login
-        </button>
-        <p class="instructions" id="small">or</p>
-        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
-          Log In with Google
-        </button>
-        <p class="instructions" id="small">Don't have an account yet?</p>
-        <button @click="$router.push('/signup')" class="btn btn-outline-dark">
-          Sign me up!
-        </button>
+          <div id="password_login">
+            <!-- <label>
+              Password -->
+            <input
+              type="password"
+              name="password"
+              v-model="v$.form.password.$model"
+              class="logininput"
+              placeholder="Password"
+            />
+            <!-- </label> -->
+            <div
+              class="input-errors"
+              v-for="(error, index) of v$.form.password.$errors"
+              :key="index"
+            >
+              <div class="error-msg">{{ error.$message }}</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            :disabled="v$.form.$invalid"
+            @click="submitLoginForm"
+          >
+            Login
+          </button>
+          <!-- TODO: Forgot password feature -->
+          <p class="instructions" id="small">or</p>
+          <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+            Log In with Google
+          </button>
+          <p class="instructions" id="small">Don't have an account yet?</p>
+          <button @click="$router.push('/signup')" class="btn btn-outline-dark">
+            Sign me up!
+          </button>
+        </div>
       </div>
     </form>
   </div>
@@ -108,7 +161,7 @@ input {
 }
 
 #alert_login {
-  color: red;
+  color: rgb(141, 0, 0);
   margin-bottom: 10px;
 }
 
@@ -128,5 +181,32 @@ input {
   font-size: 50px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
+}
+
+.logininput {
+  width: 100%;
+  padding: 8px 5px;
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: "Aleo", serif;
+  outline: none;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.error-msg {
+  color: rgb(117, 28, 28);
+  margin: 0;
+  font-size: 13px;
+  padding-bottom: 7px;
+}
+form {
+  min-width: 100%;
+  max-width: 100%;
+  padding: 1em;
 }
 </style>

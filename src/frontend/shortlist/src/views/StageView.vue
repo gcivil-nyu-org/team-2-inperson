@@ -1,7 +1,5 @@
 <script></script>
 
-<template>
-  <h1>Your Work</h1>
-</template>
+<template>blank</template>
 
 <style></style>
