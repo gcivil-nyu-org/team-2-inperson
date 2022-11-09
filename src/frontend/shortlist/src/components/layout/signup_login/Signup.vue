@@ -1,38 +1,104 @@
 <script>
 import Logo from "./Logo.vue";
 import { userLoginStore } from "../../../states/userLogin";
+import useVuelidate from "@vuelidate/core";
+import {
+  required,
+  email,
+  minLength,
+  maxLength,
+  sameAs,
+} from "@vuelidate/validators";
+
+export function validName(name) {
+  let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+  if (validNamePattern.test(name)) {
+    return true;
+  }
+  return false;
+}
+export function validPassword(password) {
+  let validPasswordPattern = new RegExp(
+    "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
+  );
+  if (validPasswordPattern.test(password)) {
+    return true;
+  }
+  return false;
+}
 
 export default {
   name: "Signup",
   components: { Logo },
   setup() {
     const loginState = userLoginStore();
-    return { loginState };
+    return { v$: useVuelidate(), loginState };
   },
   data() {
     return {
       // For sign up
-      first_name: "",
-      last_name: "",
-      email_signup: "",
-      password_signup: "",
-      passwordVerify_signup: "",
+      form: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
       // Alerts
-      alert_signup: "",
+      // alert_signup: "",
+    };
+  },
+  validations() {
+    return {
+      form: {
+        firstName: {
+          required,
+          name_validation: {
+            $validator: validName,
+            $message:
+              "Invalid Name. Valid name only contain letters, dashes (-) and spaces",
+          },
+          maxLength: maxLength(15),
+        },
+        lastName: {
+          name_validation: {
+            $validator: validName,
+            $message:
+              "Invalid Name. Valid name only contain letters, dashes (-) and spaces",
+          },
+          maxLength: maxLength(10),
+        },
+        email: { required, email },
+        password: {
+          required,
+          name_validation: {
+            $validator: validPassword,
+            $message:
+              "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.",
+          },
+          minLength: minLength(8),
+          maxLength: maxLength(15),
+        },
+        confirmPassword: {
+          required,
+          sameAsPassword: sameAs(this.form.password),
+        },
+      },
     };
   },
   methods: {
-    signupWithPassword() {
+    submitSignupForm() {
+      this.v$.$validate();
       this.alert_signup = "";
-      if (this.password_signup !== this.passwordVerify_signup) {
-        this.alert_signup = "Your Passwords do not match!";
+      if (this.v$.$error) {
+        this.alert_signup = "Form failed validation";
         return;
       } else {
-        this.loginState.userFirstName = this.first_name;
-        this.loginState.userEmail = this.email_signup;
-        this.loginState.userPassword = this.password_signup;
-
-        this.alert_signup = "Thanks for signing up! Please go to login.";
+        this.loginState.userFirstName = this.form.firstName;
+        this.loginState.userEmail = this.form.email;
+        this.loginState.userPassword = this.form.password;
+        this.$router.push("/login");
+        // this.alert_signup = "Thanks for signing up! Please go to login.";
         return;
       }
     },
@@ -51,34 +117,106 @@ export default {
     <form @submit.prevent="signupWithPassword">
       <h1 class="instructions" id="big">Sign Up</h1>
       <div id="first_name">
-        <label>
-          First Name
-          <input type="text" v-model="first_name" />
-        </label>
+        <!-- <label>
+          First Name -->
+        <input
+          type="text"
+          placeholder="First Name"
+          v-model="v$.form.firstName.$model"
+          class="signupinput"
+        />
+        <!-- </label> -->
+        <!-- Error Message -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.firstName.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div id="last_name">
-        <label>
-          Last Name
-          <input type="text" v-model="last_name" />
-        </label>
+        <!-- <label>
+          Last Name -->
+        <input
+          type="text"
+          placeholder="Last Name"
+          v-model="v$.form.lastName.$model"
+          class="signupinput"
+        />
+        <!-- </label> -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.lastName.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div id="email_address_signup">
-        <label>
-          Email
-          <input type="email" v-model="email_signup" />
-        </label>
+        <!-- <label>
+          Email -->
+        <input
+          type="email"
+          placeholder="Email"
+          class="signupinput"
+          v-model="v$.form.email.$model"
+        />
+        <!-- </label> -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.email.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
       <div id="password_signup">
-        <label>
-          Password
-          <input type="password" v-model="password_signup" />
-        </label>
+        <!-- <label>
+          Password -->
+        <input
+          type="password"
+          placeholder="Password"
+          class="signupinput"
+          v-model="v$.form.password.$model"
+        />
+        <!-- </label> -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.password.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
       </div>
-      <label>
-        Verify Password
-        <input type="password" v-model="passwordVerify_signup" />
-      </label>
-      <button type="submit" class="btn btn-outline-dark">Sign up</button>
+      <div>
+        <!-- <label>
+          Verify Password -->
+        <input
+          type="password"
+          v-model="v$.form.confirmPassword.$model"
+          autocomplete="off"
+          placeholder="Confirm Password"
+          class="signupinput"
+        />
+        <!-- </label> -->
+        <div
+          class="input-errors"
+          v-for="(error, index) of v$.form.confirmPassword.$errors"
+          :key="index"
+        >
+          <div class="error-msg">{{ error.$message }}</div>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        :disabled="v$.form.$invalid"
+        class="btn btn-outline-dark"
+        @click="submitSignupForm"
+      >
+        Sign up
+      </button>
       <p class="instructions" id="small">Have an account already?</p>
       <button @click="$router.push('/login')" class="btn btn-outline-dark">
         Log me in!
@@ -95,17 +233,17 @@ input {
 }
 .signup_components_container {
   position: absolute;
-  left: 70%;
+  left: 60%;
   top: 38%;
   height: auto;
   margin-top: -150px;
-  width: 450px;
+  width: 600px;
   margin-left: -80px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #bcd6a2;
-  padding: 3em;
+  padding: 2em;
   display: flex;
   flex-direction: column;
   border-radius: 40px;
@@ -113,11 +251,11 @@ input {
 }
 
 #alert_signup {
-  color: red;
+  color: rgb(141, 0, 0);
   margin-bottom: 2px;
 }
 #sign_up_sign {
-  position: relative;
+  position: static;
   top: 0;
 }
 .logo {
@@ -136,5 +274,31 @@ input {
   font-size: 50px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
+}
+.signupinput {
+  width: 100%;
+  padding: 8px 5px;
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: "Aleo", serif;
+  outline: none;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.error-msg {
+  color: rgb(117, 28, 28);
+  margin: 0;
+  font-size: 13px;
+  padding-bottom: 7px;
+}
+form {
+  min-width: 100%;
+  max-width: 100%;
+  padding: 1em;
 }
 </style>
