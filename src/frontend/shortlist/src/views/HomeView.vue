@@ -15,7 +15,6 @@ export default {
 
 <template>
   <main>
-    {{ loginState }} {{ accountMetadata }}
     <div class="home-container" v-if="loginState == false">
       <div class="shortlist-fnt-serif-med">
         <h1>Welcome to Shortlist</h1>

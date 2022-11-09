@@ -1,18 +1,7 @@
 <script>
-import { userLoginStore } from "../../../states/sessionStore";
-
 export default {
   name: "Home",
-  setup() {
-    const loginState = userLoginStore();
-    return { loginState };
-  },
-  mounted() {
-    this.loginState.loggedIn = false;
-    this.loginState.userFirstName = null;
-    this.loginState.userEmail = null;
-    this.loginState.userPassword = null;
-  },
+  // TODO: Handle this with events/props
 };
 </script>
 
