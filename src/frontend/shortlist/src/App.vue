@@ -10,8 +10,6 @@ const router = useRouter();
 const appSessionStore = sessionStore();
 
 function appAccountSignup(payload) {
-  //router.replace("/login");
-  console.log("accountSignup", payload, appSessionStore);
   let apiReq = {
     email: payload.email,
     password: payload.password,
@@ -24,7 +22,8 @@ function appAccountSignup(payload) {
   };
 
   let failure = (err) => {
-    console.log(err);
+    console.log("could not create!", err.response);
+    alert("could not create acount:" + err.response.data);
   };
   let req = apiClient.signupUser(apiReq, success, failure);
   req.execute();
