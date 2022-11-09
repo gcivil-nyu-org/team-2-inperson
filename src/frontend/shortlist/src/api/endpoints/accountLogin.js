@@ -13,6 +13,7 @@ export class fluentAccountLogin extends BaseShortlistCall {
   }
   forEmail(email) {
     this.#_email = email;
+    return this;
   }
   forPassword(password) {
     this.#_passwordHash = md5(password);
@@ -23,7 +24,7 @@ export class fluentAccountLogin extends BaseShortlistCall {
     let headers = {};
     let data = {
       email: this.#_email,
-      password: this.#_passwordHash,
+      passwordHash: this.#_passwordHash,
     };
 
     this.axiosRequest = new AxiosRequest("POST", this.endpoint, headers, data);

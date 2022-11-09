@@ -29,7 +29,10 @@ export default {
   <span v-if="!preferenceUpdateFlag">
     <label class="prefprofiletitle">Preferences</label>
     <form class="prefprofileform">
-      <template v-for="val in accountMetadata.preferences" :key="val">
+      <template
+        v-for="val in accountMetadata.preferences.recommendationPreferences"
+        :key="val"
+      >
         <label class="pref-q-name">{{ val.Question }}</label>
         <input type="text" class="profilefields" :placeholder="val.Response" />
       </template>

@@ -32,7 +32,7 @@ function appAccountSignup(payload) {
 function appAccountLogin(payload) {
   console.log("accountLogin", payload, appSessionStore);
   let req = apiClient
-    .loginUser()
+    .loginAccount()
     .forEmail(payload.email)
     .forPassword(payload.password)
     .onSuccess((result) => {
@@ -49,8 +49,21 @@ function appAccountLogin(payload) {
 }
 
 function appAccountUpdatePreferences(payload) {
-  console.log("accountUpdatePreferences", payload, appSessionStore);
-  appSessionStore.accountMetadata.preferences = payload;
+  let requestPayload = {
+    accountId: appSessionStore.accountMetadata.accountId,
+    preferences: appSessionStore.accountMetadata.preferences,
+  };
+  requestPayload.preferences.recommendationPreferences = payload;
+
+  let success = () => {
+    appSessionStore.accountMetadata.preferences.recommendationPreferences =
+      payload;
+  };
+  let fail = (err) => {
+    console.log(err);
+  };
+  let req = apiClient.updatePreferences(requestPayload, success, fail);
+  req.execute();
 }
 </script>
 

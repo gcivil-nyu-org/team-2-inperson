@@ -73,7 +73,7 @@ export default {
           alt="shortlist"
         />
         <span v-if="loginState" style="color: #ffffff; background-color: black">
-          Welcome {{ accountMetadata.userFirstName }} !&nbsp;
+          Welcome {{ accountMetadata.preferences.userFirstName }} !&nbsp;
         </span>
       </router-link>
 

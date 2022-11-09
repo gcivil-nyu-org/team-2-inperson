@@ -23,6 +23,9 @@ export default class ShortlistApi {
     return new temporarySignup(payload, successCb, failCb);
     // return new fluentAccountSignup(this.baseEndpoint);
   }
+  updatePreferences(payload, successCb, failCb) {
+    return new temporaryUpdatePreferences(payload, successCb, failCb);
+  }
 }
 
 import axios from "axios";
@@ -53,7 +56,7 @@ export class temporarySignup {
         password: this.password,
       },
     })
-      // email success;
+      // user/email success;
       .then(() => {
         // register the site account
         axios({
@@ -62,13 +65,35 @@ export class temporarySignup {
           headers: {},
           data: {
             email: this.email,
-            preferredName: this.firstName,
             passwordHash: this.passwordHash,
             accountType: this.accountType,
             preferences: {
-              schoolPreferences: {},
-              firstName: this.firstName,
-              lastName: this.lastName,
+              userFirstName: this.firstName,
+              userLastName: this.lastName,
+              recommendationPreferences: {
+                q1: {
+                  Question: "Which instruction mode do you prefer?",
+                  Response: "",
+                },
+                q2: {
+                  Question: "Do you have any Extra-curricular interests?",
+                  Response: [],
+                },
+                q3: {
+                  Question: "Do you already have a school in mind?",
+                  Response: "",
+                },
+                q4: {
+                  Question:
+                    "Is there a transit bus/train line you're interested in?",
+                  Response: "",
+                },
+                q5: {
+                  Question:
+                    "How would you rank your academic performance so far?",
+                  Response: "",
+                },
+              },
             },
           },
         })
@@ -76,6 +101,28 @@ export class temporarySignup {
           .catch((fail) => this.failCb(fail));
       })
       // email fail;
+      .catch((err) => this.failCb(err));
+  }
+}
+
+export class temporaryUpdatePreferences {
+  constructor(payload, successCb, failCb) {
+    this.accountId = payload.accountId;
+    this.preferences = payload.preferences;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+  execute() {
+    axios({
+      method: "POST",
+      url: "https://api.shortlist.nyc/account/update",
+      headers: {},
+      data: {
+        accountId: this.accountId,
+        preferences: this.preferences,
+      },
+    })
+      .then((result) => this.successCb(result))
       .catch((err) => this.failCb(err));
   }
 }

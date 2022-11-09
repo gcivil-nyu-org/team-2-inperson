@@ -35,7 +35,7 @@ export default {
       </div>
     </div>
     <div class="dash-container" v-else>
-      <h1>{{ accountMetadata.userFirstName }}'s Dashboard</h1>
+      <h1>{{ accountMetadata.preferences.userFirstName }}'s Dashboard</h1>
       <div class="dash-actions-container">
         <div class="action">
           <button

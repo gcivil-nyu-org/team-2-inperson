@@ -44,19 +44,23 @@ export default {
         <input
           type="text"
           class="profilefields"
-          :placeholder="'First Name:  ' + accountMetadata.userFirstName"
+          :placeholder="
+            'First Name:  ' + accountMetadata.preferences.userFirstName
+          "
           id="firstname"
         />
         <input
           type="text"
           class="profilefields"
-          :placeholder="'Last Name:  ' + accountMetadata.userLastName"
+          :placeholder="
+            'Last Name:  ' + accountMetadata.preferences.userLastName
+          "
           id="lastname"
         />
         <input
           type="text"
           class="profilefields"
-          :placeholder="accountMetadata.userEmail"
+          :placeholder="accountMetadata.email"
           id="useremail"
         />
 
