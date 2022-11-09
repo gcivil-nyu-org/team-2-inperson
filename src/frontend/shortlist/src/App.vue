@@ -23,7 +23,7 @@ function appAccountSignup(payload) {
 
   let failure = (err) => {
     console.log("could not create!", err.response);
-    alert("could not create acount:" + err.response.data);
+    alert("could not create acount");
   };
   let req = apiClient.signupUser(apiReq, success, failure);
   req.execute();
@@ -31,8 +31,21 @@ function appAccountSignup(payload) {
 
 function appAccountLogin(payload) {
   console.log("accountLogin", payload, appSessionStore);
-  appSessionStore.loginState = true;
-  router.replace("/");
+  let req = apiClient
+    .loginUser()
+    .forEmail(payload.email)
+    .forPassword(payload.password)
+    .onSuccess((result) => {
+      console.log("success:", result.data);
+      appSessionStore.loginState = true;
+      appSessionStore.accountMetadata = result.data;
+      router.replace("/");
+    })
+    .onFail((err) => {
+      alert("could not login");
+      console.log("could not login", err.response);
+    });
+  req.execute();
 }
 
 function appAccountUpdatePreferences(payload) {

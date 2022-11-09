@@ -1,7 +1,7 @@
 import { fluentAccountCreate } from "./endpoints/accountCreate";
 import { fluentAccountMetadata } from "./endpoints/accountMetadata";
 import { fluentRecommendations } from "./endpoints/recommendations";
-import { fluentAccountSignup } from "./endpoints/accountSignup";
+import { fluentAccountLogin } from "./endpoints/accountLogin";
 
 export default class ShortlistApi {
   constructor(baseURL) {
@@ -15,6 +15,9 @@ export default class ShortlistApi {
   }
   getRecommendations() {
     return new fluentRecommendations(this.baseEndpoint);
+  }
+  loginAccount() {
+    return new fluentAccountLogin(this.baseEndpoint);
   }
   signupUser(payload, successCb, failCb) {
     return new temporarySignup(payload, successCb, failCb);
