@@ -1,58 +1,63 @@
 <script>
-import { userLoginStore } from "../../../states/userLogin";
+import { sessionStore } from "../../../states/sessionStore";
+import { mapState } from "pinia";
+
+const appLinks = [
+  {
+    id: 0,
+    text: "Home",
+    page: "/",
+    always: true,
+    requireLogIn: true,
+  },
+  {
+    id: 1,
+    text: "Schools",
+    page: "/categorize",
+    always: false,
+    requireLogIn: true,
+  },
+  {
+    id: 2,
+    text: "Profile",
+    page: "/profile",
+    always: false,
+    requireLogIn: true,
+  },
+  {
+    id: 3,
+    text: "About",
+    page: "/about",
+    always: true,
+    requireLogIn: true,
+  },
+  {
+    id: 4,
+    text: "LogIn",
+    page: "/login",
+    always: false,
+    requireLogIn: false,
+  },
+  {
+    id: 5,
+    text: "Log Out",
+    page: "/logout",
+    always: false,
+    requireLogIn: true,
+  },
+];
 
 export default {
   name: "NavBar",
-  setup() {
-    const loginState = userLoginStore();
-    return { loginState };
+  computed: {
+    ...mapState(sessionStore, {
+      loginState: "loginState",
+      accountMetadata: "accountMetadata",
+    }),
   },
-  data() {
+  setup() {
     return {
-      links: [
-        {
-          id: 0,
-          text: "Home",
-          page: "/",
-          always: true,
-          requireLogIn: true,
-        },
-        {
-          id: 1,
-          text: "Set Preferences",
-          page: "/preferences",
-          always: false,
-          requireLogIn: true,
-        },
-        {
-          id: 2,
-          text: "Schools",
-          page: "/categorize",
-          always: false,
-          requireLogIn: true,
-        },
-        {
-          id: 3,
-          text: "About",
-          page: "/about",
-          always: true,
-          requireLogIn: true,
-        },
-        {
-          id: 4,
-          text: "LogIn",
-          page: "/login",
-          always: false,
-          requireLogIn: false,
-        },
-        {
-          id: 5,
-          text: "Log Out",
-          page: "/logout",
-          always: false,
-          requireLogIn: true,
-        },
-      ],
+      links: appLinks,
     };
   },
 };
@@ -67,17 +72,15 @@ export default {
           style="width: 170px; left: 15px"
           alt="shortlist"
         />
-        <span
-          v-if="loginState.loggedIn"
-          style="color: #ffffff; background-color: black"
-        >
-          Welcome {{ loginState.userFirstName }} !&nbsp;
+        <span v-if="loginState" style="color: #ffffff; background-color: black">
+          Welcome {{ accountMetadata.preferences.userFirstName }} !&nbsp;
         </span>
       </router-link>
 
       <button
         class="navbar-toggler"
         type="button"
+        src="/default-profile.png"
         data-bs-toggle="collapse"
         data-bs-target="#shortlistmenu"
         aria-controls="shortlistmenu"
@@ -92,9 +95,7 @@ export default {
             <router-link
               class="nav-item"
               style="display: inline; text-decoration: none"
-              v-if="
-                link.always || link.requireLogIn == this.loginState.loggedIn
-              "
+              v-if="link.always || link.requireLogIn == loginState"
               v-bind:key="link.id"
               :to="`${link.page}`"
             >
@@ -105,18 +106,26 @@ export default {
           </template>
         </ul>
       </div>
+      <span
+        ><img
+          src="/default-parent-profile.png"
+          alt="Profile-Picture"
+          class="profileimg"
+      /></span>
     </nav>
   </div>
 </template>
 
 <style>
-.spacing {
-  margin-right: 10px;
-}
-
 .navbar {
   font-family: "Cabin Sketch", cursive;
   font-weight: bold;
+}
+.profileimg {
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }
 .router-link-active {
   border-radius: 70px;
@@ -130,7 +139,6 @@ export default {
   color: white;
   cursor: pointer;
   display: inline-block;
-  padding: 1px 10px;
   text-align: center;
   text-decoration: none;
   transition: all 250ms;
@@ -148,7 +156,7 @@ export default {
 
 ul {
   position: absolute;
-  right: 70px;
+  right: 50px;
   top: 14px;
   z-index: 1;
 }

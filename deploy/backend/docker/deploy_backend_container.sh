@@ -2,7 +2,7 @@
 ACCESS_KEY=$(aws configure get aws_access_key_id --profile=shortlist)
 SECRET_KEY=$(aws configure get aws_secret_access_key --profile=shortlist)
 
-cp ~/.shortlist/.env .
+cp ~/.shortlist/.env_merge .env
 
 aws ecr get-login-password --profile=shortlist | docker login --username AWS --password-stdin 147551946776.dkr.ecr.us-east-1.amazonaws.com/shortlist-backend
 

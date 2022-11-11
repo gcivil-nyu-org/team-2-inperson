@@ -1,5 +1,9 @@
 """Loads school dimensions and dimension values from NYC Open Data Source is s3."""
 
+import boto3
+import json
+import requests
+
 """
 TODO TODO TODO TODO TODO
 I don't have time to do this right now, but this script needs some major optimization
@@ -13,10 +17,6 @@ instead of batching (the api is constructed to semi-handle batching).  This lose
 a TON of time in transit as each data point has to have the session setup/teardown.
 TODO TODO TODO TODO TODO
 """
-
-import boto3
-import json
-import requests
 
 S3_BUCKET = "nyu-shortlist-school-data"
 SCHOOL_DIM_OBJECT = "prod_extract/school_dim_val_model.json"
@@ -78,7 +78,6 @@ def load_school_dim_data():
     response = client.get_object(Bucket=S3_BUCKET, Key=SCHOOL_DIM_OBJECT)
     raw = response["Body"].read().decode("utf-8")
     records = raw.split("\n")
-    result = []
     present_dims = dict()
     present_schools = dict()
     progress = 0

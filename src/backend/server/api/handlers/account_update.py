@@ -22,8 +22,11 @@ def account_update(request: HttpRequest):
     if not sr.is_logged_in:
         return HttpResponseForbidden("must be logged in")
 
+    # TODO: replace this with the header
+    account_id = sr.body.get("accountId", None)
+
     try:
-        account = Account.objects.get(pk=sr.account)
+        account = Account.objects.get(pk=account_id)
     except Exception:
         return HttpResponseServerError("cannot find user record")
 

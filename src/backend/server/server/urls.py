@@ -13,9 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
 from api.handlers import account_create
+from api.handlers import account_login
 from api.handlers import account_metadata
 from api.handlers import account_update
 from api.handlers import school_create
@@ -26,10 +25,36 @@ from api.handlers import school_dim_value
 from api.handlers import school_dim_value_upsert
 from api.handlers import recommendation
 
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include
+from django.urls import path
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
+
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Shortlist Auth APIs",
+        default_version="v1",
+        description="All the apis are gonna be here",
+        terms_of_service="https://www.shortlists.nyc/",
+        contact=openapi.Contact(email="jain.v@nyu.edu"),
+        license=openapi.License(name="Test License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+    url="https://api.shortlist.nyc/",
+)
 
 urlpatterns = [
+    path("", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path("admin/", admin.site.urls),
+    path("auth/", include("authentication.urls")),
     path("account/create", account_create),
+    path("account/login", account_login),
     path("account/metadata", account_metadata),
     path("account/update", account_update),
     path("school/create", school_create),
@@ -39,4 +64,4 @@ urlpatterns = [
     path("school/dimension/value", school_dim_value),
     path("school/dimension/value/upsert", school_dim_value_upsert),
     path("recommendation", recommendation),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
