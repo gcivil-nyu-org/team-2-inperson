@@ -1,12 +1,10 @@
 <script>
-// import Logo from "./Logo.vue";
 import { userLoginStore } from "../../../states/userLogin";
 import useVuelidate from "@vuelidate/core";
 import { required, email, minLength } from "@vuelidate/validators";
 
 export default {
   name: "Login",
-  // components: { Logo },
   setup() {
     const loginState = userLoginStore();
     return { v$: useVuelidate(), loginState };
@@ -60,9 +58,6 @@ export default {
       <img src="/logo.png" id="logo_img"
     /></router-link>
   </div>
-  <!-- <div class="logo">
-    <Logo />
-  </div> -->
   <!-- Log In -->
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>

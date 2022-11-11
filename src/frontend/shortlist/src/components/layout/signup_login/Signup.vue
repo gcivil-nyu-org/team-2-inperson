@@ -1,5 +1,4 @@
 <script>
-// import Logo from "./Logo.vue";
 import { userLoginStore } from "../../../states/userLogin";
 import useVuelidate from "@vuelidate/core";
 import {
@@ -29,7 +28,6 @@ export function validPassword(password) {
 
 export default {
   name: "Signup",
-  // components: { Logo },
   setup() {
     const loginState = userLoginStore();
     return { v$: useVuelidate(), loginState };
@@ -95,7 +93,6 @@ export default {
         this.loginState.userEmail = this.form.email;
         this.loginState.userPassword = this.form.password;
         this.$router.push("/login");
-        // this.alert_signup = "Thanks for signing up! Please go to login.";
         return;
       }
     },
@@ -110,9 +107,6 @@ export default {
       <img src="/logo.png" id="logo_img"
     /></router-link>
   </div>
-  <!-- <div class="logo">
-    <Logo />
-  </div> -->
   <!-- Sign Up -->
   <div class="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
