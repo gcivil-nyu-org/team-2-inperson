@@ -15,7 +15,7 @@ export default {
     <div class="shortlist-modal" @click="$emit('modalOff')">
       <div class="shortlist-modal-inner">
         <div
-          id="stopPropagation"
+        id = "modalOffTest"
           @click="
             (e) => {
               e.stopPropagation();
