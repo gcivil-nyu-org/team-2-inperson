@@ -32,7 +32,7 @@ describe("Login.vue", () => {
 
     const testEmail = "loginEmail@address.com"; 
     const testPassword = "loginPassword"; 
-
+     
     componentWrapper.vm.form.email = testEmail; 
     componentWrapper.vm.form.password = testPassword; 
     // componentWrapper.vm.v$.$touch(); 
@@ -43,6 +43,7 @@ describe("Login.vue", () => {
     loginButton.trigger("click"); 
     await componentWrapper.vm.$nextTick(); 
     let emittedEvent = componentWrapper.emitted(); 
+    // console.log("0", emittedEvent.appAccountLogin); 
     let emittedPayload = emittedEvent.appAccountLogin[0][0]; 
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload.email).toEqual(testEmail);
