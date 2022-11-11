@@ -162,7 +162,7 @@ input {
 }
 
 .logo {
-  position: relative;
+  position: absolute;
   left: 20%;
   width: 700px;
   height: 700px;
@@ -211,9 +211,10 @@ form {
   max-height: 100%;
 }
 #logo_image_container {
-  position: relative;
+  position: absolute;
   width: 300px;
   height: 300px;
   margin-top: 100px;
+  margin-left: 22%;
 }
 </style>

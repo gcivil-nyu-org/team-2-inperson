@@ -303,9 +303,10 @@ form {
   max-height: 100%;
 }
 #logo_image_container {
-  position: relative;
+  position: absolute;
   width: 300px;
   height: 300px;
   margin-top: 100px;
+  margin-left: 22%; 
 }
 </style>
