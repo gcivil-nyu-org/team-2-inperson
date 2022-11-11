@@ -1,5 +1,5 @@
 <script>
-import Logo from "./Logo.vue";
+// import Logo from "./Logo.vue";
 import { userLoginStore } from "../../../states/userLogin";
 import useVuelidate from "@vuelidate/core";
 import {
@@ -29,14 +29,13 @@ export function validPassword(password) {
 
 export default {
   name: "Signup",
-  components: { Logo },
+  // components: { Logo },
   setup() {
     const loginState = userLoginStore();
     return { v$: useVuelidate(), loginState };
   },
   data() {
     return {
-      // For sign up
       form: {
         firstName: "",
         lastName: "",
@@ -44,8 +43,6 @@ export default {
         password: "",
         confirmPassword: "",
       },
-      // Alerts
-      // alert_signup: "",
     };
   },
   validations() {
@@ -108,9 +105,14 @@ export default {
 
 <template>
   <!-- Logo  -->
-  <div class="logo">
-    <Logo />
+  <div id="logo_image_container">
+    <router-link to="/" class="nav-item nav-link">
+      <img src="/logo.png" id="logo_img"
+    /></router-link>
   </div>
+  <!-- <div class="logo">
+    <Logo />
+  </div> -->
   <!-- Sign Up -->
   <div class="signup_components_container">
     <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
@@ -300,5 +302,16 @@ form {
   min-width: 100%;
   max-width: 100%;
   padding: 1em;
+}
+#logo_img {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+}
+#logo_image_container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin-top: 100px;
 }
 </style>
