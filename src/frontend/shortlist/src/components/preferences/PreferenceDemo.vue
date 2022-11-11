@@ -11,6 +11,7 @@ import PreferenceSlider from "./PreferenceSlider.vue";
 
 export default {
   name: "PreferenceDemo",
+  emits: ["submitPreferences"],
   components: {
     PreferenceManager,
     PreferenceManagerPage,
@@ -75,7 +76,7 @@ export default {
   methods: {
     handleSubmit() {
       this.submitted = true;
-      this.emitter.emit("submitPreferences", this.prefResults);
+      this.$emit("submitPreferences", this.prefResults);
     },
   },
 };

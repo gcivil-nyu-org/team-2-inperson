@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from api.handlers import account_create
+from api.handlers import account_login
 from api.handlers import account_metadata
 from api.handlers import account_update
 from api.handlers import school_create
@@ -53,6 +54,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("authentication.urls")),
     path("account/create", account_create),
+    path("account/login", account_login),
     path("account/metadata", account_metadata),
     path("account/update", account_update),
     path("school/create", school_create),

@@ -1,58 +1,63 @@
 <script>
-import { userLoginStore } from "../../../states/userLogin";
+import { sessionStore } from "../../../states/sessionStore";
+import { mapState } from "pinia";
+
+const appLinks = [
+  {
+    id: 0,
+    text: "Home",
+    page: "/",
+    always: true,
+    requireLogIn: true,
+  },
+  {
+    id: 1,
+    text: "Schools",
+    page: "/categorize",
+    always: false,
+    requireLogIn: true,
+  },
+  {
+    id: 2,
+    text: "Profile",
+    page: "/profile",
+    always: false,
+    requireLogIn: true,
+  },
+  {
+    id: 3,
+    text: "About",
+    page: "/about",
+    always: true,
+    requireLogIn: true,
+  },
+  {
+    id: 4,
+    text: "LogIn",
+    page: "/login",
+    always: false,
+    requireLogIn: false,
+  },
+  {
+    id: 5,
+    text: "Log Out",
+    page: "/logout",
+    always: false,
+    requireLogIn: true,
+  },
+];
 
 export default {
   name: "NavBar",
-  setup() {
-    const loginState = userLoginStore();
-    return { loginState };
+  computed: {
+    ...mapState(sessionStore, {
+      loginState: "loginState",
+      accountMetadata: "accountMetadata",
+    }),
   },
-  data() {
+  setup() {
     return {
-      links: [
-        {
-          id: 0,
-          text: "Home",
-          page: "/",
-          always: true,
-          requireLogIn: true,
-        },
-        {
-          id: 1,
-          text: "Schools",
-          page: "/categorize",
-          always: false,
-          requireLogIn: true,
-        },
-        {
-          id: 2,
-          text: "Profile",
-          page: "/profile",
-          always: false,
-          requireLogIn: true,
-        },
-        {
-          id: 3,
-          text: "About",
-          page: "/about",
-          always: true,
-          requireLogIn: true,
-        },
-        {
-          id: 4,
-          text: "LogIn",
-          page: "/login",
-          always: false,
-          requireLogIn: false,
-        },
-        {
-          id: 5,
-          text: "Log Out",
-          page: "/logout",
-          always: false,
-          requireLogIn: true,
-        },
-      ],
+      links: appLinks,
     };
   },
 };
@@ -67,11 +72,8 @@ export default {
           style="width: 170px; left: 15px"
           alt="shortlist"
         />
-        <span
-          v-if="loginState.loggedIn"
-          style="color: #ffffff; background-color: black"
-        >
-          Welcome {{ loginState.userFirstName }} !&nbsp;
+        <span v-if="loginState" style="color: #ffffff; background-color: black">
+          Welcome {{ accountMetadata.preferences.userFirstName }} !&nbsp;
         </span>
       </router-link>
 
@@ -93,9 +95,7 @@ export default {
             <router-link
               class="nav-item"
               style="display: inline; text-decoration: none"
-              v-if="
-                link.always || link.requireLogIn == this.loginState.loggedIn
-              "
+              v-if="link.always || link.requireLogIn == loginState"
               v-bind:key="link.id"
               :to="`${link.page}`"
             >
