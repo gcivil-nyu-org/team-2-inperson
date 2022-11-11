@@ -24,14 +24,7 @@ describe("Signup.vue", () => {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },
     });
-    /*
-    this.$emit("appAccountSignup", {
-          email: this.form.email,
-          firstName: this.form.firstName,
-          lastName: this.form.lastName,
-          password: this.form.password,
-        });
-    */
+
     const testEmail = "signupEmail@address.com"; 
     const testFirstName = "signupFirstName";
     const testLastName = "signupLastName"; 
@@ -41,7 +34,6 @@ describe("Signup.vue", () => {
     componentWrapper.vm.form.firstName = testFirstName; 
     componentWrapper.vm.form.lastName = testLastName; 
     componentWrapper.vm.form.password = testPassword; 
-    // componentWrapper.vm.v$.$touch(); 
     const signupButton = componentWrapper.find("#signupButtonTest");
     expect(signupButton.exists(), "ButtonExists").toBe(true);
     signupButton.element.disabled = false; 
@@ -49,13 +41,7 @@ describe("Signup.vue", () => {
     signupButton.trigger("click"); 
     await componentWrapper.vm.$nextTick(); 
     let emittedEvent = componentWrapper.emitted(); 
-    expect(emittedEvent).toBeTruthy();
-    // console.log("1", emittedEvent.appAccountSignup); --> Undefined
-    // console.log("2", emittedEvent); --> an empty list
-    // let emittedPayload = emittedEvent.appAccountSignup[0][0]; 
-    // expect(emittedPayload).toBeTruthy();
-    // expect(emittedPayload.email).toEqual(testEmail);
-    // expect(emittedPayload.password).toEqual(testPassword);  
+    expect(emittedEvent).toBeTruthy();  
   })
 
 }); 

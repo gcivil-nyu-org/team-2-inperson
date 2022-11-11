@@ -4,12 +4,7 @@ The following tests conclude all major component testing.
 */
 import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
-// import Signup from "../Signup.vue";
 import Login from "../Login.vue";
-// import Logo from "../Logo.vue";
-// import LoggedOut from "../LoggedOut.vue";
-// import ModalFullScreen from "./../../ModalFullScreen.vue";
-// import axios from "axios";
 import { createTestingPinia } from "@pinia/testing";
 
 describe("Login.vue", () => {
@@ -35,7 +30,6 @@ describe("Login.vue", () => {
      
     componentWrapper.vm.form.email = testEmail; 
     componentWrapper.vm.form.password = testPassword; 
-    // componentWrapper.vm.v$.$touch(); 
     const loginButton = componentWrapper.find("#loginButtonTest");
     expect(loginButton.exists(), "loginButtonExists").toBe(true);
     loginButton.element.disabled = false; 
@@ -43,7 +37,6 @@ describe("Login.vue", () => {
     loginButton.trigger("click"); 
     await componentWrapper.vm.$nextTick(); 
     let emittedEvent = componentWrapper.emitted(); 
-    // console.log("0", emittedEvent.appAccountLogin); 
     let emittedPayload = emittedEvent.appAccountLogin[0][0]; 
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload.email).toEqual(testEmail);
