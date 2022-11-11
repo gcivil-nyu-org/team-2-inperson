@@ -15,6 +15,7 @@ export default {
   data() {
     return {
       form: {
+        // form.email, form.password 
         email: "",
         password: "",
       },
@@ -71,46 +72,6 @@ export default {
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
     <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
-<<<<<<< HEAD
-    <form @submit.prevent="loginWithPassword" id="loginForm">
-      <h1 class="instructions" id="big">Log In</h1>
-      <div id="emailaddress_login">
-        <label>
-          Email address
-          <input type="email" v-model="email_login" />
-        </label>
-      </div>
-      <div id="password_login">
-        <label>
-          Password
-          <input type="password" name="password" v-model="password_login" />
-        </label>
-      </div>
-      <div>
-        <button
-          type="button"
-          v-on:click="loginWithPassword()"
-          class="btn btn-outline-dark"
-        >
-          Login
-        </button>
-        <p class="instructions" id="small">or</p>
-        <button
-          id="loginWithGoogle"
-          @click.prevent="loginWithSSO"
-          class="btn btn-outline-dark"
-        >
-          Log In with Google
-        </button>
-        <p class="instructions" id="small">Don't have an account yet?</p>
-        <button
-          id="switchToSignupButton"
-          @click="$router.push('/signup')"
-          class="btn btn-outline-dark"
-        >
-          Sign me up!
-        </button>
-=======
     <form>
       <div class="form-group" :class="{ error: v$.form.email.$errors.length }">
         <div id="emailaddress_login">
@@ -151,7 +112,8 @@ export default {
         </div>
         <div>
           <button
-            type="button"
+            id = "loginButtonTest"
+            type="button" 
             class="btn btn-outline-dark"
             :disabled="v$.form.$invalid"
             @click="submitLoginForm"
@@ -171,7 +133,6 @@ export default {
             Sign me up!
           </button>
         </div>
->>>>>>> develop
       </div>
     </form>
   </div>
