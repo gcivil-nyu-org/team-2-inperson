@@ -23,7 +23,7 @@ export default {
     <template v-for="(opt, optindex) in question.Options" :key="optindex">
       <div class="form-check">
         <input
-          id = "testItem"
+          id="testItem"
           type="checkbox"
           class="form-check-input"
           :value="opt"

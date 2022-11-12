@@ -15,8 +15,8 @@ describe("PreferenceMultiSelect.vue", () => {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-    "question": "String",
-    "modelValue": "String", 
+        question: "String",
+        modelValue: "String",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
@@ -25,16 +25,14 @@ describe("PreferenceMultiSelect.vue", () => {
     expect(componentWrapper.exists()).toBe(true);
   });
 
-
-
   it("test emit with data", async () => {
     const componentWrapper = mount(PreferenceMultiSelect, {
       props: {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-    "question": "String",
-    "modelValue": "String", 
+        question: "String",
+        modelValue: "String",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
@@ -43,15 +41,10 @@ describe("PreferenceMultiSelect.vue", () => {
 
     const testModelValue = "ModelValue";
     componentWrapper.vm.value = testModelValue;
-    // const testItem = componentWrapper.find("#testItem");
-    // expect(testItem.exists(),"testItemExists").toBe(true);
-
     await componentWrapper.vm.$nextTick();
     let emittedEvent = componentWrapper.emitted();
-    // console.log(emittedEvent, "emittedEvent"); 
     expect(emittedEvent).toBeTruthy();
     let emittedPayload = emittedEvent.updateModelValue[0][0];
-    // console.log(emittedPayload, "emittedPayload"); 
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload).toBe(testModelValue);
   });

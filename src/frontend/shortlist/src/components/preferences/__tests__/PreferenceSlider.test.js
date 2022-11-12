@@ -15,8 +15,8 @@ describe("PreferenceSlider.vue", () => {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-    "question": "String",
-    "modelValue": "String", 
+        question: "String",
+        modelValue: "String",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
@@ -31,8 +31,8 @@ describe("PreferenceSlider.vue", () => {
         /*
       TODO(When API call is clear, we will change this to match API variables)
      */
-    "question": "String",
-    "modelValue": "String", 
+        question: "String",
+        modelValue: "String",
       },
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
@@ -42,14 +42,14 @@ describe("PreferenceSlider.vue", () => {
     const testModelValue = "ModelValue";
     componentWrapper.vm.value = testModelValue;
     const testItem = componentWrapper.find(".slider");
-    expect(testItem.exists(),"testItemExists").toBe(true);
+    expect(testItem.exists(), "testItemExists").toBe(true);
 
     await componentWrapper.vm.$nextTick();
     let emittedEvent = componentWrapper.emitted();
-    console.log(emittedEvent, "emittedEvent"); 
+    console.log(emittedEvent, "emittedEvent");
     expect(emittedEvent).toBeTruthy();
     let emittedPayload = emittedEvent.updateModelValue[0][0];
-    console.log(emittedPayload, "emittedPayload"); 
+    console.log(emittedPayload, "emittedPayload");
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload).toBe(testModelValue);
   });
