@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DemoView from "../views/DemoView.vue";
 import ApiDemo from "../views/ApiDemo.vue";
+import { sessionStore } from "../states/sessionStore.js";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,21 +35,25 @@ const router = createRouter({
       path: "/categorize",
       name: "categorize-view",
       component: () => import("../views/CategorizeView.vue"),
+      meta: { requiresAuth: true }
     },
     {
       path: "/signup",
       name: "signup-view",
       component: () => import("../views/SignupView.vue"),
+      meta: { requiresGuest: true }
     },
     {
       path: "/login",
       name: "login-view",
       component: () => import("../views/LoginView.vue"),
+      meta: { requiresGuest: true }
     },
     {
       path: "/profile",
       name: "profile-view",
       component: () => import("../views/ProfileView.vue"),
+      meta: { requiresAuth: true }
     },
     {
       path: "/about",
@@ -63,5 +68,30 @@ const router = createRouter({
     },
   ],
 });
+
+router.beforeEach((to, from) => {
+  const appSessionStore = sessionStore();
+  console.log(appSessionStore.loginState);
+
+  if (to.meta.requiresAuth && (!appSessionStore.loginState==true)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    return {
+      path: '/login',
+      // save the location we were at to come back later
+      query: { redirect: to.fullPath },
+    }
+  }
+  // This doesn't work yet, I think bc the session is refreshed
+  // if a page is accessed via url
+  else if (to.meta.requiresGuest && (!appSessionStore.loginState==false)) {
+    // this route requires guest (not logged in)
+    return {
+      path: '/categorize',
+      query: { redirect: to.fullPath },
+    }
+  }
+});
+
 
 export default router;
