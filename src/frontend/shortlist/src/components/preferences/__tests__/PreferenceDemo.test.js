@@ -6,6 +6,7 @@ import PreferenceDemo from "../PreferenceDemo.vue";
 describe("PreferenceDemo.vue", () => {
   it("renders with null props", () => {
     const componentWrapper = mount(PreferenceDemo, {
+      props: {}, 
       global: {
         plugins: [createTestingPinia({ createSpy: vi.fn })],
       },

@@ -2,14 +2,14 @@
 export default {
   name: "PreferenceMultiSelect",
   props: ["question", "modelValue"],
-  emits: ["update:modelValue"],
+  emits: ["updateModelValue"],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
-        this.$emit("update:modelValue", value);
+        this.$emit("updateModelValue", value);
       },
     },
   },
@@ -23,6 +23,7 @@ export default {
     <template v-for="(opt, optindex) in question.Options" :key="optindex">
       <div class="form-check">
         <input
+          id = "testItem"
           type="checkbox"
           class="form-check-input"
           :value="opt"

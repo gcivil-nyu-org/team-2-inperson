@@ -9,7 +9,7 @@ jobs:
       python: 3.8.5
       install: pip install -r src/backend/requirements.txt
       script:
-        - travis/scripts/travis-backend.sh
+        - echo 'Not currently set up for deployment via Travis'
 
     - name: Frontend
       if: branch in (main,develop)
@@ -19,5 +19,5 @@ jobs:
         - 16
         
       script: 
-        - travis/scripts/travis-frontend.sh
+        - echo 'Not currently set up for deployment via Travis'
     

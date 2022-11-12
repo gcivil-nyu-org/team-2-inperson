@@ -6,12 +6,12 @@ import argparse
 from dotenv import load_dotenv
 
 _parser = argparse.ArgumentParser()
-_parser.add_argument("--prod", dest="prod", action="store_true")
 _parser.add_argument("--env_path", dest="dot_env", action="store")
 
 
 def main(main_args, remaining_args):
-    load_dotenv(main_args.dot_env)
+    if main_args.dot_env:
+        load_dotenv(main_args.dot_env)
 
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "server.settings")
     try:

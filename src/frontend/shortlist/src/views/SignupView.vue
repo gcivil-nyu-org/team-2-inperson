@@ -1,6 +1,7 @@
 <script>
 import Signup from "../components/layout/signup_login/Signup.vue";
 export default {
+  emits: ["appAccountSignup"],
   components: {
     Signup,
   },
@@ -8,7 +9,9 @@ export default {
 </script>
 
 <template>
-  <div><Signup /></div>
+  <div>
+    <Signup @appAccountSignup="(p) => this.$emit('appAccountSignup', p)" />
+  </div>
 </template>
 
 <style scoped></style>
