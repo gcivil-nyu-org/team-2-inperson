@@ -41,8 +41,6 @@ describe("PreferenceOneSelect.vue", () => {
 
     const testModelValue = "ModelValue";
     componentWrapper.vm.value = testModelValue;
-    // const testItem = componentWrapper.find("#testItem");
-    // expect(testItem.exists(),"testItemExists").toBe(true);
 
     await componentWrapper.vm.$nextTick();
     let emittedEvent = componentWrapper.emitted();
