@@ -44,7 +44,7 @@ describe("PreferenceMultiSelect.vue", () => {
     await componentWrapper.vm.$nextTick();
     let emittedEvent = componentWrapper.emitted();
     expect(emittedEvent).toBeTruthy();
-    let emittedPayload = emittedEvent.updateModelValue[0][0];
+    let emittedPayload = emittedEvent["update:modelValue"][0][0];
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload).toBe(testModelValue);
   });

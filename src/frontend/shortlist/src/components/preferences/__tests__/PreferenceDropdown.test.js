@@ -25,6 +25,8 @@ describe("PreferenceDropdown.vue", () => {
     expect(componentWrapper.exists()).toBe(true);
   });
 
+
+
   it("test emit with data", async () => {
     const componentWrapper = mount(PreferenceDropdown, {
       props: {
@@ -42,14 +44,13 @@ describe("PreferenceDropdown.vue", () => {
     const testModelValue = "ModelValue";
 
     componentWrapper.vm.value = testModelValue;
-    const testItem = componentWrapper.find(".btn-btn-success-dropdown-toggle");
+    const testItem = componentWrapper
+      .find(".btn-btn-success-dropdown-toggle");
     expect(testItem.exists(), "question.Name").toBe(true);
 
     await componentWrapper.vm.$nextTick();
     let emittedEvent = componentWrapper.emitted();
-    let emittedPayload = emittedEvent.updateModelValue[0][0];
-    // console.log(emittedEvent, "emittedEvent");
-    // console.log(emittedPayload, "emittedPayload");
+    let emittedPayload = emittedEvent["update:modelValue"][0][0];
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload).toBe(testModelValue);
   });

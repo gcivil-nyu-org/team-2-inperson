@@ -4,14 +4,14 @@ export default {
   props: ["question", "modelValue"],
 
   // Alice changed the method name, deleted : so that it would be easier to write test
-  emits: ["updateModelValue"],
+  emits: ["update:modelValue"],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
-        this.$emit("updateModelValue", value);
+        this.$emit("update:modelValue", value);
       },
     },
   },

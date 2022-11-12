@@ -2,14 +2,14 @@
 export default {
   name: "PreferenceOneSelect",
   props: ["question", "modelValue"],
-  emits: ["updateModelValue"],
+  emits: ["update:modelValue"],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
-        this.$emit("updateModelValue", value);
+        this.$emit("update:modelValue", value);
       },
     },
   },

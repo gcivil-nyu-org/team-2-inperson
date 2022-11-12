@@ -48,7 +48,7 @@ describe("PreferenceTypeText.vue", () => {
     let emittedEvent = componentWrapper.emitted();
     console.log(emittedEvent, "emittedEvent");
     expect(emittedEvent).toBeTruthy();
-    let emittedPayload = emittedEvent.updateModelValue[0][0];
+    let emittedPayload = emittedEvent["update:modelValue"][0][0];
     console.log(emittedPayload, "emittedPayload");
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload).toBe(testModelValue);
