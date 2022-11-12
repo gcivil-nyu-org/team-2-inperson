@@ -2,14 +2,16 @@
 export default {
   name: "PreferenceDropdown",
   props: ["question", "modelValue"],
-  emits: ["update:modelValue"],
+
+  // Alice changed the method name, deleted : so that it would be easier to write test
+  emits: ["updateModelValue"],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
-        this.$emit("update:modelValue", value);
+        this.$emit("updateModelValue", value);
       },
     },
   },
@@ -25,7 +27,7 @@ export default {
         :name="question.Name"
         :id="question.Name"
         v-model="value"
-        class="btn btn-success dropdown-toggle"
+        class="btn-btn-success-dropdown-toggle"
         data-toggle="dropdown"
         aria-haspopup="true"
         style="
