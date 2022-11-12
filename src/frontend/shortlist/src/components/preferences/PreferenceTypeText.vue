@@ -2,14 +2,14 @@
 export default {
   name: "PreferenceTypeText",
   props: ["question", "modelValue"],
-  emits: ["update:modelValue"],
+  emits: ["updateModelValue"],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
-        this.$emit("update:modelValue", value);
+        this.$emit("updateModelValue", value);
       },
     },
   },
