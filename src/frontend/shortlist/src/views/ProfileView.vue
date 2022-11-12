@@ -6,7 +6,8 @@ import UserPreference from "../components/layout/profile/UserPreference.vue";
 import UserRelations from "../components/layout/profile/UserRelations.vue";
 
 export default {
-  emits: ["appAccountUpdatePreferences"],
+  emits: ["appAccountUpdatePreferences",
+          "appAccountUpdateName"],
   components: {
     UserDetails,
     UserPreference,
@@ -25,7 +26,11 @@ export default {
   <main>
     <div class="profile">
       <div class="statusdetails">
-        <UserDetails :accountMetadata="accountMetadata" />
+        <UserDetails :accountMetadata="accountMetadata" 
+        @appAccountUpdateName="
+            (p) => this.$emit('appAccountUpdateName', p)
+          "
+        />
       </div>
       <div class="prefrel">
         <UserPreference

@@ -65,6 +65,28 @@ function appAccountUpdatePreferences(payload) {
   let req = apiClient.updatePreferences(requestPayload, success, fail);
   req.execute();
 }
+
+function appAccountUpdateName(payload) {
+  console.log(payload.userFirst);
+  let requestPayload = {
+    accountId: appSessionStore.accountMetadata.accountId,
+    preferences: appSessionStore.accountMetadata.preferences,
+  };
+  requestPayload.preferences.userFirstName = payload.userFirst;
+  requestPayload.preferences.userLastName = payload.userLast;
+
+  let success = () => {
+    appSessionStore.accountMetadata.preferences.userFirstName =
+      payload.userFirst;
+    appSessionStore.accountMetadata.preferences.userLastName =
+      payload.userLast;
+  };
+  let fail = (err) => {
+    console.log(err);
+  };
+  let req = apiClient.updatePreferences(requestPayload, success, fail);
+  req.execute();
+}
 </script>
 
 <template>
@@ -74,6 +96,7 @@ function appAccountUpdatePreferences(payload) {
       @appAccountLogin="appAccountLogin"
       @appAccountSignup="appAccountSignup"
       @appAccountUpdatePreferences="appAccountUpdatePreferences"
+      @appAccountUpdateName="appAccountUpdateName"
     />
   </div>
 </template>
