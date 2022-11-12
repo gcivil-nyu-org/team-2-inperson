@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       form: {
-        // form.email, form.password 
+        // form.email, form.password
         email: "",
         password: "",
       },
@@ -112,8 +112,8 @@ export default {
         </div>
         <div>
           <button
-            id = "loginButtonTest"
-            type="button" 
+            id="loginButtonTest"
+            type="button"
             class="btn btn-outline-dark"
             :disabled="v$.form.$invalid"
             @click="submitLoginForm"

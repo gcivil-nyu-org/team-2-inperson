@@ -195,7 +195,7 @@ export default {
       </div>
 
       <button
-        id = "signupButtonTest"
+        id="signupButtonTest"
         :disabled="v$.form.$invalid"
         class="btn btn-outline-dark"
         @click.prevent="submitSignupForm"

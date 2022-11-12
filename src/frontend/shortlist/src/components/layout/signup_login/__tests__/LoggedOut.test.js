@@ -6,7 +6,7 @@ import { mount } from "@vue/test-utils";
 import LoggedOut from "../LoggedOut.vue";
 import { createTestingPinia } from "@pinia/testing";
 
-describe("Login.vue", () => {
+describe("LoggedOut.vue", () => {
   // Check if LoggedOut exists
   it("Renders with null prop", () => {
     const componentWrapper = mount(LoggedOut, {
@@ -16,5 +16,4 @@ describe("Login.vue", () => {
     });
     expect(componentWrapper.exists()).toBe(true);
   });
-
-}); 
+});
