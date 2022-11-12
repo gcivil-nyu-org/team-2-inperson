@@ -66,6 +66,12 @@ const router = createRouter({
       component: () =>
         import("../components/layout/signup_login/LoggedOut.vue"),
     },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () =>
+        import("../views/NotFoundView.vue"),
+    }
   ],
 });
 
