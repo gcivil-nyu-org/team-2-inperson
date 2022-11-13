@@ -10,7 +10,7 @@ export default {
   emits: ["appAccountLogin"],
   components: { Logo },
   setup() {
-    return { v$: useVuelidate() };
+    return { $v: useVuelidate() };
   },
   data() {
     return {
@@ -38,10 +38,10 @@ export default {
     };
   },
   methods: {
-    submitLoginForm() {
+    async submitLoginForm() {
       this.alert_login = "";
-      this.v$.$validate();
-      if (this.v$.$error) {
+      this.$v.$validate();
+      if (this.$v.$error) {
         this.alert_signup = "Form failed validation";
         return;
       }
@@ -79,11 +79,11 @@ export default {
             type="email"
             class="logininput"
             placeholder="Email"
-            v-model="v$.form.email.$model"
+            v-model="$v.form.email.$model"
           />
           <div
             class="input-errors"
-            v-for="(error, index) of v$.form.email.$errors"
+            v-for="(error, index) of $v.form.email.$errors"
             :key="index"
           >
             <div class="error-msg">{{ error.$message }}</div>
@@ -91,19 +91,19 @@ export default {
         </div>
         <div
           class="form-group"
-          :class="{ error: v$.form.password.$errors.length }"
+          :class="{ error: $v.form.password.$errors.length }"
         >
           <div id="password_login">
             <input
               type="password"
               name="password"
-              v-model="v$.form.password.$model"
+              v-model="$v.form.password.$model"
               class="logininput"
               placeholder="Password"
             />
             <div
               class="input-errors"
-              v-for="(error, index) of v$.form.password.$errors"
+              v-for="(error, index) of $v.form.password.$errors"
               :key="index"
             >
               <div class="error-msg">{{ error.$message }}</div>
@@ -115,7 +115,7 @@ export default {
             id="loginButtonTest"
             type="button"
             class="btn btn-outline-dark"
-            :disabled="v$.form.$invalid"
+            :disabled="$v.form.$invalid"
             @click="submitLoginForm"
           >
             Login

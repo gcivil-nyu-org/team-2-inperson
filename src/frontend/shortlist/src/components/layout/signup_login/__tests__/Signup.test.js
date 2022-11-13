@@ -5,24 +5,17 @@ The following tests conclude all major component testing.
 import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import Signup from "../Signup.vue";
-import { createTestingPinia } from "@pinia/testing";
 
 describe("Signup.vue", () => {
   // Check if Signup exists
   it("Renders with null prop", () => {
     const componentWrapper = mount(Signup, {
-      global: {
-        plugins: [createTestingPinia({ createSpy: vi.fn })],
-      },
     });
     expect(componentWrapper.exists()).toBe(true);
   });
 
   it("test emit with data", async () => {
     const componentWrapper = mount(Signup, {
-      global: {
-        plugins: [createTestingPinia({ createSpy: vi.fn })],
-      },
     });
 
     const testEmail = "signupEmail@address.com";
