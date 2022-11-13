@@ -13,13 +13,18 @@ export default {
 <template>
   <main>
     <form class="profileform">
-      <img
-        src="/default-parent-profile.png"
-        alt="Profile-Picture"
-        id="profileimg"
-        class="profileimg"
-      />
-      <img src="/edit.png" /><br />
+      <div class="image-upload">
+        <img
+          src="/default-parent-profile.png"
+          alt="Profile-Picture"
+          id="profileimg"
+          class="profileimg"
+        />
+        <label for="file-input"><img src="/edit.png" /></label>
+
+        <input id="file-input" type="file" />
+      </div>
+
       <div class="inputs">
         <div class="accountstatus">
           <label class="typestatuslabel">Account Type:</label>&nbsp;<button
@@ -240,5 +245,9 @@ main {
 .delparent:hover:before {
   left: 0;
   opacity: 1;
+}
+
+.image-upload > input {
+  display: none;
 }
 </style>
