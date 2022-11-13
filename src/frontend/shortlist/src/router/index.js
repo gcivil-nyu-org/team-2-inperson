@@ -3,6 +3,10 @@ import HomeView from "../views/HomeView.vue";
 import DemoView from "../views/DemoView.vue";
 import ApiDemo from "../views/ApiDemo.vue";
 import { sessionStore } from "../states/sessionStore.js";
+import cookie from "@/helpers/cookie.js";
+import ShortlistApi from "@/api/shortlist.js";
+
+const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -76,25 +80,48 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from) => {
-  const appSessionStore = sessionStore();
-  console.log(appSessionStore.loginState);
-
-  if (to.meta.requiresAuth && (!appSessionStore.loginState==true)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
+  const store = sessionStore();
+  let acct = cookie.getCookie("accountid");
+  // auth required; check for existing cookie
+  // TODO: check for token?
+  if (to.meta.requiresAuth){
+    if (acct == "") { // cookie not found
     return {
       path: '/login',
       // save the location we were at to come back later
       query: { redirect: to.fullPath },
     }
+    } else { // cookie found, get user metadata
+      let req = shortlistApi
+        .getAccountMetadata()
+        .forAccountId(acct)
+        .onSuccess((result) => {
+          store.loginState = true;
+          store.accountMetadata = result.data;
+        })
+        .onFail((err) => {
+          console.log("fail", err.response.status, err.response.data);
+        });
+      req.execute();
   }
-  // This doesn't work yet, I think bc the session is refreshed
-  // if a page is accessed via url
-  else if (to.meta.requiresGuest && (!appSessionStore.loginState==false)) {
-    // this route requires guest (not logged in)
+  }
+
+  // If logged in (cookie exists) redirect to /categorize
+  else if (to.meta.requiresGuest && cookie.getCookie("accountid") != "") { 
+      let req = shortlistApi
+        .getAccountMetadata()
+        .forAccountId(acct)
+        .onSuccess((result) => {
+          store.loginState = true;
+          store.accountMetadata = result.data;
+        })
+        .onFail((err) => {
+          console.log("fail", err.response.status, err.response.data);
+        });
+      req.execute();
     return {
       path: '/categorize',
-      query: { redirect: to.fullPath },
+      // query: { redirect: to.fullPath },
     }
   }
 });
