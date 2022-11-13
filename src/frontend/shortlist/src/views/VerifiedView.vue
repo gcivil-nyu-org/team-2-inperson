@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import {useRoute} from 'vue-router'
 export default {
   data() {
     return {
@@ -8,15 +9,21 @@ export default {
       errorMessage: "",
     };
   },
-  created() {
+  setup() {
+    return { router: useRoute() };
+  },
+  mounted() {
     //fetching information from url sent to the email address
-    let urlParams = new URLSearchParams(window.location.search);
-    this.isVerified = console.log(urlParams.get("token-valid"));
-    this.errorMessage = console.log(urlParams.get("message"));
-    this.email = console.log(urlParams.get("email"));
+    let params = this.router.query;
+    this.isVerified = params.verified;
+    this.errorMessage = params.message;
+    this.email = params.email;
+    console.log(this.email);
+    console.log(this.errorMessage);
   },
   methods: {
     resendLink() {
+      console.log(this.router.query);
       axios
       //Maybe changed in the future depend on endpoint
         .post("/send-email", {
@@ -34,10 +41,11 @@ export default {
 </script>
 <template>
   <div class="verify-container">
+    {{ $router.query }}
     <!-- Display based on verification status -->
     <template v-if="isVerified">
       <h1>Verified successfully</h1>
-      <a :href="www.shortlist.nyc / login"> Click here to login! </a>
+      <a href="https://www.shortlist.nyc/login"> Click here to login! </a>
     </template>
     <template v-if="!isVerified">
       <div>Problem: {{ errorMessage }}</div>
