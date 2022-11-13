@@ -193,12 +193,14 @@ export default {
           <div class="error-msg">{{ error.$message }}</div>
         </div>
       </div>
-      <!-- ------ -->
+
       <div class="mb-3">
-        <label for="formFile" class="form-label">Upload Parent ID:</label>
+        <label for="formFile" class="form-label"
+          >Upload Parent/Guardian ID:</label
+        >
         <input class="form-control" type="file" id="formFile" />
       </div>
-      <!-- ------ -->
+
       <button
         :disabled="$v.form.$invalid"
         class="btn btn-outline-dark"
