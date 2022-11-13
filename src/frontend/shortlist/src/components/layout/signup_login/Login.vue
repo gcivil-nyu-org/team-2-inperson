@@ -10,7 +10,7 @@ export default {
   emits: ["appAccountLogin"],
   components: { Logo },
   setup() {
-    return { v$: useVuelidate() };
+    return { $v: useVuelidate() };
   },
   data() {
     return {
@@ -39,8 +39,8 @@ export default {
   methods: {
     submitLoginForm() {
       this.alert_login = "";
-      this.v$.$validate();
-      if (this.v$.$error) {
+      this.$v.$validate();
+      if (this.$v.$error) {
         this.alert_signup = "Form failed validation";
         return;
       }
@@ -72,17 +72,17 @@ export default {
     <h1 class="instructions" id="big">Log In</h1>
     <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
     <form>
-      <div class="form-group" :class="{ error: v$.form.email.$errors.length }">
+      <div class="form-group" :class="{ error: $v.form.email.$errors.length }">
         <div id="emailaddress_login">
           <input
             type="email"
             class="logininput"
             placeholder="Email"
-            v-model="v$.form.email.$model"
+            v-model="$v.form.email.$model"
           />
           <div
             class="input-errors"
-            v-for="(error, index) of v$.form.email.$errors"
+            v-for="(error, index) of $v.form.email.$errors"
             :key="index"
           >
             <div class="error-msg">{{ error.$message }}</div>
@@ -90,19 +90,19 @@ export default {
         </div>
         <div
           class="form-group"
-          :class="{ error: v$.form.password.$errors.length }"
+          :class="{ error: $v.form.password.$errors.length }"
         >
           <div id="password_login">
             <input
               type="password"
               name="password"
-              v-model="v$.form.password.$model"
+              v-model="$v.form.password.$model"
               class="logininput"
               placeholder="Password"
             />
             <div
               class="input-errors"
-              v-for="(error, index) of v$.form.password.$errors"
+              v-for="(error, index) of $v.form.password.$errors"
               :key="index"
             >
               <div class="error-msg">{{ error.$message }}</div>
@@ -113,7 +113,7 @@ export default {
           <button
             type="button"
             class="btn btn-outline-dark"
-            :disabled="v$.form.$invalid"
+            :disabled="$v.form.$invalid"
             @click="submitLoginForm"
           >
             Login
