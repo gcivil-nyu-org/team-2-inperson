@@ -61,14 +61,7 @@ export default {
         <label class="profilefields" style="color: grey" id="useremail">{{
           accountMetadata.email
         }}</label>
-          >Current Uploaded ID File Name From API</label
-        >
-        <div class="upload-file-wrapper">
-          <button class="btn btn-outline-success btn-sm">
-            Upload New ID <input type="file" name="myfile" />
-          </button>
-        </div>
-        <br />
+
         <button class="pref-actions" @click="clicker('Back')">
           Update Changes
         </button>
