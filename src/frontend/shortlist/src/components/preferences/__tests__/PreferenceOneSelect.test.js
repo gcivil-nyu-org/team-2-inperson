@@ -8,7 +8,7 @@ describe("PreferenceOneSelect.vue", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
       props: {
         question: "",
-        modelValue: [""],
+        modelValue: ["Sample"],
       },
     });
     expect(componentWrapper.exists()).toBe(true);
