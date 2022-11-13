@@ -206,10 +206,12 @@ export default {
       >
         Sign up
       </button>
-      <p class="instructions" id="small">Have an account already?</p>
-      <button @click="$router.replace('/login')" class="btn btn-outline-dark">
-        Log me in!
-      </button>
+      <p class="instructions" id="small">
+        Have an account already?
+        <button @click="$router.replace('/login')" class="btn btn-outline-dark">
+          Log me in!
+        </button>
+      </p>
     </div>
   </div>
 </template>
@@ -223,7 +225,7 @@ input {
 .signup_components_container {
   position: absolute;
   left: 60%;
-  top: 38%;
+  top: 35%;
   height: auto;
   margin-top: -150px;
   width: 600px;
@@ -293,5 +295,25 @@ form {
   min-width: 100%;
   max-width: 100%;
   padding: 1em;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Aleo";
+  margin: 0px;
+}
+.form-control {
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5px;
+  color: grey;
+  font-size: 15px;
+  font-family: "Aleo", serif;
+}
+.form-control:focus {
+  border-color: #106021;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
+    0px 0px 8px rgba(35, 173, 40, 0.5);
 }
 </style>
