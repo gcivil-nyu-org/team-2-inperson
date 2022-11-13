@@ -37,7 +37,7 @@ class Recommendation(models.Model):
         ]
 
     def __str__(self):
-        return "RECO<ACC:{}, SCH:{}>".format(self.account.id[:8], self.school.id[:8])
+        return "RECO<ACC:{}, SCH:{}>".format(self.account.email, self.school.id[:8])
 
     def serializeJson(self):
         obj = dict(
