@@ -36,13 +36,12 @@ export default {
           </button>
         </div>
         <div class="accountstatus">
-          <label class="typestatuslabel">Verification Status:</label
-          >&nbsp;<button
-            class="pendingstatus"
-            title="Account verification may take some time!"
+          <label class="typestatuslabel">ID Status:</label>&nbsp;<button
+            class="verifiedstatus"
+            title="Successfully verified Parent/Guardian uploaded ID!"
             disabled
           >
-            PENDING
+            VERIFIED
           </button>
         </div>
 
@@ -123,20 +122,21 @@ main {
   margin-bottom: 20px;
 }
 
-.pendingstatus:disabled {
+.verifiedstatus:disabled {
   border: none;
   transition: all ease-in-out 0.2s;
   cursor: pointer;
   color: black;
   font-weight: bold;
   border-radius: 5%;
-  background-color: rgb(244, 244, 147);
+  background-color: rgb(176, 221, 122);
   font-size: medium;
   font-family: "Klee One", cursive;
   float: left;
 }
-.pendingstatus:hover {
-  background-color: rgb(255, 230, 0);
+.verifiedstatus:hover {
+  background-color: rgb(37, 137, 58);
+  color: white;
   font-family: "Klee One", cursive;
 }
 
