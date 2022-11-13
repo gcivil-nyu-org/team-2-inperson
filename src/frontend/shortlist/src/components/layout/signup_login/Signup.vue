@@ -32,7 +32,7 @@ export default {
   components: { Logo },
   emits: ["appAccountSignup"],
   setup() {
-    return { v$: useVuelidate() };
+    return { $v: useVuelidate() };
   },
   data() {
     return {
@@ -91,9 +91,9 @@ export default {
   },
   methods: {
     submitSignupForm() {
-      this.v$.$validate();
+      this.$v.$validate();
       this.alert_signup = "";
-      if (this.v$.$error) {
+      if (this.$v.$error) {
         this.alert_signup = "Form failed validation";
         return;
       } else {
@@ -121,12 +121,12 @@ export default {
         <input
           type="text"
           placeholder="First Name"
-          v-model="v$.form.firstName.$model"
+          v-model="$v.form.firstName.$model"
           class="signupinput"
         />
         <div
           class="input-errors"
-          v-for="(error, index) of v$.form.firstName.$errors"
+          v-for="(error, index) of $v.form.firstName.$errors"
           :key="index"
         >
           <div class="error-msg">{{ error.$message }}</div>
@@ -136,12 +136,12 @@ export default {
         <input
           type="text"
           placeholder="Last Name"
-          v-model="v$.form.lastName.$model"
+          v-model="$v.form.lastName.$model"
           class="signupinput"
         />
         <div
           class="input-errors"
-          v-for="(error, index) of v$.form.lastName.$errors"
+          v-for="(error, index) of $v.form.lastName.$errors"
           :key="index"
         >
           <div class="error-msg">{{ error.$message }}</div>
@@ -152,11 +152,11 @@ export default {
           type="email"
           placeholder="Email"
           class="signupinput"
-          v-model="v$.form.email.$model"
+          v-model="$v.form.email.$model"
         />
         <div
           class="input-errors"
-          v-for="(error, index) of v$.form.email.$errors"
+          v-for="(error, index) of $v.form.email.$errors"
           :key="index"
         >
           <div class="error-msg">{{ error.$message }}</div>
@@ -167,11 +167,11 @@ export default {
           type="password"
           placeholder="Password"
           class="signupinput"
-          v-model="v$.form.password.$model"
+          v-model="$v.form.password.$model"
         />
         <div
           class="input-errors"
-          v-for="(error, index) of v$.form.password.$errors"
+          v-for="(error, index) of $v.form.password.$errors"
           :key="index"
         >
           <div class="error-msg">{{ error.$message }}</div>
@@ -180,14 +180,14 @@ export default {
       <div>
         <input
           type="password"
-          v-model="v$.form.confirmPassword.$model"
+          v-model="$v.form.confirmPassword.$model"
           autocomplete="off"
           placeholder="Confirm Password"
           class="signupinput"
         />
         <div
           class="input-errors"
-          v-for="(error, index) of v$.form.confirmPassword.$errors"
+          v-for="(error, index) of $v.form.confirmPassword.$errors"
           :key="index"
         >
           <div class="error-msg">{{ error.$message }}</div>
@@ -195,7 +195,7 @@ export default {
       </div>
 
       <button
-        :disabled="v$.form.$invalid"
+        :disabled="$v.form.$invalid"
         class="btn btn-outline-dark"
         @click.prevent="submitSignupForm"
       >
