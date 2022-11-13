@@ -8,7 +8,7 @@ describe("PreferenceMultiSelect.vue", () => {
     const componentWrapper = mount(PreferenceMultiSelect, {
       props: {
         question: "",
-        modelValue: [[""]],
+        modelValue: ["sample1", "sample2"],
       },
     });
     expect(componentWrapper.exists()).toBe(true);
@@ -18,7 +18,7 @@ describe("PreferenceMultiSelect.vue", () => {
     const componentWrapper = mount(PreferenceMultiSelect, {
       props: {
         question: "",
-        modelValue: [[""]],
+        modelValue: ["sample1", "sample2"],
       },
     });
 

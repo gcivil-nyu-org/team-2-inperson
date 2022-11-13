@@ -8,7 +8,7 @@ describe("PreferenceDropdown.vue", () => {
     const componentWrapper = mount(PreferenceDropdown, {
       props: {
         question: "",
-        modelValue: [[""]],
+        modelValue: "",
       },
     });
     expect(componentWrapper.exists()).toBe(true);
@@ -18,7 +18,7 @@ describe("PreferenceDropdown.vue", () => {
     const componentWrapper = mount(PreferenceDropdown, {
       props: {
         question: "",
-        modelValue: [[""]],
+        modelValue: "",
       },
     });
 
