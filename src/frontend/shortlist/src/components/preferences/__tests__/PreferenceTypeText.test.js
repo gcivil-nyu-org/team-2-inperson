@@ -8,7 +8,7 @@ describe("PreferenceTypeText.vue", () => {
     const componentWrapper = mount(PreferenceTypeText, {
       props: {
         question: "",
-        modelValue: "",
+        modelValue: [""],
       },
     });
     expect(componentWrapper.exists()).toBe(true);
@@ -18,7 +18,7 @@ describe("PreferenceTypeText.vue", () => {
     const componentWrapper = mount(PreferenceTypeText, {
       props: {
         question: "",
-        modelValue: "",
+        modelValue: [""],
       },
     });
 

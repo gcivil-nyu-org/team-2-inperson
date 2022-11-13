@@ -8,7 +8,7 @@ describe("PreferenceSlider.vue", () => {
     const componentWrapper = mount(PreferenceSlider, {
       props: {
         question: "",
-        modelValue: "",
+        modelValue: [Number],
       },
     });
     expect(componentWrapper.exists()).toBe(true);
@@ -18,7 +18,7 @@ describe("PreferenceSlider.vue", () => {
     const componentWrapper = mount(PreferenceSlider, {
       props: {
         question: "",
-        modelValue: "",
+        modelValue: [Number],
       },
     });
 

@@ -8,7 +8,7 @@ describe("PreferenceOneSelect.vue", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
       props: {
         question: "",
-        modelValue: "",
+        modelValue: [""],
       },
     });
     expect(componentWrapper.exists()).toBe(true);
@@ -18,7 +18,7 @@ describe("PreferenceOneSelect.vue", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
       props: {
         question: "",
-        modelValue: "",
+        modelValue: [""],
       },
     });
 
@@ -31,9 +31,5 @@ describe("PreferenceOneSelect.vue", () => {
     let emittedPayload = emittedEvent["update:modelValue"][0][0];
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload).toBe(testModelValue);
-
-    console.log(typeof testModelValue, "one");
-    console.log(emittedEvent, "emittedEvent");
-    console.log(emittedPayload, "emittedPayload");
   });
 });
