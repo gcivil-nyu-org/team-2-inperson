@@ -1,4 +1,5 @@
 from rest_framework import generics, status, views, permissions
+import os
 from .serializers import (
     RegisterSerializer,
     SetNewPasswordSerializer,
@@ -10,6 +11,8 @@ from .serializers import (
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
+from api.models.recommendation import Recommendation
+from api.models.school import School
 import jwt
 from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
@@ -26,7 +29,6 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from .utils import Util
 from django.http import HttpResponsePermanentRedirect
-import os
 
 
 class CustomRedirect(HttpResponsePermanentRedirect):
@@ -49,7 +51,8 @@ class RegisterView(generics.GenericAPIView):
         token = RefreshToken.for_user(user).access_token
         # urrent_site = get_current_site(request).domain
         # relativeLink = reverse("email-verify")
-        absurl = "http://www.shortlist.nyc/verifyEmail?token=" + str(token)
+        base_url = os.environ.get("SHORTLIST_API_URL")
+        absurl = base_url + "auth/email-verify?token=" + str(token)
         email_body = (
             "Hi "
             + user.username
@@ -62,14 +65,16 @@ class RegisterView(generics.GenericAPIView):
             "to_email": user.email,
             "email_subject": "Verify your email",
         }
-
         Util.send_email(data)
+        schools = School.objects.all()
+        for school in schools:
+            recommendation = Recommendation(account=user, school=school)
+            recommendation.save()
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializer
-
     token_param_config = openapi.Parameter(
         "token",
         in_=openapi.IN_QUERY,
@@ -80,23 +85,36 @@ class VerifyEmail(views.APIView):
     @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         token = request.GET.get("token")
+        redirect_url_login = "http://www.shortlist.nyc/login"
+        redirect_url_signup = "http://www.shortlist.nyc/signup"
         try:
             payload = jwt.decode(token, settings.SECRET_KEY)
             user = User.objects.get(id=payload["user_id"])
             if not user.is_verified:
                 user.is_verified = True
                 user.save()
-            return Response(
-                {"email": "Successfully activated"}, status=status.HTTP_200_OK
+            return CustomRedirect(
+                redirect_url_login + "?token_valid=True&message=Successfully Activated"
             )
+        #             return Response(
+        #                 {"email": "Successfully activated"}, status=status.HTTP_200_OK
+        #             )
         except jwt.ExpiredSignatureError:
-            return Response(
-                {"error": "Activation Expired"}, status=status.HTTP_400_BAD_REQUEST
+            return CustomRedirect(
+                redirect_url_signup + "?token_valid=False&message=Activation Expired"
             )
+        #             return Response(
+        #                 {"error": "Activation Expired"}, status=status.HTTP_400_BAD_REQUEST
+        #             )
         except jwt.exceptions.DecodeError:
-            return Response(
-                {"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST
+            return CustomRedirect(
+                redirect_url_signup + "?token_valid=False&message=Invalid token"
             )
+
+
+#             return Response(
+#                 {"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST
+#             )
 
 
 class LoginAPIView(generics.GenericAPIView):
