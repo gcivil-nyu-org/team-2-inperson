@@ -57,14 +57,10 @@ export default {
           "
           id="lastname"
         />
-        <input
-          type="text"
-          class="profilefields"
-          :placeholder="accountMetadata.email"
-          id="useremail"
-        />
 
-        <label class="fileidlabel"
+        <label class="profilefields" style="color: grey" id="useremail">{{
+          accountMetadata.email
+        }}</label>
           >Current Uploaded ID File Name From API</label
         >
         <div class="upload-file-wrapper">
