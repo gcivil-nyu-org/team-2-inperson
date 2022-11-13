@@ -2,14 +2,13 @@ from __future__ import annotations
 import json
 
 from api.util.generators import gen_uuid
-
 from django.db import models
 
 
 class Recommendation(models.Model):
     id = models.CharField(max_length=32, default=gen_uuid, primary_key=True)
     # Account and School
-    account = models.ForeignKey("Account", on_delete=models.CASCADE)
+    account = models.ForeignKey("authentication.User", on_delete=models.CASCADE)
     school = models.ForeignKey("School", on_delete=models.CASCADE)
 
     # Score field, ascending (lower is higher priority)

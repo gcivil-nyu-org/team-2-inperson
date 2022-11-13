@@ -11,6 +11,8 @@ from .serializers import (
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
+from api.models.recommendation import Recommendation
+from api.models.school import School
 import jwt
 from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
@@ -64,8 +66,11 @@ class RegisterView(generics.GenericAPIView):
             "to_email": user.email,
             "email_subject": "Verify your email",
         }
-
         Util.send_email(data)
+        schools = School.objects.all()
+        for school in schools:
+            recommendation = Recommendation(account=user, school=school)
+            recommendation.save()
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 
