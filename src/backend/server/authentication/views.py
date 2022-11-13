@@ -29,7 +29,6 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from .utils import Util
 from django.http import HttpResponsePermanentRedirect
-import os
 
 
 class CustomRedirect(HttpResponsePermanentRedirect):
