@@ -94,17 +94,25 @@ class VerifyEmail(views.APIView):
             if not user.is_verified:
                 user.is_verified = True
                 user.save()
-            return CustomRedirect(redirect_url_login+'?token_valid=True&message=Successfully Activated')
-#             return Response(
-#                 {"email": "Successfully activated"}, status=status.HTTP_200_OK
-#             )
+            return CustomRedirect(
+                redirect_url_login + "?token_valid=True&message=Successfully Activated"
+            )
+        #             return Response(
+        #                 {"email": "Successfully activated"}, status=status.HTTP_200_OK
+        #             )
         except jwt.ExpiredSignatureError:
-            return CustomRedirect(redirect_url_signup+'?token_valid=False&message=Activation Expired')
-#             return Response(
-#                 {"error": "Activation Expired"}, status=status.HTTP_400_BAD_REQUEST
-#             )
+            return CustomRedirect(
+                redirect_url_signup + "?token_valid=False&message=Activation Expired"
+            )
+        #             return Response(
+        #                 {"error": "Activation Expired"}, status=status.HTTP_400_BAD_REQUEST
+        #             )
         except jwt.exceptions.DecodeError:
-            return CustomRedirect(redirect_url_signup+'?token_valid=False&message=Invalid token')
+            return CustomRedirect(
+                redirect_url_signup + "?token_valid=False&message=Invalid token"
+            )
+
+
 #             return Response(
 #                 {"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST
 #             )
