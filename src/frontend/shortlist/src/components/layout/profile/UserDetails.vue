@@ -202,30 +202,6 @@ main {
   background-color: #008037;
 }
 
-.upload-file-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-.btn input[type="file"] {
-  font-size: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  display: inline-block;
-}
-
-.fileidlabel {
-  color: rgb(137, 137, 137);
-  background: #ebf3e6;
-  border: 1px solid #008037;
-  border-radius: 5%;
-  font-size: small;
-  padding: 1%;
-  float: left;
-  margin-right: 5px;
-}
-
 .parentdeleteimg {
   vertical-align: middle;
   width: 25px;
