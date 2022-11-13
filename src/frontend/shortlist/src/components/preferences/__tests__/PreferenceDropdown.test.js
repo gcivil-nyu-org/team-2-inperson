@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import PreferenceDropdown from "../PreferenceDropdown.vue";
 
@@ -7,8 +7,8 @@ describe("PreferenceDropdown.vue", () => {
   it("renders with null props", () => {
     const componentWrapper = mount(PreferenceDropdown, {
       props: {
-        "question": "string",
-        "modelValue": "value", 
+        question: "",
+        modelValue: "",
       },
     });
     expect(componentWrapper.exists()).toBe(true);
@@ -17,16 +17,15 @@ describe("PreferenceDropdown.vue", () => {
   it("test emit with data", async () => {
     const componentWrapper = mount(PreferenceDropdown, {
       props: {
-        "question": "string",
-        "modelValue": "value", 
+        question: "",
+        modelValue: "",
       },
     });
 
     const testModelValue = "ModelValue";
-
     componentWrapper.vm.value = testModelValue;
-    // const testItem = componentWrapper.find(".btn btn-success dropdown-toggle");
-    // expect(testItem.exists()).toBe(true);
+    const dropDownToggle = componentWrapper.find("select");
+    expect(dropDownToggle.exists()).toBe(true);
 
     await componentWrapper.vm.$nextTick();
     let emittedEvent = componentWrapper.emitted();

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import PreferenceMultiSelect from "../PreferenceMultiSelect.vue";
 
@@ -7,8 +7,8 @@ describe("PreferenceMultiSelect.vue", () => {
   it("renders with null props", () => {
     const componentWrapper = mount(PreferenceMultiSelect, {
       props: {
-        question: "String",
-        modelValue: "String",
+        question: "",
+        modelValue: "",
       },
     });
     expect(componentWrapper.exists()).toBe(true);
@@ -17,13 +17,14 @@ describe("PreferenceMultiSelect.vue", () => {
   it("test emit with data", async () => {
     const componentWrapper = mount(PreferenceMultiSelect, {
       props: {
-        question: "String",
-        modelValue: "String",
+        question: "",
+        modelValue: "",
       },
     });
 
     const testModelValue = "ModelValue";
     componentWrapper.vm.value = testModelValue;
+
     await componentWrapper.vm.$nextTick();
     let emittedEvent = componentWrapper.emitted();
     expect(emittedEvent).toBeTruthy();

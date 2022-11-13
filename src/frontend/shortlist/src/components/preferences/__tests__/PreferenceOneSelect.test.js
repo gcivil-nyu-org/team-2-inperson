@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import PreferenceOneSelect from "../PreferenceOneSelect.vue";
 
@@ -7,8 +7,8 @@ describe("PreferenceOneSelect.vue", () => {
   it("renders with null props", () => {
     const componentWrapper = mount(PreferenceOneSelect, {
       props: {
-        question: "String",
-        modelValue: "String",
+        question: "",
+        modelValue: "",
       },
     });
     expect(componentWrapper.exists()).toBe(true);
@@ -17,8 +17,8 @@ describe("PreferenceOneSelect.vue", () => {
   it("test emit with data", async () => {
     const componentWrapper = mount(PreferenceOneSelect, {
       props: {
-        question: "String",
-        modelValue: "String",
+        question: "",
+        modelValue: "",
       },
     });
 
@@ -27,11 +27,13 @@ describe("PreferenceOneSelect.vue", () => {
 
     await componentWrapper.vm.$nextTick();
     let emittedEvent = componentWrapper.emitted();
-    console.log(emittedEvent, "emittedEvent");
     expect(emittedEvent).toBeTruthy();
     let emittedPayload = emittedEvent["update:modelValue"][0][0];
-    console.log(emittedPayload, "emittedPayload");
     expect(emittedPayload).toBeTruthy();
     expect(emittedPayload).toBe(testModelValue);
+
+    console.log(typeof testModelValue, "one");
+    console.log(emittedEvent, "emittedEvent");
+    console.log(emittedPayload, "emittedPayload");
   });
 });
