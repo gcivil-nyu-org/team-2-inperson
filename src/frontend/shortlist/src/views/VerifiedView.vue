@@ -1,6 +1,6 @@
 <script>
 import axios from "axios";
-import {useRoute} from 'vue-router'
+import { useRoute } from "vue-router";
 export default {
   data() {
     return {
@@ -25,7 +25,6 @@ export default {
     resendLink() {
       console.log(this.router.query);
       axios
-      //Maybe changed in the future depend on endpoint
         .post("/send-email", {
           email: this.email,
         })
