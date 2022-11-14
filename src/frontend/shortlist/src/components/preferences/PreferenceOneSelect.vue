@@ -23,6 +23,7 @@ export default {
     <template v-for="(opt, optindex) in question.Options" :key="optindex">
       <div class="form-check">
         <input
+          id="testItem"
           class="form-check-input"
           type="radio"
           :value="opt"
@@ -48,7 +49,6 @@ export default {
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
 }
-
 .pref-q-question {
   width: 100%;
   font-size: 18px;

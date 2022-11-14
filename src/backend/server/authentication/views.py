@@ -30,7 +30,6 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from .utils import Util
 from django.http import HttpResponsePermanentRedirect
-import os
 
 
 class CustomRedirect(HttpResponsePermanentRedirect):
@@ -108,10 +107,16 @@ class VerifyEmail(views.APIView):
             return CustomRedirect(
                 redirect_url_login + "?token_valid=True&message=Successfully Activated"
             )
+        #             return Response(
+        #                 {"email": "Successfully activated"}, status=status.HTTP_200_OK
+        #             )
         except jwt.ExpiredSignatureError:
             return CustomRedirect(
                 redirect_url_signup + "?token_valid=False&message=Activation Expired"
             )
+        #             return Response(
+        #                 {"error": "Activation Expired"}, status=status.HTTP_400_BAD_REQUEST
+        #             )
         except jwt.exceptions.DecodeError:
             return CustomRedirect(
                 redirect_url_signup + "?token_valid=False&message=Invalid token"
@@ -163,6 +168,11 @@ class ResendEmail(generics.GenericAPIView):
             },
             status=status.HTTP_400_BAD_REQUEST,
         )
+
+
+#             return Response(
+#                 {"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST
+#             )
 
 
 class LoginAPIView(generics.GenericAPIView):

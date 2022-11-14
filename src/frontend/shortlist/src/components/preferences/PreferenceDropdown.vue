@@ -2,6 +2,7 @@
 export default {
   name: "PreferenceDropdown",
   props: ["question", "modelValue"],
+
   emits: ["update:modelValue"],
   computed: {
     value: {
