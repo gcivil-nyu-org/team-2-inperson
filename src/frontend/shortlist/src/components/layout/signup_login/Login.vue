@@ -5,6 +5,19 @@ import { required, email, minLength } from "@vuelidate/validators";
 import { mapState } from "pinia";
 import { sessionStore } from "../../../states/sessionStore";
 
+export const validatorSettings = {
+  form: {
+    email: {
+      required,
+      email,
+    },
+    password: {
+      required,
+      min: minLength(8),
+    },
+  },
+};
+
 export default {
   name: "Login",
   emits: ["appAccountLogin"],
@@ -23,18 +36,7 @@ export default {
     };
   },
   validations() {
-    return {
-      form: {
-        email: {
-          required,
-          email,
-        },
-        password: {
-          required,
-          min: minLength(8),
-        },
-      },
-    };
+    return validatorSettings;
   },
   methods: {
     submitLoginForm() {
