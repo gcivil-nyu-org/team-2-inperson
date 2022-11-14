@@ -27,7 +27,7 @@ export default {
     resendLink() {
       //console.log(this.router.query);
       axios
-        .post("/send-email", {
+        .post("http://127.0.0.1:8000/auth/request-resend-email", {
           email: this.email,
         })
         .then(function (response) {
@@ -36,6 +36,7 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+      alert("Check your email! Verification link resent.");
     },
   },
 };
@@ -44,9 +45,12 @@ export default {
   <div class="verify-container">
     {{ $router.query }}
     <!-- Display based on verification status -->
+    <!-- Either resend link or redirect to login depend on verification status-->
     <template v-if="isVerified">
       <h1 this.testVerified="true">Verified successfully</h1>
-      <a href="https://www.shortlist.nyc/login" id="loginLink"> Click here to login! </a>
+      <a href="https://www.shortlist.nyc/login" id="loginLink">
+        Click here to login!
+      </a>
     </template>
     <template v-if="!isVerified">
       <div this.testNotVerified="true">Problem: {{ errorMessage }}</div>
