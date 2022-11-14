@@ -7,7 +7,7 @@ from .serializers import (
     EmailVerificationSerializer,
     LoginSerializer,
     LogoutSerializer,
-    ResendEmailSerializer
+    ResendEmailSerializer,
 )
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -41,6 +41,7 @@ class CustomRedirect(HttpResponsePermanentRedirect):
 class RegisterView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
     renderer_classes = (UserRenderer,)
+
     def post(self, request):
         user = request.data
         serializer = self.serializer_class(data=user)
@@ -53,12 +54,23 @@ class RegisterView(generics.GenericAPIView):
         # relativeLink = reverse("email-verify")
         base_url = os.environ.get("SHORTLIST_API_URL")
         absurl = base_url + "auth/email-verify?token=" + str(token)
-        email_body = (
-            "Hi "
-            + user.username
-            + ", "
-            + "\n\nUse the link below to verify your email \n"
-            + absurl
+        email_body = """\
+            <html>
+                <head></head>
+                <body>
+                    <p>
+                        Hi %s,
+                        Click on the below below to verify and activate your account
+                    </p>
+                    <a href=%s target="_blank" style="background-color: green; color: black; padding: 14px 25px; text-align: center; text-decoration: none; display: inline-block; overflow:hidden;">
+                        Click here to verify
+                    </a>
+
+                </body>
+            </html>
+            """ % (
+            user.username,
+            absurl,
         )
         data = {
             "email_body": email_body,
@@ -71,6 +83,7 @@ class RegisterView(generics.GenericAPIView):
             recommendation = Recommendation(account=user, school=school)
             recommendation.save()
         return Response(user_data, status=status.HTTP_201_CREATED)
+
 
 class VerifyEmail(views.APIView):
     serializer_class = EmailVerificationSerializer
@@ -92,52 +105,65 @@ class VerifyEmail(views.APIView):
             if not user.is_verified:
                 user.is_verified = True
                 user.save()
-            return CustomRedirect(redirect_url_login+'?token_valid=True&message=Successfully Activated')
-#             return Response(
-#                 {"email": "Successfully activated"}, status=status.HTTP_200_OK
-#             )
+            return CustomRedirect(
+                redirect_url_login + "?token_valid=True&message=Successfully Activated"
+            )
         except jwt.ExpiredSignatureError:
-            return CustomRedirect(redirect_url_signup+'?token_valid=False&message=Activation Expired')
-#             return Response(
-#                 {"error": "Activation Expired"}, status=status.HTTP_400_BAD_REQUEST
-#             )
+            return CustomRedirect(
+                redirect_url_signup + "?token_valid=False&message=Activation Expired"
+            )
         except jwt.exceptions.DecodeError:
-            return CustomRedirect(redirect_url_signup+'?token_valid=False&message=Invalid token')
-#             return Response(
-#                 {"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST
-#             )
+            return CustomRedirect(
+                redirect_url_signup + "?token_valid=False&message=Invalid token"
+            )
 
 
 class ResendEmail(generics.GenericAPIView):
-	serializer_class = ResendEmailSerializer
-	def post(self, request):
-		email = request.data["email"]
-		if User.objects.filter(email=email).exists():
-			user = User.objects.get(email=email)
-			token = RefreshToken.for_user(user).access_token
-			base_url = os.environ.get("SHORTLIST_API_URL")
-			absurl = base_url + "auth/email-verify?token=" + str(token)
-			email_body = (
-			    "Hi there"
-			    + ", "
-			    + "\n\nUse the link below to re-verify your email \n"
-			    + absurl
-			)
-			token = PasswordResetTokenGenerator().make_token(user)
-			data = {
-			    "email_body": email_body,
-			    "to_email": user.email,
-			    "email_subject": "Activate your account",
-			}
-			Util.send_email(data)
-			return Response(
-			    {"success": "We have resend you a link to your email to activate your account"},
-			    status=status.HTTP_200_OK,
-			)
-		return Response(
-			{'error': 'This email address does not exists. Please enter a valid email address'},
-			status=status.HTTP_400_BAD_REQUEST
-		)
+    serializer_class = ResendEmailSerializer
+
+    def post(self, request):
+        email = request.data["email"]
+        if User.objects.filter(email=email).exists():
+            user = User.objects.get(email=email)
+            token = RefreshToken.for_user(user).access_token
+            base_url = os.environ.get("SHORTLIST_API_URL")
+            absurl = base_url + "auth/email-verify?token=" + str(token)
+            email_body = """\
+                <html>
+                    <head></head>
+                    <body>
+                        <p>
+                            Hi there,
+                            Use the link below to re-verify your email
+                        </p>
+                        <a href=%s target="_blank" style="background-color: green; color: black; padding: 14px 25px; text-align: center; text-decoration: none; display: inline-block; overflow:hidden;">
+                            Activate
+                        </a>
+                    </body>
+                </html>
+                """ % (
+                absurl
+            )
+            token = PasswordResetTokenGenerator().make_token(user)
+            data = {
+                "email_body": email_body,
+                "to_email": user.email,
+                "email_subject": "Activate your account",
+            }
+            Util.send_email(data)
+            return Response(
+                {
+                    "success": "We have resend you a link to your email to activate your account"
+                },
+                status=status.HTTP_200_OK,
+            )
+        return Response(
+            {
+                "error": "This email address does not exists. Please enter a valid email address"
+            },
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
 
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer

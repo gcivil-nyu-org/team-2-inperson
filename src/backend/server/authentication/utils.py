@@ -22,4 +22,5 @@ class Util:
             to=[data["to_email"]],
             from_email="noreply@messaging.shortlist.nyc",
         )
+        email.content_subtype = "html"
         EmailThread(email).start()
