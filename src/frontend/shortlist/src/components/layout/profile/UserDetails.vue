@@ -45,26 +45,29 @@ export default {
           </button>
         </div>
 
+        <div class="accountstatus">
+          <label class="typestatuslabel">Email :</label>&nbsp;<label
+            class="verifiedEmail"
+          >
+            {{ accountMetadata.email }}
+          </label>
+        </div>
+
+        <label>First Name</label>
         <input
           type="text"
           class="profilefields"
-          :placeholder="
-            'First Name:  ' + accountMetadata.preferences.userFirstName
-          "
+          :placeholder="accountMetadata.preferences.userFirstName"
           id="firstname"
         />
+
+        <label>Last Name</label>
         <input
           type="text"
           class="profilefields"
-          :placeholder="
-            'Last Name:  ' + accountMetadata.preferences.userLastName
-          "
+          :placeholder="accountMetadata.preferences.userLastName"
           id="lastname"
         />
-
-        <label class="profilefields" style="color: grey" id="useremail">{{
-          accountMetadata.email
-        }}</label>
 
         <button class="pref-actions" @click="clicker('Back')">
           Update Changes
@@ -225,7 +228,8 @@ main {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   overflow: hidden;
-  left: 100px;
+  left: 120px;
+  margin:2px;
 }
 .delparent:before {
   content: "";
@@ -250,5 +254,16 @@ main {
 
 .image-upload > input {
   display: none;
+}
+
+.verifiedEmail {
+  margin: 0;
+  font-family: "Libre Baskerville", serif;
+  font-size: small;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  border-radius: 5%;
+  background-color: rgb(108, 154, 185);
+  padding:4px;
 }
 </style>
