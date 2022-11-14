@@ -7,6 +7,8 @@ export default {
       isVerified: false,
       email: "",
       errorMessage: "",
+      testVerified: false,
+      testNotVerified: false,
     };
   },
   setup() {
@@ -43,11 +45,11 @@ export default {
     {{ $router.query }}
     <!-- Display based on verification status -->
     <template v-if="isVerified">
-      <h1>Verified successfully</h1>
-      <a href="https://www.shortlist.nyc/login"> Click here to login! </a>
+      <h1 this.testVerified="true">Verified successfully</h1>
+      <a href="https://www.shortlist.nyc/login" id="loginLink"> Click here to login! </a>
     </template>
     <template v-if="!isVerified">
-      <div>Problem: {{ errorMessage }}</div>
+      <div this.testNotVerified="true">Problem: {{ errorMessage }}</div>
       <button @click="this.resendLink" class="btn btn-outline-dark">
         Resend Verification Link
       </button>
