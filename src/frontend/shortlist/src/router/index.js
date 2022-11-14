@@ -39,25 +39,25 @@ const router = createRouter({
       path: "/categorize",
       name: "categorize-view",
       component: () => import("../views/CategorizeView.vue"),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
       path: "/signup",
       name: "signup-view",
       component: () => import("../views/SignupView.vue"),
-      meta: { requiresGuest: true }
+      meta: { requiresGuest: true },
     },
     {
       path: "/login",
       name: "login-view",
       component: () => import("../views/LoginView.vue"),
-      meta: { requiresGuest: true }
+      meta: { requiresGuest: true },
     },
     {
       path: "/profile",
       name: "profile-view",
       component: () => import("../views/ProfileView.vue"),
-      meta: { requiresAuth: true }
+      meta: { requiresAuth: true },
     },
     {
       path: "/about",
@@ -73,25 +73,26 @@ const router = createRouter({
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
-      component: () =>
-        import("../views/NotFoundView.vue"),
-    }
+      component: () => import("../views/NotFoundView.vue"),
+    },
   ],
 });
 
-router.beforeEach((to, from) => {
+router.beforeEach((to) => {
   const store = sessionStore();
   let acct = cookie.getCookie("accountid");
   // auth required; check for existing cookie
   // TODO: check for token?
-  if (to.meta.requiresAuth){
-    if (acct == "") { // cookie not found
-    return {
-      path: '/login',
-      // save the location we were at to come back later
-      query: { redirect: to.fullPath },
-    }
-    } else { // cookie found, get user metadata
+  if (to.meta.requiresAuth) {
+    if (acct == "") {
+      // cookie not found
+      return {
+        path: "/login",
+        // save the location we were at to come back later
+        query: { redirect: to.fullPath },
+      };
+    } else {
+      // cookie found, get user metadata
       let req = shortlistApi
         .getAccountMetadata()
         .forAccountId(acct)
@@ -103,28 +104,27 @@ router.beforeEach((to, from) => {
           console.log("fail", err.response.status, err.response.data);
         });
       req.execute();
-  }
+    }
   }
 
   // If logged in (cookie exists) redirect to /categorize
-  else if (to.meta.requiresGuest && cookie.getCookie("accountid") != "") { 
-      let req = shortlistApi
-        .getAccountMetadata()
-        .forAccountId(acct)
-        .onSuccess((result) => {
-          store.loginState = true;
-          store.accountMetadata = result.data;
-        })
-        .onFail((err) => {
-          console.log("fail", err.response.status, err.response.data);
-        });
-      req.execute();
+  else if (to.meta.requiresGuest && cookie.getCookie("accountid") != "") {
+    let req = shortlistApi
+      .getAccountMetadata()
+      .forAccountId(acct)
+      .onSuccess((result) => {
+        store.loginState = true;
+        store.accountMetadata = result.data;
+      })
+      .onFail((err) => {
+        console.log("fail", err.response.status, err.response.data);
+      });
+    req.execute();
     return {
-      path: '/categorize',
+      path: "/categorize",
       // query: { redirect: to.fullPath },
-    }
+    };
   }
 });
-
 
 export default router;

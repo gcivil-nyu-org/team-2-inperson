@@ -79,8 +79,7 @@ function appAccountUpdateName(payload) {
   let success = () => {
     appSessionStore.accountMetadata.preferences.userFirstName =
       payload.userFirst;
-    appSessionStore.accountMetadata.preferences.userLastName =
-      payload.userLast;
+    appSessionStore.accountMetadata.preferences.userLastName = payload.userLast;
   };
   let fail = (err) => {
     console.log(err);
@@ -94,7 +93,6 @@ function appLogout() {
   cookie.deleteCookie("accountid");
   console.log(appSessionStore.accountMetadata.accountId);
 }
-
 </script>
 
 <template>

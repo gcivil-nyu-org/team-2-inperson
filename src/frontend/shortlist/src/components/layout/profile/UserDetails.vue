@@ -6,7 +6,7 @@ export default {
     return {
       newFirst: "",
       newLast: "",
-    }
+    };
   },
   methods: {
     loadFile: function (event) {
@@ -19,13 +19,16 @@ export default {
 
       if (!this.newFirst && !this.newLast) {
         alert("Names cannot be blank");
-      }
-      else {
+      } else {
         // if one field is empty, set other based on existing value
-        let userFirst = (this.newFirst ? this.newFirst : this.accountMetadata.preferences.userFirstName);
-        let userLast = (this.newLast ? this.newLast : this.accountMetadata.preferences.userLastName);
+        let userFirst = this.newFirst
+          ? this.newFirst
+          : this.accountMetadata.preferences.userFirstName;
+        let userLast = this.newLast
+          ? this.newLast
+          : this.accountMetadata.preferences.userLastName;
 
-        this.$emit("appAccountUpdateName",  { userFirst, userLast });
+        this.$emit("appAccountUpdateName", { userFirst, userLast });
 
         // reset name fields
         this.newFirst = "";
@@ -33,8 +36,7 @@ export default {
 
         alert("Name updated!");
       }
-    }
-      
+    },
   },
 };
 </script>

@@ -2,9 +2,9 @@
 export default {
   name: "Home",
   emits: ["logoutEvent"],
-  mounted () {
+  mounted() {
     this.$emit("logoutEvent");
-  }
+  },
   // TODO: Handle this with events/props
 };
 </script>

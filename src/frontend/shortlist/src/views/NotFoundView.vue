@@ -1,8 +1,7 @@
-<script>
-</script>
+<script></script>
 
 <template>
-<h4>Sorry, that page does not exist.</h4>
+  <h4>Sorry, that page does not exist.</h4>
 </template>
 
 <style>
