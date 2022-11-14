@@ -1,17 +1,15 @@
-import { createLocalVue, describe, it, expect } from "vitest";
+import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import Login from "../Login.vue";
 
-import {validatorSettings} from "../Login.vue";
+import { validatorSettings } from "../Login.vue";
 describe("Login.vue", () => {
   it("test emit with data", async () => {
-    const componentWrapper = mount(Login, 
-      {
-        props: {},
-        validations: validatorSettings,
-      });
-    
-    
+    const componentWrapper = mount(Login, {
+      props: {},
+      validations: validatorSettings,
+    });
+
     const testEmail = "loginEmail@address.com";
     const testPassword = "loginPassword";
 
@@ -22,7 +20,7 @@ describe("Login.vue", () => {
     expect(loginButton.exists(), "loginButtonExists").toBe(true);
     componentWrapper.vm.v$.$touch();
     // loginButton.element.disabled = false;
-    
+
     console.log(loginButton.element);
 
     loginButton.trigger("click");
