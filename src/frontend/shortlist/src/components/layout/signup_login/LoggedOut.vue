@@ -1,6 +1,10 @@
 <script>
 export default {
   name: "Home",
+  emits: ["logoutEvent"],
+  mounted () {
+    this.$emit("logoutEvent");
+  }
   // TODO: Handle this with events/props
 };
 </script>

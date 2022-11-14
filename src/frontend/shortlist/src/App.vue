@@ -89,6 +89,12 @@ function appAccountUpdateName(payload) {
   req.execute();
 }
 
+function appLogout() {
+  appSessionStore.$reset(); // clear store
+  cookie.deleteCookie("accountid");
+  console.log(appSessionStore.accountMetadata.accountId);
+}
+
 </script>
 
 <template>
@@ -99,6 +105,7 @@ function appAccountUpdateName(payload) {
       @appAccountSignup="appAccountSignup"
       @appAccountUpdatePreferences="appAccountUpdatePreferences"
       @appAccountUpdateName="appAccountUpdateName"
+      @logoutEvent="appLogout"
     />
   </div>
 </template>
