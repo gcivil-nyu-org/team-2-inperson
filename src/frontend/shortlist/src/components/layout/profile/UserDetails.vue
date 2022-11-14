@@ -71,6 +71,7 @@ export default {
         </button>
       </div>
     </form>
+    <button type="button" class="btn btn-outline-dark btn-sm">Reset Password</button>
     <button class="delparent">
       Delete Account Permanently
       <img src="/del-parent.png" class="parentdeleteimg" />
