@@ -5,14 +5,12 @@ import Login from "../Login.vue";
 describe("Login.vue", () => {
   // Check if login exists
   it("Renders with null prop", () => {
-    const componentWrapper = mount(Login, {
-    });
+    const componentWrapper = mount(Login, {});
     expect(componentWrapper.exists()).toBe(true);
   });
 
   it("test emit with data", async () => {
-    const componentWrapper = mount(Login, {
-    });
+    const componentWrapper = mount(Login, {});
 
     const testEmail = "loginEmail@address.com";
     const testPassword = "loginPassword";
@@ -31,5 +29,4 @@ describe("Login.vue", () => {
     expect(emittedPayload.email).toEqual(testEmail);
     expect(emittedPayload.password).toEqual(testPassword);
   });
-
-}); 
+});
