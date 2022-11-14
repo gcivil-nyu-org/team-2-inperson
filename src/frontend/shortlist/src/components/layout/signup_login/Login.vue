@@ -111,6 +111,7 @@ export default {
         </div>
         <div>
           <button
+            id = "loginButtonTest"
             type="button"
             class="btn btn-outline-dark"
             :disabled="v$.form.$invalid"
