@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     resendLink() {
-      console.log(this.router.query);
+      //console.log(this.router.query);
       axios
         .post("/send-email", {
           email: this.email,
