@@ -16,6 +16,15 @@ export default {
     };
   },
   methods: {
+    validateEmail() {
+      let emailPattern = new RegExp(
+        "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+      );
+      return emailPattern.test(this.form.email);
+    },
+    validatePassword() {
+      return this.form.password.length >0;
+    },
     submitLoginForm() {
       this.$emit("appAccountLogin", {
         email: this.form.email,
@@ -24,6 +33,9 @@ export default {
     },
   },
   computed: {
+    isLoginDisabled() {
+      return !(this.validateEmail() && this.validatePassword());
+    },
     // this also contains a "loginAttemps" state, which we will use to get
     // the data about whether the login attempt failed
     ...mapState(sessionStore, {
