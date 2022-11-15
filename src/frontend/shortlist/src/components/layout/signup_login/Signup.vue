@@ -94,7 +94,6 @@ export default {
 <template>
   <div class="logo"><Logo /></div>
   <div class="signup_components_container">
-    <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
     <div class="signup-form-container">
       <h1 class="instructions" id="big">Sign Up</h1>
       <div id="first_name">
@@ -182,14 +181,7 @@ input {
   width: 100%;
   justify-content: flex-start;
 }
-#alert_signup {
-  color: rgb(141, 0, 0);
-  margin-bottom: 2px;
-}
-#sign_up_sign {
-  position: static;
-  top: 0;
-}
+
 .logo {
   position: relative;
   left: 20%;
