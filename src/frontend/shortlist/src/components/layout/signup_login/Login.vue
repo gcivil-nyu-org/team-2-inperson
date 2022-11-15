@@ -1,56 +1,44 @@
 <script>
-import Logo from "./Logo.vue";
-import useVuelidate from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
 import { mapState } from "pinia";
 import { sessionStore } from "../../../states/sessionStore";
 
 export default {
   name: "Login",
   emits: ["appAccountLogin"],
-  components: { Logo },
-  setup() {
-    return { v$: useVuelidate() };
-  },
   data() {
     return {
       form: {
         email: "",
         password: "",
       },
-      // Alerts
-      alert_login: "",
-    };
-  },
-  validations() {
-    return {
-      form: {
-        email: {
-          required,
-          email,
-        },
-        password: {
-          required,
-          min: minLength(8),
-        },
-      },
+      validation: true,
     };
   },
   methods: {
+    validateEmail() {
+      let emailPattern = new RegExp(
+        "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+      );
+      return emailPattern.test(this.form.email);
+    },
+    validatePassword() {
+      return this.form.password.length > 6 && this.form.password.length < 20;
+    },
     submitLoginForm() {
-      this.alert_login = "";
-      this.v$.$validate();
-      if (this.v$.$error) {
-        this.alert_signup = "Form failed validation";
-        return;
-      }
       this.$emit("appAccountLogin", {
-        email: this.form.email,
+        email: this.form.email.trim(),
         password: this.form.password,
       });
     },
   },
   computed: {
+    isLoginDisabled() {
+      if (!this.validation) {
+        return false;
+      } else {
+        return !(this.validateEmail() && this.validatePassword());
+      }
+    },
     // this also contains a "loginAttemps" state, which we will use to get
     // the data about whether the login attempt failed
     ...mapState(sessionStore, {
@@ -63,74 +51,71 @@ export default {
 </script>
 
 <template>
-  <!-- Logo  -->
-  <div class="logo">
-    <Logo />
+  <div class="logo_image_container">
+    <router-link to="/" class="nav-item nav-link">
+      <img src="/logo.png" class="logo_img"
+    /></router-link>
   </div>
-  <!-- Log In -->
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
-    <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
     <form>
-      <div class="form-group" :class="{ error: v$.form.email.$errors.length }">
-        <div id="emailaddress_login">
-          <input
-            type="email"
-            class="logininput"
-            placeholder="Email"
-            v-model="v$.form.email.$model"
-          />
-          <div
-            class="input-errors"
-            v-for="(error, index) of v$.form.email.$errors"
-            :key="index"
-          >
-            <div class="error-msg">{{ error.$message }}</div>
+      <div id="emailaddress_login">
+        <input
+          type="email"
+          class="logininput"
+          placeholder="Email"
+          v-model="this.form.email"
+        />
+        <div class="input-errors" v-if="!validateEmail()">
+          <div class="error-msg" v-if="this.form.email.length > 0">
+            Invalid email entry!
           </div>
+          <div class="error-msg" v-else>&nbsp;</div>
         </div>
-        <div
-          class="form-group"
-          :class="{ error: v$.form.password.$errors.length }"
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
+      </div>
+      <div id="password_login">
+        <input
+          type="password"
+          name="password"
+          v-model="this.form.password"
+          class="logininput"
+          placeholder="Password"
+        />
+        <div class="input-errors" v-if="!validatePassword()">
+          <div class="error-msg" v-if="this.form.password.length > 0">
+            Invalid password length!
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          :disabled="isLoginDisabled"
+          @click="submitLoginForm"
         >
-          <div id="password_login">
-            <input
-              type="password"
-              name="password"
-              v-model="v$.form.password.$model"
-              class="logininput"
-              placeholder="Password"
-            />
-            <div
-              class="input-errors"
-              v-for="(error, index) of v$.form.password.$errors"
-              :key="index"
-            >
-              <div class="error-msg">{{ error.$message }}</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <button
-            type="button"
-            class="btn btn-outline-dark"
-            :disabled="v$.form.$invalid"
-            @click="submitLoginForm"
-          >
-            Login
-          </button>
-          <!-- TODO: Forgot password feature -->
-          <p class="instructions" id="small">or</p>
-          <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
-            Log In with Google
-          </button>
-          <p class="instructions" id="small">Don't have an account yet?</p>
-          <button
-            @click="$router.replace('/signup')"
-            class="btn btn-outline-dark"
-          >
-            Sign me up!
-          </button>
-        </div>
+          Login
+        </button>
+        <!-- TODO: Forgot password feature -->
+        <p class="instructions" id="small">or</p>
+        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+          Log In with Google
+        </button>
+        <p class="instructions" id="small">Don't have an account yet?</p>
+        <button
+          @click="$router.replace('/signup')"
+          class="btn btn-outline-dark"
+        >
+          Sign me up!
+        </button>
       </div>
     </form>
   </div>
@@ -162,17 +147,17 @@ input {
   box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
 
-#alert_login {
-  color: rgb(141, 0, 0);
-  margin-bottom: 10px;
+.logo_img {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
 }
-
-.logo {
+.logo_image_container {
   position: relative;
   left: 20%;
-  width: 700px;
-  height: 700px;
-  margin-top: 80px;
+  width: 500px;
+  height: 500px;
+  margin-top: 100px;
 }
 #small.instructions {
   font-size: 24px;
@@ -198,13 +183,13 @@ input {
   outline: none;
   transition: border-color 0.2s;
   position: relative;
+  margin: 0px;
 }
 
 .error-msg {
   color: rgb(117, 28, 28);
-  margin: 0;
   font-size: 13px;
-  padding-bottom: 7px;
+  padding-bottom: 10px;
 }
 form {
   min-width: 100%;
