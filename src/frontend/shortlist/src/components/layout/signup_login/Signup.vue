@@ -13,6 +13,7 @@ export default {
       },
       nameAlert: "",
       passwordAlert: "",
+      validation: true,
     };
   },
   methods: {
@@ -76,13 +77,17 @@ export default {
   },
   computed: {
     isSignUpDisabled() {
-      return !(
-        this.validateName(this.form.firstName) &&
-        this.validateName(this.form.lastName) &&
-        this.validateEmail() &&
-        this.validatePassword() &&
-        this.validateConfirmPassword()
-      );
+      if (!this.validation) {
+        return false;
+      } else {
+        return !(
+          this.validateName(this.form.firstName) &&
+          this.validateName(this.form.lastName) &&
+          this.validateEmail() &&
+          this.validatePassword() &&
+          this.validateConfirmPassword()
+        );
+      }
     },
   },
 };
