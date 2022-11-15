@@ -121,6 +121,15 @@ export default {
           id="firstname"
           v-model="newFirst"
         />
+        <div class="input-errors" v-if="!validateName(this.newFirst)">
+          <div class="error-msg" v-if="this.newFirst.length > 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
 
         <label>Last Name</label>
         <input
@@ -130,13 +139,28 @@ export default {
           id="lastname"
           v-model="newLast"
         />
+        <div class="input-errors" v-if="!validateName(this.newLast)">
+          <div class="error-msg" v-if="this.newLast.length > 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
 
-        <button class="pref-actions" @click="clicker('Back')">
+        <button
+          class="pref-actions"
+          @click="updateName"
+          :disabled="isUpdateDisabled"
+        >
           Update Changes
         </button>
       </div>
     </form>
-    <button type="button" class="btn btn-outline-dark btn-sm">Reset Password</button>
+    <button type="button" class="btn btn-outline-dark btn-sm">
+      Reset Password
+    </button>
     <button class="delparent">
       Delete Account Permanently
       <img src="/del-parent.png" class="parentdeleteimg" />
