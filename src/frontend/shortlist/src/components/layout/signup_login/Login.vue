@@ -65,10 +65,15 @@ export default {
           class="logininput"
           placeholder="Email"
           v-model="this.form.email"
-          required
         />
         <div class="input-errors" v-if="!validateEmail()">
-          <div class="error-msg">Invalid email entry!</div>
+          <div class="error-msg" v-if="this.form.email.length > 0">
+            Invalid email entry!
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
       <div id="password_login">
@@ -80,7 +85,13 @@ export default {
           placeholder="Password"
         />
         <div class="input-errors" v-if="!validatePassword()">
-          <div class="error-msg">Password is required!</div>
+          <div class="error-msg" v-if="this.form.password.length > 0">
+            Invalid password length!
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
 
