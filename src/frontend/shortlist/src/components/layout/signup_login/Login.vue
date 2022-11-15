@@ -23,7 +23,7 @@ export default {
       return emailPattern.test(this.form.email);
     },
     validatePassword() {
-      return this.form.password.length >0;
+      return this.form.password.length > 0;
     },
     submitLoginForm() {
       this.$emit("appAccountLogin", {
@@ -56,55 +56,52 @@ export default {
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
     <form>
-      <div class="form-group">
-        <div id="emailaddress_login">
-          <input
-            type="email"
-            class="logininput"
-            placeholder="Email"
-            v-model="this.form.email"
-            required
-          />
-          <div class="input-errors" v-if="!validateEmail()">
-            <div class="error-msg">Invalid email entry!</div>
-          </div>
+      <div id="emailaddress_login">
+        <input
+          type="email"
+          class="logininput"
+          placeholder="Email"
+          v-model="this.form.email"
+          required
+        />
+        <div class="input-errors" v-if="!validateEmail()">
+          <div class="error-msg">Invalid email entry!</div>
         </div>
-        <div class="form-group">
-          <div id="password_login">
-            <input
-              type="password"
-              name="password"
-              v-model="this.form.password"
-              class="logininput"
-              placeholder="Password"
-            />
-            <div class="input-errors" v-if="!validatePassword()">
-              <div class="error-msg">Password is required!</div>
-            </div>
-          </div>
+      </div>
+      <div id="password_login">
+        <input
+          type="password"
+          name="password"
+          v-model="this.form.password"
+          class="logininput"
+          placeholder="Password"
+        />
+        <div class="input-errors" v-if="!validatePassword()">
+          <div class="error-msg">Password is required!</div>
         </div>
-        <div>
-          <button
-            type="button"
-            class="btn btn-outline-dark"
-            :disabled="isLoginDisabled"
-            @click="submitLoginForm"
-          >
-            Login
-          </button>
-          <!-- TODO: Forgot password feature -->
-          <p class="instructions" id="small">or</p>
-          <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
-            Log In with Google
-          </button>
-          <p class="instructions" id="small">Don't have an account yet?</p>
-          <button
-            @click="$router.replace('/signup')"
-            class="btn btn-outline-dark"
-          >
-            Sign me up!
-          </button>
-        </div>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          :disabled="isLoginDisabled"
+          @click="submitLoginForm"
+        >
+          Login
+        </button>
+        <!-- TODO: Forgot password feature -->
+        <p class="instructions" id="small">or</p>
+        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
+          Log In with Google
+        </button>
+        <p class="instructions" id="small">Don't have an account yet?</p>
+        <button
+          @click="$router.replace('/signup')"
+          class="btn btn-outline-dark"
+        >
+          Sign me up!
+        </button>
       </div>
     </form>
   </div>
@@ -134,11 +131,6 @@ input {
   flex-direction: column;
   border-radius: 40px;
   box-shadow: 0 0 3em hsl(231deg 62% 80%);
-}
-
-#alert_login {
-  color: rgb(141, 0, 0);
-  margin-bottom: 10px;
 }
 
 .logo {
