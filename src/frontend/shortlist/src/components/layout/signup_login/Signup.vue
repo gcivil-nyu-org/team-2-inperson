@@ -7,7 +7,6 @@ export default {
   emits: ["appAccountSignup"],
   data() {
     return {
-      // For sign up
       form: {
         firstName: "",
         lastName: "",
@@ -15,26 +14,78 @@ export default {
         password: "",
         confirmPassword: "",
       },
-      // Alerts
-      alert_signup: "",
+      nameAlert: "",
+      passwordAlert: "",
     };
   },
   methods: {
-    submitSignupForm() {
-      this.alert_signup = "";
-      if (this.alert_signup) {
-        this.alert_signup = "Form failed validation";
-        return;
-      } else {
-        // TRIGGER SIGNUP EVENT
-        this.$emit("appAccountSignup", {
-          email: this.form.email,
-          firstName: this.form.firstName,
-          lastName: this.form.lastName,
-          password: this.form.password,
-        });
-        return;
+    validateName(value) {
+      let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+      if (value.length < 2) {
+        this.nameAlert = "Minimum length is 2 for name!";
+        return false;
       }
+      if (value.length > 10) {
+        this.nameAlert = "Maximum length is 10 for name!";
+        return false;
+      }
+      if (!validNamePattern.test(value)) {
+        this.nameAlert =
+          "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
+        return false;
+      }
+      return true;
+    },
+    validateEmail() {
+      let emailPattern = new RegExp(
+        "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+      );
+      return emailPattern.test(this.form.email);
+    },
+    validatePassword() {
+      let passwordPattern = new RegExp(
+        "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
+      );
+      if (this.form.password.length < 8) {
+        this.passwordAlert = "Minimum length is 8 for password!";
+        return false;
+      }
+      if (this.form.password.length > 15) {
+        this.passwordAlert = "Maximum length is 15 for password!";
+        return false;
+      }
+      if (!passwordPattern.test(this.form.password)) {
+        this.passwordAlert =
+          "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
+        return false;
+      }
+      return true;
+    },
+    validateConfirmPassword() {
+      return this.form.password == this.form.confirmPassword;
+    },
+    // TODO (Pooja): ID file required validation here
+
+    submitSignupForm() {
+      // TRIGGER SIGNUP EVENT
+      this.$emit("appAccountSignup", {
+        email: this.form.email,
+        firstName: this.form.firstName,
+        lastName: this.form.lastName,
+        password: this.form.password,
+      });
+      return;
+    },
+  },
+  computed: {
+    isSignUpDisabled() {
+      return !(
+        this.validateName(this.form.firstName) &&
+        this.validateName(this.form.lastName) &&
+        this.validateEmail() &&
+        this.validatePassword() &&
+        this.validateConfirmPassword()
+      );
     },
   },
 };
