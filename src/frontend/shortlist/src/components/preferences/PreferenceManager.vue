@@ -20,7 +20,6 @@ export default {
       } else {
         this.actions.back.enabled = false;
       }
-
       if (this.selectedPage == this.numPages - 1) {
         this.actions.next.enabled = false;
         this.actions.submit.enabled = true;
@@ -48,25 +47,20 @@ export default {
         type: "submit",
       },
     };
-
     if (this.numPages == 1) {
       actions.submit.enabled = true;
     } else {
       actions.next.enabled = true;
     }
-
     return {
       actions,
     };
   },
   setup(props, { slots }) {
     let preferencePages = ref(slots.default());
-
     let numPages = preferencePages.value.length;
     let selectedPage = ref(0);
-
     provide("selectedPage", selectedPage);
-
     return {
       preferencePages,
       numPages,

@@ -10,14 +10,21 @@ from django.contrib.auth.models import (
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
+def default_preferences():
+    return {"preferredName": None}
+
+
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, password=None):
+    def create_user(self, username, email, user_type, password=None):
         if username is None:
             raise TypeError("Users should have a username")
         if email is None:
             raise TypeError("Users should have a Email")
-
-        user = self.model(username=username, email=self.normalize_email(email))
+        if user_type is None:
+            raise TypeError("Users should have a User Type")
+        user = self.model(
+            username=username, email=self.normalize_email(email), user_type=user_type
+        )
         user.set_password(password)
         user.save()
         return user
@@ -52,9 +59,20 @@ class User(AbstractBaseUser, PermissionsMixin):
     auth_provider = models.CharField(
         max_length=255, blank=False, null=False, default=AUTH_PROVIDERS.get("email")
     )
+    user_type = models.CharField(
+        max_length=20, choices=(("PARENT", "P"), ("STUDENT", "S"), ("OTHER", "O"))
+    )
+
+    # account is associated with... forms parent-child or child-parent relationship
+    # relational table is not a good way to store hierarchical inheritance, so if
+    # anyone has ideas on how to enforce these cascading constraints better, have at it
+    associates = models.ManyToManyField("User", blank=True)
+
+    # account preferences can be any json object
+    preferences = models.JSONField(default=default_preferences)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]
+    REQUIRED_FIELDS = ["username", "user_type"]
 
     objects = UserManager()
 
