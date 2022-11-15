@@ -13,17 +13,10 @@ export default {
         email: "",
         password: "",
       },
-      // Alerts
-      alert_login: "",
     };
   },
   methods: {
     submitLoginForm() {
-      this.alert_login = "";
-      if (this.alert_login) {
-        this.alert_login = "Form failed validation";
-        return;
-      }
       this.$emit("appAccountLogin", {
         email: this.form.email,
         password: this.form.password,
@@ -50,7 +43,6 @@ export default {
   <!-- Log In -->
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
-    <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
     <form>
       <div class="form-group">
         <div id="emailaddress_login">
