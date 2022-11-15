@@ -97,27 +97,47 @@ export default {
     <div class="signup-form-container">
       <h1 class="instructions" id="big">Sign Up</h1>
       <div id="first_name">
-        <input type="text" placeholder="First Name" class="signupinput" />
-        <div class="input-errors">
-          <div class="error-msg"></div>
+        <input
+          type="text"
+          placeholder="First Name"
+          class="signupinput"
+          v-model="this.form.firstName"
+        />
+        <div class="input-errors" v-if="!validateName(this.form.firstName)">
+          <div class="error-msg">{{ this.nameAlert }}</div>
         </div>
       </div>
       <div id="last_name">
-        <input type="text" placeholder="Last Name" class="signupinput" />
-        <div class="input-errors">
-          <div class="error-msg"></div>
+        <input
+          type="text"
+          placeholder="Last Name"
+          class="signupinput"
+          v-model="this.form.lastName"
+        />
+        <div class="input-errors" v-if="!validateName(this.form.lastName)">
+          <div class="error-msg">{{ this.nameAlert }}</div>
         </div>
       </div>
       <div id="email_address_signup">
-        <input type="email" placeholder="Email" class="signupinput" />
-        <div class="input-errors">
-          <div class="error-msg"></div>
+        <input
+          type="email"
+          placeholder="Email"
+          class="signupinput"
+          v-model="this.form.email"
+        />
+        <div class="input-errors" v-if="!validateEmail()">
+          <div class="error-msg">Invalid email entry!</div>
         </div>
       </div>
       <div id="password_signup">
-        <input type="password" placeholder="Password" class="signupinput" />
-        <div class="input-errors">
-          <div class="error-msg"></div>
+        <input
+          type="password"
+          placeholder="Password"
+          class="signupinput"
+          v-model="this.form.password"
+        />
+        <div class="input-errors" v-if="!validatePassword()">
+          <div class="error-msg">{{ this.passwordAlert }}</div>
         </div>
       </div>
       <div>
@@ -126,9 +146,12 @@ export default {
           autocomplete="off"
           placeholder="Confirm Password"
           class="signupinput"
+          v-model="this.form.confirmPassword"
         />
-        <div class="input-errors">
-          <div class="error-msg"></div>
+        <div class="input-errors" v-if="!validateConfirmPassword()">
+          <div class="error-msg">
+            Password and Confirm Password must be match!
+          </div>
         </div>
       </div>
 
@@ -138,8 +161,12 @@ export default {
         >
         <input class="form-control" type="file" id="formFile" />
       </div>
-
-      <button class="btn btn-outline-dark" @click.prevent="submitSignupForm">
+      <!-- TODO (Pooja): Birthdate field -->
+      <button
+        class="btn btn-outline-dark"
+        @click.prevent="submitSignupForm"
+        :disabled="isSignUpDisabled"
+      >
         Sign up
       </button>
       <p class="instructions" id="small">
