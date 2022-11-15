@@ -9,6 +9,7 @@ export default {
       errorMessage: "",
       testVerified: false,
       testNotVerified: false,
+      testPostSent: false,
     };
   },
   setup() {
@@ -20,13 +21,14 @@ export default {
     this.isVerified = params.verified;
     this.errorMessage = params.message;
     this.email = params.email;
-    console.log(this.email);
-    console.log(this.errorMessage);
+    //console.log(this.email);
+    //console.log(this.errorMessage);
   },
   methods: {
     resendLink() {
       //console.log(this.router.query);
       axios
+        //link needs update after deployment
         .post("http://127.0.0.1:8000/auth/request-resend-email", {
           email: this.email,
         })
@@ -37,6 +39,7 @@ export default {
           console.log(error);
         });
       alert("Check your email! Verification link resent.");
+      this.testPostSent = true;
     },
   },
 };
@@ -47,14 +50,18 @@ export default {
     <!-- Display based on verification status -->
     <!-- Either resend link or redirect to login depend on verification status-->
     <template v-if="isVerified">
-      <h1 this.testVerified="true">Verified successfully</h1>
+      <h5 this.testVerified="true">Verified successfully</h5>
       <a href="https://www.shortlist.nyc/login" id="loginLink">
         Click here to login!
       </a>
     </template>
     <template v-if="!isVerified">
       <div this.testNotVerified="true">Problem: {{ errorMessage }}</div>
-      <button @click="this.resendLink" class="btn btn-outline-dark">
+      <button
+        @click="this.resendLink"
+        id="resetButton"
+        class="btn btn-outline-dark"
+      >
         Resend Verification Link
       </button>
     </template>

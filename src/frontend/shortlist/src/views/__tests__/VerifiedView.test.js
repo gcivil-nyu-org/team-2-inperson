@@ -3,10 +3,11 @@ import { mount } from "@vue/test-utils";
 
 import VerifiedView from "../VerifiedView.vue";
 
-describe("ShortlistRow.vue", () => {
+describe("VerifiedView.vue", () => {
   it("renders not verified page properly", () => {
     const mockRouter = {
       push: {
+        path: "/verification",
         query: {
           verified: "false",
           message: "invalid token",
@@ -26,8 +27,10 @@ describe("ShortlistRow.vue", () => {
     expect(componentWrapper.vm.testNotVerified).toBe(true);
     expect(componentWrapper.vm.testVerified).toBe(false);
   });
+
   it("renders verified page correctly", () => {
     const mockRouter = {
+      path: "/verification",
       push: {
         query: {
           verified: "true",
@@ -47,5 +50,29 @@ describe("ShortlistRow.vue", () => {
     expect(loginLink.exists()).toBe(true);
     expect(componentWrapper.vm.testVerified).toBe(true);
     expect(componentWrapper.vm.testNotVerified).toBe(false);
+  });
+
+  it("reset button send right info", async () => {
+    const mockRouter = {
+      path: "/verification",
+      push: {
+        query: {
+          verified: "true",
+          message: "",
+          email: "xx@gmail.com",
+        },
+      },
+    };
+    const componentWrapper = mount(VerifiedView, {
+      global: {
+        mocks: {
+          $router: mockRouter,
+        },
+      },
+    });
+    const resetButton = componentWrapper.find("#resetButton");
+    expect(resetButton.exists()).toBe(true);
+    await resetButton.trigger("click");
+    expect(componentWrapper.vm.testPostSent).toBe(true);
   });
 });
