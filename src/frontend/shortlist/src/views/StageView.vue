@@ -1,5 +1,3 @@
 <script></script>
-
-<template>blank</template>
-
+<template>Stage</template>
 <style></style>

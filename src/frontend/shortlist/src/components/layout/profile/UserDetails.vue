@@ -1,11 +1,41 @@
 <script>
 export default {
   props: ["accountMetadata"],
+  emits: ["appAccountUpdateName"],
+  data() {
+    return {
+      newFirst: "",
+      newLast: "",
+    };
+  },
   methods: {
     loadFile: function (event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
       console.log(image.src);
+    },
+    updateName() {
+      // TODO: input validation on new names
+
+      if (!this.newFirst && !this.newLast) {
+        alert("Names cannot be blank");
+      } else {
+        // if one field is empty, set other based on existing value
+        let userFirst = this.newFirst
+          ? this.newFirst
+          : this.accountMetadata.preferences.userFirstName;
+        let userLast = this.newLast
+          ? this.newLast
+          : this.accountMetadata.preferences.userLastName;
+
+        this.$emit("appAccountUpdateName", { userFirst, userLast });
+
+        // reset name fields
+        this.newFirst = "";
+        this.newLast = "";
+
+        alert("Name updated!");
+      }
     },
   },
 };
@@ -59,6 +89,7 @@ export default {
           class="profilefields"
           :placeholder="accountMetadata.preferences.userFirstName"
           id="firstname"
+          v-model="newFirst"
         />
 
         <label>Last Name</label>
@@ -67,6 +98,7 @@ export default {
           class="profilefields"
           :placeholder="accountMetadata.preferences.userLastName"
           id="lastname"
+          v-model="newLast"
         />
 
         <button class="pref-actions" @click="clicker('Back')">

@@ -19,24 +19,24 @@ export const sessionStore = defineStore("sessionStore", {
           recommendationPreferences: {
             q1: {
               Question: "Which instruction mode do you prefer?",
-              Response: "In-Person",
+              Response: "",
             },
             q2: {
               Question: "Do you have any Extra-curricular interests?",
-              Response: ["Performing Arts"],
+              Response: [],
             },
             q3: {
               Question: "Do you already have a school in mind?",
-              Response: "city as school",
+              Response: "",
             },
             q4: {
               Question:
                 "Is there a transit bus/train line you're interested in?",
-              Response: "2",
+              Response: "",
             },
             q5: {
               Question: "How would you rank your academic performance so far?",
-              Response: "6",
+              Response: "",
             },
           },
           associates: [],
