@@ -6,9 +6,29 @@ export default {
     return {
       newFirst: "",
       newLast: "",
+      nameAlert: "",
+      validation: true,
     };
   },
   methods: {
+    validateName(value) {
+      let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+      if (value.length < 2) {
+        this.nameAlert = "Minimum length is 2 for name!";
+        return false;
+      }
+      if (value.length > 10) {
+        this.nameAlert = "Maximum length is 10 for name!";
+        return false;
+      }
+      if (!validNamePattern.test(value)) {
+        this.nameAlert =
+          "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
+        return false;
+      }
+      return true;
+    },
+
     loadFile: function (event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
@@ -34,7 +54,17 @@ export default {
         this.newFirst = "";
         this.newLast = "";
 
-        alert("Name updated!");
+      alert("Name updated!");
+    },
+  },
+  computed: {
+    isUpdateDisabled() {
+      if (!this.validation) {
+        return false;
+      } else {
+        return !(
+          this.validateName(this.newFirst) && this.validateName(this.newLast)
+        );
       }
     },
   },
