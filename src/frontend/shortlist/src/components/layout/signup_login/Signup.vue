@@ -1,39 +1,10 @@
 <script>
 import Logo from "./Logo.vue";
-import useVuelidate from "@vuelidate/core";
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-  sameAs,
-} from "@vuelidate/validators";
-
-export function validName(name) {
-  let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
-  if (validNamePattern.test(name)) {
-    return true;
-  }
-  return false;
-}
-
-export function validPassword(password) {
-  let validPasswordPattern = new RegExp(
-    "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
-  );
-  if (validPasswordPattern.test(password)) {
-    return true;
-  }
-  return false;
-}
 
 export default {
   name: "Signup",
   components: { Logo },
   emits: ["appAccountSignup"],
-  setup() {
-    return { $v: useVuelidate() };
-  },
   data() {
     return {
       // For sign up
@@ -48,52 +19,10 @@ export default {
       alert_signup: "",
     };
   },
-  validations() {
-    return {
-      form: {
-        firstName: {
-          required,
-          name_validation: {
-            $validator: validName,
-            $message:
-              "Invalid Name. Valid name only contain letters, dashes (-) and spaces",
-          },
-          maxLength: maxLength(15),
-        },
-        lastName: {
-          name_validation: {
-            $validator: validName,
-            $message:
-              "Invalid Name. Valid name only contain letters, dashes (-) and spaces",
-          },
-          maxLength: maxLength(10),
-        },
-        email: {
-          required,
-          email,
-        },
-        password: {
-          required,
-          name_validation: {
-            $validator: validPassword,
-            $message:
-              "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.",
-          },
-          minLength: minLength(8),
-          maxLength: maxLength(15),
-        },
-        confirmPassword: {
-          required,
-          sameAsPassword: sameAs(this.form.password),
-        },
-      },
-    };
-  },
   methods: {
     submitSignupForm() {
-      this.$v.$validate();
       this.alert_signup = "";
-      if (this.$v.$error) {
+      if (this.alert_signup) {
         this.alert_signup = "Form failed validation";
         return;
       } else {
@@ -118,79 +47,38 @@ export default {
     <div class="signup-form-container">
       <h1 class="instructions" id="big">Sign Up</h1>
       <div id="first_name">
-        <input
-          type="text"
-          placeholder="First Name"
-          v-model="$v.form.firstName.$model"
-          class="signupinput"
-        />
-        <div
-          class="input-errors"
-          v-for="(error, index) of $v.form.firstName.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <input type="text" placeholder="First Name" class="signupinput" />
+        <div class="input-errors">
+          <div class="error-msg"></div>
         </div>
       </div>
       <div id="last_name">
-        <input
-          type="text"
-          placeholder="Last Name"
-          v-model="$v.form.lastName.$model"
-          class="signupinput"
-        />
-        <div
-          class="input-errors"
-          v-for="(error, index) of $v.form.lastName.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <input type="text" placeholder="Last Name" class="signupinput" />
+        <div class="input-errors">
+          <div class="error-msg"></div>
         </div>
       </div>
       <div id="email_address_signup">
-        <input
-          type="email"
-          placeholder="Email"
-          class="signupinput"
-          v-model="$v.form.email.$model"
-        />
-        <div
-          class="input-errors"
-          v-for="(error, index) of $v.form.email.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <input type="email" placeholder="Email" class="signupinput" />
+        <div class="input-errors">
+          <div class="error-msg"></div>
         </div>
       </div>
       <div id="password_signup">
-        <input
-          type="password"
-          placeholder="Password"
-          class="signupinput"
-          v-model="$v.form.password.$model"
-        />
-        <div
-          class="input-errors"
-          v-for="(error, index) of $v.form.password.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <input type="password" placeholder="Password" class="signupinput" />
+        <div class="input-errors">
+          <div class="error-msg"></div>
         </div>
       </div>
       <div>
         <input
           type="password"
-          v-model="$v.form.confirmPassword.$model"
           autocomplete="off"
           placeholder="Confirm Password"
           class="signupinput"
         />
-        <div
-          class="input-errors"
-          v-for="(error, index) of $v.form.confirmPassword.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <div class="input-errors">
+          <div class="error-msg"></div>
         </div>
       </div>
 
@@ -201,11 +89,7 @@ export default {
         <input class="form-control" type="file" id="formFile" />
       </div>
 
-      <button
-        :disabled="$v.form.$invalid"
-        class="btn btn-outline-dark"
-        @click.prevent="submitSignupForm"
-      >
+      <button class="btn btn-outline-dark" @click.prevent="submitSignupForm">
         Sign up
       </button>
       <p class="instructions" id="small">
