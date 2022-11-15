@@ -49,30 +49,36 @@ export default {
     <!-- Display based on verification status -->
     <!-- Either resend link or redirect to login depend on verification status-->
     <template v-if="isVerified">
-      <h5 this.testVerified="true">Verified successfully</h5>
-      <a href="https://www.shortlist.nyc/login" id="loginLink">
-        Click here to login!
-      </a>
+      <form>
+        <h5 this.testVerified="true">Verified successfully</h5>
+        <a href="https://www.shortlist.nyc/login" id="loginLink">
+          Click here to login!
+        </a>
+      </form>
     </template>
     <template v-if="!isVerified">
-      <div this.testNotVerified="true">Problem: {{ errorMessage }}</div>
-      <div id="emailaddress">
-        <input
-          type="email"
-          class="emailInput"
-          placeholder="Your email"
-          v-model="email"
-        />
-      </div>
-      <div>
-        <button
-          @click="this.resendLink"
-          id="resetButton"
-          class="btn btn-outline-dark"
-        >
-          Resend Verification Link
-        </button>
-      </div>
+      <form>
+        <div class="message-container" this.testNotVerified="true">
+          {{ errorMessage }}
+        </div>
+        <div class="input-container" id="emailaddress">
+          <input
+            type="email"
+            class="emailInput"
+            placeholder="Your email"
+            v-model="email"
+          />
+        </div>
+        <div class="button-container">
+          <button
+            @click="this.resendLink"
+            id="resetButton"
+            class="btn btn-outline-dark"
+          >
+            Resend Verification Link
+          </button>
+        </div>
+      </form>
     </template>
   </div>
 </template>
