@@ -1,12 +1,10 @@
 <script>
-import Logo from "./Logo.vue";
 import { mapState } from "pinia";
 import { sessionStore } from "../../../states/sessionStore";
 
 export default {
   name: "Login",
   emits: ["appAccountLogin"],
-  components: { Logo },
   data() {
     return {
       form: {
@@ -48,11 +46,11 @@ export default {
 </script>
 
 <template>
-  <!-- Logo  -->
-  <div class="logo">
-    <Logo />
+  <div class="logo_image_container">
+    <router-link to="/" class="nav-item nav-link">
+      <img src="/logo.png" class="logo_img"
+    /></router-link>
   </div>
-  <!-- Log In -->
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
     <form>
@@ -133,12 +131,17 @@ input {
   box-shadow: 0 0 3em hsl(231deg 62% 80%);
 }
 
-.logo {
+.logo_img {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+}
+.logo_image_container {
   position: relative;
   left: 20%;
-  width: 700px;
-  height: 700px;
-  margin-top: 80px;
+  width: 500px;
+  height: 500px;
+  margin-top: 100px;
 }
 #small.instructions {
   font-size: 24px;

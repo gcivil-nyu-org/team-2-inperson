@@ -1,9 +1,6 @@
 <script>
-import Logo from "./Logo.vue";
-
 export default {
   name: "Signup",
-  components: { Logo },
   emits: ["appAccountSignup"],
   data() {
     return {
@@ -92,11 +89,15 @@ export default {
 </script>
 
 <template>
-  <div class="logo"><Logo /></div>
+  <div class="logo_image_container">
+    <router-link to="/" class="nav-item nav-link">
+      <img src="/logo.png" class="logo_img"
+    /></router-link>
+  </div>
   <div class="signup_components_container">
     <div class="signup-form-container">
       <h1 class="instructions" id="big">Sign Up</h1>
-      <div id="first_name">
+      <div class="first_name">
         <input
           type="text"
           placeholder="First Name"
@@ -209,12 +210,17 @@ input {
   justify-content: flex-start;
 }
 
-.logo {
+.logo_img {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+}
+.logo_image_container {
   position: relative;
   left: 20%;
-  width: 700px;
-  height: 700px;
-  margin-top: 80px;
+  width: 500px;
+  height: 500px;
+  margin-top: 100px;
 }
 #small.instructions {
   font-size: 24px;
