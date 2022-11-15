@@ -58,9 +58,15 @@ export default {
     <form>
       <div class="form-group">
         <div id="emailaddress_login">
-          <input type="email" class="logininput" placeholder="Email" />
-          <div class="input-errors">
-            <div class="error-msg"></div>
+          <input
+            type="email"
+            class="logininput"
+            placeholder="Email"
+            v-model="this.form.email"
+            required
+          />
+          <div class="input-errors" v-if="!validateEmail()">
+            <div class="error-msg">Invalid email entry!</div>
           </div>
         </div>
         <div class="form-group">
@@ -68,11 +74,12 @@ export default {
             <input
               type="password"
               name="password"
+              v-model="this.form.password"
               class="logininput"
               placeholder="Password"
             />
-            <div class="input-errors">
-              <div class="error-msg"></div>
+            <div class="input-errors" v-if="!validatePassword()">
+              <div class="error-msg">Password is required!</div>
             </div>
           </div>
         </div>
@@ -80,6 +87,7 @@ export default {
           <button
             type="button"
             class="btn btn-outline-dark"
+            :disabled="isLoginDisabled"
             @click="submitLoginForm"
           >
             Login
