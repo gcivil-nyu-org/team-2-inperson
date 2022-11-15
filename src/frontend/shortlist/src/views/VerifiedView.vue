@@ -20,7 +20,6 @@ export default {
     let params = this.router.query;
     this.isVerified = params.verified;
     this.errorMessage = params.message;
-    this.email = params.email;
     //console.log(this.email);
     //console.log(this.errorMessage);
   },
@@ -57,13 +56,23 @@ export default {
     </template>
     <template v-if="!isVerified">
       <div this.testNotVerified="true">Problem: {{ errorMessage }}</div>
-      <button
-        @click="this.resendLink"
-        id="resetButton"
-        class="btn btn-outline-dark"
-      >
-        Resend Verification Link
-      </button>
+      <div id="emailaddress">
+        <input
+          type="email"
+          class="emailInput"
+          placeholder="Your email"
+          v-model="email"
+        />
+      </div>
+      <div>
+        <button
+          @click="this.resendLink"
+          id="resetButton"
+          class="btn btn-outline-dark"
+        >
+          Resend Verification Link
+        </button>
+      </div>
     </template>
   </div>
 </template>
