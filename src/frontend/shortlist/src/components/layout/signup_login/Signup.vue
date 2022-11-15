@@ -250,14 +250,15 @@ input {
   outline: none;
   transition: border-color 0.2s;
   position: relative;
+  margin: 0px;
 }
 
 .error-msg {
   color: rgb(117, 28, 28);
-  margin: 0;
   font-size: 13px;
   padding-bottom: 7px;
 }
+
 form {
   min-width: 100%;
   max-width: 100%;
