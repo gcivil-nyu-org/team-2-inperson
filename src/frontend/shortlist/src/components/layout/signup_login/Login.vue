@@ -11,6 +11,7 @@ export default {
         email: "",
         password: "",
       },
+      validation: true,
     };
   },
   methods: {
@@ -32,7 +33,11 @@ export default {
   },
   computed: {
     isLoginDisabled() {
-      return !(this.validateEmail() && this.validatePassword());
+      if (!this.validation) {
+        return false;
+      } else {
+        return !(this.validateEmail() && this.validatePassword());
+      }
     },
     // this also contains a "loginAttemps" state, which we will use to get
     // the data about whether the login attempt failed
