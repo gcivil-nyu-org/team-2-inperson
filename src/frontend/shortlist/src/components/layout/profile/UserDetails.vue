@@ -195,7 +195,7 @@ main {
   font-family: "Aleo", serif;
   outline: none;
   transition: border-color 0.2s;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .accountstatus {
@@ -286,6 +286,14 @@ main {
   background-color: #008037;
 }
 
+.pref-actions:disabled {
+  box-shadow: rgba(255, 255, 255, 0.35) 0 -25px 18px -14px inset,
+    rgba(255, 255, 255, 0.25) 0 1px 2px, rgba(255, 255, 255, 0.25) 0 2px 4px,
+    rgba(255, 255, 255, 0.25) 0 4px 8px, rgba(255, 255, 255, 0.25) 0 8px 16px,
+    rgba(255, 255, 255, 0.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+  background-color: #000000;
+}
 .pref-actions button {
   padding: 20px;
   background-color: #008037;
@@ -309,7 +317,7 @@ main {
   cursor: pointer;
   overflow: hidden;
   left: 120px;
-  margin:2px;
+  margin: 2px;
 }
 .delparent:before {
   content: "";
@@ -344,6 +352,11 @@ main {
   font-weight: bolder;
   border-radius: 5%;
   background-color: rgb(108, 154, 185);
-  padding:4px;
+  padding: 4px;
+}
+.error-msg {
+  color: rgb(117, 28, 28);
+  font-size: 13px;
+  padding-bottom: 7px;
 }
 </style>
