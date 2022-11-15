@@ -27,7 +27,22 @@ export default {
         return false;
       }
     },
-    mounted() {},
+    validatePassword() {
+      if (this.form.password.length > 8) {
+        console.log("Valid");
+        return true;
+      } else {
+        console.log("Please enter a valid password");
+        return false;
+      }
+    },
+    submitLoginForm() {},
+  },
+  computed: {
+    isDisabled() {
+      console.log(this.validateEmail() && this.validatePassword());
+      return !(this.validateEmail() && this.validatePassword());
+    },
   },
 };
 </script>
@@ -53,24 +68,19 @@ export default {
             </div>
           </div>
 
-          <!-- <div
-          class="form-group"
-          :class="{ error: $v.form.password.$errors.length }"
-        >
           <div id="password_login">
             <input
               type="password"
               name="password"
-              v-model="$v.form.password.$model"
+              v-model="this.form.password"
               class="logininput"
+              required
               placeholder="Password"
             />
-            <div
-              class="input-errors"
-              v-for="(error, index) of $v.form.password.$errors"
-              :key="index"
-            >
-              <div class="error-msg">{{ error.$message }}</div>
+            <div class="input-errors">
+              <div class="error-msg">
+                Password length {{ validatePassword() ? "valid" : "invalid" }}
+              </div>
             </div>
           </div>
         </div>
@@ -78,13 +88,13 @@ export default {
           <button
             type="button"
             class="btn btn-outline-dark"
-            :disabled="$v.form.$invalid"
+            :disabled="isDisabled"
             @click="submitLoginForm"
           >
             Login
-          </button>  -->
+          </button>
           <!-- TODO: Forgot password feature -->
-          <!-- <p class="instructions" id="small">or</p>
+          <p class="instructions" id="small">or</p>
           <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
             Log In with Google
           </button>
@@ -94,7 +104,7 @@ export default {
             class="btn btn-outline-dark"
           >
             Sign me up!
-          </button> -->
+          </button>
         </div>
       </div>
     </form>
