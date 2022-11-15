@@ -67,7 +67,7 @@ export default {
     submitSignupForm() {
       // TRIGGER SIGNUP EVENT
       this.$emit("appAccountSignup", {
-        email: this.form.email,
+        email: this.form.email.trim(),
         firstName: this.form.firstName,
         lastName: this.form.lastName,
         password: this.form.password,

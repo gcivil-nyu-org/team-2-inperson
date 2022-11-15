@@ -26,7 +26,7 @@ export default {
     },
     submitLoginForm() {
       this.$emit("appAccountLogin", {
-        email: this.form.email,
+        email: this.form.email.trim(),
         password: this.form.password,
       });
     },
