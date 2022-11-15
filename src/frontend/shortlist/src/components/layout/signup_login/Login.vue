@@ -22,7 +22,7 @@ export default {
       return emailPattern.test(this.form.email);
     },
     validatePassword() {
-      return this.form.password.length > 0;
+      return this.form.password.length > 6 && this.form.password.length < 20;
     },
     submitLoginForm() {
       this.$emit("appAccountLogin", {
