@@ -35,24 +35,18 @@ export default {
       console.log(image.src);
     },
     updateName() {
-      // TODO: input validation on new names
+      let userFirst = this.newFirst
+        ? this.newFirst
+        : this.accountMetadata.preferences.userFirstName;
+      let userLast = this.newLast
+        ? this.newLast
+        : this.accountMetadata.preferences.userLastName;
 
-      if (!this.newFirst && !this.newLast) {
-        alert("Names cannot be blank");
-      } else {
-        // if one field is empty, set other based on existing value
-        let userFirst = this.newFirst
-          ? this.newFirst
-          : this.accountMetadata.preferences.userFirstName;
-        let userLast = this.newLast
-          ? this.newLast
-          : this.accountMetadata.preferences.userLastName;
+      this.$emit("appAccountUpdateName", { userFirst, userLast });
 
-        this.$emit("appAccountUpdateName", { userFirst, userLast });
-
-        // reset name fields
-        this.newFirst = "";
-        this.newLast = "";
+      // reset name fields
+      this.newFirst = "";
+      this.newLast = "";
 
       alert("Name updated!");
     },
