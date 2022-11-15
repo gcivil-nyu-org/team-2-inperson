@@ -1,94 +1,59 @@
 <script>
-// import Logo from "./Logo.vue";
-import useVuelidate from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
-// import { mapState } from "pinia";
-// import { sessionStore } from "../../../states/sessionStore";
-
 export default {
-  name: "Login",
-  emits: ["appAccountLogin"],
-//   components: { Logo },
-  setup() {
-    return { $v: useVuelidate() };
-  },
+  name: "Stage",
   data() {
     return {
       form: {
         email: "",
         password: "",
       },
-      // Alerts
-      alert_login: "",
-    };
-  },
-  validations() {
-    return {
-      form: {
-        email: {
-          required,
-          email,
-        },
-        password: {
-          required,
-          min: minLength(8),
-        },
+      alert: {
+        alert_login: "",
+        alert_email: "",
+        alert_password: "",
       },
     };
   },
   methods: {
-    submitLoginForm() {
-      this.alert_login = "";
-      this.$v.$validate();
-      if (this.$v.$error) {
-        this.alert_signup = "Form failed validation";
-        return;
+    validateEmail() {
+      let emailPattern = new RegExp(
+        "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+      );
+      if (emailPattern.test(this.form.email)) {
+        console.log("Valid");
+        return true;
+      } else {
+        console.log("Please enter a valid email address");
+        return false;
       }
-      this.$emit("appAccountLogin", {
-        email: this.form.email,
-        password: this.form.password,
-      });
     },
-  },
-  computed: {
-    // this also contains a "loginAttemps" state, which we will use to get
-    // the data about whether the login attempt failed
-    // ...mapState(sessionStore, {
-    //   loginState: "loginState",
-    //   loginAttempts: "loginAttempts",
-    //   accountMetadata: "accountMetadata",
-    // }),
+    mounted() {},
   },
 };
 </script>
 
 <template>
-  <!-- Logo  -->
-  <div class="logo">
-    <Logo />
-  </div>
   <!-- Log In -->
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
-    <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
+    <!-- <div id="alert_login" v-if="alert_login">{{ alert_login }}</div> -->
     <form>
-      <div class="form-group" :class="{ error: $v.form.email.$errors.length }">
+      <div>
         <div id="emailaddress_login">
           <input
             type="email"
             class="logininput"
             placeholder="Email"
-            v-model="$v.form.email.$model"
+            required
+            v-model="this.form.email"
           />
-          <div
-            class="input-errors"
-            v-for="(error, index) of $v.form.email.$errors"
-            :key="index"
-          >
-            <div class="error-msg">{{ error.$message }}</div>
+          <div class="input-errors">
+            <div class="error-msg">
+              Email is {{ validateEmail() ? "valid" : "invalid" }}
+            </div>
           </div>
-        </div>
-        <div
+
+          <!-- <div
           class="form-group"
           :class="{ error: $v.form.password.$errors.length }"
         >
@@ -117,9 +82,9 @@ export default {
             @click="submitLoginForm"
           >
             Login
-          </button>
+          </button>  -->
           <!-- TODO: Forgot password feature -->
-          <p class="instructions" id="small">or</p>
+          <!-- <p class="instructions" id="small">or</p>
           <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
             Log In with Google
           </button>
@@ -129,7 +94,7 @@ export default {
             class="btn btn-outline-dark"
           >
             Sign me up!
-          </button>
+          </button> -->
         </div>
       </div>
     </form>
