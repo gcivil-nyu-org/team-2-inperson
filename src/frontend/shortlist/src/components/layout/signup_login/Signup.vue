@@ -110,7 +110,13 @@ export default {
           v-model="this.form.firstName"
         />
         <div class="input-errors" v-if="!validateName(this.form.firstName)">
-          <div class="error-msg">{{ this.nameAlert }}</div>
+          <div class="error-msg" v-if="this.form.firstName.length > 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
       <div id="last_name">
@@ -121,9 +127,16 @@ export default {
           v-model="this.form.lastName"
         />
         <div class="input-errors" v-if="!validateName(this.form.lastName)">
-          <div class="error-msg">{{ this.nameAlert }}</div>
+          <div class="error-msg" v-if="this.form.lastName.length > 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
+
       <div id="email_address_signup">
         <input
           type="email"
@@ -132,7 +145,13 @@ export default {
           v-model="this.form.email"
         />
         <div class="input-errors" v-if="!validateEmail()">
-          <div class="error-msg">Invalid email entry!</div>
+          <div class="error-msg" v-if="this.form.email.length > 0">
+            Invalid email entry!
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
       <div id="password_signup">
@@ -143,7 +162,13 @@ export default {
           v-model="this.form.password"
         />
         <div class="input-errors" v-if="!validatePassword()">
-          <div class="error-msg">{{ this.passwordAlert }}</div>
+          <div class="error-msg" v-if="this.form.password.length > 0">
+            {{ this.passwordAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
       <div>
@@ -158,6 +183,9 @@ export default {
           <div class="error-msg">
             Password and Confirm Password must be match!
           </div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
 
