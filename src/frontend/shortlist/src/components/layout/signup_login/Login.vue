@@ -1,7 +1,5 @@
 <script>
 import Logo from "./Logo.vue";
-import useVuelidate from "@vuelidate/core";
-import { required, email, minLength } from "@vuelidate/validators";
 import { mapState } from "pinia";
 import { sessionStore } from "../../../states/sessionStore";
 
@@ -9,9 +7,6 @@ export default {
   name: "Login",
   emits: ["appAccountLogin"],
   components: { Logo },
-  setup() {
-    return { $v: useVuelidate() };
-  },
   data() {
     return {
       form: {
@@ -22,26 +17,11 @@ export default {
       alert_login: "",
     };
   },
-  validations() {
-    return {
-      form: {
-        email: {
-          required,
-          email,
-        },
-        password: {
-          required,
-          min: minLength(8),
-        },
-      },
-    };
-  },
   methods: {
     submitLoginForm() {
       this.alert_login = "";
-      this.$v.$validate();
-      if (this.$v.$error) {
-        this.alert_signup = "Form failed validation";
+      if (this.alert_login) {
+        this.alert_login = "Form failed validation";
         return;
       }
       this.$emit("appAccountLogin", {
@@ -72,40 +52,23 @@ export default {
     <h1 class="instructions" id="big">Log In</h1>
     <div id="alert_login" v-if="alert_login">{{ alert_login }}</div>
     <form>
-      <div class="form-group" :class="{ error: $v.form.email.$errors.length }">
+      <div class="form-group">
         <div id="emailaddress_login">
-          <input
-            type="email"
-            class="logininput"
-            placeholder="Email"
-            v-model="$v.form.email.$model"
-          />
-          <div
-            class="input-errors"
-            v-for="(error, index) of $v.form.email.$errors"
-            :key="index"
-          >
-            <div class="error-msg">{{ error.$message }}</div>
+          <input type="email" class="logininput" placeholder="Email" />
+          <div class="input-errors">
+            <div class="error-msg"></div>
           </div>
         </div>
-        <div
-          class="form-group"
-          :class="{ error: $v.form.password.$errors.length }"
-        >
+        <div class="form-group">
           <div id="password_login">
             <input
               type="password"
               name="password"
-              v-model="$v.form.password.$model"
               class="logininput"
               placeholder="Password"
             />
-            <div
-              class="input-errors"
-              v-for="(error, index) of $v.form.password.$errors"
-              :key="index"
-            >
-              <div class="error-msg">{{ error.$message }}</div>
+            <div class="input-errors">
+              <div class="error-msg"></div>
             </div>
           </div>
         </div>
@@ -113,7 +76,6 @@ export default {
           <button
             type="button"
             class="btn btn-outline-dark"
-            :disabled="$v.form.$invalid"
             @click="submitLoginForm"
           >
             Login
