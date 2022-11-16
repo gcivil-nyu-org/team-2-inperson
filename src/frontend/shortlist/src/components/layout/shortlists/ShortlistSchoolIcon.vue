@@ -10,10 +10,18 @@ export default {
   >
     <img class="school-icon-img" :src="schoolData.img" />
     <div class="school-icon-name shortlist-fnt-serif-bold">
+      <!-- Old school data format -->
+      <div v-if="schoolData.name">
       {{ schoolData.name }}
+      </div>
+      <!-- New school data format -->
+      <div v-else>
+        {{ schoolData.school.schoolMetadata.name }}
+      </div>
     </div>
   </div>
 </template>
+
 <style scoped>
 .school-icon-container {
   border-radius: 10px;
