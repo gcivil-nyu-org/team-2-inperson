@@ -23,6 +23,12 @@ export default {
       this.dragState.endCategorize();
     },
   },
+  computed: {
+    stackSize() {
+      let len = this.recommendations.length;
+      return len > 3 ? 3 : len;
+    }
+  }
 };
 </script>
 
@@ -34,9 +40,9 @@ export default {
           class="reco-stack-grid-position"
           :style="{
             paddingLeft:
-              offsetFactor * (recommendations.length - idx + 1) + 'px',
+              offsetFactor * (stackSize - idx + 1) + 'px',
             paddingTop: offsetFactor * idx + 'px',
-            zIndex: 200 * (recommendations.length - idx + 1),
+            zIndex: 200 * (stackSize - idx + 1),
           }"
         >
           <SchoolCard
@@ -47,14 +53,14 @@ export default {
           />
         </div>
       </template>
-      <template v-else>
+      <template v-else-if="idx < stackSize">
         <div
           class="reco-stack-grid-position"
           :style="{
             paddingLeft:
-              offsetFactor * (recommendations.length - idx + 1) + 'px',
+              offsetFactor * (stackSize - idx + 1) + 'px',
             paddingTop: offsetFactor * idx + 'px',
-            zIndex: 200 * (recommendations.length - idx + 1),
+            zIndex: 200 * (stackSize - idx + 1),
           }"
         >
           <SchoolCard :schoolData="reco" />
