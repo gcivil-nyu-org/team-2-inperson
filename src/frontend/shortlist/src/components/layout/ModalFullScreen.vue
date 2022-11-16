@@ -11,9 +11,10 @@ export default {
 </script>
 <template>
   <template v-if="visible">
-    <div class="shortlist-modal" @click="$emit('modalOff')">
+    <div id="modalOffTest" class="shortlist-modal" @click="$emit('modalOff')">
       <div class="shortlist-modal-inner">
         <div
+          id="stopPropagationTest"
           @click="
             (e) => {
               e.stopPropagation();

@@ -1,11 +1,65 @@
 <script>
 export default {
   props: ["accountMetadata"],
+  emits: ["appAccountUpdateName"],
+  data() {
+    return {
+      newFirst: "",
+      newLast: "",
+      nameAlert: "",
+      validation: true,
+    };
+  },
   methods: {
+    validateName(value) {
+      let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+      if (value.length < 2) {
+        this.nameAlert = "Minimum length is 2 for name!";
+        return false;
+      }
+      if (value.length > 10) {
+        this.nameAlert = "Maximum length is 10 for name!";
+        return false;
+      }
+      if (!validNamePattern.test(value)) {
+        this.nameAlert =
+          "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
+        return false;
+      }
+      return true;
+    },
+
     loadFile: function (event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
       console.log(image.src);
+    },
+    updateName() {
+      let userFirst = this.newFirst
+        ? this.newFirst
+        : this.accountMetadata.preferences.userFirstName;
+      let userLast = this.newLast
+        ? this.newLast
+        : this.accountMetadata.preferences.userLastName;
+
+      this.$emit("appAccountUpdateName", { userFirst, userLast });
+
+      // reset name fields
+      this.newFirst = "";
+      this.newLast = "";
+
+      alert("Name updated!");
+    },
+  },
+  computed: {
+    isUpdateDisabled() {
+      if (!this.validation) {
+        return false;
+      } else {
+        return !(
+          this.validateName(this.newFirst) && this.validateName(this.newLast)
+        );
+      }
     },
   },
 };
@@ -13,13 +67,18 @@ export default {
 <template>
   <main>
     <form class="profileform">
-      <img
-        src="/default-parent-profile.png"
-        alt="Profile-Picture"
-        id="profileimg"
-        class="profileimg"
-      />
-      <img src="/edit.png" /><br />
+      <div class="image-upload">
+        <img
+          src="/default-parent-profile.png"
+          alt="Profile-Picture"
+          id="profileimg"
+          class="profileimg"
+        />
+        <label for="file-input"><img src="/edit.png" /></label>
+
+        <input id="file-input" type="file" />
+      </div>
+
       <div class="inputs">
         <div class="accountstatus">
           <label class="typestatuslabel">Account Type:</label>&nbsp;<button
@@ -31,53 +90,71 @@ export default {
           </button>
         </div>
         <div class="accountstatus">
-          <label class="typestatuslabel">Verification Status:</label
-          >&nbsp;<button
-            class="pendingstatus"
-            title="Account verification may take some time!"
+          <label class="typestatuslabel">ID Status:</label>&nbsp;<button
+            class="verifiedstatus"
+            title="Successfully verified Parent/Guardian uploaded ID!"
             disabled
           >
-            PENDING
+            VERIFIED
           </button>
         </div>
 
+        <div class="accountstatus">
+          <label class="typestatuslabel">Email :</label>&nbsp;<label
+            class="verifiedEmail"
+          >
+            {{ accountMetadata.email }}
+          </label>
+        </div>
+
+        <label>First Name</label>
         <input
           type="text"
           class="profilefields"
-          :placeholder="
-            'First Name:  ' + accountMetadata.preferences.userFirstName
-          "
+          :placeholder="accountMetadata.preferences.userFirstName"
           id="firstname"
+          v-model="newFirst"
         />
-        <input
-          type="text"
-          class="profilefields"
-          :placeholder="
-            'Last Name:  ' + accountMetadata.preferences.userLastName
-          "
-          id="lastname"
-        />
-        <input
-          type="text"
-          class="profilefields"
-          :placeholder="accountMetadata.email"
-          id="useremail"
-        />
-
-        <label class="fileidlabel"
-          >Current Uploaded ID File Name From API</label
-        >
-        <div class="upload-file-wrapper">
-          <button class="btn btn-outline-success btn-sm">
-            Upload New ID <input type="file" name="myfile" />
-          </button>
+        <div class="input-errors" v-if="!validateName(this.newFirst)">
+          <div class="error-msg" v-if="this.newFirst.length > 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
         </div>
-        <br />
-        <button class="pref-actions" @click="clicker('Back')">
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
+
+        <label>Last Name</label>
+        <input
+          type="text"
+          class="profilefields"
+          :placeholder="accountMetadata.preferences.userLastName"
+          id="lastname"
+          v-model="newLast"
+        />
+        <div class="input-errors" v-if="!validateName(this.newLast)">
+          <div class="error-msg" v-if="this.newLast.length > 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
+
+        <button
+          class="pref-actions"
+          @click="updateName"
+          :disabled="isUpdateDisabled"
+        >
           Update Changes
         </button>
       </div>
     </form>
+    <button type="button" class="btn btn-outline-dark btn-sm">
+      Reset Password
+    </button>
     <button class="delparent">
       Delete Account Permanently
       <img src="/del-parent.png" class="parentdeleteimg" />
@@ -118,7 +195,7 @@ main {
   font-family: "Aleo", serif;
   outline: none;
   transition: border-color 0.2s;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .accountstatus {
@@ -129,20 +206,21 @@ main {
   margin-bottom: 20px;
 }
 
-.pendingstatus:disabled {
+.verifiedstatus:disabled {
   border: none;
   transition: all ease-in-out 0.2s;
   cursor: pointer;
   color: black;
   font-weight: bold;
   border-radius: 5%;
-  background-color: rgb(244, 244, 147);
+  background-color: rgb(176, 221, 122);
   font-size: medium;
   font-family: "Klee One", cursive;
   float: left;
 }
-.pendingstatus:hover {
-  background-color: rgb(255, 230, 0);
+.verifiedstatus:hover {
+  background-color: rgb(37, 137, 58);
+  color: white;
   font-family: "Klee One", cursive;
 }
 
@@ -208,33 +286,17 @@ main {
   background-color: #008037;
 }
 
+.pref-actions:disabled {
+  box-shadow: rgba(255, 255, 255, 0.35) 0 -25px 18px -14px inset,
+    rgba(255, 255, 255, 0.25) 0 1px 2px, rgba(255, 255, 255, 0.25) 0 2px 4px,
+    rgba(255, 255, 255, 0.25) 0 4px 8px, rgba(255, 255, 255, 0.25) 0 8px 16px,
+    rgba(255, 255, 255, 0.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+  background-color: #000000;
+}
 .pref-actions button {
   padding: 20px;
   background-color: #008037;
-}
-
-.upload-file-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-.btn input[type="file"] {
-  font-size: 100px;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  display: inline-block;
-}
-
-.fileidlabel {
-  color: rgb(137, 137, 137);
-  background: #ebf3e6;
-  border: 1px solid #008037;
-  border-radius: 5%;
-  font-size: small;
-  padding: 1%;
-  float: left;
-  margin-right: 5px;
 }
 
 .parentdeleteimg {
@@ -254,7 +316,8 @@ main {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   overflow: hidden;
-  left: 100px;
+  left: 120px;
+  margin: 2px;
 }
 .delparent:before {
   content: "";
@@ -275,5 +338,25 @@ main {
 .delparent:hover:before {
   left: 0;
   opacity: 1;
+}
+
+.image-upload > input {
+  display: none;
+}
+
+.verifiedEmail {
+  margin: 0;
+  font-family: "Libre Baskerville", serif;
+  font-size: small;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  border-radius: 5%;
+  background-color: rgb(108, 154, 185);
+  padding: 4px;
+}
+.error-msg {
+  color: rgb(117, 28, 28);
+  font-size: 13px;
+  padding-bottom: 7px;
 }
 </style>

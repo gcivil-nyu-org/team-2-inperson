@@ -7,7 +7,8 @@ import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
 import { shortLists } from "../api/examples/shortlists.js";
 import { recommendations } from "../api/examples/recommendations.js";
-import axios from "axios";
+import cookie from "@/helpers/cookie.js";
+
 export default {
   components: {
     ShortlistManager,
@@ -21,6 +22,11 @@ export default {
     return {
       dragState,
     };
+  },
+  computed: {
+    acctID() {
+      return cookie.getCookie("accountid");
+    }
   },
   methods: {
     swapListElements(inList, idx1, idx2) {
@@ -86,23 +92,39 @@ export default {
         }
       }
     },
+    removeTopCard() {
+      this.myRecommendations.splice(
+        // remove card at schoolIdx (always 0?)
+        this.dragState.categorizeState.schoolIdx,
+        1
+      );
+    },
     dragDropDrop() {
       if (this.dragState.dragType == "categorize") {
         if (this.dragState.categorizeState.activeDrop) {
-          this.myRecommendations.splice(
-            this.dragState.categorizeState.schoolIdx,
-            1
-          );
-          if (this.dragState.categorizeState.schoolOverListIdx == -1) {
+          let listIdx = this.dragState.categorizeState.schoolOverListIdx;
+          if (listIdx == -1) {
             // trash it;
+            this.removeTopCard();
             console.log("DELETE school");
+            // TODO set current_trashed in db
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
-            this.myShortlists[
-              this.dragState.categorizeState.schoolOverListIdx
-            ].schools.push(this.dragState.categorizeState.schoolData);
+            if (this.myShortlists[listIdx].schools.length < 4) {
+              this.myShortlists[listIdx]
+                .schools.push(this.dragState.categorizeState.schoolData);
+              this.removeTopCard();
+              // TODO set current_accepted in db
+            }
+            else {
+              alert("List is full")
+            }
           }
+          if (this.myRecommendations.length == 3) {
+            // get new schools
+            this.myRecommendations.push(...recommendations);
+          }               
         }
       }
     },
@@ -138,19 +160,6 @@ export default {
       listDragEnabled,
       listDropEnabled,
     };
-  },
-  mounted() {
-    axios
-      .get(
-        //"http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/api/shortlists"
-        "https://1rct87m2md.execute-api.us-east-1.amazonaws.com/api/shortlists"
-      )
-      .then((response) => {
-        this.myShortlists = JSON.parse(JSON.stringify(response.data));
-      })
-      .catch((err) => {
-        console.log("AXIOS ERR:", err);
-      });
   },
 };
 </script>

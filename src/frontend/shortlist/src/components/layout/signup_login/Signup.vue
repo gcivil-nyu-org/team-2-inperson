@@ -1,42 +1,9 @@
 <script>
-import Logo from "./Logo.vue";
-import useVuelidate from "@vuelidate/core";
-import {
-  required,
-  email,
-  minLength,
-  maxLength,
-  sameAs,
-} from "@vuelidate/validators";
-
-export function validName(name) {
-  let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
-  if (validNamePattern.test(name)) {
-    return true;
-  }
-  return false;
-}
-
-export function validPassword(password) {
-  let validPasswordPattern = new RegExp(
-    "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
-  );
-  if (validPasswordPattern.test(password)) {
-    return true;
-  }
-  return false;
-}
-
 export default {
   name: "Signup",
-  components: { Logo },
   emits: ["appAccountSignup"],
-  setup() {
-    return { v$: useVuelidate() };
-  },
   data() {
     return {
-      // For sign up
       form: {
         firstName: "",
         lastName: "",
@@ -44,67 +11,82 @@ export default {
         password: "",
         confirmPassword: "",
       },
-      // Alerts
-      alert_signup: "",
-    };
-  },
-  validations() {
-    return {
-      form: {
-        firstName: {
-          required,
-          name_validation: {
-            $validator: validName,
-            $message:
-              "Invalid Name. Valid name only contain letters, dashes (-) and spaces",
-          },
-          maxLength: maxLength(15),
-        },
-        lastName: {
-          name_validation: {
-            $validator: validName,
-            $message:
-              "Invalid Name. Valid name only contain letters, dashes (-) and spaces",
-          },
-          maxLength: maxLength(10),
-        },
-        email: {
-          required,
-          email,
-        },
-        password: {
-          required,
-          name_validation: {
-            $validator: validPassword,
-            $message:
-              "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.",
-          },
-          minLength: minLength(8),
-          maxLength: maxLength(15),
-        },
-        confirmPassword: {
-          required,
-          sameAsPassword: sameAs(this.form.password),
-        },
-      },
+      nameAlert: "",
+      passwordAlert: "",
+      validation: true,
     };
   },
   methods: {
+    validateName(value) {
+      let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+      if (value.length < 2) {
+        this.nameAlert = "Minimum length is 2 for name!";
+        return false;
+      }
+      if (value.length > 10) {
+        this.nameAlert = "Maximum length is 10 for name!";
+        return false;
+      }
+      if (!validNamePattern.test(value)) {
+        this.nameAlert =
+          "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
+        return false;
+      }
+      return true;
+    },
+    validateEmail() {
+      let emailPattern = new RegExp(
+        "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+      );
+      return emailPattern.test(this.form.email);
+    },
+    validatePassword() {
+      let passwordPattern = new RegExp(
+        "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
+      );
+      if (this.form.password.length < 8) {
+        this.passwordAlert = "Minimum length is 8 for password!";
+        return false;
+      }
+      if (this.form.password.length > 15) {
+        this.passwordAlert = "Maximum length is 15 for password!";
+        return false;
+      }
+      if (!passwordPattern.test(this.form.password)) {
+        this.passwordAlert =
+          "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
+        return false;
+      }
+      return true;
+    },
+    validateConfirmPassword() {
+      return this.form.password == this.form.confirmPassword;
+    },
+    // TODO (Pooja): ID file required validation here
+
     submitSignupForm() {
-      this.v$.$validate();
-      this.alert_signup = "";
-      if (this.v$.$error) {
-        this.alert_signup = "Form failed validation";
-        return;
+      // TRIGGER SIGNUP EVENT
+      this.$emit("appAccountSignup", {
+        email: this.form.email.trim(),
+        firstName: this.form.firstName,
+        lastName: this.form.lastName,
+        password: this.form.password,
+      });
+      return;
+    },
+  },
+  computed: {
+    isSignUpDisabled() {
+      if (!this.validation) {
+        return false;
       } else {
-        // TRIGGER SIGNUP EVENT
-        this.$emit("appAccountSignup", {
-          email: this.form.email,
-          firstName: this.form.firstName,
-          lastName: this.form.lastName,
-          password: this.form.password,
-        });
-        return;
+        return !(
+          this.validateName(this.form.firstName) &&
+          this.validateName(this.form.lastName) &&
+          this.validateEmail() &&
+          this.validatePassword() &&
+          this.validateConfirmPassword()
+        );
       }
     },
   },
@@ -112,54 +94,64 @@ export default {
 </script>
 
 <template>
-  <div class="logo"><Logo /></div>
+  <div class="logo_image_container">
+    <router-link to="/" class="nav-item nav-link">
+      <img src="/logo.png" class="logo_img"
+    /></router-link>
+  </div>
   <div class="signup_components_container">
-    <div id="alert_signup" v-if="alert_signup">{{ alert_signup }}</div>
     <div class="signup-form-container">
       <h1 class="instructions" id="big">Sign Up</h1>
-      <div id="first_name">
+      <div class="first_name">
         <input
           type="text"
           placeholder="First Name"
-          v-model="v$.form.firstName.$model"
           class="signupinput"
+          v-model="this.form.firstName"
         />
-        <div
-          class="input-errors"
-          v-for="(error, index) of v$.form.firstName.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <div class="input-errors" v-if="!validateName(this.form.firstName)">
+          <div class="error-msg" v-if="this.form.firstName.length > 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
       <div id="last_name">
         <input
           type="text"
           placeholder="Last Name"
-          v-model="v$.form.lastName.$model"
           class="signupinput"
+          v-model="this.form.lastName"
         />
-        <div
-          class="input-errors"
-          v-for="(error, index) of v$.form.lastName.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <div class="input-errors" v-if="!validateName(this.form.lastName)">
+          <div class="error-msg" v-if="this.form.lastName.length > 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
+
       <div id="email_address_signup">
         <input
           type="email"
           placeholder="Email"
           class="signupinput"
-          v-model="v$.form.email.$model"
+          v-model="this.form.email"
         />
-        <div
-          class="input-errors"
-          v-for="(error, index) of v$.form.email.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <div class="input-errors" v-if="!validateEmail()">
+          <div class="error-msg" v-if="this.form.email.length > 0">
+            Invalid email entry!
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
       <div id="password_signup">
@@ -167,44 +159,57 @@ export default {
           type="password"
           placeholder="Password"
           class="signupinput"
-          v-model="v$.form.password.$model"
+          v-model="this.form.password"
         />
-        <div
-          class="input-errors"
-          v-for="(error, index) of v$.form.password.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <div class="input-errors" v-if="!validatePassword()">
+          <div class="error-msg" v-if="this.form.password.length > 0">
+            {{ this.passwordAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
       <div>
         <input
           type="password"
-          v-model="v$.form.confirmPassword.$model"
           autocomplete="off"
           placeholder="Confirm Password"
           class="signupinput"
+          v-model="this.form.confirmPassword"
         />
-        <div
-          class="input-errors"
-          v-for="(error, index) of v$.form.confirmPassword.$errors"
-          :key="index"
-        >
-          <div class="error-msg">{{ error.$message }}</div>
+        <div class="input-errors" v-if="!validateConfirmPassword()">
+          <div class="error-msg">
+            Password and Confirm Password must be match!
+          </div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
 
+      <div class="mb-3">
+        <label for="formFile" class="form-label"
+          >Upload Parent/Guardian ID:</label
+        >
+        <input class="form-control" type="file" id="formFile" />
+      </div>
+      <!-- TODO (Pooja): Birthdate field -->
       <button
-        :disabled="v$.form.$invalid"
         class="btn btn-outline-dark"
+        id="signupButtonTest"
         @click.prevent="submitSignupForm"
+        :disabled="isSignUpDisabled"
       >
         Sign up
       </button>
-      <p class="instructions" id="small">Have an account already?</p>
-      <button @click="$router.replace('/login')" class="btn btn-outline-dark">
-        Log me in!
-      </button>
+      <p class="instructions" id="small">
+        Have an account already?
+        <button @click="$router.replace('/login')" class="btn btn-outline-dark">
+          Log me in!
+        </button>
+      </p>
     </div>
   </div>
 </template>
@@ -218,7 +223,7 @@ input {
 .signup_components_container {
   position: absolute;
   left: 60%;
-  top: 38%;
+  top: 35%;
   height: auto;
   margin-top: -150px;
   width: 600px;
@@ -238,20 +243,18 @@ input {
   width: 100%;
   justify-content: flex-start;
 }
-#alert_signup {
-  color: rgb(141, 0, 0);
-  margin-bottom: 2px;
+
+.logo_img {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
 }
-#sign_up_sign {
-  position: static;
-  top: 0;
-}
-.logo {
+.logo_image_container {
   position: relative;
   left: 20%;
-  width: 700px;
-  height: 700px;
-  margin-top: 80px;
+  width: 500px;
+  height: 500px;
+  margin-top: 100px;
 }
 #small.instructions {
   font-size: 24px;
@@ -276,17 +279,38 @@ input {
   outline: none;
   transition: border-color 0.2s;
   position: relative;
+  margin: 0px;
 }
 
 .error-msg {
   color: rgb(117, 28, 28);
-  margin: 0;
   font-size: 13px;
   padding-bottom: 7px;
 }
+
 form {
   min-width: 100%;
   max-width: 100%;
   padding: 1em;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Aleo";
+  margin: 0px;
+}
+.form-control {
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5px;
+  color: grey;
+  font-size: 15px;
+  font-family: "Aleo", serif;
+}
+.form-control:focus {
+  border-color: #106021;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
+    0px 0px 8px rgba(35, 173, 40, 0.5);
 }
 </style>
