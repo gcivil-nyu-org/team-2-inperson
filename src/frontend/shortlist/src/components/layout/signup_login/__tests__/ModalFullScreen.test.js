@@ -6,29 +6,58 @@ describe("ModalFullScreen.vue", () => {
   // Check if ModalFullScreen exists
   it("Renders with null prop", () => {
     const componentWrapper = mount(ModalFullScreen, {
-      props: {
-        visible: true,
-      },
+      props: {},
     });
     expect(componentWrapper.exists()).toBe(true);
   });
 
   // Test emit
-  it("Renders with null prop", async () => {
+  it("test if emit works", async () => {
+    const componentWrapper = mount(ModalFullScreen, {
+      props: {
+        visible: true,
+      },
+    });
+    componentWrapper.vm.$emit("modalOff");
+    /*
+    console.log(componentWrapper.emitted(), "modalOff");  ==>
+    { modalOff: [ [] ] } modalOff
+    */
+    expect(componentWrapper.emitted()).toBeTruthy();
+  });
+
+  it("test emit without data", async () => {
+    const componentWrapper = mount(ModalFullScreen, {
+      props: {
+        visible: true,
+      },
+    });
+    componentWrapper.vm.$emit("modalOff");
+
+    await componentWrapper.vm.$nextTick();
+    expect(componentWrapper.emitted().modalOff).toBeTruthy();
+    expect(componentWrapper.emitted().modalOff.length).toBe(1);
+    expect(componentWrapper.emitted().modalOff[0]).toEqual([]);
+  });
+
+  it("test emit with data", async () => {
     const componentWrapper = mount(ModalFullScreen, {
       props: {
         visible: true,
       },
     });
 
-    const modalButton = componentWrapper.find("#modalOffTest");
-    expect(modalButton.exists()).toBe(true);
-    modalButton.element.disabled = false;
+    componentWrapper.vm.$emit("modalOff");
+    let clickableElement = componentWrapper.find("#modalOffTest");
+    expect(clickableElement.exists(), "clickable element exists").toBe(true);
 
-    modalButton.trigger("click");
-    await componentWrapper.vm.$nextTick();
-    let emittedEvent = componentWrapper.emitted();
-    expect(emittedEvent).toBeTruthy();
-    expect(emittedEvent.stopPropagation).toBeUndefined();
+    const testVisibility = true;
+    componentWrapper.vm.isVisible = testVisibility;
+    clickableElement.trigger("click");
+    expect(
+      testVisibility,
+      "show intended data is just as expected after click"
+    ).toBe(true);
+    expect(componentWrapper.find(".shortlist-modal").element).exist;
   });
 });

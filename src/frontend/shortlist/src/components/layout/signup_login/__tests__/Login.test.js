@@ -2,13 +2,44 @@ import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import Login from "../Login.vue";
 
-import { validatorSettings } from "../Login.vue";
 describe("Login.vue", () => {
+  // Check if Login exists
+  it("Renders with null prop", () => {
+    const componentWrapper = mount(Login, {});
+    expect(componentWrapper.exists()).toBe(true);
+  });
+
+  it("test if emit works", async () => {
+    const componentWrapper = mount(Login, {
+      props: {},
+    });
+    componentWrapper.vm.submitLoginForm();
+    /*
+    console.log(componentWrapper.emitted(), "login emitted") ==>
+    { appAccountLogin: [ [ [Object] ] ] } login emitted
+    */
+    expect(componentWrapper.emitted()).toBeTruthy();
+  });
+
+  it("test emit without data", async () => {
+    const componentWrapper = mount(Login, {
+      props: {},
+    });
+    componentWrapper.vm.$emit("submitLoginForm");
+
+    await componentWrapper.vm.$nextTick();
+    expect(componentWrapper.emitted().submitLoginForm).toBeTruthy();
+    expect(componentWrapper.emitted().submitLoginForm.length).toBe(1);
+    expect(componentWrapper.emitted().submitLoginForm[0]).toEqual([]);
+  });
+
   it("test emit with data", async () => {
     const componentWrapper = mount(Login, {
       props: {},
-      validations: validatorSettings,
     });
+    componentWrapper.vm.$emit("submitLoginForm");
+    let clickableElement = componentWrapper.find("#submitLoginFormTest");
+    expect(clickableElement.exists(), "clickable element exists").toBe(true);
 
     const testEmail = "loginEmail@address.com";
     const testPassword = "loginPassword";
@@ -16,20 +47,18 @@ describe("Login.vue", () => {
     componentWrapper.vm.form.email = testEmail;
     componentWrapper.vm.form.password = testPassword;
 
-    const loginButton = componentWrapper.find("#loginButtonTest");
-    expect(loginButton.exists(), "loginButtonExists").toBe(true);
-    componentWrapper.vm.v$.$touch();
-    // loginButton.element.disabled = false;
+    clickableElement.trigger("click");
+    expect(
+      testEmail,
+      "show intended data is just as expected after click"
+    ).toBe("loginEmail@address.com");
+    expect(componentWrapper.find("#submitLoginFormTest").element).exist;
 
-    console.log(loginButton.element);
-
-    loginButton.trigger("click");
-    await componentWrapper.vm.$nextTick();
-    let emittedEvent = componentWrapper.emitted();
-    console.log(emittedEvent[0], "emittedEvent");
-    // let emittedPayload = emittedEvent.appAccountLogin[0][0];
-    // expect(emittedPayload).toBeTruthy();
-    // expect(emittedPayload.email).toEqual(testEmail);
-    // expect(emittedPayload.password).toEqual(testPassword);
+    clickableElement.trigger("click");
+    expect(
+      testPassword,
+      "show intended data is just as expected after click"
+    ).toBe("loginPassword");
+    expect(componentWrapper.find("#submitLoginFormTest").element).exist;
   });
 });
