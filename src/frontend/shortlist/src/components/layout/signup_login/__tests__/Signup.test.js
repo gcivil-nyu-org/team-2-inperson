@@ -21,7 +21,7 @@ describe("Signup.vue", () => {
     expect(componentWrapper.emitted()).toBeTruthy();
   });
 
-  it("test emit data", async () => {
+  it("test emit without data", async () => {
     const componentWrapper = mount(Signup, {
       props: {},
     });
