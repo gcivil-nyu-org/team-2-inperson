@@ -61,6 +61,7 @@ export default {
     <form>
       <div id="emailaddress_login">
         <input
+          id = "loginButtonTest"
           type="email"
           class="logininput"
           placeholder="Email"
@@ -78,6 +79,7 @@ export default {
       </div>
       <div id="password_login">
         <input
+          id = "loginButtonTest"
           type="password"
           name="password"
           v-model="this.form.password"
@@ -97,6 +99,7 @@ export default {
 
       <div>
         <button
+          id = "submitLoginFormTest"
           type="button"
           class="btn btn-outline-dark"
           :disabled="isLoginDisabled"

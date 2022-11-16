@@ -104,6 +104,7 @@ export default {
       <h1 class="instructions" id="big">Sign Up</h1>
       <div class="first_name">
         <input
+          
           type="text"
           placeholder="First Name"
           class="signupinput"
@@ -198,6 +199,7 @@ export default {
       <!-- TODO (Pooja): Birthdate field -->
       <button
         class="btn btn-outline-dark"
+        id = "signupButtonTest"
         @click.prevent="submitSignupForm"
         :disabled="isSignUpDisabled"
       >
