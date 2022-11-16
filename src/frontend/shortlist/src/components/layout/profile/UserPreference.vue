@@ -34,7 +34,12 @@ export default {
         :key="val"
       >
         <label class="pref-q-name">{{ val.Question }}</label>
-        <input type="text" class="profilefields" :placeholder="val.Response" />
+        <input
+          type="text"
+          class="profilefields"
+          :placeholder="val.Response"
+          disabled
+        />
       </template>
     </form>
     <button @click="togglePreferenceForm" class="btn btn-outline-dark">
