@@ -6,7 +6,9 @@ import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
 import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
 import { shortLists } from "../api/examples/shortlists.js";
+import { recommendations } from "../api/examples/recommendations.js";
 import cookie from "@/helpers/cookie.js";
+
 export default {
   components: {
     ShortlistManager,
@@ -158,19 +160,6 @@ export default {
       listDragEnabled,
       listDropEnabled,
     };
-  },
-  mounted() {
-    axios
-      .get(
-        //"http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/api/shortlists"
-        "https://1rct87m2md.execute-api.us-east-1.amazonaws.com/api/shortlists"
-      )
-      .then((response) => {
-        this.myShortlists = JSON.parse(JSON.stringify(response.data));
-      })
-      .catch((err) => {
-        console.log("AXIOS ERR:", err);
-      });
   },
 };
 </script>
