@@ -8,4 +8,26 @@ describe("LoggedOut.vue", () => {
     const componentWrapper = mount(LoggedOut, {});
     expect(componentWrapper.exists()).toBe(true);
   });
+
+  // Test emit
+  it("test if emit works", async () => {
+    const componentWrapper = mount(LoggedOut, {});
+    componentWrapper.vm.$emit("logoutEvent");
+    /*
+    console.log(componentWrapper.emitted(), "logoutEvent");  ==>
+    { logoutEvent: [ [], [] ] } logoutEvent
+    */
+    expect(componentWrapper.emitted()).toBeTruthy();
+  });
+
+  //Test emit
+  it("test emit without data", async () => {
+    const componentWrapper = mount(LoggedOut, {});
+    componentWrapper.vm.$emit("logoutEvent");
+
+    await componentWrapper.vm.$nextTick();
+    expect(componentWrapper.emitted().logoutEvent).toBeTruthy();
+    expect(componentWrapper.emitted().logoutEvent.length).toBe(2);
+    expect(componentWrapper.emitted().logoutEvent).toEqual([[], []]);
+  });
 });

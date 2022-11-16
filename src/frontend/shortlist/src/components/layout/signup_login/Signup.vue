@@ -198,6 +198,7 @@ export default {
       <!-- TODO (Pooja): Birthdate field -->
       <button
         class="btn btn-outline-dark"
+        id="signupButtonTest"
         @click.prevent="submitSignupForm"
         :disabled="isSignUpDisabled"
       >
