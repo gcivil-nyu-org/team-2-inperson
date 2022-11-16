@@ -90,23 +90,39 @@ export default {
         }
       }
     },
+    removeTopCard() {
+      this.myRecommendations.splice(
+        // remove card at schoolIdx (always 0?)
+        this.dragState.categorizeState.schoolIdx,
+        1
+      );
+    },
     dragDropDrop() {
       if (this.dragState.dragType == "categorize") {
         if (this.dragState.categorizeState.activeDrop) {
-          this.myRecommendations.splice(
-            this.dragState.categorizeState.schoolIdx,
-            1
-          );
-          if (this.dragState.categorizeState.schoolOverListIdx == -1) {
+          let listIdx = this.dragState.categorizeState.schoolOverListIdx;
+          if (listIdx == -1) {
             // trash it;
+            this.removeTopCard();
             console.log("DELETE school");
+            // TODO set current_trashed in db
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
-            this.myShortlists[
-              this.dragState.categorizeState.schoolOverListIdx
-            ].schools.push(this.dragState.categorizeState.schoolData);
+            if (this.myShortlists[listIdx].schools.length < 4) {
+              this.myShortlists[listIdx]
+                .schools.push(this.dragState.categorizeState.schoolData);
+              this.removeTopCard();
+              // TODO set current_accepted in db
+            }
+            else {
+              alert("List is full")
+            }
           }
+          if (this.myRecommendations.length == 3) {
+            // get new schools
+            this.myRecommendations.push(...recommendations);
+          }               
         }
       }
     },
