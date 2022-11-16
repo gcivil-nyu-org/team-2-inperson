@@ -6,8 +6,7 @@ import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
 import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
 import { shortLists } from "../api/examples/shortlists.js";
-import { recommendations } from "../api/examples/recommendations.js";
-import axios from "axios";
+import cookie from "@/helpers/cookie.js";
 export default {
   components: {
     ShortlistManager,
@@ -21,6 +20,11 @@ export default {
     return {
       dragState,
     };
+  },
+  computed: {
+    acctID() {
+      return cookie.getCookie("accountid");
+    }
   },
   methods: {
     swapListElements(inList, idx1, idx2) {
