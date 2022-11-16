@@ -5,36 +5,21 @@ export const recommendations = [
     borough: "Manhattan",
     link: "http://google.com",
     dimensions: [
+      { name: "rigorous_instruction_rating", value: 0.77, simple: true },
+      { name: "collaborative_teachers_rating", value: 0.75, simple: false },
+      { name: "supportive_environment_rating", value: 0.69, simple: true },
       {
-        name: "School Dim 1",
-        value: "alskdf",
-        simple: true,
-      },
-      {
-        name: "School Dim 2",
-        value: "alskdf",
-        simple: true,
-      },
-      {
-        name: "School Dim 3",
-        value: "alskdf",
-        simple: true,
-      },
-      {
-        name: "School Dim 4",
-        value: "alskdf",
+        name: "effective_school_leadership_rating",
+        value: 0.68,
         simple: false,
       },
       {
-        name: "School Dim 5",
-        value: "alskdf",
-        simple: false,
+        name: "strong_family_community_ties_rating",
+        value: 0.82,
+        simple: true,
       },
-      {
-        name: "School Dim 6",
-        value: "alskdf",
-        simple: false,
-      },
+      { name: "trust_rating", value: 0.77, simple: false },
+      { name: "student_achievement_rating", value: null, simple: false },
     ],
   },
   {
@@ -42,36 +27,21 @@ export const recommendations = [
     name: "Stuyvesant High School Super Long School Name",
     borough: "West Village, Manhattan",
     dimensions: [
+      { name: "rigorous_instruction_rating", value: 0.81, simple: true },
+      { name: "collaborative_teachers_rating", value: 0.88, simple: false },
+      { name: "supportive_environment_rating", value: 0.85, simple: true },
       {
-        name: "School Dim 1",
-        value: "alskdf",
+        name: "effective_school_leadership_rating",
+        value: 0.95,
+        simple: false,
+      },
+      {
+        name: "strong_family_community_ties_rating",
+        value: 0.68,
         simple: true,
       },
-      {
-        name: "School Dim 2",
-        value: "alskdf",
-        simple: false,
-      },
-      {
-        name: "School Dim 3",
-        value: "alskdf",
-        simple: false,
-      },
-      {
-        name: "School Dim 4",
-        value: "alskdf",
-        simple: false,
-      },
-      {
-        name: "School Dim 5",
-        value: "alskdf",
-        simple: false,
-      },
-      {
-        name: "School Dim 6",
-        value: "alskdf",
-        simple: true,
-      },
+      { name: "trust_rating", value: 0.91, simple: false },
+      { name: "student_achievement_rating", value: null, simple: false },
     ],
   },
   {
@@ -79,36 +49,21 @@ export const recommendations = [
     name: "Google High School",
     borough: "Chelsea, Manhattan",
     dimensions: [
+      { name: "rigorous_instruction_rating", value: 0.77, simple: true },
+      { name: "collaborative_teachers_rating", value: 0.75, simple: false },
+      { name: "supportive_environment_rating", value: 0.69, simple: true },
       {
-        name: "School Dim 1",
-        value: "alskdf",
-        simple: true,
-      },
-      {
-        name: "School Dim 2",
-        value: "alskdf",
+        name: "effective_school_leadership_rating",
+        value: 0.68,
         simple: false,
       },
       {
-        name: "School Dim 3",
-        value: "alskdf",
+        name: "strong_family_community_ties_rating",
+        value: 0.82,
         simple: true,
       },
-      {
-        name: "School Dim 4",
-        value: "alskdf",
-        simple: false,
-      },
-      {
-        name: "School Dim 5",
-        value: "alskdf",
-        simple: true,
-      },
-      {
-        name: "School Dim 6",
-        value: "alskdf",
-        simple: true,
-      },
+      { name: "trust_rating", value: 0.77, simple: false },
+      { name: "student_achievement_rating", value: null, simple: false },
     ],
   },
   {
