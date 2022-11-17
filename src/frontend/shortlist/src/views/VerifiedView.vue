@@ -18,7 +18,7 @@ export default {
   mounted() {
     //fetching information from url sent to the email address
     let params = this.router.query;
-    this.isVerified = params.verified;
+    this.isVerified = params.token_valid;
     this.errorMessage = params.message;
     //console.log(this.email);
     //console.log(this.errorMessage);

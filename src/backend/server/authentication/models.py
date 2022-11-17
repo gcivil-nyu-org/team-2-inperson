@@ -15,7 +15,7 @@ def default_preferences():
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, email, user_type, password=None):
+    def create_user(self, username, email, user_type="PARENT", password=None):
         if username is None:
             raise TypeError("Users should have a username")
         if email is None:
@@ -60,7 +60,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=255, blank=False, null=False, default=AUTH_PROVIDERS.get("email")
     )
     user_type = models.CharField(
-        max_length=20, choices=(("PARENT", "P"), ("STUDENT", "S"), ("OTHER", "O"))
+        max_length=20,
+        choices=(("PARENT", "P"), ("STUDENT", "S"), ("OTHER", "O")),
+        default="PARENT",
     )
 
     # account is associated with... forms parent-child or child-parent relationship

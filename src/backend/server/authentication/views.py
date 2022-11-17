@@ -52,7 +52,7 @@ class RegisterView(generics.GenericAPIView):
         # urrent_site = get_current_site(request).domain
         # relativeLink = reverse("email-verify")
         base_url = os.environ.get("SHORTLIST_API_URL")
-        absurl = base_url + "auth/email-verify?token=" + str(token)
+        absurl = base_url + "/auth/email-verify?token=" + str(token)
         email_body = """\
             <html>
                 <head></head>
