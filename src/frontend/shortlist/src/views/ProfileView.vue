@@ -4,9 +4,10 @@ import { sessionStore } from "../states/sessionStore";
 import UserDetails from "../components/layout/profile/UserDetails.vue";
 import UserPreference from "../components/layout/profile/UserPreference.vue";
 import UserRelations from "../components/layout/profile/UserRelations.vue";
+import axios from "axios";
 
 export default {
-  emits: ["appAccountUpdatePreferences", "appAccountUpdateName"],
+  emits: ["appAccountUpdatePreferences", "appAccountUpdateName", "addStudent"],
   components: {
     UserDetails,
     UserPreference,
@@ -17,6 +18,22 @@ export default {
       loginState: "loginState",
       accountMetadata: "accountMetadata",
     }),
+  },
+  methods: {
+    axioAdd(inviteEmail) {
+      axios
+        //link needs update after deployment
+        .post("/invite", {
+          email: inviteEmail,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      alert("Student added.");
+    },
   },
 };
 </script>
@@ -37,7 +54,9 @@ export default {
             (p) => this.$emit('appAccountUpdatePreferences', p)
           "
         />
-        <UserRelations :accountMetadata="accountMetadata" />
+        <UserRelations
+          :accountMetadata="accountMetadata"
+        />
       </div>
     </div>
   </main>
