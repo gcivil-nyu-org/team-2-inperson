@@ -81,6 +81,11 @@ const router = createRouter({
       name: "verification-view",
       component: VerifiedView,
     },
+    {
+      path: "/verification",
+      name: "verification-view",
+      component: VerifiedView,
+    },
   ],
 });
 
