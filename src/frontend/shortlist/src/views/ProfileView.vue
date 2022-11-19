@@ -20,7 +20,7 @@ export default {
     }),
   },
   methods: {
-    axioAdd(inviteEmail) {
+    addEmail(inviteEmail) {
       axios
         //link needs update after deployment
         .post("/invite", {
@@ -33,6 +33,7 @@ export default {
           console.log(error);
         });
       alert("Student added.");
+      console.log(inviteEmail);
     },
   },
 };
@@ -54,8 +55,9 @@ export default {
             (p) => this.$emit('appAccountUpdatePreferences', p)
           "
         />
-        <UserRelations
-          :accountMetadata="accountMetadata"
+        <UserRelations 
+           :accountMetadata="accountMetadata" 
+           @addStudent="(e) => addEmail(e)"
         />
       </div>
     </div>

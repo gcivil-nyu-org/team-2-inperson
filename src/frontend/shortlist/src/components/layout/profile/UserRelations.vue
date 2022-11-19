@@ -9,7 +9,6 @@ export default {
   methods: {
     sendInvit() {
       this.$emit("addStudent", this.newEmail);
-      console.log("add email is: ", this.newEmail);
     },
   },
 };
