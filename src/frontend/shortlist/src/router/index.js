@@ -8,7 +8,6 @@ import ShortlistApi from "@/api/shortlist.js";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 import VerifiedView from "../views/VerifiedView.vue";
-import InvitedView from "../views/InvitedView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
