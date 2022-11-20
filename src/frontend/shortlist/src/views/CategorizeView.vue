@@ -150,7 +150,7 @@ export default {
         .count(count)
         .strategy("RANKING")
         .onSuccess((result) => {
-          // console.log("categorize recs: ", Array.isArray(result.data));
+          console.log("categorize recs: ", Array.isArray(result.data));
           this.myRecommendations.push(...result.data);
         })
         .onFail((err) => {
@@ -180,6 +180,9 @@ export default {
       listDragEnabled,
       listDropEnabled,
     };
+  },
+  created() {
+    this.getRecommendations();
   },
 };
 </script>

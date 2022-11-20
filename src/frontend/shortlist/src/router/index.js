@@ -112,18 +112,6 @@ router.beforeEach((to) => {
         });
       req.execute();
     }
-    } else { // cookie found, get user metadata
-      let req = shortlistApi
-        .getAccountMetadata()
-        .forAccountId(acct)
-        .onSuccess((result) => {
-          store.loginState = true;
-          store.accountMetadata = result.data;
-        })
-        .onFail((err) => {
-          console.log("fail", err.response.status, err.response.data);
-        });
-      req.execute();
   }
 
   // If logged in (cookie exists) redirect to /categorize
