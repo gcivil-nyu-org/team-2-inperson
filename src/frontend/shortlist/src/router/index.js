@@ -83,9 +83,9 @@ const router = createRouter({
       component: VerifiedView,
     },
     {
-      path: "/Invitation",
+      path: "/invitation",
       name: "invitation-view",
-      component: VerifiedView,
+      component: InvitedView,
     },
   ],
 });
