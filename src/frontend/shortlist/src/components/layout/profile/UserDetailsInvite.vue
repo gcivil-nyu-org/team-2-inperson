@@ -270,6 +270,7 @@ main {
 }
 
 .pref-actions {
+  margin-top: 15px;
   flex-wrap: wrap;
   align-items: center;
   font-weight: 500;
