@@ -4,13 +4,40 @@ export default {
   emits: ["appAccountUpdateName"],
   data() {
     return {
-      newFirst: "",
-      newLast: "",
+      form: {
+        newFirst: "",
+        newLast: "",
+        password: "",
+        confirmPassword: "",
+      },
       nameAlert: "",
+      passwordAlert: "",
       validation: true,
     };
   },
   methods: {
+    validatePassword() {
+      let passwordPattern = new RegExp(
+        "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
+      );
+      if (this.form.password.length < 8) {
+        this.passwordAlert = "Minimum length is 8 for password!";
+        return false;
+      }
+      if (this.form.password.length > 15) {
+        this.passwordAlert = "Maximum length is 15 for password!";
+        return false;
+      }
+      if (!passwordPattern.test(this.form.password)) {
+        this.passwordAlert =
+          "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
+        return false;
+      }
+      return true;
+    },
+    validateConfirmPassword() {
+      return this.form.password == this.form.confirmPassword;
+    },
     validateName(value) {
       let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
       if (value.length < 2) {
@@ -35,18 +62,18 @@ export default {
       console.log(image.src);
     },
     updateName() {
-      let userFirst = this.newFirst
-        ? this.newFirst
+      let userFirst = this.form.newFirst
+        ? this.form.newFirst
         : this.accountMetadata.preferences.userFirstName;
-      let userLast = this.newLast
-        ? this.newLast
+      let userLast = this.form.newLast
+        ? this.form.newLast
         : this.accountMetadata.preferences.userLastName;
 
       this.$emit("appAccountUpdateName", { userFirst, userLast });
 
       // reset name fields
-      this.newFirst = "";
-      this.newLast = "";
+      this.form.newFirst = "";
+      this.form.newLast = "";
 
       alert("Name updated!");
     },
@@ -57,7 +84,7 @@ export default {
         return false;
       } else {
         return !(
-          this.validateName(this.newFirst) && this.validateName(this.newLast)
+          this.validateName(this.form.newFirst) && this.validateName(this.form.newLast)
         );
       }
     },
@@ -113,10 +140,10 @@ export default {
           class="profilefields"
           placeholder="Type in your first name"
           id="firstname"
-          v-model="newFirst"
+          v-model="this.form.newFirst"
         />
-        <div class="input-errors" v-if="!validateName(this.newFirst)">
-          <div class="error-msg" v-if="this.newFirst.length > 0">
+        <div class="input-errors" v-if="!validateName(this.form.newFirst)">
+          <div class="error-msg" v-if="this.form.newFirst.length > 0">
             {{ this.nameAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
@@ -131,10 +158,10 @@ export default {
           class="profilefields"
           placeholder="Type in your last name"
           id="lastname"
-          v-model="newLast"
+          v-model="this.form.newLast"
         />
-        <div class="input-errors" v-if="!validateName(this.newLast)">
-          <div class="error-msg" v-if="this.newLast.length > 0">
+        <div class="input-errors" v-if="!validateName(this.form.newLast)">
+          <div class="error-msg" v-if="this.form.newLast.length > 0">
             {{ this.nameAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
@@ -143,29 +170,40 @@ export default {
           <div class="error-msg">&nbsp;</div>
         </div>
 
-
-
-
-        <label>First Password</label>
-        <input
-          type="text"
-          class="profilefields"
-          placeholder="Input your password"
-          id="FirstPassword"
-          v-model="firstPass"
-        />
-        <label>Second Password</label>
-        <input
-          type="text"
-          class="profilefields"
-          placeholder="Type in your password again"
-          id="SecondPassword"
-          v-model="secondPass"
-        />
-
-
-
-
+        <div id="password_signup">
+          <input
+            type="password"
+            placeholder="New Password"
+            class="signupinput"
+            v-model="this.form.password"
+          />
+          <div class="input-errors" v-if="!validatePassword()">
+            <div class="error-msg" v-if="this.form.password.length > 0">
+              {{ this.passwordAlert }}
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
+          </div>
+        </div>
+        <div>
+          <input
+            type="password"
+            autocomplete="off"
+            placeholder="Confirm New Password"
+            class="signupinput"
+            v-model="this.form.confirmPassword"
+          />
+          <div class="input-errors" v-if="!validateConfirmPassword()">
+            <div class="error-msg">
+              Password and Confirm Password must be match!
+            </div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
+          </div>
+        </div>
 
         <button
           class="pref-actions"
