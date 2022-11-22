@@ -1,7 +1,7 @@
 <script>
 import Signup from "../components/layout/profile/UserDetailsInvite.vue"
 export default {
-  emits: ["appAccountSignup"],
+  emits: ["appAccountAcceptInvite"],
   components: {
     Signup,
   },
@@ -10,7 +10,9 @@ export default {
 
 <template>
   <div>
-    <Signup @appAccountSignup="(p) => this.$emit('appAccountSignup', p)" />
+    <Signup
+      @appAccountSignup="(p) => this.$emit('appAccountAcceptInvite', p)"
+    />
   </div>
 </template>
 

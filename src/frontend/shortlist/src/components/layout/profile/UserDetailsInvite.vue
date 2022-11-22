@@ -1,7 +1,7 @@
 <script>
 export default {
   name: "Signup",
-  emits: ["appAccountSignup"],
+  emits: ["appAccountAcceptInvite"],
   data() {
     return {
       form: {
@@ -66,7 +66,7 @@ export default {
 
     submitSignupForm() {
       // TRIGGER SIGNUP EVENT
-      this.$emit("appAccountSignup", {
+      this.$emit("appAccountAcceptInvite", {
         email: this.form.email.trim(),
         firstName: this.form.firstName,
         lastName: this.form.lastName,

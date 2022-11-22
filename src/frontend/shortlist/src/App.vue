@@ -30,6 +30,28 @@ function appAccountSignup(payload) {
   req.execute();
 }
 
+function appAccountAcceptInvite(payload) {
+  let apiReq = {
+    email: payload.email,
+    password: payload.password,
+    firstName: payload.firstName,
+    lastName: payload.lastName,
+    isChild: payload.isChild,
+  };
+
+  let success = () => {
+    //might need to change
+    router.replace("/login");
+  };
+
+  let failure = (err) => {
+    console.log("could not create!", err.response);
+    alert("could not create acount");
+  };
+  let req = apiClient.acceptInvite(apiReq, success, failure);
+  req.execute();
+}
+
 function appAccountLogin(payload) {
   console.log("accountLogin", payload, appSessionStore);
   let req = apiClient
@@ -104,6 +126,7 @@ function appLogout() {
       @appAccountUpdatePreferences="appAccountUpdatePreferences"
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
+      @appAccountAcceptInvite="appAccountAcceptInvite"
     />
   </div>
 </template>
