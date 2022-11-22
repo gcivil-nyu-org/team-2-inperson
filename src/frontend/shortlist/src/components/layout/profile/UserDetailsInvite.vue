@@ -203,14 +203,8 @@ export default {
         @click.prevent="submitSignupForm"
         :disabled="isSignUpDisabled"
       >
-        Sign up
+        Update Account information
       </button>
-      <p class="instructions" id="small">
-        Have an account already?
-        <button @click="$router.replace('/login')" class="btn btn-outline-dark">
-          Log me in!
-        </button>
-      </p>
     </div>
   </div>
 </template>
