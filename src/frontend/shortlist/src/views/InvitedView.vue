@@ -1,5 +1,5 @@
 <script>
-import Signup from "../components/layout/signup_login/Signup.vue";
+import Signup from "../components/layout/profile/UserDetailsInvite.vue"
 export default {
   emits: ["appAccountSignup"],
   components: {

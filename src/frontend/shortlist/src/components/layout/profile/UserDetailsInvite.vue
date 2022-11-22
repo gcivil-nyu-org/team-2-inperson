@@ -102,7 +102,7 @@ export default {
   </div>
   <div class="signup_components_container">
     <div class="signup-form-container">
-      <h1 class="instructions" id="big">Sign Up</h1>
+      <h1 class="instructions" id="big">Profile</h1>
       <div class="first_name">
         <input
           type="text"
@@ -188,13 +188,6 @@ export default {
         <div class="input-errors" v-else>
           <div class="error-msg">&nbsp;</div>
         </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="formFile" class="form-label"
-          >Upload Parent/Guardian ID:</label
-        >
-        <input class="form-control" type="file" id="formFile" />
       </div>
       <!-- TODO (Pooja): Birthdate field -->
       <button
