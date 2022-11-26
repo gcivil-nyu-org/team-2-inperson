@@ -140,7 +140,7 @@ export class temporaryAddStudent {
   execute() {
     axios({
       method: "POST",
-      url: "https://api.shortlist.nyc/account/update",
+      url: "https://api.shortlist.nyc/account/send-invite",
       headers: {},
       data: {
         accountId: this.accountId,

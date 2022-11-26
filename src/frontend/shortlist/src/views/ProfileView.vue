@@ -19,23 +19,6 @@ export default {
       accountMetadata: "accountMetadata",
     }),
   },
-  methods: {
-    addEmail(inviteEmail) {
-      axios
-        //link needs update after deployment
-        .post("/invite", {
-          email: inviteEmail,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      alert("Student added.");
-      console.log(inviteEmail);
-    },
-  },
 };
 </script>
 
@@ -55,9 +38,9 @@ export default {
             (p) => this.$emit('appAccountUpdatePreferences', p)
           "
         />
-        <UserRelations 
-           :accountMetadata="accountMetadata" 
-           @addStudent="(e) => this.$emit('addStudent', e)"
+        <UserRelations
+          :accountMetadata="accountMetadata"
+          @addStudent="(e) => this.$emit('addStudent', e)"
         />
       </div>
     </div>

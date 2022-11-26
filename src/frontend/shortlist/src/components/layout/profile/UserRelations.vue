@@ -7,7 +7,7 @@ export default {
     };
   },
   methods: {
-    sendInvit() {
+    sendInvite() {
       this.$emit("addStudent", this.newEmail);
     },
   },
@@ -59,7 +59,7 @@ export default {
       />
       <button
         type="button"
-        @click="this.sendInvit"
+        @click="this.sendInvite"
         class="btn btn-outline-light"
       >
         <img src="/add-student.png" class="studentupdateimg" />
