@@ -5,6 +5,7 @@ export const sessionStore = defineStore("sessionStore", {
     return {
       loginState: false,
       registeredState: false,
+      prefCompletionState: false,
       loginAttempts: {
         count: 0,
         message: null,
