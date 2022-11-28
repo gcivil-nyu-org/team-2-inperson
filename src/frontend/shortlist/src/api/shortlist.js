@@ -76,23 +76,20 @@ export class temporarySignup {
               userLastName: this.lastName,
               recommendationPreferences: {
                 q1: {
-                  Question: "Which instruction mode do you prefer?",
+                  Question:
+                    "How much do you value instructions from your teachers?",
                   Response: "",
                 },
                 q2: {
-                  Question: "Do you have any Extra-curricular interests?",
-                  Response: [],
+                  Question:
+                    "How much would you value the supportive environment provided by school?",
+                  Response: "",
                 },
                 q3: {
-                  Question: "Do you already have a school in mind?",
+                  Question: "Is there a spicific borough you are looking for?",
                   Response: "",
                 },
                 q4: {
-                  Question:
-                    "Is there a transit bus/train line you're interested in?",
-                  Response: "",
-                },
-                q5: {
                   Question:
                     "How would you rank your academic performance so far?",
                   Response: "",
@@ -152,24 +149,29 @@ export class temporaryAcceptInvite {
               userFirstName: this.firstName,
               userLastName: this.lastName,
               recommendationPreferences: {
+                /*
+                1. Rogorous Instruction
+                2. Collaborative Teachers Rating
+                3. Supportive Environment Rating
+                4. Effective School Leadership Rating
+                5. Strong Family-Community Ties Rating
+                Use as simple multiplier, add up for rank
+                */
                 q1: {
-                  Question: "Which instruction mode do you prefer?",
+                  Question:
+                    "How much do you value instructions from your teachers?",
                   Response: "",
                 },
                 q2: {
-                  Question: "Do you have any Extra-curricular interests?",
-                  Response: [],
+                  Question:
+                    "How much would you value the supportive environment provided by school?",
+                  Response: "",
                 },
                 q3: {
-                  Question: "Do you already have a school in mind?",
+                  Question: "Is there a spicific borough you are looking for?",
                   Response: "",
                 },
                 q4: {
-                  Question:
-                    "Is there a transit bus/train line you're interested in?",
-                  Response: "",
-                },
-                q5: {
                   Question:
                     "How would you rank your academic performance so far?",
                   Response: "",
