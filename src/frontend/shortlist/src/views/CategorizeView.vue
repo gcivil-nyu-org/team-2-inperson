@@ -10,6 +10,7 @@ import { recommendations } from "../api/examples/recommendations.js";
 import cookie from "@/helpers/cookie.js";
 
 export default {
+  emits: ["sendASchoolCardToTrash"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -29,6 +30,12 @@ export default {
     }
   },
   methods: {
+    sendASchoolCardToTrash(schoolIdx, listIdx) {
+      this.$emit("sendASchoolCardToTrash", {
+        schoolIdx: schoolIdx,
+        listIdx: listIdx,
+      });
+    },
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*
@@ -108,6 +115,7 @@ export default {
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db
+            this.sendASchoolCardToTrash(this.schoolIdx, listIdx)
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");

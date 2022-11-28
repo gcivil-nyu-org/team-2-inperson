@@ -127,6 +127,7 @@ function appLogout() {
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
       @appAccountAcceptInvite="appAccountAcceptInvite"
+      @sendASchoolCardToTrash="sendASchoolCardToTrash"
     />
   </div>
 </template>
