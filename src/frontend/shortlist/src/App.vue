@@ -113,6 +113,8 @@ function appAddStudent(payload) {
 }
 </script>
 
+
+
 <template>
   <NavBar />
   <div class="app-container">

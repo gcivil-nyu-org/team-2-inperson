@@ -1,4 +1,18 @@
-<script></script>
+<script>
+export default {
+  emits: ["addStudent"],
+  data() {
+    return {
+      newEmail: "",
+    };
+  },
+  methods: {
+    sendInvite() {
+      this.$emit("addStudent", this.newEmail);
+    },
+  },
+};
+</script>
 <template>
   <main>
     <label class="relprofiletitle">Student Accounts</label>
@@ -36,10 +50,21 @@
         </span>
       </span>
     </div>
-    <span
-      ><button type="button" class="btn btn-outline-light">
-        <img src="/add-student.png" class="studentupdateimg" /></button
-    ></span>
+    <span>
+      <input
+        type="email"
+        class="emailInput"
+        placeholder="Your child's email"
+        v-model="newEmail"
+      />
+      <button
+        type="button"
+        @click="this.sendInvite"
+        class="btn btn-outline-light"
+      >
+        <img src="/add-student.png" class="studentupdateimg" />
+      </button>
+    </span>
   </main>
 </template>
 <style scoped>
