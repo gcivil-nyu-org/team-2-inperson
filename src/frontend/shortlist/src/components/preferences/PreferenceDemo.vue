@@ -25,7 +25,7 @@ export default {
     return {
       prefResults: {
         q1: {
-          Question: "How much do you value instructions from your teachers?",
+          Question: "How important is an engaging curriculum & emphasis on critical thinking skills?",
           Response: 4,
         },
         q2: {
@@ -34,7 +34,7 @@ export default {
           Response: 4,
         },
         q3: {
-          Question: "Is there a spicific borough you are looking for?",
+          Question: "Is there a specific borough you are looking for?",
           Response: "",
         },
         q4: {
@@ -48,25 +48,32 @@ export default {
   setup() {
     return {
       question1: {
-        Name: "Instruction",
-        Text: "How much do you value instructions from your teachers?",
+        Name: "Rigorous Instruction",
+        Text: "How important is an engaging curriculum & emphasis on critical thinking skills?",
         Min: 1,
-        MinLabel: "I'd like more time studying alone.",
+        MinLabel: "I'd prefer more time studying alone",
         Max: 7,
-        MaxLabel: "I wish instructors can cover every details",
+        MaxLabel: "More class material coverage",
       },
       question2: {
         Name: "Supportive Environment",
-        Text: "How much do you weight the importance of a supportive environment?",
+        Text: "How important is a school culture where students feel safe and supported to meet high expectations?",
         Min: 1,
-        MinLabel: "I'm a loner for life.",
+        MinLabel: "Less important",
         Max: 7,
-        MaxLabel: "I want a family like school environment!",
+        MaxLabel: "More important",
       },
       question3: {
         Name: "Borough",
-        Text: "Is there a spicific borough you are looking for?",
-        Options: ["Manhattan", "Brooklyn", "Queens", "Bronx"],
+        Text: "Is there a specific borough you are looking for?",
+        Options: [
+          "Manhattan",
+          "Brooklyn",
+          "Queens",
+          "Bronx",
+          "Staten Island",
+          "No Preference",
+        ],
       },
       question4: {
         Name: "Academic Performance",
@@ -123,7 +130,7 @@ export default {
         title="Set Preferences"
         @preferenceSubmitted="handleSubmit"
       >
-        <PreferenceManagerPage id="0" subtitle="School Life Style">
+        <PreferenceManagerPage id="0" subtitle="School Qualities">
           <PreferenceSlider
             :question="question1"
             v-model="prefResults.q1.Response"

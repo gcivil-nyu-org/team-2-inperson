@@ -162,16 +162,16 @@ export class temporaryAcceptInvite {
                 */
                 q1: {
                   Question:
-                    "How much do you value instructions from your teachers?",
+                    "How important is an engaging curriculum & emphasis on critical thinking skills?",
                   Response: "",
                 },
                 q2: {
                   Question:
-                    "How much would you value the supportive environment provided by school?",
+                    "How important is a school culture where students feel safe and supported to meet high expectations?",
                   Response: "",
                 },
                 q3: {
-                  Question: "Is there a spicific borough you are looking for?",
+                  Question: "Is there a specific borough you are looking for?",
                   Response: "",
                 },
                 q4: {
