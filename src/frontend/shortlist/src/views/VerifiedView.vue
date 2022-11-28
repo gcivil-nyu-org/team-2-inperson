@@ -28,7 +28,7 @@ export default {
       //console.log(this.router.query);
       axios
         //link needs update after deployment
-        .post("http://127.0.0.1:8000/auth/request-resend-email", {
+        .post("https://api.shortlist.nyc/auth/request-resend-email", {
           email: this.email,
         })
         .then(function (response) {
