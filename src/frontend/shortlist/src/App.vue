@@ -10,6 +10,20 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
+function sendASchoolCardToTrash(payload) {
+  let apiReq = {
+    schoolIdx: payload.schoolIdx,
+    listIdx: payload.listIdx,
+  };
+
+  let success = () => {
+    router.replace("/login");
+  };
+
+
+
+}
+
 function appAccountSignup(payload) {
   let apiReq = {
     email: payload.email,
