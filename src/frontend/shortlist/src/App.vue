@@ -44,28 +44,6 @@ function appAccountSignup(payload) {
   req.execute();
 }
 
-function appAccountAcceptInvite(payload) {
-  let apiReq = {
-    email: payload.email,
-    password: payload.password,
-    firstName: payload.firstName,
-    lastName: payload.lastName,
-    isChild: payload.isChild,
-  };
-
-  let success = () => {
-    //might need to change
-    router.replace("/login");
-  };
-
-  let failure = (err) => {
-    console.log("could not create!", err.response);
-    alert("could not create acount");
-  };
-  let req = apiClient.acceptInvite(apiReq, success, failure);
-  req.execute();
-}
-
 function appAccountLogin(payload) {
   console.log("accountLogin", payload, appSessionStore);
   let req = apiClient
@@ -130,10 +108,31 @@ function appLogout() {
   console.log(appSessionStore.accountMetadata.accountId);
 }
 
+<<<<<<< HEAD
 function sendASchoolCardToTrash() {
   
+=======
+function appAddStudent(payload) {
+  console.log(payload);
+  let requestPayload = {
+    accountId: appSessionStore.accountMetadata.accountId,
+    addEmail: payload,
+  };
+  //requestPayload.preferences.recommendationPreferences = payload;
+
+  let success = () => {
+    //appSessionStore.accountMetadata.preferences.recommendationPreferences = payload;
+  };
+  let fail = (err) => {
+    console.log(err);
+  };
+  let req = apiClient.addStudent(requestPayload, success, fail);
+  req.execute();
+>>>>>>> develop
 }
 </script>
+
+
 
 <template>
   <NavBar />
@@ -144,8 +143,12 @@ function sendASchoolCardToTrash() {
       @appAccountUpdatePreferences="appAccountUpdatePreferences"
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
+<<<<<<< HEAD
       @appAccountAcceptInvite="appAccountAcceptInvite"
       @sendASchoolCardToTrash="sendASchoolCardToTrash"
+=======
+      @addStudent="appAddStudent"
+>>>>>>> develop
     />
   </div>
 </template>

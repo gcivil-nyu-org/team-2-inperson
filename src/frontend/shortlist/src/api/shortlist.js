@@ -30,6 +30,9 @@ export default class ShortlistApi {
   updatePreferences(payload, successCb, failCb) {
     return new temporaryUpdatePreferences(payload, successCb, failCb);
   }
+  addStudent(payload, successCb, failCb) {
+    return new temporaryAddStudent(payload, successCb, failCb);
+  }
 }
 
 import axios from "axios";
@@ -201,6 +204,28 @@ export class temporaryUpdatePreferences {
       data: {
         accountId: this.accountId,
         preferences: this.preferences,
+      },
+    })
+      .then((result) => this.successCb(result))
+      .catch((err) => this.failCb(err));
+  }
+}
+
+export class temporaryAddStudent {
+  constructor(payload, successCb, failCb) {
+    this.accountId = payload.accountId;
+    this.addEmail = payload.addEmail;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+  execute() {
+    axios({
+      method: "POST",
+      url: "https://api.shortlist.nyc/account/send-invite",
+      headers: {},
+      data: {
+        accountId: this.accountId,
+        addEmail: this.email,
       },
     })
       .then((result) => this.successCb(result))
