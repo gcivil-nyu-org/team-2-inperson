@@ -60,6 +60,9 @@ function appAuthLogin(payload) {
   let success = (result) => {
     alert("Login complete");
     console.log("success: " , result.data);
+    appSessionStore.loginState = true;
+    appSessionStore.accountMetadata = result.data;
+    cookie.setCookie("accountid", result.data.user_id, 1);
     router.replace("/");
   };
   let fail = (err) => {
