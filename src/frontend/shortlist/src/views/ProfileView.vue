@@ -7,7 +7,8 @@ import UserRelations from "../components/layout/profile/UserRelations.vue";
 
 export default {
   emits: ["appAccountUpdatePreferences",
-          "appAccountUpdateName"],
+          "appAccountUpdateName",
+          "addStudent"],
   components: {
     UserDetails,
     UserPreference,
