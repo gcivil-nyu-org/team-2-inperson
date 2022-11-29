@@ -115,6 +115,10 @@ function appLogout() {
   cookie.deleteCookie("accountid");
   console.log(appSessionStore.accountMetadata.accountId);
 }
+
+function sendASchoolCardToTrash() {
+  
+}
 </script>
 
 <template>

@@ -115,7 +115,7 @@ export default {
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db
-            this.sendASchoolCardToTrash(this.schoolIdx, listIdx)
+            this.sendASchoolCardToTrash(this.schoolIdx, listIdx);
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
