@@ -50,6 +50,32 @@ function appAccountLogin(payload) {
   req.execute();
 }
 
+function appAuthLogin(payload) {
+  console.log("accountLogin", payload.email);
+  let requestPayload = {
+    email: payload.email,
+    password: payload.password,
+  };
+
+  let success = (result) => {
+    alert("Login complete");
+    console.log("success: " , result.data);
+    router.replace("/");
+  };
+  let fail = (err) => {
+    console.log(err.response.data);
+    if (err.response.data.detail == "Email is not verified") {
+      alert("Please verify your email address before logging in.")
+    }
+    else {
+      alert("Could not login.")
+    }
+  };
+  let req = apiClient.authLogin(requestPayload, success, fail);
+  req.execute();
+  
+}
+
 function appAccountUpdatePreferences(payload) {
   let requestPayload = {
     accountId: appSessionStore.accountMetadata.accountId,
@@ -99,7 +125,7 @@ function appLogout() {
   <NavBar />
   <div class="app-container">
     <RouterView
-      @appAccountLogin="appAccountLogin"
+      @appAccountLogin="appAuthLogin"
       @appAccountSignup="appAccountSignup"
       @appAccountUpdatePreferences="appAccountUpdatePreferences"
       @appAccountUpdateName="appAccountUpdateName"

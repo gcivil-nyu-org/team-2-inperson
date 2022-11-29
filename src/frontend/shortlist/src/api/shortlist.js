@@ -26,6 +26,9 @@ export default class ShortlistApi {
   updatePreferences(payload, successCb, failCb) {
     return new temporaryUpdatePreferences(payload, successCb, failCb);
   }
+  authLogin(payload, successCb, failCb) {
+    return new tempAuthLogin(payload, successCb, failCb);
+  }
 }
 
 import axios from "axios";
@@ -120,6 +123,28 @@ export class temporaryUpdatePreferences {
       data: {
         accountId: this.accountId,
         preferences: this.preferences,
+      },
+    })
+      .then((result) => this.successCb(result))
+      .catch((err) => this.failCb(err));
+  }
+}
+
+export class tempAuthLogin {
+  constructor(payload, successCb, failCb) {
+    this.email = payload.email;
+    this.password = payload.password;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+  execute() {
+    axios({
+      method: "POST",
+      url: "https://api.shortlist.nyc/auth/login",
+      headers: {},
+      data: {
+        email: this.email,
+        password: this.password,
       },
     })
       .then((result) => this.successCb(result))
