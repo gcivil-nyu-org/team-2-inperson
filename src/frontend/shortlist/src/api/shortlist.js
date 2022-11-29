@@ -80,7 +80,7 @@ export class temporarySignup {
               recommendationPreferences: {
                 q1: {
                   Question:
-                    "How much do you value instructions from your teachers?",
+                    "How important is an engaging curriculum & emphasis on critical thinking skills?",
                   Response: "",
                 },
                 q2: {
