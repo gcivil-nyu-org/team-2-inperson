@@ -155,10 +155,6 @@ export default {
     <button type="button" class="btn btn-outline-dark btn-sm">
       Reset Password
     </button>
-    <button class="delparent">
-      Delete Account Permanently
-      <img src="/del-parent.png" class="parentdeleteimg" />
-    </button>
   </main>
 </template>
 <style scoped>
@@ -298,48 +294,6 @@ main {
   padding: 20px;
   background-color: #008037;
 }
-
-.parentdeleteimg {
-  vertical-align: middle;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-}
-
-.delparent {
-  background: transparent;
-  border: 1px solid #000000;
-  padding: 5px 5px;
-  color: #000000;
-  border-radius: 3px;
-  position: relative;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  overflow: hidden;
-  left: 120px;
-  margin: 2px;
-}
-.delparent:before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 120%;
-  background: #811919;
-  top: 0;
-  left: -140px;
-  border-radius: 0 20px 20px 0;
-  z-index: -1;
-  transition: all 0.3s ease-in-out;
-}
-.delparent:hover {
-  transform: translateY(5px);
-  color: #ffffff;
-}
-.delparent:hover:before {
-  left: 0;
-  opacity: 1;
-}
-
 .image-upload > input {
   display: none;
 }
