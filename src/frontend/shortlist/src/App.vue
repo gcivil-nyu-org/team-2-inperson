@@ -15,13 +15,11 @@ function sendASchoolCardToTrash(payload) {
     schoolIdx: payload.schoolIdx,
     listIdx: payload.listIdx,
   };
-
   let success = () => {
-    router.replace("/login");
   };
-
-
-
+  let fail = (err) => {
+  };
+  apiReq.execute(); 
 }
 
 function appAccountSignup(payload) {
