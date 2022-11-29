@@ -126,7 +126,7 @@ export default {
           }
           if (this.myRecommendations.length == 3) {
             // get new schools
-            this.myRecommendations.push(...recommendations);
+            this.getRecommendations(7);
           }               
         }
       }
