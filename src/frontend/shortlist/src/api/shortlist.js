@@ -53,8 +53,8 @@ export class removeSchoolCard {
       url: "https://api.shortlist.nyc",
       headers: {},
       data: {
-        email: this.email,
-        username: this.username,
+        // email: this.email,
+        // username: this.username,
         schoolId = this.schoolId, 
         trashed = this.trashed,
       },
@@ -67,8 +67,8 @@ export class removeSchoolCard {
           url: "https://api.shortlist.",
           headers: {},
           data: {
-            email: this.email,
-            username: this.username,
+            // email: this.email,
+            // username: this.username,
             schoolId = this.schoolId, 
             trashed = this.trashed,
           },

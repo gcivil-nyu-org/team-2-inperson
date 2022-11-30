@@ -16,8 +16,12 @@ function sendASchoolCardToTrash(payload) {
     trashed: payload.trashed,
   };
   let success = () => {
+    console.log("Removed successfully"); 
+    // alert("could not create acount");
+    // console.log("could not create!", err.response);
   };
   let fail = (err) => {
+
   };
   apiReq.execute(); 
 }
