@@ -12,8 +12,8 @@ const appSessionStore = sessionStore();
 
 function sendASchoolCardToTrash(payload) {
   let apiReq = {
-    schoolIdx: payload.schoolIdx,
-    listIdx: payload.listIdx,
+    schoolId: payload.schoolId,
+    trashed: payload.trashed,
   };
   let success = () => {
   };
@@ -106,10 +106,6 @@ function appLogout() {
   console.log(appSessionStore.accountMetadata.accountId);
 }
 
-<<<<<<< HEAD
-function sendASchoolCardToTrash() {
-  
-=======
 function appAddStudent(payload) {
   console.log(payload);
   let requestPayload = {
@@ -126,7 +122,6 @@ function appAddStudent(payload) {
   };
   let req = apiClient.addStudent(requestPayload, success, fail);
   req.execute();
->>>>>>> develop
 }
 </script>
 
@@ -141,12 +136,8 @@ function appAddStudent(payload) {
       @appAccountUpdatePreferences="appAccountUpdatePreferences"
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
-<<<<<<< HEAD
-      @appAccountAcceptInvite="appAccountAcceptInvite"
-      @sendASchoolCardToTrash="sendASchoolCardToTrash"
-=======
       @addStudent="appAddStudent"
->>>>>>> develop
+      @sendASchoolCardToTrash="sendASchoolCardToTrash"
     />
   </div>
 </template>

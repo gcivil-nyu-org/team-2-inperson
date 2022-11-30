@@ -30,10 +30,10 @@ export default {
     }
   },
   methods: {
-    sendASchoolCardToTrash(schoolIdx, listIdx) {
+    sendASchoolCardToTrash(schoolId, trashed) {
       this.$emit("sendASchoolCardToTrash", {
-        schoolIdx: schoolIdx,
-        listIdx: listIdx,
+        schoolId: schoolId,
+        trashed: false,
       });
     },
     swapListElements(inList, idx1, idx2) {
@@ -115,7 +115,7 @@ export default {
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db
-            this.sendASchoolCardToTrash(this.schoolIdx, listIdx);
+            this.sendASchoolCardToTrash(schoolId, trashed);
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
