@@ -52,7 +52,7 @@ class RegisterView(generics.GenericAPIView):
         # urrent_site = get_current_site(request).domain
         # relativeLink = reverse("email-verify")
         base_url = os.environ.get("SHORTLIST_API_URL")
-        absurl = base_url + "/auth/email-verify?token=" + str(token)
+        absurl = base_url + "auth/email-verify?token=" + str(token)
         email_body = """\
             <html>
                 <head></head>
@@ -96,8 +96,8 @@ class VerifyEmail(views.APIView):
     @swagger_auto_schema(manual_parameters=[token_param_config])
     def get(self, request):
         token = request.GET.get("token")
-        redirect_url_login = "http://www.shortlist.nyc/login"
-        redirect_url_signup = "http://www.shortlist.nyc/signup"
+        redirect_url_login = "http://www.shortlist.nyc/verification"
+        redirect_url_signup = "http://www.shortlist.nyc/verification"
         try:
             payload = jwt.decode(token, settings.SECRET_KEY)
             user = User.objects.get(id=payload["user_id"])

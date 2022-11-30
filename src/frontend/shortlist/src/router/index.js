@@ -8,7 +8,6 @@ import ShortlistApi from "@/api/shortlist.js";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 import VerifiedView from "../views/VerifiedView.vue";
-import InvitedView from "../views/InvitedView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,20 +72,16 @@ const router = createRouter({
         import("../components/layout/signup_login/LoggedOut.vue"),
     },
     {
-      path: "/:pathMatch(.*)*",
-      name: "NotFound",
-      component: () => import("../views/NotFoundView.vue"),
-    },
-    {
       path: "/verification",
       name: "verification-view",
       component: VerifiedView,
     },
     {
-      path: "/invitation",
-      name: "invitation-view",
-      component: InvitedView,
-    },
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () =>
+        import("../views/NotFoundView.vue"),
+    }
   ],
 });
 
@@ -105,6 +100,7 @@ router.beforeEach((to) => {
       };
     } else {
       // cookie found, get user metadata
+      store.loginState = true; // temp for metadata unavailable
       let req = shortlistApi
         .getAccountMetadata()
         .forAccountId(acct)

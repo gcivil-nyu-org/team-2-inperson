@@ -7,7 +7,9 @@ import UserRelations from "../components/layout/profile/UserRelations.vue";
 //import axios from "axios";
 
 export default {
-  emits: ["appAccountUpdatePreferences", "appAccountUpdateName", "addStudent"],
+  emits: ["appAccountUpdatePreferences",
+          "appAccountUpdateName",
+          "addStudent"],
   components: {
     UserDetails,
     UserPreference,
@@ -26,9 +28,10 @@ export default {
   <main>
     <div class="profile">
       <div class="statusdetails">
-        <UserDetails
-          :accountMetadata="accountMetadata"
-          @appAccountUpdateName="(p) => this.$emit('appAccountUpdateName', p)"
+        <UserDetails :accountMetadata="accountMetadata" 
+        @appAccountUpdateName="
+            (p) => this.$emit('appAccountUpdateName', p)
+          "
         />
       </div>
       <div class="prefrel">

@@ -8,6 +8,7 @@ export default {
     ...mapState(sessionStore, {
       loginState: "loginState",
       accountMetadata: "accountMetadata",
+      prefCompletionState: "prefCompletionState",
     }),
   },
 };
@@ -36,6 +37,15 @@ export default {
     <div class="dash-container" v-else>
       <h1>{{ accountMetadata.preferences.userFirstName }}'s Dashboard</h1>
       <div class="dash-actions-container">
+        <div
+          class="pref-state"
+          v-if="prefCompletionState == false"
+          style="background-color: powderblue"
+        >
+          Please set up your preference
+          <a href="https://www.shortlist.nyc/profile"> here. </a>
+        </div>
+
         <div class="action">
           <button
             class="btn btn-outline-success"
