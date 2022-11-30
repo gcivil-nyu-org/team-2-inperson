@@ -23,8 +23,8 @@ function appAccountSignup(payload) {
   };
 
   let failure = (err) => {
-    console.log("could not create!", err.response.data);
-    alert("could not create acount");
+    console.log("could not create account", err.response.data);
+    alert("Could not create an account");
   };
   let req = apiClient.signupUser(apiReq, success, failure);
   req.execute();
