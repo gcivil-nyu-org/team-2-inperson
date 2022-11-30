@@ -182,7 +182,7 @@ export default {
     };
   },
   created() {
-    this.getRecommendations();
+    this.getRecommendations(50);
   },
 };
 </script>
