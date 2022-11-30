@@ -100,6 +100,7 @@ router.beforeEach((to) => {
       };
     } else {
       // cookie found, get user metadata
+      store.loginState = true; // temp for metadata unavailable
       let req = shortlistApi
         .getAccountMetadata()
         .forAccountId(acct)
