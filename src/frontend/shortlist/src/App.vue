@@ -122,7 +122,27 @@ function appLogout() {
   cookie.deleteCookie("accountid");
   console.log(appSessionStore.accountMetadata.accountId);
 }
+
+function appAddStudent(payload) {
+  console.log(payload);
+  let requestPayload = {
+    accountId: appSessionStore.accountMetadata.accountId,
+    addEmail: payload,
+  };
+  //requestPayload.preferences.recommendationPreferences = payload;
+
+  let success = () => {
+    //appSessionStore.accountMetadata.preferences.recommendationPreferences = payload;
+  };
+  let fail = (err) => {
+    console.log(err);
+  };
+  let req = apiClient.addStudent(requestPayload, success, fail);
+  req.execute();
+}
 </script>
+
+
 
 <template>
   <NavBar />
@@ -133,6 +153,7 @@ function appLogout() {
       @appAccountUpdatePreferences="appAccountUpdatePreferences"
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
+      @addStudent="appAddStudent"
     />
   </div>
 </template>

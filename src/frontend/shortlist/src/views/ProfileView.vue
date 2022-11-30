@@ -4,6 +4,7 @@ import { sessionStore } from "../states/sessionStore";
 import UserDetails from "../components/layout/profile/UserDetails.vue";
 import UserPreference from "../components/layout/profile/UserPreference.vue";
 import UserRelations from "../components/layout/profile/UserRelations.vue";
+//import axios from "axios";
 
 export default {
   emits: ["appAccountUpdatePreferences",
@@ -40,7 +41,10 @@ export default {
             (p) => this.$emit('appAccountUpdatePreferences', p)
           "
         />
-        <UserRelations :accountMetadata="accountMetadata" />
+        <UserRelations
+          :accountMetadata="accountMetadata"
+          @addStudent="(e) => this.$emit('addStudent', e)"
+        />
       </div>
     </div>
   </main>
