@@ -37,6 +37,50 @@ export default class ShortlistApi {
 
 import axios from "axios";
 import md5 from "md5";
+
+export class removeSchoolCard {
+  constructor(payload, successCb, failCb) {
+    this.schoolId = payload.schoolId;
+    this.trashed = payload.trashed;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+
+  execute() {
+    // Send the removed card first
+    axios({
+      method: "POST",
+      url: "https://api.shortlist.nyc",
+      headers: {},
+      data: {
+        email: this.email,
+        username: this.username,
+        schoolId = this.schoolId, 
+        trashed = this.trashed,
+      },
+    })
+      // user/email success;
+      .then(() => {
+        // remove the card from the account
+        axios({
+          method: "POST",
+          url: "https://api.shortlist.",
+          headers: {},
+          data: {
+            email: this.email,
+            username: this.username,
+            schoolId = this.schoolId, 
+            trashed = this.trashed,
+          },
+        })
+          .then((result) => this.successCb(result))
+          .catch((fail) => this.failCb(fail));
+      })
+      // removal fail;
+      .catch((err) => this.failCb(err));
+}
+}
+
 export class temporarySignup {
   constructor(payload, successCb, failCb) {
     this.email = payload.email;
