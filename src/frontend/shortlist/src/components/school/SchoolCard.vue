@@ -14,6 +14,13 @@ export default {
       this.isDetail = !this.isDetail;
     },
   },
+  computed: {
+    getBorough() {
+      // console.log(boroid)
+      let boros = ["","Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"];
+      return boros[this.schoolData.school.schoolMetadata.boroughCode];
+    }
+  }
 };
 </script>
 
@@ -44,7 +51,7 @@ export default {
           </template>
         </div>
         <div class="school-simple-name-borough">
-          {{ schoolData.school.schoolMetadata.boroughCode }}
+          {{ getBorough }}
         </div>
       </div>
       <div class="school-simple-dim-container">
@@ -53,7 +60,7 @@ export default {
           :key="dimension"
         >
           <template v-if="!isDetail">
-            <template v-if="dimension.simple">
+            <template v-if="[3, 5, 6].indexOf(dimension.dimId) > -1">
               <div class="school-simple-dim-row">
                 <div class="school-simple-dim-name">
                   {{ dimension.dimShort }}
