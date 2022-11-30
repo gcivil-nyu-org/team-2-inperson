@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       isDetail: false,
+      defaultImg: "/school-img-default.png",
     };
   },
   methods: {
@@ -13,6 +14,13 @@ export default {
       this.isDetail = !this.isDetail;
     },
   },
+  computed: {
+    getBorough() {
+      // console.log(boroid)
+      let boros = ["","Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"];
+      return boros[this.schoolData.school.schoolMetadata.boroughCode];
+    }
+  }
 };
 </script>
 
@@ -26,40 +34,44 @@ export default {
     <div class="school-simple-container" @click="swapDetail">
       <template v-if="!isDetail">
         <div class="school-simple-img-container">
-          <img
-            class="school-simple-img"
-            :src="schoolData.img"
-            draggable="false"
-          />
+          <img class="school-simple-img" :src="defaultImg" draggable="false" />
+          <!-- :src="schoolData.img" -->
         </div>
       </template>
 
       <div class="school-simple-name-row">
         <div class="school-simple-name-name">
           <template v-if="isDetail">
-            <a :href="schoolData.link">{{ schoolData.name }}</a>
+            <a :href="schoolData.school.schoolMetadata.link">{{
+              schoolData.school.schoolMetadata.name
+            }}</a>
           </template>
-          <template v-if="!isDetail">
-            {{ schoolData.name }}
+          <template v-else>
+            {{ schoolData.school.schoolMetadata.name }}
           </template>
         </div>
         <div class="school-simple-name-borough">
-          {{ schoolData.borough }}
+          {{ getBorough }}
         </div>
       </div>
       <div class="school-simple-dim-container">
-        <template v-for="dimension in schoolData.dimensions" :key="dimension">
+        <template
+          v-for="dimension in schoolData.school.schoolDimensions"
+          :key="dimension"
+        >
           <template v-if="!isDetail">
-            <template v-if="dimension.simple">
+            <template v-if="[3, 5, 6].indexOf(dimension.dimId) > -1">
               <div class="school-simple-dim-row">
-                <div class="school-simple-dim-name">{{ dimension.name }}</div>
+                <div class="school-simple-dim-name">
+                  {{ dimension.dimShort }}
+                </div>
                 <div class="school-simple-dim-value">{{ dimension.value }}</div>
               </div>
             </template>
           </template>
           <template v-if="isDetail">
             <div class="school-simple-dim-row">
-              <div class="school-simple-dim-name">{{ dimension.name }}</div>
+              <div class="school-simple-dim-name">{{ dimension.dimShort }}</div>
               <div class="school-simple-dim-value">{{ dimension.value }}</div>
             </div>
           </template>
