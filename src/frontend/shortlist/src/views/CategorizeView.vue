@@ -30,9 +30,9 @@ export default {
     }
   },
   methods: {
-    sendASchoolCardToTrash(schoolId, trashed) {
+    sendASchoolCardToTrash(recommendationId, trashed) {
       this.$emit("sendASchoolCardToTrash", {
-        schoolId: schoolId,
+        recommendationId: recommendationId,
         trashed: false,
       });
     },
@@ -115,7 +115,7 @@ export default {
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db
-            this.sendASchoolCardToTrash(schoolId, trashed);
+            this.sendASchoolCardToTrash(recommendationId, trashed);
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");

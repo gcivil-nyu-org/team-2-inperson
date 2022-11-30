@@ -11,8 +11,9 @@ const router = useRouter();
 const appSessionStore = sessionStore();
 
 function sendASchoolCardToTrash(payload) {
+  console.log(payload); 
   let apiReq = {
-    schoolId: payload.schoolId,
+    recommendationId: payload.recommendationId,
     trashed: payload.trashed,
   };
   let success = () => {
@@ -21,9 +22,11 @@ function sendASchoolCardToTrash(payload) {
     // console.log("could not create!", err.response);
   };
   let fail = (err) => {
+    console.log("Fail to remove.", err.response.data); 
+  }; 
 
-  };
-  apiReq.execute(); 
+  let req = apiClient.removeSchoolCard(apiReq, success, failure);
+  req.execute();
 }
 
 function appAccountSignup(payload) {

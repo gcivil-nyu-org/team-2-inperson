@@ -33,6 +33,9 @@ export default class ShortlistApi {
   addStudent(payload, successCb, failCb) {
     return new temporaryAddStudent(payload, successCb, failCb);
   }
+  removeSchoolCard(payload, successCb, failCb) {
+    return new temporaryRemoveSchoolCard(payload, successCb, failCb); 
+  }
 }
 
 import axios from "axios";
@@ -40,12 +43,11 @@ import md5 from "md5";
 
 export class removeSchoolCard {
   constructor(payload, successCb, failCb) {
-    this.schoolId = payload.schoolId;
+    this.recommendationId = payload.recommendationId;
     this.trashed = payload.trashed;
     this.successCb = successCb;
     this.failCb = failCb;
   }
-
   execute() {
     // Send the removed card first
     axios({
@@ -53,29 +55,12 @@ export class removeSchoolCard {
       url: "https://api.shortlist.nyc",
       headers: {},
       data: {
-        // email: this.email,
-        // username: this.username,
-        schoolId = this.schoolId, 
-        trashed = this.trashed,
+        recommendationId: this.recommendationId, 
+        trashed: this.trashed,
       },
     })
       // user/email success;
-      .then(() => {
-        // remove the card from the account
-        axios({
-          method: "POST",
-          url: "https://api.shortlist.",
-          headers: {},
-          data: {
-            // email: this.email,
-            // username: this.username,
-            schoolId = this.schoolId, 
-            trashed = this.trashed,
-          },
-        })
-          .then((result) => this.successCb(result))
-          .catch((fail) => this.failCb(fail));
-      })
+      .then((result) => this.successCb(result))
       // removal fail;
       .catch((err) => this.failCb(err));
 }
