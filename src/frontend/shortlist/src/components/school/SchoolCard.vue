@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       isDetail: false,
-      defaultImg: "https://cdn-icons-png.flaticon.com/512/3198/3198793.png",
+      defaultImg: "/school-img-default.png",
     };
   },
   methods: {
