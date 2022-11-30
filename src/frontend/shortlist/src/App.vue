@@ -21,7 +21,7 @@ function sendASchoolCardToTrash(payload) {
     // alert("could not create acount");
     // console.log("could not create!", err.response);
   };
-  let fail = (err) => {
+  let failure = (err) => {
     console.log("Fail to remove.", err.response.data); 
   }; 
 
@@ -42,8 +42,8 @@ function appAccountSignup(payload) {
   };
 
   let failure = (err) => {
-    console.log("could not create!", err.response);
-    alert("could not create acount");
+    console.log("could not create account", err.response.data);
+    alert("Could not create an account");
   };
   let req = apiClient.signupUser(apiReq, success, failure);
   req.execute();
@@ -64,9 +64,37 @@ function appAccountLogin(payload) {
     })
     .onFail((err) => {
       alert("could not login");
-      console.log("could not login", err.response);
+      console.log("could not login", err.response.data);
     });
   req.execute();
+}
+
+function appAuthLogin(payload) {
+  console.log("accountLogin", payload.email);
+  let requestPayload = {
+    email: payload.email,
+    password: payload.password,
+  };
+
+  let success = (result) => {
+    console.log("success: " , result.data);
+    appSessionStore.loginState = true;
+    appSessionStore.accountMetadata = result.data;
+    cookie.setCookie("accountid", result.data.user_id, 1);
+    router.replace("/categorize");
+  };
+  let fail = (err) => {
+    console.log(err.response.data);
+    if (err.response.data.detail == "Email is not verified") {
+      alert("Please verify your email address before logging in.")
+    }
+    else {
+      alert("Could not login.")
+    }
+  };
+  let req = apiClient.authLogin(requestPayload, success, fail);
+  req.execute();
+  
 }
 
 function appAccountUpdatePreferences(payload) {
@@ -138,7 +166,7 @@ function appAddStudent(payload) {
   <NavBar />
   <div class="app-container">
     <RouterView
-      @appAccountLogin="appAccountLogin"
+      @appAccountLogin="appAuthLogin"
       @appAccountSignup="appAccountSignup"
       @appAccountUpdatePreferences="appAccountUpdatePreferences"
       @appAccountUpdateName="appAccountUpdateName"

@@ -33,15 +33,18 @@ export default class ShortlistApi {
   addStudent(payload, successCb, failCb) {
     return new temporaryAddStudent(payload, successCb, failCb);
   }
+  authLogin(payload, successCb, failCb) {
+    return new tempAuthLogin(payload, successCb, failCb);
+  }
   removeSchoolCard(payload, successCb, failCb) {
-    return new temporaryRemoveSchoolCard(payload, successCb, failCb); 
+    return new tempRemoveSchoolCard(payload, successCb, failCb); 
   }
 }
 
 import axios from "axios";
 import md5 from "md5";
 
-export class removeSchoolCard {
+export class tempRemoveSchoolCard {
   constructor(payload, successCb, failCb) {
     this.recommendationId = payload.recommendationId;
     this.trashed = payload.trashed;
@@ -69,7 +72,8 @@ export class removeSchoolCard {
 export class temporarySignup {
   constructor(payload, successCb, failCb) {
     this.email = payload.email;
-    this.username = md5(payload.email).substring(0, 10);
+    // this.username = md5(payload.email).substring(0, 10);
+    this.username = payload.firstName + payload.lastName;
     this.password = payload.password;
 
     this.passwordHash = md5(payload.password);
@@ -93,6 +97,7 @@ export class temporarySignup {
       },
     })
       // user/email success;
+      /*
       .then(() => {
         // register the site account
         axios({
@@ -108,23 +113,20 @@ export class temporarySignup {
               userLastName: this.lastName,
               recommendationPreferences: {
                 q1: {
-                  Question: "Which instruction mode do you prefer?",
+                  Question:
+                    "How important is an engaging curriculum & emphasis on critical thinking skills?",
                   Response: "",
                 },
                 q2: {
-                  Question: "Do you have any Extra-curricular interests?",
-                  Response: [],
+                  Question:
+                    "How much would you value the supportive environment provided by school?",
+                  Response: "",
                 },
                 q3: {
-                  Question: "Do you already have a school in mind?",
+                  Question: "Is there a spicific borough you are looking for?",
                   Response: "",
                 },
                 q4: {
-                  Question:
-                    "Is there a transit bus/train line you're interested in?",
-                  Response: "",
-                },
-                q5: {
                   Question:
                     "How would you rank your academic performance so far?",
                   Response: "",
@@ -136,15 +138,19 @@ export class temporarySignup {
           .then((result) => this.successCb(result))
           .catch((fail) => this.failCb(fail));
       })
+      */
+      .then((result) => this.successCb(result))
       // email fail;
       .catch((err) => this.failCb(err));
+      
   }
 }
 
 export class temporaryAcceptInvite {
   constructor(payload, successCb, failCb) {
     this.email = payload.email;
-    this.username = md5(payload.email).substring(0, 10);
+    // this.username = md5(payload.email).substring(0, 10);
+    this.username = payload.firstName + payload.lastName;
     this.password = payload.password;
 
     this.passwordHash = md5(payload.password);
@@ -170,6 +176,7 @@ export class temporaryAcceptInvite {
       },
     })
       // user/email success;
+      /*
       .then(() => {
         // register the site account
         axios({
@@ -184,24 +191,29 @@ export class temporaryAcceptInvite {
               userFirstName: this.firstName,
               userLastName: this.lastName,
               recommendationPreferences: {
+                
+                // 1. Rogorous Instruction
+                // 2. Collaborative Teachers Rating
+                // 3. Supportive Environment Rating
+                // 4. Effective School Leadership Rating
+                // 5. Strong Family-Community Ties Rating
+                // Use as simple multiplier, add up for rank
+                
                 q1: {
-                  Question: "Which instruction mode do you prefer?",
+                  Question:
+                    "How important is an engaging curriculum & emphasis on critical thinking skills?",
                   Response: "",
                 },
                 q2: {
-                  Question: "Do you have any Extra-curricular interests?",
-                  Response: [],
+                  Question:
+                    "How important is a school culture where students feel safe and supported to meet high expectations?",
+                  Response: "",
                 },
                 q3: {
-                  Question: "Do you already have a school in mind?",
+                  Question: "Is there a specific borough you are looking for?",
                   Response: "",
                 },
                 q4: {
-                  Question:
-                    "Is there a transit bus/train line you're interested in?",
-                  Response: "",
-                },
-                q5: {
                   Question:
                     "How would you rank your academic performance so far?",
                   Response: "",
@@ -213,8 +225,11 @@ export class temporaryAcceptInvite {
           .then((result) => this.successCb(result))
           .catch((fail) => this.failCb(fail));
       })
+      */
+      .then((result) => this.successCb(result))
       // email fail;
       .catch((err) => this.failCb(err));
+      
   }
 }
 
@@ -255,6 +270,28 @@ export class temporaryAddStudent {
       data: {
         accountId: this.accountId,
         addEmail: this.email,
+      },
+    })
+      .then((result) => this.successCb(result))
+      .catch((err) => this.failCb(err));
+  }
+}
+
+export class tempAuthLogin {
+  constructor(payload, successCb, failCb) {
+    this.email = payload.email;
+    this.password = payload.password;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+  execute() {
+    axios({
+      method: "POST",
+      url: "https://api.shortlist.nyc/auth/login",
+      headers: {},
+      data: {
+        email: this.email,
+        password: this.password,
       },
     })
       .then((result) => this.successCb(result))

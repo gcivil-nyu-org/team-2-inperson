@@ -51,8 +51,8 @@ class LoginSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(max_length=255, min_length=3)
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
     username = serializers.CharField(max_length=255, min_length=3, read_only=True)
-
     tokens = serializers.SerializerMethodField()
+    user_id = serializers.CharField(read_only=True)
 
     def get_tokens(self, obj):
         user = User.objects.get(email=obj["email"])
@@ -61,7 +61,7 @@ class LoginSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "password", "username", "tokens"]
+        fields = ["email", "password", "username", "tokens", "user_id"]
 
     def validate(self, attrs):
         email = attrs.get("email", "")
@@ -84,8 +84,12 @@ class LoginSerializer(serializers.ModelSerializer):
             raise AuthenticationFailed("Account disabled, contact admin")
         if not user.is_verified:
             raise AuthenticationFailed("Email is not verified")
-
-        return {"email": user.email, "username": user.username, "tokens": user.tokens}
+        return {
+            "user_id": user.id,
+            "email": user.email,
+            "username": user.username,
+            "tokens": user.tokens,
+        }
 
         return super().validate(attrs)
 

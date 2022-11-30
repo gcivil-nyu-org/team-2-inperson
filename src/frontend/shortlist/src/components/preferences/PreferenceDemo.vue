@@ -24,17 +24,20 @@ export default {
   data() {
     return {
       prefResults: {
-        q1: { Question: "Which instruction mode do you prefer?", Response: "" },
-        q2: {
-          Question: "Do you have any Extra-curricular interests?",
-          Response: [],
+        q1: {
+          Question: "How important is an engaging curriculum & emphasis on critical thinking skills?",
+          Response: 4,
         },
-        q3: { Question: "Do you already have a school in mind?", Response: "" },
-        q4: {
-          Question: "Is there a transit bus/train line you're interested in?",
+        q2: {
+          Question:
+            "How much would you value the supportive environment provided by school?",
+          Response: 4,
+        },
+        q3: {
+          Question: "Is there a specific borough you are looking for?",
           Response: "",
         },
-        q5: {
+        q4: {
           Question: "How would you rank your academic performance so far?",
           Response: 4,
         },
@@ -44,6 +47,43 @@ export default {
   },
   setup() {
     return {
+      question1: {
+        Name: "Rigorous Instruction",
+        Text: "How important is an engaging curriculum & emphasis on critical thinking skills?",
+        Min: 1,
+        MinLabel: "I'd prefer more time studying alone",
+        Max: 7,
+        MaxLabel: "More class material coverage",
+      },
+      question2: {
+        Name: "Supportive Environment",
+        Text: "How important is a school culture where students feel safe and supported to meet high expectations?",
+        Min: 1,
+        MinLabel: "Less important",
+        Max: 7,
+        MaxLabel: "More important",
+      },
+      question3: {
+        Name: "Borough",
+        Text: "Is there a specific borough you are looking for?",
+        Options: [
+          "Manhattan",
+          "Brooklyn",
+          "Queens",
+          "Bronx",
+          "Staten Island",
+          "No Preference",
+        ],
+      },
+      question4: {
+        Name: "Academic Performance",
+        Text: "How would you rank your academic performance so far?",
+        Min: 1,
+        MinLabel: "Average",
+        Max: 7,
+        MaxLabel: "Excellent",
+      },
+      /*
       question1: {
         Name: "Instruction Mode",
         Text: "Which instruction mode do you prefer?",
@@ -71,6 +111,7 @@ export default {
         Max: 7,
         MaxLabel: "Excellent",
       },
+      */
     };
   },
   methods: {
@@ -89,32 +130,28 @@ export default {
         title="Set Preferences"
         @preferenceSubmitted="handleSubmit"
       >
-        <PreferenceManagerPage id="0" subtitle="Instruction & Curriculum">
-          <PreferenceOneSelect
+        <PreferenceManagerPage id="0" subtitle="School Qualities">
+          <PreferenceSlider
             :question="question1"
             v-model="prefResults.q1.Response"
           />
-          <PreferenceMultiSelect
+          <PreferenceSlider
             :question="question2"
             v-model="prefResults.q2.Response"
           />
         </PreferenceManagerPage>
 
         <PreferenceManagerPage id="1" subtitle="Location/School Specific">
-          <PreferenceTypeText
+          <PreferenceDropdown
             :question="question3"
             v-model="prefResults.q3.Response"
-          />
-          <PreferenceDropdown
-            :question="question4"
-            v-model="prefResults.q4.Response"
           />
         </PreferenceManagerPage>
 
         <PreferenceManagerPage id="2" subtitle="This or that...">
           <PreferenceSlider
-            :question="question5"
-            v-model="prefResults.q5.Response"
+            :question="question4"
+            v-model="prefResults.q4.Response"
           />
         </PreferenceManagerPage>
       </PreferenceManager>

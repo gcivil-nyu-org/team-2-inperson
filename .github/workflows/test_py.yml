@@ -41,5 +41,6 @@ jobs:
           SHORTLIST_EMAIL_SMTP_HOST: ${{ secrets.SHORTLIST_EMAIL_SMTP_HOST }}
           SHORTLIST_EMAIL_HOST_USER: ${{ secrets.SHORTLIST_EMAIL_HOST_USER }}
           SHORTLIST_EMAIL_HOST_PASSWORD: ${{ secrets.SHORTLIST_EMAIL_HOST_PASSWORD }}
+          SHORTLIST_API_URL: ${{ secrets.SHORTLIST_API_URL }}
         run: |
           python3 manage.py test

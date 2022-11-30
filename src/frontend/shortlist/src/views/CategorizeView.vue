@@ -5,9 +5,12 @@ import TrashCan from "../components/layout/shortlists/TrashCan.vue";
 import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
 import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
+import ShortlistApi from "../api/shortlist";
 import { shortLists } from "../api/examples/shortlists.js";
 import { recommendations } from "../api/examples/recommendations.js";
 import cookie from "@/helpers/cookie.js";
+
+const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
   emits: ["sendASchoolCardToTrash"],
@@ -33,7 +36,7 @@ export default {
     sendASchoolCardToTrash(recommendationId, trashed) {
       this.$emit("sendASchoolCardToTrash", {
         recommendationId: recommendationId,
-        trashed: false,
+        trashed: true,
       });
     },
     swapListElements(inList, idx1, idx2) {
@@ -115,7 +118,7 @@ export default {
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db
-            this.sendASchoolCardToTrash(recommendationId, trashed);
+            this.sendASchoolCardToTrash(this.myRecommendations[0].id, true);
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
@@ -131,7 +134,7 @@ export default {
           }
           if (this.myRecommendations.length == 3) {
             // get new schools
-            this.myRecommendations.push(...recommendations);
+            this.getRecommendations(7);
           }               
         }
       }
@@ -147,10 +150,27 @@ export default {
     shareList(e) {
       console.log("SHARED LIST #:", e);
     },
+    getRecommendations(count = 10) {
+      console.log("payload:", this.acctID);
+      let req = shortlistApi
+        .getRecommendations()
+        .forAccountId(this.acctID)
+        .count(count)
+        .strategy("RANKING")
+        .onSuccess((result) => {
+          console.log("categorize recs: ", Array.isArray(result.data));
+          this.myRecommendations.push(...result.data);
+        })
+        .onFail((err) => {
+          console.log("fail", err.response.status, err.response.data);
+          this.myRecommendations = "ERROR GETTING RECOMMENDATIONS";
+        });
+      req.execute();
+    },
   },
   data() {
     let myShortlists = shortLists;
-    let myRecommendations = recommendations;
+    let myRecommendations = []; // recommendations;
     let schoolDetailModalVisible = false;
     let schoolDetailModalData = null;
     let listDragEnabled = false;
@@ -168,6 +188,9 @@ export default {
       listDragEnabled,
       listDropEnabled,
     };
+  },
+  created() {
+    this.getRecommendations(50);
   },
 };
 </script>
