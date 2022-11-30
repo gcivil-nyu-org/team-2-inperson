@@ -23,7 +23,7 @@ function appAccountSignup(payload) {
   };
 
   let failure = (err) => {
-    console.log("could not create!", err.response);
+    console.log("could not create!", err.response.data);
     alert("could not create acount");
   };
   let req = apiClient.signupUser(apiReq, success, failure);
@@ -45,7 +45,7 @@ function appAccountLogin(payload) {
     })
     .onFail((err) => {
       alert("could not login");
-      console.log("could not login", err.response);
+      console.log("could not login", err.response.data);
     });
   req.execute();
 }
@@ -58,12 +58,11 @@ function appAuthLogin(payload) {
   };
 
   let success = (result) => {
-    alert("Login complete");
     console.log("success: " , result.data);
     appSessionStore.loginState = true;
     appSessionStore.accountMetadata = result.data;
     cookie.setCookie("accountid", result.data.user_id, 1);
-    router.replace("/");
+    router.replace("/categorize");
   };
   let fail = (err) => {
     console.log(err.response.data);
