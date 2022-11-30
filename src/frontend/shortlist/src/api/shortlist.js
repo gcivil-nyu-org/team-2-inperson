@@ -43,7 +43,8 @@ import md5 from "md5";
 export class temporarySignup {
   constructor(payload, successCb, failCb) {
     this.email = payload.email;
-    this.username = md5(payload.email).substring(0, 10);
+    // this.username = md5(payload.email).substring(0, 10);
+    this.username = payload.firstName + payload.lastName;
     this.password = payload.password;
 
     this.passwordHash = md5(payload.password);
@@ -67,6 +68,7 @@ export class temporarySignup {
       },
     })
       // user/email success;
+      /*
       .then(() => {
         // register the site account
         axios({
@@ -107,15 +109,19 @@ export class temporarySignup {
           .then((result) => this.successCb(result))
           .catch((fail) => this.failCb(fail));
       })
+      */
+      .then((result) => this.successCb(result))
       // email fail;
       .catch((err) => this.failCb(err));
+      
   }
 }
 
 export class temporaryAcceptInvite {
   constructor(payload, successCb, failCb) {
     this.email = payload.email;
-    this.username = md5(payload.email).substring(0, 10);
+    // this.username = md5(payload.email).substring(0, 10);
+    this.username = payload.firstName + payload.lastName;
     this.password = payload.password;
 
     this.passwordHash = md5(payload.password);
@@ -141,6 +147,7 @@ export class temporaryAcceptInvite {
       },
     })
       // user/email success;
+      /*
       .then(() => {
         // register the site account
         axios({
@@ -155,14 +162,14 @@ export class temporaryAcceptInvite {
               userFirstName: this.firstName,
               userLastName: this.lastName,
               recommendationPreferences: {
-                /*
-                1. Rogorous Instruction
-                2. Collaborative Teachers Rating
-                3. Supportive Environment Rating
-                4. Effective School Leadership Rating
-                5. Strong Family-Community Ties Rating
-                Use as simple multiplier, add up for rank
-                */
+                
+                // 1. Rogorous Instruction
+                // 2. Collaborative Teachers Rating
+                // 3. Supportive Environment Rating
+                // 4. Effective School Leadership Rating
+                // 5. Strong Family-Community Ties Rating
+                // Use as simple multiplier, add up for rank
+                
                 q1: {
                   Question:
                     "How important is an engaging curriculum & emphasis on critical thinking skills?",
@@ -189,8 +196,11 @@ export class temporaryAcceptInvite {
           .then((result) => this.successCb(result))
           .catch((fail) => this.failCb(fail));
       })
+      */
+      .then((result) => this.successCb(result))
       // email fail;
       .catch((err) => this.failCb(err));
+      
   }
 }
 
