@@ -127,6 +127,7 @@ export default {
                 .schools.push(this.dragState.categorizeState.schoolData);
               this.removeTopCard();
               // TODO set current_accepted in db
+              
             }
             else {
               alert("List is full")
