@@ -17,7 +17,7 @@ class TestViews(TestSetUp):
             self.assertEqual(res.status_code, 201)
 
             # Email Testing
-            self.assertTrue(mocked_email.call_count == 1, "django call to send email")
+            self.assertTrue(mocked_email.call_count == 2, "django call to send email")
 
             # first call, first positional
             email_call = mocked_email.mock_calls[0].args[0]
