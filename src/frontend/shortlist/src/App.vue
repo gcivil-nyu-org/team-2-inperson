@@ -10,6 +10,23 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
+function moveAcceptedSchoolCardToDB(payload) {
+  console.log(payload); 
+  let apiReq = {
+    recommendationId: payload.recommendationId,
+    accepted: payload.accepted,
+  };
+  let success = () => {
+    console.log("Added to DB successfully"); 
+  };
+  let failure = (err) => {
+    console.log("Fail to add to DB", err.response.data); 
+  }; 
+
+  let req = apiClient.moveAcceptedSchoolCardToDB(apiReq, success, failure);
+  req.execute();
+}
+
 function appAccountSignup(payload) {
   let apiReq = {
     email: payload.email,
@@ -153,6 +170,7 @@ function appAddStudent(payload) {
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
       @addStudent="appAddStudent"
+      @sendASchoolCardToTrash="sendASchoolCardToTrash"
     />
   </div>
 </template>
