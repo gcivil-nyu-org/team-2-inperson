@@ -62,9 +62,7 @@ export class tempMoveAcceptedSchoolCardToDB {
         accepted : this.accepted ,
       },
     })
-      // user/email success;
       .then((result) => this.successCb(result))
-      // send accepted card fail;
       .catch((err) => this.failCb(err));
 }
 }
