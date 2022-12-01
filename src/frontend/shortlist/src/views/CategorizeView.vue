@@ -32,6 +32,12 @@ export default {
     }
   },
   methods: {
+    moveAcceptedSchoolCardToDB(recommendationId, accepted) {
+      this.$emit("moveAcceptedSchoolCardToDB", {
+        recommendationId: recommendationId,
+        accepted: true,
+      });
+    },
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*
@@ -119,6 +125,7 @@ export default {
                 .schools.push(this.dragState.categorizeState.schoolData);
               this.removeTopCard();
               // TODO set current_accepted in db
+              this.moveAcceptedSchoolCardToDB(this.myRecommendations[0].id, true)
             }
             else {
               alert("List is full")
