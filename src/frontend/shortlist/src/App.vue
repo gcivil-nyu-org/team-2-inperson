@@ -18,8 +18,6 @@ function sendASchoolCardToTrash(payload) {
   };
   let success = () => {
     console.log("Removed successfully"); 
-    // alert("could not create acount");
-    // console.log("could not create!", err.response);
   };
   let failure = (err) => {
     console.log("Fail to remove.", err.response.data); 
