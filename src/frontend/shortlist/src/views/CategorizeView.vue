@@ -13,6 +13,7 @@ import cookie from "@/helpers/cookie.js";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
+  emits: ["moveAcceptedSchoolCardToDB"],
   components: {
     ShortlistManager,
     RecommendationStack,
