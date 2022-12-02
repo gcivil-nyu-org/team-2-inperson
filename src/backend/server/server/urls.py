@@ -24,6 +24,7 @@ from api.handlers import school_dim_upsert
 from api.handlers import school_dim_value
 from api.handlers import school_dim_value_upsert
 from api.handlers import recommendation
+from api.handlers import recommendation_update
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -65,4 +66,5 @@ urlpatterns = [
     path("school/dimension/value", school_dim_value),
     path("school/dimension/value/upsert", school_dim_value_upsert),
     path("recommendation", recommendation),
+    path("recommendation/update", recommendation_update),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
