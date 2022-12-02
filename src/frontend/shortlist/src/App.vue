@@ -22,8 +22,7 @@ function moveAcceptedSchoolCardToDB(payload) {
   let failure = (err) => {
     console.log("Fail to add to DB", err.response.data); 
   }; 
-
-  let req = apiClient.moveAcceptedSchoolCardToDB(apiReq, success, failure);
+  let req = apiClient.removeTopCard(apiReq, success, failure);
   req.execute();
 }
 

@@ -125,7 +125,9 @@ export default {
                 .schools.push(this.dragState.categorizeState.schoolData);
               this.removeTopCard();
               // TODO set current_accepted in db
+              console.log("School Accepted.")
               this.moveAcceptedSchoolCardToDB(this.myRecommendations[0].id, true)
+              console.log("Accepted School sent to DB")
             }
             else {
               alert("List is full")

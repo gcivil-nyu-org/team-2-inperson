@@ -47,7 +47,7 @@ import md5 from "md5";
 export class tempMoveAcceptedSchoolCardToDB {
   constructor(payload, successCb, failCb) {
     this.recommendationId = payload.recommendationId;
-    this.accepted = payload.accepted ;
+    this.accepted = payload.accepted;
     this.successCb = successCb;
     this.failCb = failCb;
   }
