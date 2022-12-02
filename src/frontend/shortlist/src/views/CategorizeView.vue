@@ -9,6 +9,7 @@ import ShortlistApi from "../api/shortlist";
 import { shortLists } from "../api/examples/shortlists.js";
 import { recommendations } from "../api/examples/recommendations.js";
 import cookie from "@/helpers/cookie.js";
+import axios from "axios";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
@@ -29,9 +30,42 @@ export default {
   computed: {
     acctID() {
       return cookie.getCookie("accountid");
-    }
+    },
   },
   methods: {
+    getList() {
+      console.log("school data looks like: ", this.listSchools);
+      axios
+        //address needs change to coop
+        .post("https://api.shortlist.nyc/auth/get-list", {
+          //name might need change
+          accountID: this.acctID,
+        })
+        .then(function (response) {
+          console.log("response is: ", response);
+          this.myShortlists = response;
+        })
+        .catch(function (error) {
+          console.log(error.response.data);
+        });
+    },
+    saveList(listIndex, listSchools) {
+      console.log("school data looks like: ", this.listSchools);
+      console.log("list id is: ", this.myShortlists[listIndex].id);
+      axios
+        //three end points for each list? what to send, should be post
+        .post("https://api.shortlist.nyc/auth/save-list", {
+          accountID: this.acctID,
+          listID: this.myShortlists[listIndex].id,
+          schools: listSchools,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error.response.data);
+        });
+    },
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*
@@ -115,19 +149,20 @@ export default {
             // assign it;
             console.log("ASSIGN SCHOOL");
             if (this.myShortlists[listIdx].schools.length < 4) {
-              this.myShortlists[listIdx]
-                .schools.push(this.dragState.categorizeState.schoolData);
+              this.myShortlists[listIdx].schools.push(
+                this.dragState.categorizeState.schoolData
+              );
               this.removeTopCard();
               // TODO set current_accepted in db
-            }
-            else {
-              alert("List is full")
+              this.saveList(listIdx, this.myShortlists[listIdx].schools);
+            } else {
+              alert("List is full");
             }
           }
           if (this.myRecommendations.length == 3) {
             // get new schools
             this.getRecommendations(7);
-          }               
+          }
         }
       }
     },
@@ -161,7 +196,7 @@ export default {
     },
   },
   data() {
-    let myShortlists = shortLists;
+    let myShortlists = [];
     let myRecommendations = []; // recommendations;
     let schoolDetailModalVisible = false;
     let schoolDetailModalData = null;
@@ -183,6 +218,7 @@ export default {
   },
   created() {
     this.getRecommendations(50);
+    this.getList();
   },
 };
 </script>
