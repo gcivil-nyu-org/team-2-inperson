@@ -11,6 +11,9 @@ const router = useRouter();
 const appSessionStore = sessionStore();
 
 function moveAcceptedSchoolCardToDB(payload) {
+  /*
+  recoID: "e5dac3ed963e4df2948b5e474994452a"
+  */
   console.log(payload);
   let apiReq = {
     recoID: payload.recoID,
@@ -74,7 +77,7 @@ function appAuthLogin(payload) {
   };
 
   let success = (result) => {
-    console.log("success: " , result.data);
+    console.log("success: ", result.data);
     appSessionStore.loginState = true;
     appSessionStore.accountMetadata = result.data;
     cookie.setCookie("accountid", result.data.user_id, 1);
@@ -83,15 +86,13 @@ function appAuthLogin(payload) {
   let fail = (err) => {
     console.log(err.response.data);
     if (err.response.data.detail == "Email is not verified") {
-      alert("Please verify your email address before logging in.")
-    }
-    else {
-      alert("Could not login.")
+      alert("Please verify your email address before logging in.");
+    } else {
+      alert("Could not login.");
     }
   };
   let req = apiClient.authLogin(requestPayload, success, fail);
   req.execute();
-  
 }
 
 function appAccountUpdatePreferences(payload) {
@@ -157,8 +158,6 @@ function appAddStudent(payload) {
 }
 </script>
 
-
-
 <template>
   <NavBar />
   <div class="app-container">
@@ -170,7 +169,6 @@ function appAddStudent(payload) {
       @logoutEvent="appLogout"
       @addStudent="appAddStudent"
       @moveAcceptedSchoolCardToDB="moveAcceptedSchoolCardToDB"
-
     />
   </div>
 </template>

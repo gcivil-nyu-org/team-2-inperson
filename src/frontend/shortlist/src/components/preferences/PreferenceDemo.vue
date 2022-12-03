@@ -25,7 +25,8 @@ export default {
     return {
       prefResults: {
         q1: {
-          Question: "How important is an engaging curriculum & emphasis on critical thinking skills?",
+          Question:
+            "How important is an engaging curriculum & emphasis on critical thinking skills?",
           Response: 4,
         },
         q2: {

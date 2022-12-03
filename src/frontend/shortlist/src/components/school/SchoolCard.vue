@@ -17,10 +17,17 @@ export default {
   computed: {
     getBorough() {
       // console.log(boroid)
-      let boros = ["","Bronx", "Brooklyn", "Manhattan", "Queens", "Staten Island"];
+      let boros = [
+        "",
+        "Bronx",
+        "Brooklyn",
+        "Manhattan",
+        "Queens",
+        "Staten Island",
+      ];
       return boros[this.schoolData.school.schoolMetadata.boroughCode];
-    }
-  }
+    },
+  },
 };
 </script>
 

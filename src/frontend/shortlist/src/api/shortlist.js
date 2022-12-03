@@ -37,7 +37,7 @@ export default class ShortlistApi {
     return new tempAuthLogin(payload, successCb, failCb);
   }
   moveAcceptedSchoolCardToDB(payload, successCb, failCb) {
-    return new tempMoveAcceptedSchoolCardToDB(payload, successCb, failCb); 
+    return new tempMoveAcceptedSchoolCardToDB(payload, successCb, failCb);
   }
 }
 
@@ -46,7 +46,7 @@ import md5 from "md5";
 
 export class tempMoveAcceptedSchoolCardToDB {
   constructor(payload, successCb, failCb) {
-    this.recommendationId = payload.recommendationId;
+    this.recoID = payload.recoID;
     this.accepted = payload.accepted;
     this.successCb = successCb;
     this.failCb = failCb;
@@ -58,13 +58,13 @@ export class tempMoveAcceptedSchoolCardToDB {
       url: "https://api.shortlist.nyc",
       headers: {},
       data: {
-        recommendationId: this.recommendationId, 
-        accepted : this.accepted ,
+        recoID: this.recoID,
+        accepted: this.accepted,
       },
     })
       .then((result) => this.successCb(result))
       .catch((err) => this.failCb(err));
-}
+  }
 }
 
 export class temporarySignup {
@@ -140,7 +140,6 @@ export class temporarySignup {
       .then((result) => this.successCb(result))
       // email fail;
       .catch((err) => this.failCb(err));
-      
   }
 }
 
@@ -227,7 +226,6 @@ export class temporaryAcceptInvite {
       .then((result) => this.successCb(result))
       // email fail;
       .catch((err) => this.failCb(err));
-      
   }
 }
 

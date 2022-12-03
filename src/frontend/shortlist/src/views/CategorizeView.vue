@@ -30,15 +30,17 @@ export default {
   computed: {
     acctID() {
       return cookie.getCookie("accountid");
-    }
+    },
   },
   methods: {
-    moveAcceptedSchoolCardToDB(recommendationId, accepted) {
+    /* eslint-disable */
+    moveAcceptedSchoolCardToDB(recoID, accepted) {
       this.$emit("moveAcceptedSchoolCardToDB", {
-        recommendationId: recommendationId,
+        recoID: recoID,
         accepted: true,
       });
     },
+    /* eslint-disable */
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*

@@ -27,8 +27,8 @@ export default {
     stackSize() {
       let len = this.recommendations.length;
       return len > 3 ? 3 : len;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -39,8 +39,7 @@ export default {
         <div
           class="reco-stack-grid-position"
           :style="{
-            paddingLeft:
-              offsetFactor * (stackSize - idx + 1) + 'px',
+            paddingLeft: offsetFactor * (stackSize - idx + 1) + 'px',
             paddingTop: offsetFactor * idx + 'px',
             zIndex: 200 * (stackSize - idx + 1),
           }"
@@ -57,8 +56,7 @@ export default {
         <div
           class="reco-stack-grid-position"
           :style="{
-            paddingLeft:
-              offsetFactor * (stackSize - idx + 1) + 'px',
+            paddingLeft: offsetFactor * (stackSize - idx + 1) + 'px',
             paddingTop: offsetFactor * idx + 'px',
             zIndex: 200 * (stackSize - idx + 1),
           }"
