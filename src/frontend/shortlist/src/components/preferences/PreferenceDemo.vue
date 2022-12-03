@@ -1,9 +1,9 @@
 <script>
 import PreferenceManager from "./PreferenceManager.vue";
 import PreferenceManagerPage from "./PreferenceManagerPage.vue";
-import PreferenceMultiSelect from "./PreferenceMultiSelect.vue";
-import PreferenceOneSelect from "./PreferenceOneSelect.vue";
-import PreferenceTypeText from "./PreferenceTypeText.vue";
+// import PreferenceMultiSelect from "./PreferenceMultiSelect.vue";
+// import PreferenceOneSelect from "./PreferenceOneSelect.vue";
+// import PreferenceTypeText from "./PreferenceTypeText.vue";
 import PreferenceDropdown from "./PreferenceDropdown.vue";
 import PreferenceSlider from "./PreferenceSlider.vue";
 
@@ -15,9 +15,9 @@ export default {
   components: {
     PreferenceManager,
     PreferenceManagerPage,
-    PreferenceMultiSelect,
-    PreferenceOneSelect,
-    PreferenceTypeText,
+    // PreferenceMultiSelect,
+    // PreferenceOneSelect,
+    // PreferenceTypeText,
     PreferenceDropdown,
     PreferenceSlider,
   },
@@ -25,7 +25,8 @@ export default {
     return {
       prefResults: {
         q1: {
-          Question: "How important is an engaging curriculum & emphasis on critical thinking skills?",
+          Question:
+            "How important is an engaging curriculum & emphasis on critical thinking skills?",
           Response: 4,
         },
         q2: {
