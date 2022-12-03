@@ -5,14 +5,14 @@ from api.util.generators import gen_uuid
 
 
 def default_settings():
-    obj = {
-        "settings": {
+    settings = (
+        {
             "name": "My List",
             "color": "red",
             "icon": {"value": "unknown", "color": "green"},
         },
-    }
-    return obj
+    )
+    return settings
 
 
 class Shortlist(models.Model):
