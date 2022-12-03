@@ -295,7 +295,8 @@ class UserDetailsView(generics.GenericAPIView):
         data = JSONParser().parse(request)
         if User.objects.filter(id=user_id).exists():
             user = User.objects.get(id=user_id)
-            serializer = UpdateUserSerializer(user, data=data)
+            serializer = self.serializer_class(data=request.data)
+            #             serializer = UpdateUserSerializer(user, data=data)
             if serializer.is_valid():
                 serializer.save()
                 return JsonResponse(serializer.data)
