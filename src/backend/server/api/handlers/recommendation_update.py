@@ -10,6 +10,7 @@ from django.http import HttpResponseForbidden
 from django.http import HttpResponseServerError
 from django.views.decorators.csrf import csrf_exempt
 
+
 @csrf_exempt
 def recommendation_update(request: HttpRequest):
     sr = ShortlistRequest(request)
