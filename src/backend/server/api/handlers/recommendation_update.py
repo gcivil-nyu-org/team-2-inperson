@@ -1,3 +1,4 @@
+import json
 from api.handlers.shortlist_request import ShortlistRequest
 from api.models.recommendation import Recommendation
 
@@ -8,30 +9,6 @@ from django.http import HttpResponseBadRequest
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseServerError
 from django.views.decorators.csrf import csrf_exempt
-
-SEEN_QUERY = """
-SET seen_count = seen_count + 1
-UPDATE api_recommendation 
-WHERE id = '{}'
-"""
-
-CHECK_QRY = """
-SELECT id, seen_count
-FROM api_recommendation 
-WHERE id = '{}'
-"""
-
-def camel_caser(input):
-    vals = input.split("_")
-    if len(vals) > 1:
-        for i in range(1, len(vals)):
-            vals[i] = vals[i].capitalize()
-    return "".join(vals)
-
-
-def dictfetchall(cursor):
-    columns = [camel_caser(col[0]) for col in cursor.description]
-    return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
 @csrf_exempt
 def recommendation_update(request: HttpRequest):
@@ -44,13 +21,11 @@ def recommendation_update(request: HttpRequest):
 
     try:
         recoID = sr.body.get("recoID", None)
-        rec = Recommendation.objects.filter(id=recoID)
+        rec = Recommendation.objects.get(id=recoID)
     except Exception:
         return HttpResponseServerError("cannot find recommendation")
 
     try:
-        # with connection.cursor() as cursor:
-        #   cursor.execute(CHECK_QRY.format(recoID) )
         rec.seen_count = rec.seen_count + 1
         for k in sr.body:
             if k == "accepted":
@@ -65,4 +40,4 @@ def recommendation_update(request: HttpRequest):
     except Exception:
         return HttpResponseServerError("could not update recommendation")
 
-    return HttpResponse(rec.metadataJson())
+    return HttpResponse(rec.serializeJson())
