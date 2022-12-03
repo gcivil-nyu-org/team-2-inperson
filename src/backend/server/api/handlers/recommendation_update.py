@@ -1,8 +1,6 @@
-import json
 from api.handlers.shortlist_request import ShortlistRequest
 from api.models.recommendation import Recommendation
 
-from django.db import connection
 from django.http import HttpRequest
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
