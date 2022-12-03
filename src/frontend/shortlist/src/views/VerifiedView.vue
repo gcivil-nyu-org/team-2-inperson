@@ -70,7 +70,6 @@ export default {
           />
         </div>
         <div class="button-container">
-          
           <button
             @click="this.resendLink"
             id="resetButton"
