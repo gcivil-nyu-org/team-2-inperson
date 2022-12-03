@@ -17,11 +17,11 @@ export default {
   },
   mounted() {
     //fetching information from url sent to the email address
-    let params = this.router.query;
-    this.isVerified = params.token_valid;
+    //let params = this.router.query;
+    let params = this.$route.query;
+    //somehow this line makes thing works, so param does not provide bool but string
+    this.isVerified = params.token_valid == "true";
     this.errorMessage = params.message;
-    //console.log(this.email);
-    //console.log(this.errorMessage);
   },
   methods: {
     resendLink() {
@@ -48,7 +48,7 @@ export default {
     {{ $router.query }}
     <!-- Display based on verification status -->
     <!-- Either resend link or redirect to login depend on verification status-->
-    <template v-if="isVerified">
+    <template v-if="this.isVerified">
       <form>
         <h5 this.testVerified="true">Verified successfully</h5>
         <a href="https://www.shortlist.nyc/login" id="loginLink">
@@ -56,7 +56,7 @@ export default {
         </a>
       </form>
     </template>
-    <template v-if="!isVerified">
+    <template v-else>
       <form>
         <div class="message-container" this.testNotVerified="true">
           {{ errorMessage }}

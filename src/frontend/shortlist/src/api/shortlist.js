@@ -142,7 +142,6 @@ export class temporarySignup {
       .then((result) => this.successCb(result))
       // email fail;
       .catch((err) => this.failCb(err));
-      
   }
 }
 
@@ -229,7 +228,6 @@ export class temporaryAcceptInvite {
       .then((result) => this.successCb(result))
       // email fail;
       .catch((err) => this.failCb(err));
-      
   }
 }
 

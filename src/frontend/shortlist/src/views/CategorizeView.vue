@@ -7,7 +7,6 @@ import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
 import ShortlistApi from "../api/shortlist";
 import { shortLists } from "../api/examples/shortlists.js";
-import { recommendations } from "../api/examples/recommendations.js";
 import cookie from "@/helpers/cookie.js";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
@@ -30,7 +29,7 @@ export default {
   computed: {
     acctID() {
       return cookie.getCookie("accountid");
-    }
+    },
   },
   methods: {
     sendASchoolCardToTrash(recommendationId, trashed) {
@@ -123,20 +122,19 @@ export default {
             // assign it;
             console.log("ASSIGN SCHOOL");
             if (this.myShortlists[listIdx].schools.length < 4) {
-              this.myShortlists[listIdx]
-                .schools.push(this.dragState.categorizeState.schoolData);
+              this.myShortlists[listIdx].schools.push(
+                this.dragState.categorizeState.schoolData
+              );
               this.removeTopCard();
               // TODO set current_accepted in db
-              
-            }
-            else {
-              alert("List is full")
+            } else {
+              alert("List is full");
             }
           }
           if (this.myRecommendations.length == 3) {
             // get new schools
             this.getRecommendations(7);
-          }               
+          }
         }
       }
     },
