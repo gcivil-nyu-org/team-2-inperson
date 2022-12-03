@@ -11,18 +11,18 @@ const router = useRouter();
 const appSessionStore = sessionStore();
 
 function moveAcceptedSchoolCardToDB(payload) {
-  console.log(payload); 
+  console.log(payload);
   let apiReq = {
-    recommendationId: payload.recommendationId,
+    recoID: payload.recoID,
     accepted: payload.accepted,
   };
   let success = () => {
-    console.log("Added to DB successfully"); 
+    console.log("Added to a list successfully");
   };
   let failure = (err) => {
-    console.log("Fail to add to DB", err.response.data); 
-  }; 
-  let req = apiClient.removeTopCard(apiReq, success, failure);
+    console.log("Fail to add to a list.", err.response.data);
+  };
+  let req = apiClient.removeSchoolCard(apiReq, success, failure);
   req.execute();
 }
 
@@ -169,7 +169,8 @@ function appAddStudent(payload) {
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
       @addStudent="appAddStudent"
-      @sendASchoolCardToTrash="sendASchoolCardToTrash"
+      @moveAcceptedSchoolCardToDB="moveAcceptedSchoolCardToDB"
+
     />
   </div>
 </template>
