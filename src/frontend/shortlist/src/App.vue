@@ -49,26 +49,6 @@ function appAccountSignup(payload) {
   req.execute();
 }
 
-function appAccountLogin(payload) {
-  console.log("accountLogin", payload, appSessionStore);
-  let req = apiClient
-    .loginAccount()
-    .forEmail(payload.email)
-    .forPassword(payload.password)
-    .onSuccess((result) => {
-      console.log("success:", result.data);
-      appSessionStore.loginState = true;
-      appSessionStore.accountMetadata = result.data;
-      cookie.setCookie("accountid", result.data.accountId, 1); // expires in 1 day
-      router.replace("/");
-    })
-    .onFail((err) => {
-      alert("could not login");
-      console.log("could not login", err.response.data);
-    });
-  req.execute();
-}
-
 function appAuthLogin(payload) {
   console.log("accountLogin", payload.email);
   let requestPayload = {
@@ -80,7 +60,7 @@ function appAuthLogin(payload) {
     console.log("success: ", result.data);
     appSessionStore.loginState = true;
     appSessionStore.accountMetadata = result.data;
-    cookie.setCookie("accountid", result.data.user_id, 1);
+    cookie.setCookie("accountid", result.data.user_id, 1); // expires in 1 day
     router.replace("/categorize");
   };
   let fail = (err) => {
