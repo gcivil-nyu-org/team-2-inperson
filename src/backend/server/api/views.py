@@ -1,31 +1,17 @@
-from rest_framework import generics, status, views, permissions
+from rest_framework import generics, status
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 import os
 from .serializers import (
     ShortlistSerializer,
-    GetAShortlistSerializer,
+    #     GetAShortlistSerializer,
     UpdateShortlistSerializer,
 )
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Shortlist
-from api.models.recommendation import Recommendation
-from api.models.school import School
 from authentication.models import User
-import jwt
-from django.conf import settings
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
+
 from .renderers import ShortlistRenderer
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.encoding import (
-    smart_str,
-    smart_bytes,
-    DjangoUnicodeDecodeError,
-)
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponsePermanentRedirect
 
 

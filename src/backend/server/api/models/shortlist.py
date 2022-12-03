@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 import uuid
-from api.util.generators import gen_uuid
 
 
 def default_settings():
