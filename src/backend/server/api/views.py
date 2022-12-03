@@ -26,7 +26,6 @@ from django.utils.encoding import (
 )
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
-from django.urls import reverse
 from django.http import HttpResponsePermanentRedirect
 
 
