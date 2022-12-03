@@ -150,6 +150,6 @@ class LogoutSerializer(serializers.Serializer):
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = User
-		fields = ["preferences", "username", "email"]
+    class Meta:
+        model = User
+        fields = ["preferences", "username", "email"]

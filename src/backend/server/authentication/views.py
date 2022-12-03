@@ -8,7 +8,7 @@ from .serializers import (
     LoginSerializer,
     LogoutSerializer,
     ResendEmailSerializer,
-    UpdateUserSerializer
+    UpdateUserSerializer,
 )
 from rest_framework.parsers import JSONParser
 
@@ -183,8 +183,6 @@ class ResendEmail(generics.GenericAPIView):
         )
 
 
-
-
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
@@ -292,6 +290,7 @@ class UserDetailsView(generics.GenericAPIView):
             {"error": "Invalid Shortlist ID"},
             status=status.HTTP_404_NOT_FOUND,
         )
+
     def put(self, request, user_id):
         data = JSONParser().parse(request)
         if User.objects.filter(id=user_id).exists():
