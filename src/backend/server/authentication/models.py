@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -84,3 +83,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def tokens(self):
         refresh = RefreshToken.for_user(self)
         return {"refresh": str(refresh), "access": str(refresh.access_token)}
+    def metadataJson(self):
+        obj_repr = dict(
+            user_id=self.id,
+            user_name=self.username,
+            email=self.email,
+            email_verified=self.is_verified,
+            user_type=self.user_type,
+            associates=[_.id for _ in self.associates.all()],
+            preferences=self.preferences,
+        )
+        return obj_repr
