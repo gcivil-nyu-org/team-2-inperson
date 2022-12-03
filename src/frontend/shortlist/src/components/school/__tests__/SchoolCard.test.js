@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import SchoolCard from "../SchoolCard.vue";
-import { schoolDataTest } from "../../../api/examples/school.js";
+import { schoolDataTest } from "../../../api/examples/school-api.js";
 
 describe("SchoolCard.vue", () => {
   it("renders with null props", () => {
