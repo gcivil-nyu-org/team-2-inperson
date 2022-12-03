@@ -5,6 +5,7 @@ export const sessionStore = defineStore("sessionStore", {
     return {
       loginState: false,
       registeredState: false,
+      prefCompletionState: false,
       loginAttempts: {
         count: 0,
         message: null,
@@ -18,23 +19,20 @@ export const sessionStore = defineStore("sessionStore", {
           userLastName: "unset",
           recommendationPreferences: {
             q1: {
-              Question: "Which instruction mode do you prefer?",
+              Question:
+                "How important is an engaging curriculum & emphasis on critical thinking skills?",
               Response: "",
             },
             q2: {
-              Question: "Do you have any Extra-curricular interests?",
-              Response: [],
+              Question:
+                "How important is a school culture where students feel safe and supported to meet high expectations?",
+              Response: "",
             },
             q3: {
-              Question: "Do you already have a school in mind?",
+              Question: "Is there a specific borough you are looking for?",
               Response: "",
             },
             q4: {
-              Question:
-                "Is there a transit bus/train line you're interested in?",
-              Response: "",
-            },
-            q5: {
               Question: "How would you rank your academic performance so far?",
               Response: "",
             },

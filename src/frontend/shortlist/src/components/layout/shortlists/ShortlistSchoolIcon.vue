@@ -8,12 +8,28 @@ export default {
     class="school-icon-container"
     :style="{ boxShadow: '0 0 5px -1px ' + bgColor }"
   >
-    <img class="school-icon-img" :src="schoolData.img" />
+    <div v-if="schoolData.img">
+      <!--real image-->
+      <img class="school-icon-img" :src="schoolData.img" />
+    </div>
+    <div v-else>
+      <!--no image, use default-->
+      <img class="school-icon-img" src="/school-img-default-sm.png" />
+    </div>
+
     <div class="school-icon-name shortlist-fnt-serif-bold">
-      {{ schoolData.name }}
+      <!-- Old school data format -->
+      <div v-if="schoolData.name">
+        {{ schoolData.name }}
+      </div>
+      <!-- New school data format -->
+      <div v-else>
+        {{ schoolData.school.schoolMetadata.name }}
+      </div>
     </div>
   </div>
 </template>
+
 <style scoped>
 .school-icon-container {
   border-radius: 10px;
