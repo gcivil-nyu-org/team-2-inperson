@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 import uuid
+from api.util.generators import gen_uuid
 
 
 def default_settings():
@@ -20,7 +21,10 @@ class Shortlist(models.Model):
     )
     user_id = models.ForeignKey("authentication.User", on_delete=models.CASCADE)
     school_ids = ArrayField(
-        models.UUIDField(null=True), size=3, blank=True, default=list
+        models.CharField(max_length=32, null=True),
+        size=4,
+        blank=True,
+        default=list,
     )
     shortlist_name = models.CharField(max_length=50)
     settings = models.JSONField(default=default_settings)
