@@ -33,7 +33,7 @@ export default {
     },
   },
   methods: {
-    getList() {
+    getLists() {
       console.log("school data looks like: ", this.listSchools);
       axios
         //address needs change to coop
