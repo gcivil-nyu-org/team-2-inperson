@@ -6,7 +6,6 @@ import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
 import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
 import ShortlistApi from "../api/shortlist";
-import { shortLists } from "../api/examples/shortlists.js";
 import { recommendations } from "../api/examples/recommendations.js";
 import cookie from "@/helpers/cookie.js";
 import axios from "axios";
@@ -34,10 +33,9 @@ export default {
   },
   methods: {
     getLists() {
-      console.log("school data looks like: ", this.listSchools);
       axios
         //address needs change to coop
-        .post("https://api.shortlist.nyc/auth/get-list", {
+        .post("https://api.shortlist.nyc/shortlists/all", {
           //name might need change
           accountID: this.acctID,
         })
@@ -50,13 +48,13 @@ export default {
         });
     },
     saveList(listIndex, listSchools) {
-      console.log("school data looks like: ", this.listSchools);
-      console.log("list id is: ", this.myShortlists[listIndex].id);
+      console.log("school data looks like: ", listSchools);
+      console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
       axios
         //three end points for each list? what to send, should be post
         .post("https://api.shortlist.nyc/auth/save-list", {
           accountID: this.acctID,
-          listID: this.myShortlists[listIndex].id,
+          listID: this.myShortlists[listIndex].shortlist_id,
           schools: listSchools,
         })
         .then(function (response) {
@@ -77,7 +75,7 @@ export default {
     showSchoolModal(e) {
       this.schoolDetailModalVisible = true;
       this.schoolDetailModalData =
-        this.myShortlists[e.listIdx].schools[e.schoolIdx];
+        this.myShortlists[e.listIdx].school_ids[e.schoolIdx];
     },
     dragDropOver() {
       if (this.dragState.dragType == "reorderList") {
@@ -118,7 +116,7 @@ export default {
               console.log("CHANGE PRIORITY WITHIN LIST");
               let a = this.dragState.reorderSchoolInListState.schoolStartIdx;
               let b = this.dragState.reorderSchoolInListState.schoolOverIdx;
-              let targList = this.myShortlists[i].schools;
+              let targList = this.myShortlists[i].school_ids;
               targList[b] = targList.splice(a, 1, targList[b])[0];
 
               this.dragState.reorderSchoolInListState.schoolStartIdx =
@@ -148,13 +146,13 @@ export default {
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
-            if (this.myShortlists[listIdx].schools.length < 4) {
-              this.myShortlists[listIdx].schools.push(
+            if (this.myShortlists[listIdx].school_ids.length < 4) {
+              this.myShortlists[listIdx].school_ids.push(
                 this.dragState.categorizeState.schoolData
               );
               this.removeTopCard();
               // TODO set current_accepted in db
-              this.saveList(listIdx, this.myShortlists[listIdx].schools);
+              this.saveList(listIdx, this.myShortlists[listIdx].school_ids);
             } else {
               alert("List is full");
             }
