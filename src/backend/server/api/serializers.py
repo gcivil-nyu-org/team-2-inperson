@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Shortlist
+from api.models.shortlist import Shortlist
 
 
 class ShortlistSerializer(serializers.ModelSerializer):
