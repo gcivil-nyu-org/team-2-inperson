@@ -32,9 +32,9 @@ export default {
     },
   },
   methods: {
-    sendASchoolCardToTrash(recommendationId, trashed) {
+    sendASchoolCardToTrash(recoID, trashed) {
       this.$emit("sendASchoolCardToTrash", {
-        recommendationId: recommendationId,
+        recoID: recoID,
         trashed: true,
       });
     },

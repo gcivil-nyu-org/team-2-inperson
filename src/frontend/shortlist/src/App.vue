@@ -13,7 +13,7 @@ const appSessionStore = sessionStore();
 function sendASchoolCardToTrash(payload) {
   console.log(payload); 
   let apiReq = {
-    recommendationId: payload.recommendationId,
+    recoID: payload.recoID,
     trashed: payload.trashed,
   };
   let success = () => {

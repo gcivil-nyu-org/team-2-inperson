@@ -46,7 +46,7 @@ import md5 from "md5";
 
 export class tempRemoveSchoolCard {
   constructor(payload, successCb, failCb) {
-    this.recommendationId = payload.recommendationId;
+    this.recoID = payload.recoID;
     this.trashed = payload.trashed;
     this.successCb = successCb;
     this.failCb = failCb;
@@ -55,10 +55,10 @@ export class tempRemoveSchoolCard {
     // Send the removed card first
     axios({
       method: "POST",
-      url: "https://api.shortlist.nyc",
+      url: "https://api.shortlist.nyc/recommendation/update",
       headers: {},
       data: {
-        recommendationId: this.recommendationId, 
+        recoID: this.recoID, 
         trashed: this.trashed,
       },
     })
