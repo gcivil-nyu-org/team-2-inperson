@@ -11,9 +11,6 @@ const router = useRouter();
 const appSessionStore = sessionStore();
 
 function moveAcceptedSchoolCardToDB(payload) {
-  /*
-  recoID: "e5dac3ed963e4df2948b5e474994452a"
-  */
   console.log(payload);
   let apiReq = {
     recoID: payload.recoID,

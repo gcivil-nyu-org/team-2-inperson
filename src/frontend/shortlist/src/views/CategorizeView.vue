@@ -128,17 +128,9 @@ export default {
               );
               this.removeTopCard();
               // TODO set current_accepted in db
-<<<<<<< HEAD
-              console.log("School Accepted.")
-              this.moveAcceptedSchoolCardToDB(this.myRecommendations[0].id, true)
-              console.log("Accepted School sent to DB")
-            }
-            else {
-              alert("List is full")
-=======
+              this.moveAcceptedSchoolCardToDB(this.myRecommendations[0].id, true);
             } else {
               alert("List is full");
->>>>>>> develop
             }
           }
           if (this.myRecommendations.length == 3) {
