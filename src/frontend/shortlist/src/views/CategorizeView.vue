@@ -32,12 +32,14 @@ export default {
     },
   },
   methods: {
+    /* eslint-disable */
     sendASchoolCardToTrash(recoID, trashed) {
       this.$emit("sendASchoolCardToTrash", {
         recoID: recoID,
         trashed: true,
       });
     },
+    /* eslint-disable */
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*

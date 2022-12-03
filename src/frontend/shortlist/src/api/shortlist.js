@@ -37,7 +37,7 @@ export default class ShortlistApi {
     return new tempAuthLogin(payload, successCb, failCb);
   }
   removeSchoolCard(payload, successCb, failCb) {
-    return new tempRemoveSchoolCard(payload, successCb, failCb); 
+    return new tempRemoveSchoolCard(payload, successCb, failCb);
   }
 }
 
@@ -58,7 +58,7 @@ export class tempRemoveSchoolCard {
       url: "https://api.shortlist.nyc/recommendation/update",
       headers: {},
       data: {
-        recoID: this.recoID, 
+        recoID: this.recoID,
         trashed: this.trashed,
       },
     })
@@ -66,7 +66,7 @@ export class tempRemoveSchoolCard {
       .then((result) => this.successCb(result))
       // removal fail;
       .catch((err) => this.failCb(err));
-}
+  }
 }
 
 export class temporarySignup {

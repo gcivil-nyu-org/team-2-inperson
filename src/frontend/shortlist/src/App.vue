@@ -11,17 +11,17 @@ const router = useRouter();
 const appSessionStore = sessionStore();
 
 function sendASchoolCardToTrash(payload) {
-  console.log(payload); 
+  console.log(payload);
   let apiReq = {
     recoID: payload.recoID,
     trashed: payload.trashed,
   };
   let success = () => {
-    console.log("Removed successfully"); 
+    console.log("Removed successfully");
   };
   let failure = (err) => {
-    console.log("Fail to remove.", err.response.data); 
-  }; 
+    console.log("Fail to remove.", err.response.data);
+  };
 
   let req = apiClient.removeSchoolCard(apiReq, success, failure);
   req.execute();
