@@ -57,10 +57,7 @@ export class tempRemoveSchoolCard {
       method: "POST",
       url: "https://api.shortlist.nyc/recommendation/update",
       headers: {},
-      data: {
-        recoID: this.recoID,
-        trashed: this.trashed,
-      },
+      data: payload,
     })
       // user/email success;
       .then((result) => this.successCb(result))
