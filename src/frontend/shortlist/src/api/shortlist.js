@@ -70,7 +70,6 @@ export class temporarySignup {
     // this.username = md5(payload.email).substring(0, 10);
     this.username = payload.firstName + payload.lastName;
     this.password = payload.password;
-
     this.passwordHash = md5(payload.password);
     this.firstName = payload.firstName;
     this.lastName = payload.lastName;
