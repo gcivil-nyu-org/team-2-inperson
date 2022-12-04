@@ -225,7 +225,7 @@ export default {
   },
   created() {
     this.getRecommendations(50);
-    this.getList();
+    this.getLists();
   },
 };
 </script>
