@@ -51,7 +51,6 @@ export class tempRemoveSchoolCard {
     this.failCb = failCb;
   }
   execute() {
-    // Send the removed card first
     axios({
       method: "POST",
       url: "https://api.shortlist.nyc/recommendation/update",

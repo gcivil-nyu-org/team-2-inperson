@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     /* eslint-disable */
-    markSchoolAsRejected(recoID, trashed) {
+    markSchoolAsRejected(recoID) {
       this.$emit("markSchoolAsRejected", {
         recoID: recoID,
         trashed: true,
@@ -116,7 +116,7 @@ export default {
           let listIdx = this.dragState.categorizeState.schoolOverListIdx;
           if (listIdx == -1) {
             // trash it;
-            this.markSchoolAsRejected(this.myRecommendations[0].id, true);
+            this.markSchoolAsRejected(this.myRecommendations[0].id);
             this.removeTopCard();
             console.log("DELETE school");
           } else {
