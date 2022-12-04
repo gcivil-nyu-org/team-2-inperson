@@ -35,7 +35,6 @@ from django.urls import reverse
 from .utils import Util
 from django.http import JsonResponse
 
-
 # from .helpers import default_shortlists
 from django.http import HttpResponsePermanentRedirect
 

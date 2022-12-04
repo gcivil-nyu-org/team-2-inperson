@@ -57,6 +57,11 @@ class SingleShortlistView(generics.GenericAPIView):
             if serializer.is_valid():
                 serializer.save()
                 return JsonResponse(serializer.data)
+            else:
+                return Response(
+                    {"error": "Serializer not valid"},
+                    status=status.HTTP_404_NOT_FOUND,
+                )
         return Response(
             {"error": "Shortlist Not Found"},
             status=status.HTTP_404_NOT_FOUND,
