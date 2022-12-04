@@ -57,7 +57,10 @@ export class tempUpdateRecommendation {
       method: "POST",
       url: "https://api.shortlist.nyc/recommendation/update",
       headers: {},
-      data: this.payload,
+      data: {
+        recoID: this.recoID,
+        accepted: this.accepted,
+      },
     })
       .then((result) => this.successCb(result))
       .catch((err) => this.failCb(err));
