@@ -32,6 +32,13 @@ export default {
     },
   },
   methods: {
+    calculateSaveEndpoint(listIndex) {
+      let listID = this.myShortlists[listIndex].shortlist_id;
+      return (
+        "http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/shortlists/" +
+        listID
+      );
+    },
     getLists() {
       axios
         //address needs change to coop
@@ -52,10 +59,12 @@ export default {
       console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
       axios
         //three end points for each list? what to send, should be post
-        .post("https://api.shortlist.nyc/auth/save-list", {
-          accountID: this.acctID,
-          listID: this.myShortlists[listIndex].shortlist_id,
-          schools: listSchools,
+        .put(this.calculateSaveEndpoint(listIndex), {
+          shortlist_id: this.myShortlists[listIndex].shortlist_id,
+          user_id: this.acctID,
+          school_ids: listSchools,
+          shortlist_name: this.myShortlists[listIndex].name,
+          settings: this.myShortlists[listIndex].settings,
         })
         .then(function (response) {
           console.log(response);
