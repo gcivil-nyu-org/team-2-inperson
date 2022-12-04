@@ -37,8 +37,8 @@ class GetShortlistView(generics.GenericAPIView):
 
 class SingleShortlistView(generics.GenericAPIView):
     #     serializers_class = GetAShortlistSerializer
-    #     serializers_class = UpdateShortlistSerializer
-    #     renderer_classes = (ShortlistRenderer,)
+    serializers_class = UpdateShortlistSerializer
+    renderer_classes = (ShortlistRenderer,)
 
     def get(self, request, shortlist_id):
         if Shortlist.objects.filter(shortlist_id=shortlist_id).exists():

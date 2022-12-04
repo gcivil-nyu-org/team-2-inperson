@@ -17,4 +17,4 @@ class GetAShortlistSerializer(serializers.ModelSerializer):
 class UpdateShortlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shortlist
-        fields = ["user_id", "school_ids", "shortlist_name", "settings"]
+        fields = ["shortlist_id", "user_id", "school_ids", "shortlist_name", "settings"]
