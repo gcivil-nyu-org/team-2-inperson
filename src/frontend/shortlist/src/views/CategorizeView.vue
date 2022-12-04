@@ -12,6 +12,7 @@ import cookie from "@/helpers/cookie.js";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
+  emits: ["sendASchoolCardToTrash"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -31,6 +32,14 @@ export default {
     },
   },
   methods: {
+    /* eslint-disable */
+    sendASchoolCardToTrash(recoID, trashed) {
+      this.$emit("sendASchoolCardToTrash", {
+        recoID: recoID,
+        trashed: true,
+      });
+    },
+    /* eslint-disable */
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*

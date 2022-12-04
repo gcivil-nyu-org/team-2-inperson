@@ -10,6 +10,23 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
+function markSchoolAsRejected(payload) {
+  console.log(payload);
+    let apiReq = {
+      recoID: payload.recoID,
+      trashed: payload.trashed,
+    };
+    let success = () => {
+      console.log("Removed successfully");
+    };
+    let failure = (err) => {
+      console.log("Fail to remove.", err.response.data);
+    };
+    let req = apiClient.removeSchoolCard(apiReq, success, failure);
+    req.execute();
+}
+
+
 function appAccountSignup(payload) {
   let apiReq = {
     email: payload.email,
@@ -129,6 +146,7 @@ function appAddStudent(payload) {
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
       @addStudent="appAddStudent"
+      @sendASchoolCardToTrash="sendASchoolCardToTrash"
     />
   </div>
 </template>
