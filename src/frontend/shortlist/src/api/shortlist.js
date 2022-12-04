@@ -36,15 +36,15 @@ export default class ShortlistApi {
   authLogin(payload, successCb, failCb) {
     return new tempAuthLogin(payload, successCb, failCb);
   }
-  markSchoolAsAccepted(payload, successCb, failCb) {
-    return new tempMarkSchoolAsAccepted(payload, successCb, failCb);
+  removeSchoolCard(payload, successCb, failCb) {
+    return new tempRemoveSchoolCard(payload, successCb, failCb);
   }
 }
 
 import axios from "axios";
 import md5 from "md5";
 
-export class tempMarkSchoolAsAccepted {
+export class tempRemoveSchoolCard {
   constructor(payload, successCb, failCb) {
     this.recoID = payload.recoID;
     this.accepted = payload.accepted;
