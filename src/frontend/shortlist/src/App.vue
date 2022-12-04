@@ -18,7 +18,7 @@ function markSchoolAsAccepted(payload) {
   };
   let success = () => {
     console.log("Added to a list successfully");
-    };
+  };
   let failure = (err) => {
     console.log("Fail to add to a list.", err.response.data);
   };

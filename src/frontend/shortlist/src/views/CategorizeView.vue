@@ -12,7 +12,7 @@ import cookie from "@/helpers/cookie.js";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
-  emits: ["moveAcceptedSchoolCardToDB"],
+  emits: ["markSchoolAsAccepted"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -33,8 +33,8 @@ export default {
   },
   methods: {
     /* eslint-disable */
-    moveAcceptedSchoolCardToDB(recoID, accepted) {
-      this.$emit("moveAcceptedSchoolCardToDB", {
+    markSchoolAsAccepted(recoID, accepted) {
+      this.$emit("markSchoolAsAccepted", {
         recoID: recoID,
         accepted: true,
       });
@@ -126,7 +126,7 @@ export default {
               this.myShortlists[listIdx].schools.push(
                 this.dragState.categorizeState.schoolData
               );
-              this.moveAcceptedSchoolCardToDB(this.myRecommendations[0].id, true);
+              this.markSchoolAsAccepted(this.myRecommendations[0].id, true);
               this.removeTopCard();
             } else {
               alert("List is full");
