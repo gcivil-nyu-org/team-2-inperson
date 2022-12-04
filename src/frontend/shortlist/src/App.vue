@@ -22,7 +22,7 @@ function markSchoolAsAccepted(payload) {
   let failure = (err) => {
     console.log("Fail to add to a list.", err.response.data);
   };
-  let req = apiClient.removeSchoolCard(apiReq, success, failure);
+  let req = apiClient.updateRecommendation(apiReq, success, failure);
   req.execute();
 }
 
