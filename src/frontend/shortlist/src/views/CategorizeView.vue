@@ -44,7 +44,7 @@ export default {
         //address needs change to coop
         .post("https://api.shortlist.nyc/shortlists/all", {
           //name might need change
-          accountID: this.acctID,
+          user_id: this.acctID,
         })
         .then(function (response) {
           console.log("response is: ", response);
