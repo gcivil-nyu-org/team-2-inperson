@@ -4,13 +4,11 @@ import uuid
 
 
 def default_settings():
-    settings = (
-        {
-            "name": "My List",
-            "color": "red",
-            "icon": {"value": "unknown", "color": "green"},
-        },
-    )
+    settings = {
+        "name": "My List",
+        "color": "red",
+        "icon": {"value": "unknown", "color": "green"},
+    }
     return settings
 
 
