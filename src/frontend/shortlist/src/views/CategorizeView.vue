@@ -32,6 +32,12 @@ export default {
     },
   },
   methods: {
+    successGet(responseData) {
+      console.log("get function running");
+      console.log("data looks like: ", responseData);
+      this.myShortlists = responseData;
+      console.log("my list looks like: ", this.myShortlists);
+    },
     calculateSaveEndpoint(listIndex) {
       let listID = this.myShortlists[listIndex].shortlist_id;
       return (
@@ -46,13 +52,19 @@ export default {
           //name might need change
           user_id: this.acctID,
         })
-        .then(function (response) {
-          console.log("response is: ", response);
-          this.myShortlists = response;
-        })
+        .then((response) => this.successGet(response.data))
+          //console.log("response data is: ", response);
+          //this.myShortlists = response.data;
+          
+          //console.log(typeof response.data);
+          
+          //console.log("this my shortlist is: ", this.myShortlists[0].id);
+        
         .catch(function (error) {
-          console.log(error.response.data);
+          console.log(error.response);
         });
+        console.log(this.myShortlists[0]);
+        //console.log("this my shortlist is: ", this.myShortlists);
     },
     saveList(listIndex, listSchools) {
       console.log("school data looks like: ", listSchools);
