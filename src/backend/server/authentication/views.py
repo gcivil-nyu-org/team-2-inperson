@@ -14,6 +14,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
 from api.models.recommendation import Recommendation
 from api.models.school import School
+from api.models.shortlist import Shortlist
 import jwt
 from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
@@ -29,6 +30,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from .utils import Util
+
+# from .helpers import default_shortlists
 from django.http import HttpResponsePermanentRedirect
 
 
@@ -81,6 +84,15 @@ class RegisterView(generics.GenericAPIView):
         for school in schools:
             recommendation = Recommendation(account=user, school=school)
             recommendation.save()
+        shortlist_names = ["Easy", "Target", "Dream"]
+        for name in shortlist_names:
+            create_shortlist = Shortlist(
+                user_id=user,
+                school_ids=[],
+                shortlist_name=name,
+            )
+            create_shortlist.save()
+        #         for
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 
