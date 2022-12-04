@@ -46,8 +46,7 @@ import md5 from "md5";
 
 export class tempRemoveSchoolCard {
   constructor(payload, successCb, failCb) {
-    this.recoID = payload.recoID;
-    this.trashed = payload.trashed;
+    this.payload = payload;
     this.successCb = successCb;
     this.failCb = failCb;
   }
