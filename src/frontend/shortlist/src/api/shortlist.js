@@ -69,7 +69,6 @@ export class tempRemoveSchoolCard {
   }
 }
 
-
 export class temporarySignup {
   constructor(payload, successCb, failCb) {
     this.email = payload.email;
