@@ -12,6 +12,7 @@ import cookie from "@/helpers/cookie.js";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
+  emits: ["markSchoolAsAccepted"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -31,6 +32,14 @@ export default {
     },
   },
   methods: {
+    /* eslint-disable */
+    markSchoolAsAccepted(recoID) {
+      this.$emit("markSchoolAsAccepted", {
+        recoID: recoID,
+        accepted: true,
+      });
+    },
+    /* eslint-disable */
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*
@@ -117,8 +126,8 @@ export default {
               this.myShortlists[listIdx].schools.push(
                 this.dragState.categorizeState.schoolData
               );
+              this.markSchoolAsAccepted(this.myRecommendations[0].id);
               this.removeTopCard();
-              // TODO set current_accepted in db
             } else {
               alert("List is full");
             }

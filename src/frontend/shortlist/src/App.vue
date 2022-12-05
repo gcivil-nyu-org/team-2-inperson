@@ -10,6 +10,25 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
+function markSchoolAsAccepted(payload) {
+  console.log(payload);
+  // let apiReq = {
+  //   recoID: payload.recoID,
+  //   accepted: payload.accepted,
+  // };
+  let success = () => {
+    console.log("Marked as being accepted to one of the lists");
+  };
+  let failure = (err) => {
+    console.log(
+      "Failed to mark as being accepted to one of the lists",
+      err.response.data
+    );
+  };
+  let req = apiClient.updateRecommendation(payload, success, failure);
+  req.execute();
+}
+
 function appAccountSignup(payload) {
   let apiReq = {
     email: payload.email,
@@ -129,6 +148,7 @@ function appAddStudent(payload) {
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
       @addStudent="appAddStudent"
+      @markSchoolAsAccepted="markSchoolAsAccepted"
     />
   </div>
 </template>
