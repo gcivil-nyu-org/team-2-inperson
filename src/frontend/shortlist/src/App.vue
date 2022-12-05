@@ -88,7 +88,9 @@ function appAuthLogin(payload) {
 
 function appAccountUpdatePreferences(payload) {
   let requestPayload = {
-    accountId: appSessionStore.accountMetadata.accountId,
+    user_id: appSessionStore.accountMetadata.user_id,
+    user_name: appSessionStore.accountMetadata.user_name,
+    email: appSessionStore.accountMetadata.email,
     preferences: appSessionStore.accountMetadata.preferences,
   };
   requestPayload.preferences.recommendationPreferences = payload;
@@ -98,7 +100,7 @@ function appAccountUpdatePreferences(payload) {
       payload;
   };
   let fail = (err) => {
-    console.log(err);
+    console.log(err.response.data);
   };
   let req = apiClient.updatePreferences(requestPayload, success, fail);
   req.execute();

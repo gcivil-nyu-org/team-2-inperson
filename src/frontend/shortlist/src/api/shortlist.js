@@ -225,19 +225,23 @@ export class temporaryAcceptInvite {
 
 export class temporaryUpdatePreferences {
   constructor(payload, successCb, failCb) {
-    this.accountId = payload.accountId;
+    this.user_id = payload.user_id;
     this.preferences = payload.preferences;
+    this.email = payload.email;
+    this.username = payload.user_name;
     this.successCb = successCb;
     this.failCb = failCb;
   }
+  
   execute() {
     axios({
-      method: "POST",
-      url: "https://api.shortlist.nyc/account/update",
+      method: "PUT",
+      url: "https://api.shortlist.nyc/auth/" + this.user_id + "/details",
       headers: {},
       data: {
-        accountId: this.accountId,
         preferences: this.preferences,
+        username: this.username,
+        email: this.email
       },
     })
       .then((result) => this.successCb(result))
