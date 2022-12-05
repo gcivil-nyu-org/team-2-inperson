@@ -10,7 +10,7 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
-function showSchoolAsAccepted(payload) {
+function markSchoolAsAccepted(payload) {
   console.log(payload);
   let apiReq = {
     recoID: payload.recoID,
@@ -145,7 +145,7 @@ function appAddStudent(payload) {
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
       @addStudent="appAddStudent"
-      @markSchoolAsAccepted="showSchoolAsAccepted"
+      @markSchoolAsAccepted="markSchoolAsAccepted"
     />
   </div>
 </template>
