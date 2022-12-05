@@ -77,6 +77,11 @@ const router = createRouter({
       component: VerifiedView,
     },
     {
+      path: "/shortlist/:shortlistId",
+      name: "verification-view",
+      component: () => import("../views/ShareShortlist.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: () => import("../views/NotFoundView.vue"),
