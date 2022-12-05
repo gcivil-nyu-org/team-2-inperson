@@ -125,7 +125,6 @@ export default {
             this.markSchoolAsTrashed(this.myRecommendations[0].id);
             this.removeTopCard();
             console.log("DELETE school");
-            // TODO set current_trashed in db
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
