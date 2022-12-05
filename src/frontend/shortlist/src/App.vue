@@ -145,7 +145,7 @@ function appAddStudent(payload) {
       @appAccountUpdateName="appAccountUpdateName"
       @logoutEvent="appLogout"
       @addStudent="appAddStudent"
-      @markSchoolAsTrashed="showSchoolAsTrashed"
+      @markSchoolAsTrashed="markSchoolAsTrashed"
     />
   </div>
 </template>
