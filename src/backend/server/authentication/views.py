@@ -8,12 +8,16 @@ from .serializers import (
     LoginSerializer,
     LogoutSerializer,
     ResendEmailSerializer,
+    UpdateUserSerializer,
 )
+from rest_framework.parsers import JSONParser
+
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import User
 from api.models.recommendation import Recommendation
 from api.models.school import School
+from api.models.shortlist import Shortlist
 import jwt
 from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
@@ -29,6 +33,9 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from .utils import Util
+from django.http import JsonResponse
+
+# from .helpers import default_shortlists
 from django.http import HttpResponsePermanentRedirect
 
 
@@ -81,6 +88,15 @@ class RegisterView(generics.GenericAPIView):
         for school in schools:
             recommendation = Recommendation(account=user, school=school)
             recommendation.save()
+        shortlist_names = ["Easy", "Target", "Dream"]
+        for name in shortlist_names:
+            create_shortlist = Shortlist(
+                user_id=user,
+                school_ids=[],
+                shortlist_name=name,
+            )
+            create_shortlist.save()
+        #         for
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 
@@ -107,16 +123,12 @@ class VerifyEmail(views.APIView):
             return CustomRedirect(
                 redirect_url_login + "?token_valid=True&message=Successfully Activated"
             )
-        #             return Response(
-        #                 {"email": "Successfully activated"}, status=status.HTTP_200_OK
-        #             )
+
         except jwt.ExpiredSignatureError:
             return CustomRedirect(
                 redirect_url_signup + "?token_valid=False&message=Activation Expired"
             )
-        #             return Response(
-        #                 {"error": "Activation Expired"}, status=status.HTTP_400_BAD_REQUEST
-        #             )
+
         except jwt.exceptions.DecodeError:
             return CustomRedirect(
                 redirect_url_signup + "?token_valid=False&message=Invalid token"
@@ -170,11 +182,6 @@ class ResendEmail(generics.GenericAPIView):
         )
 
 
-#             return Response(
-#                 {"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST
-#             )
-
-
 class LoginAPIView(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
@@ -182,64 +189,6 @@ class LoginAPIView(generics.GenericAPIView):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-# class RequestPasswordResetEmail(generics.GenericAPIView):
-#     serializer_class = ResetPasswordEmailRequestSerializer
-#
-#     def post(self, request):
-#         serializer = self.serializer_class(data=request.data)
-#
-#         email = request.data.get('email', '')
-#
-#         if User.objects.filter(email=email).exists():
-#             user = User.objects.get(email=email)
-#             uidb64 = urlsafe_base64_encode(smart_bytes(user.id))
-#             token = PasswordResetTokenGenerator().make_token(user)
-#             current_site = get_current_site(
-#                 request=request).domain
-#             relativeLink = reverse(
-#                 'password-reset-confirm', kwargs={'uidb64': uidb64, 'token': token})
-#
-#             redirect_url = request.data.get('redirect_url', '')
-#             absurl = 'http://'+current_site + relativeLink
-#             email_body = 'Hello, \n Use link below to reset your password  \n' + \
-#                 absurl+"?redirect_url="+redirect_url
-#             data = {'email_body': email_body, 'to_email': user.email,
-#                     'email_subject': 'Reset your passsword'}
-#             Util.send_email(data)
-#         return Response({'success': 'We have sent you a link to reset your password'}, status=status.HTTP_200_OK)
-#
-#
-# class PasswordTokenCheckAPI(generics.GenericAPIView):
-#     serializer_class = SetNewPasswordSerializer
-#
-#     def get(self, request, uidb64, token):
-#
-#         redirect_url = request.GET.get('redirect_url')
-#
-#         try:
-#             id = smart_str(urlsafe_base64_decode(uidb64))
-#             user = User.objects.get(id=id)
-#
-#             if not PasswordResetTokenGenerator().check_token(user, token):
-#                 if len(redirect_url) > 3:
-#                     return CustomRedirect(redirect_url+'?token_valid=False')
-#                 else:
-#                     return CustomRedirect(os.environ.get('FRONTEND_URL', '')+'?token_valid=False')
-#
-#             if redirect_url and len(redirect_url) > 3:
-#                 return CustomRedirect(redirect_url+'?token_valid=True&message=Credentials Valid&uidb64='+uidb64+'&token='+token)
-#             else:
-#                 return CustomRedirect(os.environ.get('FRONTEND_URL', '')+'?token_valid=False')
-#
-#         except DjangoUnicodeDecodeError as identifier:
-#             try:
-#                 if not PasswordResetTokenGenerator().check_token(user):
-#                     return CustomRedirect(redirect_url+'?token_valid=False')
-#
-#             except UnboundLocalError as e:
-#                 return Response({'error': 'Token is not valid, please request a new one'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RequestPasswordResetEmail(generics.GenericAPIView):
@@ -327,3 +276,34 @@ class LogoutAPIView(generics.GenericAPIView):
         serializer.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class UserDetailsView(generics.GenericAPIView):
+    serializers_class = UpdateUserSerializer
+
+    def get(self, request, user_id):
+        if User.objects.filter(id=user_id).exists():
+            user = User.objects.get(id=user_id)
+            return Response(user.metadataJson(), status=status.HTTP_200_OK)
+        return Response(
+            {"error": "Invalid Shortlist ID"},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+
+    def put(self, request, user_id):
+        data = JSONParser().parse(request)
+        if User.objects.filter(id=user_id).exists():
+            user = User.objects.get(id=user_id)
+            serializer = UpdateUserSerializer(user, data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data)
+            else:
+                return Response(
+                    {"error": "Bad Request. Check Again"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+        return Response(
+            {"error": "User Not Found"},
+            status=status.HTTP_404_NOT_FOUND,
+        )

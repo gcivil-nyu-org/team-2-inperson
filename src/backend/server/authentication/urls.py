@@ -8,6 +8,7 @@ from .views import (
     PasswordTokenCheckAPI,
     RequestPasswordResetEmail,
     ResendEmail,
+    UserDetailsView,
 )
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -40,4 +41,5 @@ urlpatterns = [
         SetNewPasswordAPIView.as_view(),
         name="password-reset-complete",
     ),
+    path("<int:user_id>/details", UserDetailsView.as_view(), name="update-user"),
 ]

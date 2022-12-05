@@ -3,6 +3,7 @@ from api.handlers.account_login import account_login  # noqa: F401
 from api.handlers.account_metadata import account_metadata  # noqa: F401
 from api.handlers.account_update import account_update  # noqa: F401
 from api.handlers.recommendation import recommendation  # noqa: F401
+from api.handlers.recommendation_update import recommendation_update  # noqa: F401
 from api.handlers.school_create import school_create  # noqa: F401
 from api.handlers.school_dim import school_dim  # noqa: F401
 from api.handlers.school_dim_upsert import school_dim_upsert  # noqa: F401
