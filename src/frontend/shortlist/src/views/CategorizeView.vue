@@ -39,7 +39,7 @@ export default {
       console.log("my list looks like: ", this.myShortlists);
     },
     calculateSaveEndpoint(listIndex) {
-      let listID = this.myShortlists[listIndex].shortlist_id;
+      let listID = this.myShortlists[listIndex].id;
       return (
         "http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/shortlists/" +
         listID
@@ -72,10 +72,10 @@ export default {
       axios
         //three end points for each list? what to send, should be post
         .put(this.calculateSaveEndpoint(listIndex), {
-          shortlist_id: this.myShortlists[listIndex].shortlist_id,
+          id: this.myShortlists[listIndex].id,
           user_id: this.acctID,
           school_ids: listSchools,
-          shortlist_name: this.myShortlists[listIndex].name,
+          name: this.myShortlists[listIndex].name,
           settings: this.myShortlists[listIndex].settings,
         })
         .then(function (response) {
