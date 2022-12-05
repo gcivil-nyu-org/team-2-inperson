@@ -46,21 +46,18 @@ import md5 from "md5";
 
 export class tempUpdateRecommendation {
   constructor(payload, successCb, failCb) {
-    this.recoID = payload.recoID;
-    this.accepted = payload.accepted;
+    this.payload = payload; 
     this.successCb = successCb;
     this.failCb = failCb;
   }
   execute() {
     // Send the accepted card first
+    console.log(this.payload);
     axios({
       method: "POST",
       url: "https://api.shortlist.nyc/recommendation/update",
       headers: {},
-      data: {
-        recoID: this.recoID,
-        accepted: this.accepted,
-      },
+      data: this.payload,
     })
       .then((result) => this.successCb(result))
       .catch((err) => this.failCb(err));
