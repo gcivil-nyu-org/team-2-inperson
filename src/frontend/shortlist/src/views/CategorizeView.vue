@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     /* eslint-disable */
-    markSchoolAsTrashed(recoID, Trashed) {
+    markSchoolAsTrashed(recoID) {
       this.$emit("markSchoolAsTrashed", {
         recoID: recoID,
         Trashed: true,
