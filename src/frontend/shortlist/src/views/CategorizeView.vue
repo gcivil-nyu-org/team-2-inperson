@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     /* eslint-disable */
-    markSchoolAsAccepted(recoID, accepted) {
+    markSchoolAsAccepted(recoID) {
       this.$emit("markSchoolAsAccepted", {
         recoID: recoID,
         accepted: true,
@@ -126,7 +126,7 @@ export default {
               this.myShortlists[listIdx].schools.push(
                 this.dragState.categorizeState.schoolData
               );
-              this.markSchoolAsAccepted(this.myRecommendations[0].id, true);
+              this.markSchoolAsAccepted(this.myRecommendations[0].id);
               this.removeTopCard();
             } else {
               alert("List is full");

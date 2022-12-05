@@ -12,17 +12,17 @@ const appSessionStore = sessionStore();
 
 function markSchoolAsAccepted(payload) {
   console.log(payload);
-  let apiReq = {
-    recoID: payload.recoID,
-    accepted: payload.accepted,
-  };
+  // let apiReq = {
+  //   recoID: payload.recoID,
+  //   accepted: payload.accepted,
+  // };
   let success = () => {
     console.log("Added to a list successfully");
   };
   let failure = (err) => {
     console.log("Fail to add to a list.", err.response.data);
   };
-  let req = apiClient.updateRecommendation(apiReq, success, failure);
+  let req = apiClient.updateRecommendation(payload, success, failure);
   req.execute();
 }
 
