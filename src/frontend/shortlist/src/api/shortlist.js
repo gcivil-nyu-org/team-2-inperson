@@ -10,8 +10,9 @@ export default class ShortlistApi {
   createAccount() {
     return new fluentAccountCreate(this.baseEndpoint);
   }
-  getAccountMetadata() {
-    return new fluentAccountMetadata(this.baseEndpoint);
+  getAccountMetadata(payload, successCb, failCb) {
+    // return new fluentAccountMetadata(this.baseEndpoint);
+    return new tempUserMetadata(payload, successCb, failCb);
   }
   getRecommendations() {
     return new fluentRecommendations(this.baseEndpoint);
@@ -89,51 +90,26 @@ export class temporarySignup {
         password: this.password,
       },
     })
-      // user/email success;
-      /*
-      .then(() => {
-        // register the site account
-        axios({
-          method: "POST",
-          url: "https://api.shortlist.nyc/account/create",
-          headers: {},
-          data: {
-            email: this.email,
-            passwordHash: this.passwordHash,
-            accountType: this.accountType,
-            preferences: {
-              userFirstName: this.firstName,
-              userLastName: this.lastName,
-              recommendationPreferences: {
-                q1: {
-                  Question:
-                    "How important is an engaging curriculum & emphasis on critical thinking skills?",
-                  Response: "",
-                },
-                q2: {
-                  Question:
-                    "How much would you value the supportive environment provided by school?",
-                  Response: "",
-                },
-                q3: {
-                  Question: "Is there a spicific borough you are looking for?",
-                  Response: "",
-                },
-                q4: {
-                  Question:
-                    "How would you rank your academic performance so far?",
-                  Response: "",
-                },
-              },
-            },
-          },
-        })
-          .then((result) => this.successCb(result))
-          .catch((fail) => this.failCb(fail));
-      })
-      */
+    .then((result) => this.successCb(result))
+    .catch((err) => this.failCb(err));
+  }
+}
+
+export class tempUserMetadata {
+  constructor(payload, successCb, failCb) {
+    this.user_id = payload.userID;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+
+  execute() {
+    axios({
+      method: "GET",
+      url: "https://api.shortlist.nyc/auth/" + this.user_id + "/details",
+      headers: {},
+      data: "",
+    })
       .then((result) => this.successCb(result))
-      // email fail;
       .catch((err) => this.failCb(err));
   }
 }

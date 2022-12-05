@@ -9,6 +9,20 @@ import ShortlistApi from "@/api/shortlist.js";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 import VerifiedView from "../views/VerifiedView.vue";
 
+function getUserMetadata(payload, store) {
+  let data = { "userID": payload};
+  let success = (result) => {
+    // console.log("got metadata: ", result.data);
+    store.loginState = true;
+    store.accountMetadata = result.data;
+  };
+  let fail = (err) => {
+    console.log("fail to get metadata", err.response.data);
+  };
+  let req = shortlistApi.getAccountMetadata(data, success, fail);
+  req.execute();
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -99,34 +113,13 @@ router.beforeEach((to) => {
       };
     } else {
       // cookie found, get user metadata
-      store.loginState = true; // temp for metadata unavailable
-      let req = shortlistApi
-        .getAccountMetadata()
-        .forAccountId(acct)
-        .onSuccess((result) => {
-          store.loginState = true;
-          store.accountMetadata = result.data;
-        })
-        .onFail((err) => {
-          console.log("fail", err.response.status, err.response.data);
-        });
-      req.execute();
+      getUserMetadata(acct, store);
     }
   }
 
   // If logged in (cookie exists) redirect to /categorize
   else if (to.meta.requiresGuest && cookie.getCookie("accountid") != "") {
-    let req = shortlistApi
-      .getAccountMetadata()
-      .forAccountId(acct)
-      .onSuccess((result) => {
-        store.loginState = true;
-        store.accountMetadata = result.data;
-      })
-      .onFail((err) => {
-        console.log("fail", err.response.status, err.response.data);
-      });
-    req.execute();
+    getUserMetadata(acct, store);
     return {
       path: "/categorize",
       // query: { redirect: to.fullPath },
