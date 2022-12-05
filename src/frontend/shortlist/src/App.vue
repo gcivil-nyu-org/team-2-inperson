@@ -61,11 +61,6 @@ function appAccountSignup(payload) {
 }
 
 function appAuthLogin(payload) {
-  console.log("accountLogin", payload.email);
-  let requestPayload = {
-    email: payload.email,
-    password: payload.password,
-  };
 
   let success = (result) => {
     console.log("success: ", result.data);
@@ -82,7 +77,7 @@ function appAuthLogin(payload) {
       alert("Could not login.");
     }
   };
-  let req = apiClient.authLogin(requestPayload, success, fail);
+  let req = apiClient.authLogin(payload, success, fail);
   req.execute();
 }
 
@@ -129,7 +124,6 @@ function appAccountUpdateName(payload) {
 function appLogout() {
   appSessionStore.$reset(); // clear store
   cookie.deleteCookie("accountid");
-  console.log(appSessionStore.accountMetadata.accountId);
 }
 
 function appAddStudent(payload) {

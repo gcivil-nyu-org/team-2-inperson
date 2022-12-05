@@ -7,7 +7,7 @@ export default class ShortlistApi {
   constructor(baseURL) {
     this.baseEndpoint = baseURL;
   }
-  createAccount() {
+  createAccount() { // not in use
     return new fluentAccountCreate(this.baseEndpoint);
   }
   getAccountMetadata(payload, successCb, failCb) {
@@ -17,7 +17,7 @@ export default class ShortlistApi {
   getRecommendations() {
     return new fluentRecommendations(this.baseEndpoint);
   }
-  loginAccount() {
+  loginAccount() { // not in use
     return new fluentAccountLogin(this.baseEndpoint);
   }
   signupUser(payload, successCb, failCb) {
@@ -79,7 +79,6 @@ export class temporarySignup {
   }
 
   execute() {
-    // send the email first
     axios({
       method: "POST",
       url: "https://api.shortlist.nyc/auth/register",
