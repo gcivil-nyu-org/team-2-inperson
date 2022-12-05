@@ -242,6 +242,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 25px;
 }
 .categorize-view-trash-column {
   width: 150px;
