@@ -12,6 +12,7 @@ import cookie from "@/helpers/cookie.js";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
+  emits: ["markSchoolAsTrashed"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -31,6 +32,14 @@ export default {
     },
   },
   methods: {
+    /* eslint-disable */
+    markSchoolAsTrashed(recoID, Trashed) {
+      this.$emit("markSchoolAsTrashed", {
+        recoID: recoID,
+        Trashed: true,
+      });
+    },
+    /* eslint-disable */
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*
@@ -107,6 +116,7 @@ export default {
           let listIdx = this.dragState.categorizeState.schoolOverListIdx;
           if (listIdx == -1) {
             // trash it;
+            this.markSchoolAsTrashed(this.myRecommendations[0].id, true);
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db

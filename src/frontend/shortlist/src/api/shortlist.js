@@ -36,10 +36,37 @@ export default class ShortlistApi {
   authLogin(payload, successCb, failCb) {
     return new tempAuthLogin(payload, successCb, failCb);
   }
+  removeSchoolCard(payload, successCb, failCb) {
+    return new tempRemoveSchoolCard(payload, successCb, failCb);
+  }
 }
 
 import axios from "axios";
 import md5 from "md5";
+
+export class tempRemoveSchoolCard {
+  constructor(payload, successCb, failCb) {
+    this.recoID = payload.recoID;
+    this.accepted = payload.accepted;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+  execute() {
+    // Send the accepted card first
+    axios({
+      method: "POST",
+      url: "https://api.shortlist.nyc/recommendation/update",
+      headers: {},
+      data: {
+        recoID: this.recoID,
+        trashed: this.trashed,
+      },
+    })
+      .then((result) => this.successCb(result))
+      .catch((err) => this.failCb(err));
+  }
+}
+
 export class temporarySignup {
   constructor(payload, successCb, failCb) {
     this.email = payload.email;
