@@ -17,10 +17,13 @@ function markSchoolAsAccepted(payload) {
   //   accepted: payload.accepted,
   // };
   let success = () => {
-    console.log("Added to a list successfully");
+    console.log("Marked as being accepted to one of the lists");
   };
   let failure = (err) => {
-    console.log("Fail to add to a list.", err.response.data);
+    console.log(
+      "Failed to mark as being accepted to one of the lists",
+      err.response.data
+    );
   };
   let req = apiClient.updateRecommendation(payload, success, failure);
   req.execute();
