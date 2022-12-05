@@ -46,8 +46,9 @@ import md5 from "md5";
 
 export class tempUpdateRecommendation {
   constructor(payload, successCb, failCb) {
-    this.recoID = payload.recoID;
-    this.accepted = payload.accepted;
+    // this.recoID = payload.recoID;
+    // this.accepted = payload.accepted;
+    this.payload = payload; 
     this.successCb = successCb;
     this.failCb = failCb;
   }
