@@ -46,12 +46,11 @@ import md5 from "md5";
 
 export class tempUpdateRecommendation {
   constructor(payload, successCb, failCb) {
-    this.payload = payload; 
+    this.payload = payload;
     this.successCb = successCb;
     this.failCb = failCb;
   }
   execute() {
-    // Send the accepted card first
     console.log(this.payload);
     axios({
       method: "POST",

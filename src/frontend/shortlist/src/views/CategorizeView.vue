@@ -12,7 +12,7 @@ import cookie from "@/helpers/cookie.js";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
-  emits: ["markSchoolAsAccepted"],
+  emits: ["markSchoolAsAccepted", "markSchoolAsTrashed"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -37,6 +37,12 @@ export default {
       this.$emit("markSchoolAsAccepted", {
         recoID: recoID,
         accepted: true,
+      });
+    },
+    markSchoolAsTrashed(recoID) {
+      this.$emit("markSchoolAsTrashed", {
+        recoID: recoID,
+        Trashed: true,
       });
     },
     /* eslint-disable */
@@ -116,6 +122,7 @@ export default {
           let listIdx = this.dragState.categorizeState.schoolOverListIdx;
           if (listIdx == -1) {
             // trash it;
+            this.markSchoolAsTrashed(this.myRecommendations[0].id);
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db
