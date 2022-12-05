@@ -24,6 +24,7 @@ from api.handlers import school_dim_upsert
 from api.handlers import school_dim_value
 from api.handlers import school_dim_value_upsert
 from api.handlers import recommendation
+from api.handlers import recommendation_update
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -54,6 +55,7 @@ urlpatterns = [
     path("", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path("admin/", admin.site.urls),
     path("auth/", include("authentication.urls")),
+    path("shortlists/", include("api.urls")),
     path("account/create", account_create),
     path("account/login", account_login),
     path("account/metadata", account_metadata),
@@ -65,4 +67,5 @@ urlpatterns = [
     path("school/dimension/value", school_dim_value),
     path("school/dimension/value/upsert", school_dim_value_upsert),
     path("recommendation", recommendation),
+    path("recommendation/update", recommendation_update),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
