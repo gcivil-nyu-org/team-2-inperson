@@ -61,7 +61,6 @@ function appAccountSignup(payload) {
 }
 
 function appAuthLogin(payload) {
-
   let success = (result) => {
     console.log("success: ", result.data);
     appSessionStore.loginState = true;

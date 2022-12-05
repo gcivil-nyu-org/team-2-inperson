@@ -10,7 +10,7 @@ const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 import VerifiedView from "../views/VerifiedView.vue";
 
 function getUserMetadata(payload, store) {
-  let data = { "userID": payload};
+  let data = { userID: payload };
   let success = (result) => {
     // console.log("got metadata: ", result.data);
     store.loginState = true;

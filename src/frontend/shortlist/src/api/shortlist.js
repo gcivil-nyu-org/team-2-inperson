@@ -1,5 +1,5 @@
 import { fluentAccountCreate } from "./endpoints/accountCreate";
-import { fluentAccountMetadata } from "./endpoints/accountMetadata";
+// import { fluentAccountMetadata } from "./endpoints/accountMetadata";
 import { fluentRecommendations } from "./endpoints/recommendations";
 import { fluentAccountLogin } from "./endpoints/accountLogin";
 
@@ -7,7 +7,8 @@ export default class ShortlistApi {
   constructor(baseURL) {
     this.baseEndpoint = baseURL;
   }
-  createAccount() { // not in use
+  createAccount() {
+    // not in use
     return new fluentAccountCreate(this.baseEndpoint);
   }
   getAccountMetadata(payload, successCb, failCb) {
@@ -17,7 +18,8 @@ export default class ShortlistApi {
   getRecommendations() {
     return new fluentRecommendations(this.baseEndpoint);
   }
-  loginAccount() { // not in use
+  loginAccount() {
+    // not in use
     return new fluentAccountLogin(this.baseEndpoint);
   }
   signupUser(payload, successCb, failCb) {
@@ -89,7 +91,7 @@ export class temporarySignup {
         password: this.password,
         userFirstName: this.firstName,
         userLastName: this.lastName,
-        recommendationPreferences: {        
+        recommendationPreferences: {
           q1: {
             Question:
               "How important is an engaging curriculum & emphasis on critical thinking skills?",
@@ -105,15 +107,14 @@ export class temporarySignup {
             Response: "",
           },
           q4: {
-            Question:
-              "How would you rank your academic performance so far?",
+            Question: "How would you rank your academic performance so far?",
             Response: "",
           },
         },
       },
     })
-    .then((result) => this.successCb(result))
-    .catch((err) => this.failCb(err));
+      .then((result) => this.successCb(result))
+      .catch((err) => this.failCb(err));
   }
 }
 
@@ -231,7 +232,7 @@ export class temporaryUpdatePreferences {
     this.successCb = successCb;
     this.failCb = failCb;
   }
-  
+
   execute() {
     axios({
       method: "PUT",
@@ -240,7 +241,7 @@ export class temporaryUpdatePreferences {
       data: {
         preferences: this.preferences,
         username: this.username,
-        email: this.email
+        email: this.email,
       },
     })
       .then((result) => this.successCb(result))
