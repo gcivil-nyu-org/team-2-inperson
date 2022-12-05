@@ -17,10 +17,13 @@ function markSchoolAsTrashed(payload) {
   //   trashed: payload.trashed,
   // };
   let success = () => {
-    console.log("Added to a list successfully");
+    console.log("Marked the schoolCard as being trashed");
   };
   let failure = (err) => {
-    console.log("Fail to add to a list.", err.response.data);
+    console.log(
+      "Failed to mark the schoolCard as being trashed",
+      err.response.data
+    );
   };
   let req = apiClient.removeSchoolCard(payload, success, failure);
   req.execute();
