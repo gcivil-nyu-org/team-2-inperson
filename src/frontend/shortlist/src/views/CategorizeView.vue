@@ -116,7 +116,7 @@ export default {
           let listIdx = this.dragState.categorizeState.schoolOverListIdx;
           if (listIdx == -1) {
             // trash it;
-            this.markSchoolAsTrashed(this.myRecommendations[0].id, true);
+            this.markSchoolAsTrashed(this.myRecommendations[0].id);
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db

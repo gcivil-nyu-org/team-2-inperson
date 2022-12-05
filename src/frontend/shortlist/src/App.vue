@@ -10,19 +10,19 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
-function showSchoolAsTrashed(payload) {
+function markSchoolAsTrashed(payload) {
   console.log(payload);
-  let apiReq = {
-    recoID: payload.recoID,
-    trashed: payload.trashed,
-  };
+  // let apiReq = {
+  //   recoID: payload.recoID,
+  //   trashed: payload.trashed,
+  // };
   let success = () => {
     console.log("Added to a list successfully");
   };
   let failure = (err) => {
     console.log("Fail to add to a list.", err.response.data);
   };
-  let req = apiClient.removeSchoolCard(apiReq, success, failure);
+  let req = apiClient.removeSchoolCard(payload, success, failure);
   req.execute();
 }
 
