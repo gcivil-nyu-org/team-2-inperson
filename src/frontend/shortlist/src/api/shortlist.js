@@ -46,20 +46,17 @@ import md5 from "md5";
 
 export class tempRemoveSchoolCard {
   constructor(payload, successCb, failCb) {
-    this.recoID = payload.recoID;
-    this.trashed = payload.trashed;
+    this.payload = payload; 
     this.successCb = successCb;
     this.failCb = failCb;
-  }
+  } 
   execute() {
+    console.log(this.payload);
     axios({
       method: "POST",
       url: "https://api.shortlist.nyc/recommendation/update",
       headers: {},
-      data: {
-        recoID: this.recoID,
-        trashed: this.trashed,
-      },
+      data: this.payload,
     })
       .then((result) => this.successCb(result))
       .catch((err) => this.failCb(err));
