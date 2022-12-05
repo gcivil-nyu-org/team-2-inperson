@@ -36,21 +36,22 @@ export default class ShortlistApi {
   authLogin(payload, successCb, failCb) {
     return new tempAuthLogin(payload, successCb, failCb);
   }
-  removeSchoolCard(payload, successCb, failCb) {
-    return new tempRemoveSchoolCard(payload, successCb, failCb);
+  updateRecommendation(payload, successCb, failCb) {
+    return new tempUpdateRecommendation(payload, successCb, failCb);
   }
 }
 
 import axios from "axios";
 import md5 from "md5";
 
-export class tempRemoveSchoolCard {
+export class tempUpdateRecommendation {
   constructor(payload, successCb, failCb) {
-    this.payload = payload; 
+    this.payload = payload;
     this.successCb = successCb;
     this.failCb = failCb;
-  } 
+  }
   execute() {
+    console.log(this.payload);
     axios({
       method: "POST",
       url: "https://api.shortlist.nyc/recommendation/update",
@@ -68,7 +69,6 @@ export class temporarySignup {
     // this.username = md5(payload.email).substring(0, 10);
     this.username = payload.firstName + payload.lastName;
     this.password = payload.password;
-
     this.passwordHash = md5(payload.password);
     this.firstName = payload.firstName;
     this.lastName = payload.lastName;
