@@ -58,6 +58,7 @@ export default {
   </div>
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
+    <div style="color: red">Tip: Make sure to check your email and verify your account</div>
     <form>
       <div id="emailaddress_login">
         <input
