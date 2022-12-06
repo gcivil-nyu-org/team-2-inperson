@@ -88,7 +88,7 @@ export default {
     showSchoolModal(e) {
       this.schoolDetailModalVisible = true;
       this.schoolDetailModalData =
-        this.myShortlists[e.listIdx].school_ids[e.schoolIdx];
+        this.myShortlists[e.listIdx].schools[e.schoolIdx];
     },
     dragDropOver() {
       if (this.dragState.dragType == "reorderList") {
@@ -235,49 +235,50 @@ export default {
 </script>
 
 <template>
-  <ModalFullScreen
-    v-if="schoolDetailModalVisible"
-    visible="schoolDetailModalVisible"
-    @modalOff="schoolDetailModalVisible = false"
-  >
-    <div style="display: block">
-      <div
-        style="
-          display: flex;
-          justify-content: space-around;
-          margin-bottom: 20px;
-        "
-      >
-        Discard?
+  <div>
+    <ModalFullScreen
+      v-if="schoolDetailModalVisible"
+      visible="schoolDetailModalVisible"
+      @modalOff="schoolDetailModalVisible = false"
+    >
+      <div style="display: block">
+        <div
+          style="
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+          "
+        >
+          Discard?
+        </div>
+        <SchoolCard
+          v-if="schoolDetailModalData"
+          :schoolData="schoolDetailModalData"
+        />
       </div>
-      <SchoolCard
-        v-if="schoolDetailModalData"
-        :schoolData="schoolDetailModalData"
-      />
-    </div>
-  </ModalFullScreen>
+    </ModalFullScreen>
+    <div
+      class="categorize-view-container"
+      @dragover="dragDropOver"
+      @drop="dragDropDrop"
+    >
+      <div class="categorize-view-trash-column">
+        <TrashCan />
+      </div>
 
-  <div
-    class="categorize-view-container"
-    @dragover="dragDropOver"
-    @drop="dragDropDrop"
-  >
-    <div class="categorize-view-trash-column">
-      <TrashCan />
-    </div>
-
-    <div class="categorize-view-recommendation-column">
-      <RecommendationStack :recommendations="myRecommendations" />
-    </div>
-    <div style="width: 50px; height: 100%"></div>
-    <div class="categorize-view-shortlist-column">
-      <ShortlistManager
-        v-if="this.myShortlists.length > 0"
-        :studentShortlists="myShortlists"
-        @listItemDetailClick="(e) => showSchoolModal(e)"
-        @changeListSettings="(e) => changeListSettings(e)"
-        @shareList="(e) => shareList(e)"
-      />
+      <div class="categorize-view-recommendation-column">
+        <RecommendationStack :recommendations="myRecommendations" />
+      </div>
+      <div style="width: 50px; height: 100%"></div>
+      <div class="categorize-view-shortlist-column">
+        <ShortlistManager
+          v-if="this.myShortlists.length > 0"
+          :studentShortlists="myShortlists"
+          @listItemDetailClick="(e) => showSchoolModal(e)"
+          @changeListSettings="(e) => changeListSettings(e)"
+          @shareList="(e) => shareList(e)"
+        />
+      </div>
     </div>
   </div>
 </template>
