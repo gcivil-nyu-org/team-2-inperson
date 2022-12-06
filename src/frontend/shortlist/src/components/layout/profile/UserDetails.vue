@@ -51,8 +51,8 @@ export default {
       alert("Name updated!");
     },
     resetPassword() {
-      // alert("Please check your email")
-      this.$router.push("/reset")
+      // TODO: call /auth/request-reset-email
+      alert("Please check your email.")
     },
   },
   computed: {
