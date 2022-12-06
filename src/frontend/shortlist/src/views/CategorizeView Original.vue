@@ -6,13 +6,13 @@ import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
 import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
 import ShortlistApi from "../api/shortlist";
-import { recommendations } from "../api/examples/recommendations.js";
+import { shortLists } from "../api/examples/shortlists.js";
 import cookie from "@/helpers/cookie.js";
-import axios from "axios";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
+  emits: ["markSchoolAsAccepted", "markSchoolAsTrashed"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -32,52 +32,20 @@ export default {
     },
   },
   methods: {
-    successGet(responseData) {
-      console.log("get function running");
-      console.log("data looks like: ", responseData);
-      this.myShortlists = responseData;
-      console.log("my list looks like: ", this.myShortlists);
+    /* eslint-disable */
+    markSchoolAsAccepted(recoID) {
+      this.$emit("markSchoolAsAccepted", {
+        recoID: recoID,
+        accepted: true,
+      });
     },
-    calculateSaveEndpoint(listIndex) {
-      let listID = this.myShortlists[listIndex].id;
-      return (
-        "http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/shortlists/" +
-        listID
-      );
+    markSchoolAsTrashed(recoID) {
+      this.$emit("markSchoolAsTrashed", {
+        recoID: recoID,
+        Trashed: true,
+      });
     },
-    getLists() {
-      axios
-        //address needs change to coop
-        .post("https://api.shortlist.nyc/shortlists/all", {
-          //name might need change
-          user_id: this.acctID,
-        })
-        .then((response) => this.successGet(response.data))
-        .catch(function (error) {
-          console.log(error.response);
-        });
-      console.log(this.myShortlists[0]);
-      //console.log("this my shortlist is: ", this.myShortlists);
-    },
-    saveList(listIndex, listSchools) {
-      console.log("school data looks like: ", listSchools);
-      console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
-      let schoolList = [];
-      for (let i = 0; i < listSchools.length; i++) {
-        schoolList.push(listSchools[i].id);
-      }
-      axios
-        //three end points for each list? what to send, should be post
-        .put(this.calculateSaveEndpoint(listIndex), {
-          school: listSchools,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error.response.data);
-        });
-    },
+    /* eslint-disable */
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*
@@ -89,7 +57,7 @@ export default {
     showSchoolModal(e) {
       this.schoolDetailModalVisible = true;
       this.schoolDetailModalData =
-        this.myShortlists[e.listIdx].school_ids[e.schoolIdx];
+        this.myShortlists[e.listIdx].schools[e.schoolIdx];
     },
     dragDropOver() {
       if (this.dragState.dragType == "reorderList") {
@@ -154,6 +122,7 @@ export default {
           let listIdx = this.dragState.categorizeState.schoolOverListIdx;
           if (listIdx == -1) {
             // trash it;
+            this.markSchoolAsTrashed(this.myRecommendations[0].id);
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db
@@ -164,9 +133,8 @@ export default {
               this.myShortlists[listIdx].schools.push(
                 this.dragState.categorizeState.schoolData
               );
+              this.markSchoolAsAccepted(this.myRecommendations[0].id);
               this.removeTopCard();
-              // TODO set current_accepted in db
-              this.saveList(listIdx, this.myShortlists[listIdx].schools);
             } else {
               alert("List is full");
             }
@@ -208,7 +176,7 @@ export default {
     },
   },
   data() {
-    let myShortlists = [];
+    let myShortlists = shortLists;
     let myRecommendations = []; // recommendations;
     let schoolDetailModalVisible = false;
     let schoolDetailModalData = null;
@@ -230,7 +198,6 @@ export default {
   },
   created() {
     this.getRecommendations(50);
-    this.getLists();
   },
 };
 </script>
@@ -290,6 +257,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 25px;
 }
 .categorize-view-trash-column {
   width: 150px;
