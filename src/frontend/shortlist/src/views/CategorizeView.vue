@@ -53,30 +53,23 @@ export default {
           user_id: this.acctID,
         })
         .then((response) => this.successGet(response.data))
-          //console.log("response data is: ", response);
-          //this.myShortlists = response.data;
-          
-          //console.log(typeof response.data);
-          
-          //console.log("this my shortlist is: ", this.myShortlists[0].id);
-        
         .catch(function (error) {
           console.log(error.response);
         });
-        console.log(this.myShortlists[0]);
-        //console.log("this my shortlist is: ", this.myShortlists);
+      console.log(this.myShortlists[0]);
+      //console.log("this my shortlist is: ", this.myShortlists);
     },
     saveList(listIndex, listSchools) {
       console.log("school data looks like: ", listSchools);
       console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
+      let schoolList = [];
+      for (let i = 0; i < listSchools.length; i++) {
+        schoolList.push(listSchools[i].id);
+      }
       axios
         //three end points for each list? what to send, should be post
         .put(this.calculateSaveEndpoint(listIndex), {
-          id: this.myShortlists[listIndex].id,
-          user_id: this.acctID,
-          school_ids: listSchools,
-          name: this.myShortlists[listIndex].name,
-          settings: this.myShortlists[listIndex].settings,
+          school: listSchools,
         })
         .then(function (response) {
           console.log(response);
@@ -167,8 +160,8 @@ export default {
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
-            if (this.myShortlists[listIdx].school_ids.length < 4) {
-              this.myShortlists[listIdx].school_ids.push(
+            if (this.myShortlists[listIdx].school.length < 4) {
+              this.myShortlists[listIdx].school.push(
                 this.dragState.categorizeState.schoolData
               );
               this.removeTopCard();
