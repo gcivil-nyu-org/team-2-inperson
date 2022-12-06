@@ -50,6 +50,10 @@ export default {
 
       alert("Name updated!");
     },
+    resetPassword() {
+      // alert("Please check your email")
+      this.$router.push("/reset")
+    },
   },
   computed: {
     isUpdateDisabled() {
@@ -152,7 +156,10 @@ export default {
         </button>
       </div>
     </form>
-    <button type="button" class="btn btn-outline-dark btn-sm">
+    <button 
+      type="button"
+      class="btn btn-outline-dark btn-sm"
+      @click.prevent="resetPassword">
       Reset Password
     </button>
   </main>
