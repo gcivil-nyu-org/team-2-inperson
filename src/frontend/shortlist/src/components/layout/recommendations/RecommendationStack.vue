@@ -45,7 +45,7 @@ export default {
           }"
         >
           <SchoolCard
-            :schoolData="reco"
+            :schoolData="reco.school"
             draggable="true"
             @dragstart="(e) => dragStart(e, idx)"
             @dragend="(e) => dragEnd()"
@@ -61,7 +61,7 @@ export default {
             zIndex: 200 * (stackSize - idx + 1),
           }"
         >
-          <SchoolCard :schoolData="reco" />
+          <SchoolCard :schoolData="reco.school" />
         </div>
       </template>
     </template>
