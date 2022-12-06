@@ -74,7 +74,7 @@ export default {
     <template v-for="(list, listNum) in studentShortlists" :key="list">
       <ShortlistRow
         :listId="listNum"
-        :listSettings="list.settings"
+        :listSettings="list.settings[0]"
         :listSchools="list.schools"
         @listItemDetailClick="(e) => listItemDetailClick(e, listNum)"
         @shareList="shareList(listNum)"

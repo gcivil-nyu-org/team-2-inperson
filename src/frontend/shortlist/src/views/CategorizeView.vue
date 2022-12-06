@@ -34,12 +34,11 @@ export default {
   methods: {
     successGet(responseData) {
       console.log("get function running");
-      console.log("data looks like: ", responseData);
       this.myShortlists = responseData;
       console.log("my list looks like: ", this.myShortlists);
     },
     calculateSaveEndpoint(listIndex) {
-      let listID = this.myShortlists[listIndex].id;
+      let listID = this.myShortlists[listIndex].shortlist_id;
       return (
         "http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/shortlists/" +
         listID
