@@ -13,6 +13,7 @@ from authentication.models import User
 
 from .renderers import ShortlistRenderer
 from django.http import HttpResponsePermanentRedirect
+from api.handlers.recommendation import school_formatter
 
 
 class CustomRedirect(HttpResponsePermanentRedirect):
@@ -28,6 +29,11 @@ class GetShortlistView(generics.GenericAPIView):
         user_id = request.data["user_id"]
         if User.objects.filter(id=user_id).exists():
             shortlists = list(Shortlist.objects.filter(user_id=user_id).values())
+            for shortlist in shortlists:
+                out = []
+                for school_id in shortlist.get("school_ids"):
+                    out.append(school_formatter(school_id, None))
+                shortlist["schools"] = out
             return JsonResponse(shortlists, safe=False)
         return Response(
             {"error": "User does not exists"},
@@ -43,6 +49,11 @@ class SingleShortlistView(generics.GenericAPIView):
             shortlists = list(
                 Shortlist.objects.filter(shortlist_id=shortlist_id).values()
             )
+            for shortlist in shortlists:
+                out = []
+                for school_id in shortlist.get("school_ids"):
+                    out.append(school_formatter(school_id, None))
+                shortlist["schools"] = out
             return JsonResponse(shortlists, safe=False)
         return Response(
             {"error": "Invalid Shortlist ID"},
