@@ -12,6 +12,7 @@ import axios from "axios";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
+  emits: ["markSchoolAsAccepted", "markSchoolAsTrashed"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -31,6 +32,18 @@ export default {
     },
   },
   methods: {
+    markSchoolAsAccepted(recoID) {
+      this.$emit("markSchoolAsAccepted", {
+        recoID: recoID,
+        accepted: true,
+      });
+    },
+    markSchoolAsTrashed(recoID) {
+      this.$emit("markSchoolAsTrashed", {
+        recoID: recoID,
+        Trashed: true,
+      });
+    },
     successGet(responseData) {
       console.log("get function running");
       this.myShortlists = responseData;
@@ -152,6 +165,7 @@ export default {
           let listIdx = this.dragState.categorizeState.schoolOverListIdx;
           if (listIdx == -1) {
             // trash it;
+            this.markSchoolAsTrashed(this.myRecommendations[0].id);
             this.removeTopCard();
             console.log("DELETE school");
             // TODO set current_trashed in db
@@ -162,9 +176,10 @@ export default {
               this.myShortlists[listIdx].schools.push(
                 this.dragState.categorizeState.schoolData
               );
+              this.markSchoolAsAccepted(this.myRecommendations[0].id);
               this.removeTopCard();
               // TODO set current_accepted in db
-              this.saveList(listIdx, this.myShortlists[listIdx].schools);
+              // this.saveList(listIdx, this.myShortlists[listIdx].schools);
             } else {
               alert("List is full");
             }
@@ -287,6 +302,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 25px;
 }
 .categorize-view-trash-column {
   width: 150px;
