@@ -61,12 +61,6 @@ function appAccountSignup(payload) {
 }
 
 function appAuthLogin(payload) {
-  console.log("accountLogin", payload.email);
-  let requestPayload = {
-    email: payload.email,
-    password: payload.password,
-  };
-
   let success = (result) => {
     console.log("success: ", result.data);
     appSessionStore.loginState = true;
@@ -82,13 +76,15 @@ function appAuthLogin(payload) {
       alert("Could not login.");
     }
   };
-  let req = apiClient.authLogin(requestPayload, success, fail);
+  let req = apiClient.authLogin(payload, success, fail);
   req.execute();
 }
 
 function appAccountUpdatePreferences(payload) {
   let requestPayload = {
-    accountId: appSessionStore.accountMetadata.accountId,
+    user_id: appSessionStore.accountMetadata.user_id,
+    user_name: appSessionStore.accountMetadata.user_name,
+    email: appSessionStore.accountMetadata.email,
     preferences: appSessionStore.accountMetadata.preferences,
   };
   requestPayload.preferences.recommendationPreferences = payload;
@@ -98,7 +94,7 @@ function appAccountUpdatePreferences(payload) {
       payload;
   };
   let fail = (err) => {
-    console.log(err);
+    console.log(err.response.data);
   };
   let req = apiClient.updatePreferences(requestPayload, success, fail);
   req.execute();
@@ -127,7 +123,6 @@ function appAccountUpdateName(payload) {
 function appLogout() {
   appSessionStore.$reset(); // clear store
   cookie.deleteCookie("accountid");
-  console.log(appSessionStore.accountMetadata.accountId);
 }
 
 function appAddStudent(payload) {

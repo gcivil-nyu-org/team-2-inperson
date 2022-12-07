@@ -188,14 +188,12 @@ export default {
       console.log("SHARED LIST #:", e);
     },
     getRecommendations(count = 10) {
-      console.log("payload:", this.acctID);
       let req = shortlistApi
         .getRecommendations()
         .forAccountId(this.acctID)
         .count(count)
         .strategy("RANKING")
         .onSuccess((result) => {
-          console.log("categorize recs: ", Array.isArray(result.data));
           this.myRecommendations.push(...result.data);
         })
         .onFail((err) => {
