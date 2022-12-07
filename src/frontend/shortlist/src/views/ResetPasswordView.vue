@@ -1,4 +1,5 @@
-<script></script>
+<script>
+</script>
 
 <template>
   <main style="margin:auto;">
