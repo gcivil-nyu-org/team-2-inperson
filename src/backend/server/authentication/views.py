@@ -92,16 +92,16 @@ class RegisterView(generics.GenericAPIView):
         names = ["Easy", "Target", "Dream"]
         colors = ["#bec7e7", "#bcd6a2", "#ecf0f3"]
 
-        for i in range(0,3):
+        for i in range(0, 3):
             create_shortlist = Shortlist(
                 user_id=user,
                 school_ids=[],
                 shortlist_name=names[i],
-                settings = {
+                settings={
                     "name": names[i],
                     "color": colors[i],
                     "icon": {"value": "token", "color": "black"},
-                }
+                },
             )
             create_shortlist.save()
         return Response(user_data, status=status.HTTP_201_CREATED)
