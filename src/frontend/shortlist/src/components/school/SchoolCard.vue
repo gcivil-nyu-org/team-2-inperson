@@ -25,7 +25,7 @@ export default {
         "Queens",
         "Staten Island",
       ];
-      return boros[this.schoolData.school.schoolMetadata.boroughCode];
+      return boros[this.schoolData.schoolMetadata.boroughCode];
     },
   },
 };
@@ -49,12 +49,12 @@ export default {
       <div class="school-simple-name-row">
         <div class="school-simple-name-name">
           <template v-if="isDetail">
-            <a :href="schoolData.school.schoolMetadata.link">{{
-              schoolData.school.schoolMetadata.name
+            <a :href="schoolData.schoolMetadata.link">{{
+              schoolData.schoolMetadata.name
             }}</a>
           </template>
           <template v-else>
-            {{ schoolData.school.schoolMetadata.name }}
+            {{ schoolData.schoolMetadata.name }}
           </template>
         </div>
         <div class="school-simple-name-borough">
@@ -63,7 +63,7 @@ export default {
       </div>
       <div class="school-simple-dim-container">
         <template
-          v-for="dimension in schoolData.school.schoolDimensions"
+          v-for="dimension in schoolData.schoolDimensions"
           :key="dimension"
         >
           <template v-if="!isDetail">
