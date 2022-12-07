@@ -41,7 +41,7 @@ export default {
     markSchoolAsTrashed(recoID) {
       this.$emit("markSchoolAsTrashed", {
         recoID: recoID,
-        Trashed: true,
+        trashed: true,
       });
     },
     successGet(responseData) {
