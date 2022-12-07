@@ -6,7 +6,6 @@ import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
 import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
 import ShortlistApi from "../api/shortlist";
-import { recommendations } from "../api/examples/recommendations.js";
 import cookie from "@/helpers/cookie.js";
 import axios from "axios";
 
