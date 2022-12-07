@@ -83,6 +83,7 @@ export default {
         //three end points for each list? what to send, should be post
         .put(this.calculateSaveEndpoint(listIndex), {
           school_ids: listSchools,
+          settings: this.myShortlists[listIndex].settings,
         })
         .then(function (response) {
           console.log(response);
