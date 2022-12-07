@@ -71,16 +71,18 @@ export default {
       //console.log("this my shortlist is: ", this.myShortlists);
     },
     saveList(listIndex, listSchools) {
-      console.log("school data looks like: ", listSchools);
+      //console.log("school data looks like: ", listSchools);
       console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
+      console.log("endpoint is: ", this.calculateSaveEndpoint(listIndex));
       let schoolList = [];
       for (let i = 0; i < listSchools.length; i++) {
         schoolList.push(listSchools[i].id);
       }
+      console.log("save schools ids: ", schoolList);
       axios
         //three end points for each list? what to send, should be post
         .put(this.calculateSaveEndpoint(listIndex), {
-          school: listSchools,
+          school_ids: listSchools,
         })
         .then(function (response) {
           console.log(response);
@@ -179,7 +181,9 @@ export default {
               this.markSchoolAsAccepted(this.myRecommendations[0].id);
               this.removeTopCard();
               // TODO set current_accepted in db
-              // this.saveList(listIdx, this.myShortlists[listIdx].schools);
+              console.log("listIDX is: ", listIdx);
+              console.log("save schools are: ", this.myShortlists[listIdx].schools);
+              this.saveList(listIdx, this.myShortlists[listIdx].schools);
             } else {
               alert("List is full");
             }
