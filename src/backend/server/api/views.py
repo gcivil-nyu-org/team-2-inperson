@@ -60,7 +60,7 @@ class SingleShortlistView(generics.GenericAPIView):
             status=status.HTTP_404_NOT_FOUND,
         )
 
-    def put(self, request, shortlist_id):
+    def post(self, request, shortlist_id):
         data = JSONParser().parse(request)
         if Shortlist.objects.filter(shortlist_id=shortlist_id).exists():
             shortlist = Shortlist.objects.get(shortlist_id=shortlist_id)
