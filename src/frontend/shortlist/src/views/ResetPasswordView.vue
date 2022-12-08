@@ -1,32 +1,33 @@
 <script>
-  import { mapState } from "pinia";
-  import { sessionStore } from "../states/sessionStore";
-  export default {
-    name: "ResetPasswordView",
-    emits: ["appPasswordReset"],
-    data() {
-      return {
-        form: {
+export default {
+  name: "ResetPasswordView",
+  emits: ["appPasswordReset"],
+  data() {
+    return {
+      form: {
         email: "",
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
       },
-        passwordAlert: "",
-        validation: true,
-      };
-    },
-    methods: {
-      validateEmail() {
+      passwordAlert: "",
+      validation: true,
+    };
+  },
+  methods: {
+    validateEmail() {
       let emailPattern = new RegExp(
         "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
       );
       return emailPattern.test(this.form.email);
     },
-      validateCurrentPassword() {
-        return this.form.currentPassword.length > 6 && this.form.currentPassword.length < 20;
-      },
-      validateNewPassword() {
+    validateCurrentPassword() {
+      return (
+        this.form.currentPassword.length > 6 &&
+        this.form.currentPassword.length < 20
+      );
+    },
+    validateNewPassword() {
       let passwordPattern = new RegExp(
         "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
       );
@@ -44,7 +45,8 @@
         return false;
       }
       if (this.form.newPassword === this.form.currentPassword) {
-        this.passwordAlert = "New password cannot be the same as the current one!";
+        this.passwordAlert =
+          "New password cannot be the same as the current one!";
         return false;
       }
       return true;
@@ -54,39 +56,39 @@
     },
     submitPWResetForm() {
       this.$emit("appPasswordReset", {
-          email: this.form.email,
-          currentPassword: this.form.currentPassword,
-          newPassword: this.form.newPassword,
-          confirmPassword: this.form.confirmPassword,
-        });
-        console.log(email);
-        return;
-      },
+        email: this.form.email,
+        currentPassword: this.form.currentPassword,
+        newPassword: this.form.newPassword,
+        confirmPassword: this.form.confirmPassword,
+      });
+      console.log(this.form.email);
+      return;
     },
-    computed: {
+  },
+  computed: {
     isSubmitDisabled() {
       if (!this.validation) {
         return false;
       } else {
-        return !(this.validateNewPassword() && this.validateCurrentPassword() && this.validateEmail() && this.validateConfirmPassword());
+        return !(
+          this.validateEmail() &&
+          this.validateNewPassword() &&
+          this.validateCurrentPassword() &&
+          this.validateConfirmPassword()
+        );
       }
     },
-    ...mapState(sessionStore, {
-      loginState: "loginState",
-      loginAttempts: "loginAttempts",
-      accountMetadata: "accountMetadata",
-    }),
   },
-  }
+};
 </script>
 
 <template>
   <main style="margin: auto">
     <div class="form-container">
-    <div class="email">
-      <label>Your Email</label>
+      <div class="email">
+        <label>Your Email</label>
         <input
-          class = "resetInput"
+          class="resetInput"
           type="text"
           placeholder="email"
           v-model="this.form.email"
@@ -104,12 +106,15 @@
       <div class="current-password">
         <label>Current Password</label>
         <input
-          class = "resetInput"
+          class="resetInput"
           type="password"
           placeholder="current password"
           v-model="this.form.currentPassword"
         />
-        <div class="input-errors" v-if="!validateCurrentPassword(this.form.currentPassword)">
+        <div
+          class="input-errors"
+          v-if="!validateCurrentPassword(this.form.currentPassword)"
+        >
           <div class="error-msg" v-if="this.form.currentPassword.length > 0">
             {{ this.passwordAlert }}
           </div>
@@ -122,7 +127,7 @@
       <div id="newPassword">
         <label>New Password</label>
         <input
-          class = "resetInput"
+          class="resetInput"
           type="password"
           placeholder="new password"
           v-model="this.form.newPassword"
@@ -139,25 +144,30 @@
       </div>
       <div>
         <div id="confirmPassword">
-        <label>Confirm Password</label>
-        <input
-          class = "resetInput"
-          type="password"
-          autocomplete="off"
-          placeholder="confirm new password"
-          v-model="this.form.confirmPassword"
-        />
-        <div class="input-errors" v-if="!validateConfirmPassword()">
-          <div class="error-msg" v-if="this.form.confirmPassword.length>0">
-            New Password and Confirm Password must be match!
+          <label>Confirm Password</label>
+          <input
+            class="resetInput"
+            type="password"
+            autocomplete="off"
+            placeholder="confirm new password"
+            v-model="this.form.confirmPassword"
+          />
+          <div class="input-errors" v-if="!validateConfirmPassword()">
+            <div class="error-msg" v-if="this.form.confirmPassword.length > 0">
+              New Password and Confirm Password must be match!
+            </div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
           </div>
         </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-        </div>
       </div>
-      <button id ="big-instructions" class="btn btn-outline-dark" @click.prevent="submitPWResetForm" :disabled="isSubmitDisabled">
+      <button
+        id="big-instructions"
+        class="btn btn-outline-dark"
+        @click.prevent="submitPWResetForm"
+        :disabled="isSubmitDisabled"
+      >
         Submit
       </button>
     </div>
@@ -196,7 +206,7 @@ input {
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
 }
-#instructions{
+#instructions {
   font-size: 18px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
