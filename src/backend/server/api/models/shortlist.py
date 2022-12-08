@@ -6,8 +6,8 @@ import uuid
 def default_settings():
     settings = {
         "name": "My List",
-        "color": "red",
-        "icon": {"value": "unknown", "color": "green"},
+        "color": "#bec7e7",
+        "icon": {"value": "token", "color": "black"},
     }
     return settings
 

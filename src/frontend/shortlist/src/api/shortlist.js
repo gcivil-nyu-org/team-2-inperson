@@ -1,5 +1,5 @@
 import { fluentAccountCreate } from "./endpoints/accountCreate";
-import { fluentAccountMetadata } from "./endpoints/accountMetadata";
+// import { fluentAccountMetadata } from "./endpoints/accountMetadata";
 import { fluentRecommendations } from "./endpoints/recommendations";
 import { fluentAccountLogin } from "./endpoints/accountLogin";
 
@@ -8,15 +8,18 @@ export default class ShortlistApi {
     this.baseEndpoint = baseURL;
   }
   createAccount() {
+    // not in use
     return new fluentAccountCreate(this.baseEndpoint);
   }
-  getAccountMetadata() {
-    return new fluentAccountMetadata(this.baseEndpoint);
+  getAccountMetadata(payload, successCb, failCb) {
+    // return new fluentAccountMetadata(this.baseEndpoint);
+    return new tempUserMetadata(payload, successCb, failCb);
   }
   getRecommendations() {
     return new fluentRecommendations(this.baseEndpoint);
   }
   loginAccount() {
+    // not in use
     return new fluentAccountLogin(this.baseEndpoint);
   }
   signupUser(payload, successCb, failCb) {
@@ -82,7 +85,6 @@ export class temporarySignup {
   }
 
   execute() {
-    // send the email first
     axios({
       method: "POST",
       url: "https://api.shortlist.nyc/auth/register",
@@ -91,53 +93,50 @@ export class temporarySignup {
         email: this.email,
         username: this.username,
         password: this.password,
+        userFirstName: this.firstName,
+        userLastName: this.lastName,
+        recommendationPreferences: {
+          q1: {
+            Question:
+              "How important is an engaging curriculum & emphasis on critical thinking skills?",
+            Response: "",
+          },
+          q2: {
+            Question:
+              "How important is a school culture where students feel safe and supported to meet high expectations?",
+            Response: "",
+          },
+          q3: {
+            Question: "Is there a specific borough you are looking for?",
+            Response: "",
+          },
+          q4: {
+            Question: "How would you rank your academic performance so far?",
+            Response: "",
+          },
+        },
       },
     })
-      // user/email success;
-      /*
-      .then(() => {
-        // register the site account
-        axios({
-          method: "POST",
-          url: "https://api.shortlist.nyc/account/create",
-          headers: {},
-          data: {
-            email: this.email,
-            passwordHash: this.passwordHash,
-            accountType: this.accountType,
-            preferences: {
-              userFirstName: this.firstName,
-              userLastName: this.lastName,
-              recommendationPreferences: {
-                q1: {
-                  Question:
-                    "How important is an engaging curriculum & emphasis on critical thinking skills?",
-                  Response: "",
-                },
-                q2: {
-                  Question:
-                    "How much would you value the supportive environment provided by school?",
-                  Response: "",
-                },
-                q3: {
-                  Question: "Is there a spicific borough you are looking for?",
-                  Response: "",
-                },
-                q4: {
-                  Question:
-                    "How would you rank your academic performance so far?",
-                  Response: "",
-                },
-              },
-            },
-          },
-        })
-          .then((result) => this.successCb(result))
-          .catch((fail) => this.failCb(fail));
-      })
-      */
       .then((result) => this.successCb(result))
-      // email fail;
+      .catch((err) => this.failCb(err));
+  }
+}
+
+export class tempUserMetadata {
+  constructor(payload, successCb, failCb) {
+    this.user_id = payload.userID;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+
+  execute() {
+    axios({
+      method: "GET",
+      url: "https://api.shortlist.nyc/auth/" + this.user_id + "/details",
+      headers: {},
+      data: "",
+    })
+      .then((result) => this.successCb(result))
       .catch((err) => this.failCb(err));
   }
 }
@@ -230,19 +229,23 @@ export class temporaryAcceptInvite {
 
 export class temporaryUpdatePreferences {
   constructor(payload, successCb, failCb) {
-    this.accountId = payload.accountId;
+    this.user_id = payload.user_id;
     this.preferences = payload.preferences;
+    this.email = payload.email;
+    this.username = payload.user_name;
     this.successCb = successCb;
     this.failCb = failCb;
   }
+
   execute() {
     axios({
-      method: "POST",
-      url: "https://api.shortlist.nyc/account/update",
+      method: "PUT",
+      url: "https://api.shortlist.nyc/auth/" + this.user_id + "/details",
       headers: {},
       data: {
-        accountId: this.accountId,
         preferences: this.preferences,
+        username: this.username,
+        email: this.email,
       },
     })
       .then((result) => this.successCb(result))

@@ -24,7 +24,7 @@ export default {
       </div>
       <!-- New school data format -->
       <div v-else>
-        {{ schoolData.school.schoolMetadata.name }}
+        {{ schoolData.schoolMetadata.name }}
       </div>
     </div>
   </div>
