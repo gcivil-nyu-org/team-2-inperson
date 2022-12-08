@@ -53,8 +53,11 @@ export default {
     },
     appRequestResetEmail() {
       // TODO: call /auth/request-reset-email
-      alert("Please check your email.")
-      this.appRequestResetEmail(accountMetadata.email); 
+      this.$emit("appRequestResetEmail", {
+        email: email,
+        });
+      this.email = accountMetadata.email; 
+      alert("Please check your email."); 
     },
   },
   computed: {

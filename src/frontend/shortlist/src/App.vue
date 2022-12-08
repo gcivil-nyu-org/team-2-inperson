@@ -12,6 +12,9 @@ const appSessionStore = sessionStore();
 
 function appRequestResetEmail(payload) {
   console.log(payload);
+  let apiReq = {
+    email: payload.email,
+  };
   let success = () => {
     console.log("Reset Email sent");
   };
@@ -20,7 +23,7 @@ function appRequestResetEmail(payload) {
       "Failed to send the reset password email", err.response.data
     ); 
   }
-  let req = apiClient.requestResetEmail(payload, success, failure);
+  let req = apiClient.requestResetEmail(apiReq, success, failure);
   req.execute();
 }
 
