@@ -1,28 +1,25 @@
-<script>
-</script>
+<script></script>
 
 <template>
-  <main style="margin:auto;">
+  <main style="margin: auto">
     <div class="form-container">
-        <div>
-          <label>Current Password</label>
-          <input type="text"/>
-        </div>
-        <div>
-          <label>New Password</label>
-          <input type="text"/>
-        </div>
-        <div>
-          <label>Confirm New Password</label>
-          <input type="text"/>
-        </div>
+      <div>
+        <label>Current Password</label>
+        <input type="text" />
+      </div>
+      <div>
+        <label>New Password</label>
+        <input type="text" />
+      </div>
+      <div>
+        <label>Confirm New Password</label>
+        <input type="text" />
+      </div>
 
-
-        <button
-          class="btn btn-outline-dark"
-          @click.prevent="submitSignupForm"
-        >Submit</button>
-  </div>
+      <button class="btn btn-outline-dark" @click.prevent="submitSignupForm">
+        Submit
+      </button>
+    </div>
   </main>
 </template>
 

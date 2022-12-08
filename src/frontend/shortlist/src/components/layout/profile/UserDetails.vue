@@ -10,6 +10,7 @@ export default {
       nameAlert: "",
       email: "",
       validation: true,
+      pwResetSent: false,
     };
   },
   methods: {
@@ -30,7 +31,6 @@ export default {
       }
       return true;
     },
-
     loadFile: function (event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
@@ -63,6 +63,7 @@ export default {
         });
       console.log(content, "appRequestResetEmail from UserDetails");
       alert("Please check your email");
+      this.pwResetSent = true;
     },
   },
   computed: {
@@ -166,10 +167,11 @@ export default {
         </button>
       </div>
     </form>
-    <button 
+    <button
       type="button"
       class="btn btn-outline-dark btn-sm"
-      @click.prevent="appRequestResetEmail">
+      @click.prevent="appRequestResetEmail"
+    >
       Reset Password
     </button>
   </main>

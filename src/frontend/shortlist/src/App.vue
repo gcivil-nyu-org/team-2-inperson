@@ -21,7 +21,7 @@ const appSessionStore = sessionStore();
 //   let failure = (err) => {
 //     console.log(
 //       "Failed to send the reset password email", err.response.data
-//     ); 
+//     );
 //   }
 //   let req = apiClient.requestResetEmail(apiReq, success, failure);
 //   req.execute();

@@ -44,7 +44,7 @@ export default class ShortlistApi {
   }
   // requestResetEmail(payload, successCb, failCb) {
   //   return new tempRequestResetEmail(payload, successCb, failCb);
-  // } 
+  // }
   getShortlist(payload, successCb, failCb) {
     return new tempGetShortlist(payload, successCb, failCb);
   }
