@@ -1,7 +1,7 @@
 <script>
 export default {
   props: ["accountMetadata"],
-  emits: ["appAccountUpdateName", "appResetPassword"],
+  emits: ["appAccountUpdateName", "appRequestResetEmail"],
   data() {
     return {
       newFirst: "",
@@ -12,11 +12,6 @@ export default {
     };
   },
   methods: {
-    appResetPassword(email) {
-      this.$emit("appResetPassword", {
-        email: email,
-      })
-    },
     validateName(value) {
       let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
       if (value.length < 2) {
@@ -56,10 +51,10 @@ export default {
 
       alert("Name updated!");
     },
-    resetPassword() {
+    appRequestResetEmail() {
       // TODO: call /auth/request-reset-email
       alert("Please check your email.")
-      this.resetPassword(accountMetadata.email); 
+      this.appRequestResetEmail(accountMetadata.email); 
     },
   },
   computed: {
@@ -166,7 +161,7 @@ export default {
     <button 
       type="button"
       class="btn btn-outline-dark btn-sm"
-      @click.prevent="resetPassword">
+      @click.prevent="appRequestResetEmail">
       Reset Password
     </button>
   </main>
