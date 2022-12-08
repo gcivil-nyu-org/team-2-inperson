@@ -1,13 +1,16 @@
 <script>
+import axios from "axios";
 export default {
   props: ["accountMetadata"],
-  emits: ["appAccountUpdateName"],
+  emits: ["appAccountUpdateName", "appRequestResetEmail"],
   data() {
     return {
       newFirst: "",
       newLast: "",
       nameAlert: "",
+      email: "",
       validation: true,
+      pwResetSent: false,
     };
   },
   methods: {
@@ -28,7 +31,6 @@ export default {
       }
       return true;
     },
-
     loadFile: function (event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
@@ -49,6 +51,19 @@ export default {
       this.newLast = "";
 
       alert("Name updated!");
+    },
+    async appRequestResetEmail() {
+      const content = await axios
+        .post("https://api.shortlist.nyc/auth/request-reset-email", {
+          email: this.email,
+        })
+        .then((response) => this.successGet(response.data))
+        .catch(function (error) {
+          console.log(error.response);
+        });
+      console.log(content, "appRequestResetEmail from UserDetails");
+      alert("Please check your email");
+      this.pwResetSent = true;
     },
   },
   computed: {
@@ -152,7 +167,11 @@ export default {
         </button>
       </div>
     </form>
-    <button type="button" class="btn btn-outline-dark btn-sm">
+    <button
+      type="button"
+      class="btn btn-outline-dark btn-sm"
+      @click.prevent="appRequestResetEmail"
+    >
       Reset Password
     </button>
   </main>

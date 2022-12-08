@@ -100,6 +100,11 @@ const router = createRouter({
       name: "NotFound",
       component: () => import("../views/NotFoundView.vue"),
     },
+    {
+      path: "/reset",
+      name: "resetpassword-view",
+      component: () => import("../views/ResetPasswordView.vue"),
+    },
   ],
 });
 
