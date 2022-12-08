@@ -42,6 +42,9 @@ export default class ShortlistApi {
   updateRecommendation(payload, successCb, failCb) {
     return new tempUpdateRecommendation(payload, successCb, failCb);
   }
+  getShortlist(payload, successCb, failCb) {
+    return new tempGetShortlist(payload, successCb, failCb);
+  }
 }
 
 import axios from "axios";
@@ -287,6 +290,26 @@ export class tempAuthLogin {
         email: this.email,
         password: this.password,
       },
+    })
+      .then((result) => this.successCb(result))
+      .catch((err) => this.failCb(err));
+  }
+}
+
+export class tempGetShortlist {
+  constructor(payload, successCb, failCb) {
+    this.shortlistId = payload;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+  execute() {
+    axios({
+      method: "GET",
+      url:
+        "http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/shortlists/" +
+        this.shortlistId,
+      headers: {},
+      data: "",
     })
       .then((result) => this.successCb(result))
       .catch((err) => this.failCb(err));
