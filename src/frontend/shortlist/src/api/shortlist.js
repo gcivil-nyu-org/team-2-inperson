@@ -42,16 +42,35 @@ export default class ShortlistApi {
   updateRecommendation(payload, successCb, failCb) {
     return new tempUpdateRecommendation(payload, successCb, failCb);
   }
-  // requestResetEmail(payload, successCb, failCb) {
-  //   return new tempRequestResetEmail(payload, successCb, failCb);
-  // }
   getShortlist(payload, successCb, failCb) {
     return new tempGetShortlist(payload, successCb, failCb);
+  }
+  resetPassword(payload, successCb, failCb) {
+    return new tempResetPassword(payload, successCb, failCb);
   }
 }
 
 import axios from "axios";
 import md5 from "md5";
+
+export class tempResetPassword {
+  constructor(payload, successCb, failCb) {
+    this.payload = payload;
+    this.successCb = successCb;
+    this.failCb = failCb;
+  }
+  execute() {
+    console.log(this.payload, "tempResetPassword");
+    axios({
+      method: "POST",
+      url: "https://api.shortlist.nyc/auth/password-reset-complete",
+      headers: {},
+      data: this.payload,
+    })
+      .then((result) => this.successCb(result))
+      .catch((err) => this.failCb(err));
+  }
+}
 
 export class tempUpdateRecommendation {
   constructor(payload, successCb, failCb) {
