@@ -1,18 +1,32 @@
 <script>
+  import { mapState } from "pinia";
+  import { sessionStore } from "../states/sessionStore";
   export default {
     name: "ResetPasswordView",
+    emits: ["appPasswordReset"],
     data() {
       return {
-        isMatched: false,
-        notMatchingMessage: "",
+        form: {
+        email: "",
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      },
         passwordAlert: "",
         validation: true,
-        newPassword: "",
-        newConfirmPassword: "",
       };
     },
     methods: {
-      validatePassword() {
+      validateEmail() {
+      let emailPattern = new RegExp(
+        "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+      );
+      return emailPattern.test(this.form.email);
+    },
+      validateCurrentPassword() {
+        return this.form.currentPassword.length > 6 && this.form.currentPassword.length < 20;
+      },
+      validateNewPassword() {
       let passwordPattern = new RegExp(
         "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
       );
@@ -29,32 +43,121 @@
           "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
         return false;
       }
+      if (this.form.newPassword === this.form.currentPassword) {
+        this.passwordAlert = "New password cannot be the same as the current one!";
+        return false;
+      }
       return true;
     },
     validateConfirmPassword() {
-      return this.form.newConfirmPassword == this.form.newConfirmPassword;
+      return this.form.newPassword == this.form.confirmPassword;
     },
-    }
+    submitPWResetForm() {
+      this.$emit("appPasswordReset", {
+          email: this.form.email,
+          currentPassword: this.form.currentPassword,
+          newPassword: this.form.newPassword,
+          confirmPassword: this.form.confirmPassword,
+        });
+        console.log(email);
+        return;
+      },
+    },
+    computed: {
+    isSubmitDisabled() {
+      if (!this.validation) {
+        return false;
+      } else {
+        return !(this.validateNewPassword() && this.validateCurrentPassword() && this.validateEmail() && this.validateConfirmPassword());
+      }
+    },
+    ...mapState(sessionStore, {
+      loginState: "loginState",
+      loginAttempts: "loginAttempts",
+      accountMetadata: "accountMetadata",
+    }),
+  },
   }
 </script>
 
 <template>
   <main style="margin: auto">
     <div class="form-container">
-      <div>
-        <label id = "instructions" >Current Password</label>
-        <input type="text" />
+    <div class="email">
+      <label>Your Email</label>
+        <input
+          class = "resetInput"
+          type="text"
+          placeholder="email"
+          v-model="this.form.email"
+        />
+        <div class="input-errors" v-if="!validateEmail()">
+          <div class="error-msg" v-if="this.form.email.length > 0">
+            Invalid email entry!
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
+      </div>
+      <div class="current-password">
+        <label>Current Password</label>
+        <input
+          class = "resetInput"
+          type="password"
+          placeholder="current password"
+          v-model="this.form.currentPassword"
+        />
+        <div class="input-errors" v-if="!validateCurrentPassword(this.form.currentPassword)">
+          <div class="error-msg" v-if="this.form.currentPassword.length > 0">
+            {{ this.passwordAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
+      </div>
+      <div id="newPassword">
+        <label>New Password</label>
+        <input
+          class = "resetInput"
+          type="password"
+          placeholder="new password"
+          v-model="this.form.newPassword"
+        />
+        <div class="input-errors" v-if="!validateNewPassword()">
+          <div class="error-msg" v-if="this.form.newPassword.length > 0">
+            {{ this.passwordAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
       </div>
       <div>
-        <label id = "instructions" >New Password</label>
-        <input type="text" />
+        <div id="confirmPassword">
+        <label>Confirm Password</label>
+        <input
+          class = "resetInput"
+          type="password"
+          autocomplete="off"
+          placeholder="confirm new password"
+          v-model="this.form.confirmPassword"
+        />
+        <div class="input-errors" v-if="!validateConfirmPassword()">
+          <div class="error-msg" v-if="this.form.confirmPassword.length>0">
+            New Password and Confirm Password must be match!
+          </div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
+        </div>
       </div>
-      <div>
-        <label id = "instructions">Confirm New Password</label>
-        <input type="text" />
-      </div>
-
-      <button id ="big-instructions" class="btn btn-outline-dark" @click.prevent="submitSignupForm">
+      <button id ="big-instructions" class="btn btn-outline-dark" @click.prevent="submitPWResetForm" :disabled="isSubmitDisabled">
         Submit
       </button>
     </div>
@@ -64,8 +167,8 @@
 <style scoped>
 .form-container {
   position: absolute;
-  margin-left: 30%;
-  margin-top: 4%;
+  margin-left: 34%;
+  margin-top: 3%;
   padding: 5%;
   display: flex;
   align-items: center;
@@ -74,6 +177,11 @@
   flex-direction: column;
   border-radius: 40px;
   box-shadow: 0 0 3em hsl(231deg 62% 80%);
+}
+label {
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
 }
 input {
   width: 100%;
@@ -92,5 +200,52 @@ input {
   font-size: 18px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
+}
+.resetInput {
+  width: 100%;
+  padding: 8px 5px;
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: "Aleo", serif;
+  outline: none;
+  transition: border-color 0.2s;
+  position: relative;
+  margin: 0px;
+}
+
+.error-msg {
+  color: rgb(117, 28, 28);
+  font-size: 13px;
+  padding-bottom: 7px;
+}
+
+form {
+  min-width: 100%;
+  max-width: 100%;
+  padding: 1em;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Aleo";
+  margin: 0px;
+}
+.form-control {
+  background: #ebf3e6;
+  border: 1px solid #008037;
+  border-radius: 5px;
+  color: grey;
+  font-size: 15px;
+  font-family: "Aleo", serif;
+}
+.form-control:focus {
+  border-color: #106021;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
+    0px 0px 8px rgba(35, 173, 40, 0.5);
 }
 </style>
