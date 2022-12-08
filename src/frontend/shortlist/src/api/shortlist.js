@@ -42,9 +42,9 @@ export default class ShortlistApi {
   updateRecommendation(payload, successCb, failCb) {
     return new tempUpdateRecommendation(payload, successCb, failCb);
   }
-  requestResetEmail(payload, successCb, failCb) {
-    return new tempRequestResetEmail(payload, successCb, failCb);
-  } 
+  // requestResetEmail(payload, successCb, failCb) {
+  //   return new tempRequestResetEmail(payload, successCb, failCb);
+  // } 
   getShortlist(payload, successCb, failCb) {
     return new tempGetShortlist(payload, successCb, failCb);
   }
@@ -53,26 +53,26 @@ export default class ShortlistApi {
 import axios from "axios";
 import md5 from "md5";
 
-export class tempRequestResetEmail {
-  constructor(payload, successCb, failCb) {
-    this.email = payload.email; 
-    this.successCb = successCb;
-    this.failCb = failCb; 
-  }
-  execute() {
-    console.log(payload, "email sent to account");
-    axios({
-      method: "POST",
-      url: "https://api.shortlist.nyc/auth/request-reset-email",
-      headers: {},
-      data: {
-        email: this.email,
-      }
-    })
-      .then((result) => this.successCb(result))
-      .catch((err) => this.failCb(err));
-  }
-}
+// export class tempRequestResetEmail {
+//   constructor(payload, successCb, failCb) {
+//     this.email = payload.email; 
+//     this.successCb = successCb;
+//     this.failCb = failCb; 
+//   }
+//   execute() {
+//     console.log(payload, "email sent to account");
+//     axios({
+//       method: "POST",
+//       url: "https://api.shortlist.nyc/auth/request-reset-email",
+//       headers: {},
+//       data: {
+//         email: this.email,
+//       }
+//     })
+//       .then((result) => this.successCb(result))
+//       .catch((err) => this.failCb(err));
+//   }
+// }
 
 
 export class tempUpdateRecommendation {

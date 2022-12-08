@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 export default {
   props: ["accountMetadata"],
   emits: ["appAccountUpdateName", "appRequestResetEmail"],
@@ -52,18 +53,15 @@ export default {
       alert("Name updated!");
     },
     appRequestResetEmail() {
-      let confirmEmail = this.email
-        ? this.email
-        : this.accountMetadata.preferences.email;
-      // TODO: call /auth/request-reset-email
-      this.$emit("appRequestResetEmail", {
-        confirmEmail,
+      axios
+        .post("https://api.shortlist.nyc/auth/request-reset-email", {
+          userEmail: this.email,
+        })
+        .then((response) => this.successGet(response.data))
+        .catch(function (error) {
+          console.log(error.response);
         });
-      this.confirmEmail = this.email;
-      console.log(confirmEmail);
-      // this.email = accountMetadata.email; 
-      alert("Please check your email."); 
-      
+      console.log(this.email);
     },
   },
   computed: {
