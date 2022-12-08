@@ -9,6 +9,7 @@ from .views import (
     RequestPasswordResetEmail,
     ResendEmail,
     UserDetailsView,
+    SendInviteView,
 )
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -42,4 +43,9 @@ urlpatterns = [
         name="password-reset-complete",
     ),
     path("<int:user_id>/details", UserDetailsView.as_view(), name="update-user"),
+    path(
+        "send-invite",
+        SendInviteView.as_view(),
+        name="send-invite",
+    ),
 ]

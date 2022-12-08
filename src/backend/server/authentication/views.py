@@ -9,6 +9,7 @@ from .serializers import (
     LogoutSerializer,
     ResendEmailSerializer,
     UpdateUserSerializer,
+    SendInviteSerializer,
 )
 from rest_framework.parsers import JSONParser
 
@@ -226,6 +227,27 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
         )
 
 
+class SendInviteView(generics.GenericAPIView):
+    serializer_class = SendInviteSerializer
+
+    def post(self, request):
+        email = request.data["email"]
+        absurl = "https://www.shortlist.nyc/signup"
+        email_body = "Hello, \n You have been invited to sign up.  \n" + absurl
+        data = {
+            "email_body": email_body,
+            "to_email": email,
+            "email_subject": "Invitation to SignUp",
+        }
+        Util.send_email(data)
+        return Response(
+            {
+                "success": "We have sent an invite link to you child to signup to shortlists."
+            },
+            status=status.HTTP_200_OK,
+        )
+
+
 class PasswordTokenCheckAPI(generics.GenericAPIView):
     serializer_class = SetNewPasswordSerializer
 
@@ -240,7 +262,6 @@ class PasswordTokenCheckAPI(generics.GenericAPIView):
                     {"error": "Token is not valid, please request a new one"},
                     status=status.HTTP_401_UNAUTHORIZED,
                 )
-
             return Response(
                 {
                     "success": True,

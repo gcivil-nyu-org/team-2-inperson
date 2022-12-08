@@ -103,6 +103,13 @@ class ResetPasswordEmailRequestSerializer(serializers.Serializer):
         fields = ["email"]
 
 
+class SendInviteSerializer(serializers.Serializer):
+    email = serializers.EmailField(min_length=2)
+
+    class Meta:
+        fields = ["email"]
+
+
 class SetNewPasswordSerializer(serializers.Serializer):
     password = serializers.CharField(min_length=6, max_length=68, write_only=True)
     token = serializers.CharField(min_length=1, write_only=True)
