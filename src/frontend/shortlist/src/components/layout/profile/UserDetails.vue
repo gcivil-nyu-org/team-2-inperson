@@ -52,16 +52,17 @@ export default {
 
       alert("Name updated!");
     },
-    appRequestResetEmail() {
-      axios
+    async appRequestResetEmail() {
+      const content = await axios
         .post("https://api.shortlist.nyc/auth/request-reset-email", {
-          userEmail: this.email,
+          email: this.email,
         })
         .then((response) => this.successGet(response.data))
         .catch(function (error) {
           console.log(error.response);
         });
-      console.log(this.email);
+      console.log(content, "appRequestResetEmail from UserDetails");
+      alert("Please check your email");
     },
   },
   computed: {
