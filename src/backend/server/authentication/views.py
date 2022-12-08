@@ -88,15 +88,22 @@ class RegisterView(generics.GenericAPIView):
         for school in schools:
             recommendation = Recommendation(account=user, school=school)
             recommendation.save()
-        shortlist_names = ["Easy", "Target", "Dream"]
-        for name in shortlist_names:
+
+        names = ["Easy", "Target", "Dream"]
+        colors = ["#bec7e7", "#bcd6a2", "#ecf0f3"]
+
+        for i in range(0, 3):
             create_shortlist = Shortlist(
                 user_id=user,
                 school_ids=[],
-                shortlist_name=name,
+                shortlist_name=names[i],
+                settings={
+                    "name": names[i],
+                    "color": colors[i],
+                    "icon": {"value": "token", "color": "black"},
+                },
             )
             create_shortlist.save()
-        #         for
         return Response(user_data, status=status.HTTP_201_CREATED)
 
 

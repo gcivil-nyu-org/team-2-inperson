@@ -52,12 +52,18 @@ export default {
       alert("Name updated!");
     },
     appRequestResetEmail() {
+      let confirmEmail = this.email
+        ? this.email
+        : this.accountMetadata.preferences.email;
       // TODO: call /auth/request-reset-email
       this.$emit("appRequestResetEmail", {
-        email: email,
+        confirmEmail,
         });
-      this.email = accountMetadata.email; 
+      this.confirmEmail = this.email;
+      console.log(confirmEmail);
+      // this.email = accountMetadata.email; 
       alert("Please check your email."); 
+      
     },
   },
   computed: {

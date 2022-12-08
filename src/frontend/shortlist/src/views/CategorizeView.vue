@@ -6,8 +6,8 @@ import ModalFullScreen from "../components/layout/ModalFullScreen.vue";
 import SchoolCard from "../components/school/SchoolCard.vue";
 import { dragStateStore } from "../states/categorizeDragAndDrop";
 import ShortlistApi from "../api/shortlist";
-import { shortLists } from "../api/examples/shortlists.js";
 import cookie from "@/helpers/cookie.js";
+import axios from "axios";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
@@ -32,7 +32,6 @@ export default {
     },
   },
   methods: {
-    /* eslint-disable */
     markSchoolAsAccepted(recoID) {
       this.$emit("markSchoolAsAccepted", {
         recoID: recoID,
@@ -42,10 +41,54 @@ export default {
     markSchoolAsTrashed(recoID) {
       this.$emit("markSchoolAsTrashed", {
         recoID: recoID,
-        Trashed: true,
+        trashed: true,
       });
     },
-    /* eslint-disable */
+    successGet(responseData) {
+      console.log("get function running");
+      this.myShortlists = responseData;
+      console.log("my list looks like: ", this.myShortlists);
+    },
+    calculateSaveEndpoint(listIndex) {
+      let listID = this.myShortlists[listIndex].shortlist_id;
+      return (
+        "http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/shortlists/" +
+        listID
+      );
+    },
+    getLists() {
+      axios
+        //address needs change to coop
+        .post("https://api.shortlist.nyc/shortlists/all", {
+          //name might need change
+          user_id: this.acctID,
+        })
+        .then((response) => this.successGet(response.data))
+        .catch(function (error) {
+          console.log(error.response);
+        });
+      console.log(this.myShortlists[0]);
+      //console.log("this my shortlist is: ", this.myShortlists);
+    },
+    saveList(listIndex, listSchools) {
+      console.log("school data looks like: ", listSchools);
+      console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
+      let schoolList = [];
+      for (let i = 0; i < listSchools.length; i++) {
+        schoolList.push(listSchools[i].id);
+      }
+      axios
+        //three end points for each list? what to send, should be post
+        .put(this.calculateSaveEndpoint(listIndex), {
+          school: listSchools,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error.response.data);
+        });
+    },
     swapListElements(inList, idx1, idx2) {
       inList[idx2] = inList.splice(idx1, 1, inList[idx2])[0];
       /*
@@ -135,6 +178,8 @@ export default {
               );
               this.markSchoolAsAccepted(this.myRecommendations[0].id);
               this.removeTopCard();
+              // TODO set current_accepted in db
+              // this.saveList(listIdx, this.myShortlists[listIdx].schools);
             } else {
               alert("List is full");
             }
@@ -158,14 +203,12 @@ export default {
       console.log("SHARED LIST #:", e);
     },
     getRecommendations(count = 10) {
-      console.log("payload:", this.acctID);
       let req = shortlistApi
         .getRecommendations()
         .forAccountId(this.acctID)
         .count(count)
         .strategy("RANKING")
         .onSuccess((result) => {
-          console.log("categorize recs: ", Array.isArray(result.data));
           this.myRecommendations.push(...result.data);
         })
         .onFail((err) => {
@@ -176,7 +219,7 @@ export default {
     },
   },
   data() {
-    let myShortlists = shortLists;
+    let myShortlists = [];
     let myRecommendations = []; // recommendations;
     let schoolDetailModalVisible = false;
     let schoolDetailModalData = null;
@@ -198,54 +241,56 @@ export default {
   },
   created() {
     this.getRecommendations(50);
+    this.getLists();
   },
 };
 </script>
 
 <template>
-  <ModalFullScreen
-    v-if="schoolDetailModalVisible"
-    visible="schoolDetailModalVisible"
-    @modalOff="schoolDetailModalVisible = false"
-  >
-    <div style="display: block">
-      <div
-        style="
-          display: flex;
-          justify-content: space-around;
-          margin-bottom: 20px;
-        "
-      >
-        Discard?
+  <div>
+    <ModalFullScreen
+      v-if="schoolDetailModalVisible"
+      visible="schoolDetailModalVisible"
+      @modalOff="schoolDetailModalVisible = false"
+    >
+      <div style="display: block">
+        <div
+          style="
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+          "
+        >
+          Discard?
+        </div>
+        <SchoolCard
+          v-if="schoolDetailModalData"
+          :schoolData="schoolDetailModalData"
+        />
       </div>
-      <SchoolCard
-        v-if="schoolDetailModalData"
-        :schoolData="schoolDetailModalData"
-      />
-    </div>
-  </ModalFullScreen>
+    </ModalFullScreen>
+    <div
+      class="categorize-view-container"
+      @dragover="dragDropOver"
+      @drop="dragDropDrop"
+    >
+      <div class="categorize-view-trash-column">
+        <TrashCan />
+      </div>
 
-  <div
-    class="categorize-view-container"
-    @dragover="dragDropOver"
-    @drop="dragDropDrop"
-  >
-    <div class="categorize-view-trash-column">
-      <TrashCan />
-    </div>
-
-    <div class="categorize-view-recommendation-column">
-      <RecommendationStack :recommendations="myRecommendations" />
-    </div>
-    <div style="width: 50px; height: 100%"></div>
-    <div class="categorize-view-shortlist-column">
-      <ShortlistManager
-        v-if="this.myShortlists.length > 0"
-        :studentShortlists="myShortlists"
-        @listItemDetailClick="(e) => showSchoolModal(e)"
-        @changeListSettings="(e) => changeListSettings(e)"
-        @shareList="(e) => shareList(e)"
-      />
+      <div class="categorize-view-recommendation-column">
+        <RecommendationStack :recommendations="myRecommendations" />
+      </div>
+      <div style="width: 50px; height: 100%"></div>
+      <div class="categorize-view-shortlist-column">
+        <ShortlistManager
+          v-if="this.myShortlists.length > 0"
+          :studentShortlists="myShortlists"
+          @listItemDetailClick="(e) => showSchoolModal(e)"
+          @changeListSettings="(e) => changeListSettings(e)"
+          @shareList="(e) => shareList(e)"
+        />
+      </div>
     </div>
   </div>
 </template>
