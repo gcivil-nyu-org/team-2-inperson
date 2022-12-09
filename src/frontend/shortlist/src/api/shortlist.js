@@ -79,7 +79,6 @@ export class tempUpdateRecommendation {
     this.failCb = failCb;
   }
   execute() {
-    console.log(this.payload);
     axios({
       method: "POST",
       url: "https://api.shortlist.nyc/recommendation/update",

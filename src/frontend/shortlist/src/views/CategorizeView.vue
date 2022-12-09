@@ -45,7 +45,6 @@ export default {
       });
     },
     successGet(responseData) {
-      console.log("get function running");
       this.myShortlists = responseData;
       console.log("my list looks like: ", this.myShortlists);
     },
@@ -53,22 +52,19 @@ export default {
       let listID = this.myShortlists[listIndex].shortlist_id;
       return (
         "http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/shortlists/" +
-        listID + "/"
+        listID +
+        "/"
       );
     },
     getLists() {
       axios
-        //address needs change to coop
         .post("https://api.shortlist.nyc/shortlists/all", {
-          //name might need change
           user_id: this.acctID,
         })
         .then((response) => this.successGet(response.data))
         .catch(function (error) {
           console.log(error.response);
         });
-      console.log(this.myShortlists[0]);
-      //console.log("this my shortlist is: ", this.myShortlists);
     },
     saveList(listIndex) {
       let listSchools = this.myShortlists[listIndex].schools;
@@ -83,7 +79,7 @@ export default {
         school_ids: schoolList,
         shortlist_name: this.myShortlists[listIndex].shortlist_name,
         settings: this.myShortlists[listIndex].settings,
-      }
+      };
       axios
         .post(this.calculateSaveEndpoint(listIndex), payload)
         .then(function (response) {
@@ -168,11 +164,10 @@ export default {
         if (this.dragState.categorizeState.activeDrop) {
           let listIdx = this.dragState.categorizeState.schoolOverListIdx;
           if (listIdx == -1) {
-            // trash it;
+            // set current_trashed in db
             this.markSchoolAsTrashed(this.myRecommendations[0].id);
             this.removeTopCard();
             console.log("DELETE school");
-            // TODO set current_trashed in db
           } else {
             // assign it;
             console.log("ASSIGN SCHOOL");
