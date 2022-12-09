@@ -1,5 +1,8 @@
 <script>
 import axios from "axios";
+import cookie from "@/helpers/cookie.js";
+import { mapState } from "pinia";
+import { sessionStore } from "../../../states/sessionStore";
 export default {
   props: ["accountMetadata"],
   emits: ["appAccountUpdateName", "appRequestResetEmail"],
@@ -10,7 +13,6 @@ export default {
       nameAlert: "",
       email: "",
       validation: true,
-      pwResetSent: false,
     };
   },
   methods: {
@@ -52,21 +54,44 @@ export default {
 
       alert("Name updated!");
     },
-    async appRequestResetEmail() {
-      const content = await axios
+    validateEmail(email) {
+      let emailPattern = new RegExp(
+        "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+      );
+      return emailPattern.test(email);
+    },
+    enterEmail() {
+      var email = prompt("Enter your email here:");
+      if (this.validateEmail(email)) {
+        alert("Thank you, your password reset link has been sent. Please check your email.");
+        return email;
+      } else {
+        alert("You didn't enter a valid email, try again.");
+      }
+    },
+    successGet(responseData) {
+      console.log("get reset email function running");
+      console.log(responseData, "This is responseData from successGet");
+      console.log("my list looks like: ");
+    },
+    appRequestResetEmail() {
+      const emailInput = this.enterEmail();
+      axios
         .post("https://api.shortlist.nyc/auth/request-reset-email", {
-          email: this.email,
+          email: emailInput,
         })
-        .then((response) => this.successGet(response.data))
+        .then((email) => this.successGet(email))
         .catch(function (error) {
           console.log(error.response);
         });
-      console.log(content, "appRequestResetEmail from UserDetails");
-      alert("Please check your email");
-      this.pwResetSent = true;
     },
   },
+  
   computed: {
+    ...mapState(sessionStore, {
+      loginState: "loginState",
+      accountMetadata: "accountMetadata",
+    }),
     isUpdateDisabled() {
       if (!this.validation) {
         return false;
