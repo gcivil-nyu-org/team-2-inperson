@@ -53,7 +53,7 @@ export default {
       let listID = this.myShortlists[listIndex].shortlist_id;
       return (
         "http://shortlist-api-361033341.us-east-1.elb.amazonaws.com/shortlists/" +
-        listID
+        listID + "/"
       );
     },
     getLists() {
@@ -70,21 +70,22 @@ export default {
       console.log(this.myShortlists[0]);
       //console.log("this my shortlist is: ", this.myShortlists);
     },
-    saveList(listIndex, listSchools) {
-      //console.log("school data looks like: ", listSchools);
-      console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
-      console.log("endpoint is: ", this.calculateSaveEndpoint(listIndex));
+    saveList(listIndex) {
+      let listSchools = this.myShortlists[listIndex].schools;
+      // console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
+      // console.log("endpoint is: ", this.calculateSaveEndpoint(listIndex));
       let schoolList = [];
       for (let i = 0; i < listSchools.length; i++) {
-        schoolList.push(listSchools[i].id);
+        schoolList.push(listSchools[i].schoolMetadata.id);
       }
-      console.log("save schools ids: ", schoolList);
+      let payload = {
+        user_id: this.acctID,
+        school_ids: schoolList,
+        shortlist_name: this.myShortlists[listIndex].shortlist_name,
+        settings: this.myShortlists[listIndex].settings,
+      }
       axios
-        //three end points for each list? what to send, should be post
-        .put(this.calculateSaveEndpoint(listIndex), {
-          school_ids: listSchools,
-          settings: this.myShortlists[listIndex].settings,
-        })
+        .post(this.calculateSaveEndpoint(listIndex), payload)
         .then(function (response) {
           console.log(response);
         })
@@ -177,14 +178,14 @@ export default {
             console.log("ASSIGN SCHOOL");
             if (this.myShortlists[listIdx].schools.length < 4) {
               this.myShortlists[listIdx].schools.push(
-                this.dragState.categorizeState.schoolData
+                this.dragState.categorizeState.schoolData.school
               );
+              // set current_accepted in db
               this.markSchoolAsAccepted(this.myRecommendations[0].id);
               this.removeTopCard();
-              // TODO set current_accepted in db
-              console.log("listIDX is: ", listIdx);
-              console.log("save schools are: ", this.myShortlists[listIdx].schools);
-              this.saveList(listIdx, this.myShortlists[listIdx].schools);
+              // console.log("listIDX is: ", listIdx);
+              // console.log("save schools are: ", this.myShortlists[listIdx].schools);
+              this.saveList(listIdx);
             } else {
               alert("List is full");
             }
