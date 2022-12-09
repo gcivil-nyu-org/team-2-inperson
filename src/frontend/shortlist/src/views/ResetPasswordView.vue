@@ -7,6 +7,16 @@ export default {
   setup() {
     return { router: useRoute() };
   },
+  mounted() {
+    //fetching information from url sent to the email address
+    //let params = this.router.query;
+    let params = this.$route.query;
+    //somehow this line makes thing works, so param does not provide bool but string
+    this.isSent = params.success == "true";
+    this.errorMessage = params.message;
+    console.log(this.errorMessage);
+    console.log(this.isSent);
+  },
   data() {
     return {
       form: {
@@ -63,12 +73,11 @@ export default {
     },
     submitPWResetForm() {
       axios
-        .post("https://api.shortlist.nyc/auth/password-reset/uidb64/token", {
+        .post("https://api.shortlist.nyc/password-reset", {
           newPassword: this.newPassword,
           confirmPassword: this.confirmPassword,
           token: this.$route.params.token,
           uidb64: this.$route.params.uidb64,
-          isSent: this.$route.params.success,
         })
         .then(function (response) {
           console.log(response);
@@ -77,7 +86,7 @@ export default {
           console.log(error);
         });
       console.log(response);
-      alert("Your password has been successfully updated!")
+      this.$router.push('/login');
       this.$emit("appPasswordReset", {
         email: this.form.email,
         currentPassword: this.form.currentPassword,
@@ -109,7 +118,6 @@ export default {
   <main style="margin: auto">
     <div class="form-container">
       {{ $router.query }}
-      <template v-if="this.isSent">
       <div class="email">
         <label>Your Email</label>
         <input
@@ -195,7 +203,6 @@ export default {
       >
         Submit
       </button>
-      </template>
     </div>
   </main>
 </template>
