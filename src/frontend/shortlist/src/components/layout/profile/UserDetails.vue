@@ -1,8 +1,5 @@
 <script>
 import axios from "axios";
-import cookie from "@/helpers/cookie.js";
-import { mapState } from "pinia";
-import { sessionStore } from "../../../states/sessionStore";
 export default {
   props: ["accountMetadata"],
   emits: ["appAccountUpdateName", "appRequestResetEmail"],
@@ -88,10 +85,6 @@ export default {
   },
   
   computed: {
-    ...mapState(sessionStore, {
-      loginState: "loginState",
-      accountMetadata: "accountMetadata",
-    }),
     isUpdateDisabled() {
       if (!this.validation) {
         return false;
