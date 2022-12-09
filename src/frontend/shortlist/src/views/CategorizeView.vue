@@ -45,9 +45,7 @@ export default {
       });
     },
     successGet(responseData) {
-      console.log("get function running");
       this.myShortlists = responseData;
-      console.log("my list looks like: ", this.myShortlists);
     },
     calculateSaveEndpoint(listIndex) {
       let listID = this.myShortlists[listIndex].shortlist_id;
