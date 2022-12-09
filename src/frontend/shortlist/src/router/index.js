@@ -8,6 +8,7 @@ import ShortlistApi from "@/api/shortlist.js";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 import VerifiedView from "../views/VerifiedView.vue";
+import ResetPasswordView from "../views/ResetPasswordView.vue";
 
 function getUserMetadata(payload, store) {
   let data = { userID: payload };
@@ -104,6 +105,11 @@ const router = createRouter({
       path: "/reset",
       name: "resetpassword-view",
       component: () => import("../views/ResetPasswordView.vue"),
+    },
+    {
+      path: "/password-reset",
+      name: "ResetPasswordView",
+      component: ResetPasswordView,
     },
   ],
 });

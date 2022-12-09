@@ -1,7 +1,12 @@
 <script>
+import axios from "axios";
+import { useRoute } from "vue-router";
 export default {
   name: "ResetPasswordView",
   emits: ["appPasswordReset"],
+  setup() {
+    return { router: useRoute() };
+  },
   data() {
     return {
       form: {
@@ -10,8 +15,10 @@ export default {
         newPassword: "",
         confirmPassword: "",
       },
+      isSent: true,
       passwordAlert: "",
       validation: true,
+      errorMessage: "",
     };
   },
   methods: {
@@ -55,6 +62,22 @@ export default {
       return this.form.newPassword == this.form.confirmPassword;
     },
     submitPWResetForm() {
+      axios
+        .post("https://api.shortlist.nyc/auth/password-reset/uidb64/token", {
+          newPassword: this.newPassword,
+          confirmPassword: this.confirmPassword,
+          token: this.$route.params.token,
+          uidb64: this.$route.params.uidb64,
+          isSent: this.$route.params.success,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      console.log(response);
+      alert("Your password has been successfully updated!")
       this.$emit("appPasswordReset", {
         email: this.form.email,
         currentPassword: this.form.currentPassword,
@@ -85,6 +108,8 @@ export default {
 <template>
   <main style="margin: auto">
     <div class="form-container">
+      {{ $router.query }}
+      <template v-if="this.isSent">
       <div class="email">
         <label>Your Email</label>
         <input
@@ -170,6 +195,7 @@ export default {
       >
         Submit
       </button>
+      </template>
     </div>
   </main>
 </template>
