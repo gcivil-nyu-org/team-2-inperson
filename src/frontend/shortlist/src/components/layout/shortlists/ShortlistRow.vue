@@ -74,12 +74,11 @@ export default {
   methods: {
     shareList() {
       console.log(this.shortlistId);
-      
+
       this.$router.push({
         path: "share",
         query: { shortlistId: this.shortlistId },
       });
-      
     },
     dragStart(e, itemIdx) {
       e.stopPropagation();
