@@ -29,8 +29,9 @@ const appSessionStore = sessionStore();
 
 function markSchoolAsTrashed(payload) {
   console.log(payload);
-  let success = () => {
+  let success = (response) => {
     console.log("Marked the schoolCard as being trashed");
+    console.log(response);
   };
   let failure = (err) => {
     console.log(

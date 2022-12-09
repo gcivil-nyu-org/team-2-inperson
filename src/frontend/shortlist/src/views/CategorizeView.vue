@@ -172,8 +172,8 @@ export default {
             console.log("DELETE school");
           } else {
             // assign it;
-            console.log("ASSIGN SCHOOL");
             if (this.myShortlists[listIdx].schools.length < 4) {
+              console.log("ASSIGN SCHOOL");
               this.myShortlists[listIdx].schools.push(
                 this.dragState.categorizeState.schoolData.school
               );
@@ -209,7 +209,7 @@ export default {
     deleteFromList() {
       // console.log("DELETE FROM LIST: ", this.schoolDetailModalData.data.schoolMetadata.id);
       let schoolIdx = this.schoolDetailModalData.schoolIdx;
-      let listIdx = this.schoolDetailModalData.listIdx; 
+      let listIdx = this.schoolDetailModalData.listIdx;
       this.myShortlists[listIdx].school_ids.splice(schoolIdx, 1);
       this.myShortlists[listIdx].schools.splice(schoolIdx, 1);
       this.saveList(listIdx);
