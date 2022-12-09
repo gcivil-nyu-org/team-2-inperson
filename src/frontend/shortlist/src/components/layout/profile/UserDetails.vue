@@ -60,7 +60,9 @@ export default {
     enterEmail() {
       var email = prompt("Enter your email here:");
       if (this.validateEmail(email)) {
-        alert("Thank you, your password reset link has been sent. Please check your email.");
+        alert(
+          "Thank you, your password reset link has been sent. Please check your email."
+        );
         return email;
       } else {
         alert("You didn't enter a valid email, try again.");
@@ -83,7 +85,7 @@ export default {
         });
     },
   },
-  
+
   computed: {
     isUpdateDisabled() {
       if (!this.validation) {
