@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+
 export default {
   emits: ["addStudent"],
   data() {
@@ -8,7 +10,19 @@ export default {
   },
   methods: {
     sendInvite() {
-      this.$emit("addStudent", this.newEmail);
+      axios
+        //address needs change to coop
+        .post("https://api.shortlist.nyc/shortlists/send-invite", {
+          //name might need change
+          email: this.newEmail,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+        });
+      alert("Invitation Sent!");
     },
   },
 };
