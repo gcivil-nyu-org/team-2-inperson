@@ -197,8 +197,9 @@ export default {
       this.myShortlists[e.listId].settings = JSON.parse(
         JSON.stringify(e.settings)
       );
-      // TODO: send update to api
-      console.log("SEND UPDATE SETTINGS:", e.settings);
+      // send update to api
+      // console.log("SEND UPDATE SETTINGS:", e.settings);
+      this.saveList(e.listId);
     },
     shareList(e) {
       console.log("SHARED LIST #:", e);
