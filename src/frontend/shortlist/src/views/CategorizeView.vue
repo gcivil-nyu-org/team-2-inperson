@@ -69,7 +69,6 @@ export default {
     saveList(listIndex) {
       let listSchools = this.myShortlists[listIndex].schools;
       // console.log("list id is: ", this.myShortlists[listIndex].shortlist_id);
-      // console.log("endpoint is: ", this.calculateSaveEndpoint(listIndex));
       let schoolList = [];
       for (let i = 0; i < listSchools.length; i++) {
         schoolList.push(listSchools[i].schoolMetadata.id);
@@ -99,8 +98,11 @@ export default {
     },
     showSchoolModal(e) {
       this.schoolDetailModalVisible = true;
-      this.schoolDetailModalData =
-        this.myShortlists[e.listIdx].schools[e.schoolIdx];
+      this.schoolDetailModalData = {
+        listIdx: e.listIdx,
+        schoolIdx: e.schoolIdx,
+        data: this.myShortlists[e.listIdx].schools[e.schoolIdx],
+      };
     },
     dragDropOver() {
       if (this.dragState.dragType == "reorderList") {
@@ -204,6 +206,18 @@ export default {
     shareList(e) {
       console.log("SHARED LIST #:", e);
     },
+    deleteFromList() {
+      // console.log("DELETE FROM LIST: ", this.schoolDetailModalData.data.schoolMetadata.id);
+      let schoolIdx = this.schoolDetailModalData.schoolIdx;
+      let listIdx = this.schoolDetailModalData.listIdx; 
+      this.myShortlists[listIdx].school_ids.splice(schoolIdx, 1);
+      this.myShortlists[listIdx].schools.splice(schoolIdx, 1);
+      this.saveList(listIdx);
+
+      // reset modal data
+      this.schoolDetailModalVisible = false;
+      this.schoolDetailModalData = null;
+    },
     getRecommendations(count = 10) {
       let req = shortlistApi
         .getRecommendations()
@@ -263,11 +277,11 @@ export default {
             margin-bottom: 20px;
           "
         >
-          Discard?
+          <button @click="deleteFromList()">Discard?</button>
         </div>
         <SchoolCard
           v-if="schoolDetailModalData"
-          :schoolData="schoolDetailModalData"
+          :schoolData="schoolDetailModalData.data"
         />
       </div>
     </ModalFullScreen>
