@@ -21,11 +21,11 @@
     <p class="contents">
       Each list can contain up to four different schools and users can
       personalize the lists' name, style, and priority. Once users are satisfied
-      with their selections in a list, they can share such a list to their friends
-      and families so that they can discuss which schools are the best options
-      for their high school experience. What could be more exciting than talking
-      about which high school to go together with your besties 👭👬 in a few
-      months?
+      with their selections in a list, they can share such a list to their
+      friends and families so that they can discuss which schools are the best
+      options for their high school experience. What could be more exciting than
+      talking about which high school to go together with your besties 👭👬 in a
+      few months?
     </p>
     <p class="contents">
       Does this sound fun and familiar? We certainly hope so 😉 We are here to
