@@ -5,17 +5,15 @@ export default {
   components: {
     Forget,
   },
-}
+};
 </script>
 
 <template>
   <form>
     <div>
-    <Forget/>
-  </div>
+      <Forget />
+    </div>
   </form>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

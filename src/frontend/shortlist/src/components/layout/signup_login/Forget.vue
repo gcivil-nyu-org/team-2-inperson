@@ -7,8 +7,7 @@ export default {
       form: {
         email: "",
       },
-      validation:false, 
-    }
+    };
   },
   methods: {
     validateEmail(email) {
@@ -31,16 +30,17 @@ export default {
         .catch(function (error) {
           console.log(error.response);
         });
-      alert("Thank you, your password reset link has been sent. Please check your email.");
-    },
-    },
-  computed: {
-    isSubmitDisabled() {
-      this.validation = this.validateEmail(this.form.email);
-      return this.validation;
+      alert(
+        "Thank you, your password reset link has been sent. Please check your email."
+      );
     },
   },
-}
+  computed: {
+    isSubmitDisabled() {
+      return this.validateEmail(this.form.email);
+    },
+  },
+};
 </script>
 
 <template>
