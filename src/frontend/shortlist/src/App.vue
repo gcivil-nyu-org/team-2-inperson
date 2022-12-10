@@ -27,21 +27,6 @@ const appSessionStore = sessionStore();
 //   req.execute();
 // }
 
-function unmarkSchoolCards(payload) {
-  console.log(payload);
-  let success = (response) => {
-    console.log("This school has been discarded and it is not ");
-    console.log(response);
-  };
-  let failure = (err) => {
-    console.log(
-      "Failed to mark the schoolCard as being trashed",
-      err.response.data
-    );
-  };
-  let req = apiClient.updateRecommendation(payload, success, failure);
-  req.execute();
-}
 
 function markSchoolAsTrashed(payload) {
   console.log(payload);
@@ -190,7 +175,6 @@ function appAddStudent(payload) {
       @markSchoolAsAccepted="markSchoolAsAccepted"
       @markSchoolAsTrashed="markSchoolAsTrashed"
       @appRequestResetEmail="appRequestResetEmail"
-      @unmarkSchoolCards="unmarkSchoolCards"
     />
   </div>
 </template>

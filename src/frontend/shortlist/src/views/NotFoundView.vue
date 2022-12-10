@@ -15,16 +15,27 @@
     </h3>
   <table class = "table">
   <tr>
-    <td>Take me home</td>
+    <td>
+      <router-link to="/" >
+          <p class="nav-item nav-link" id="small">Take me home</p>
+        </router-link>
+      </td>
   </tr>
   <tr>
-    <td>Sign me up</td>
+    <td><router-link to="/Signup">
+          <p class="nav-item nav-link" id="small">Sign me up</p>
+        </router-link>
+      </td>
   </tr>
   <tr>
-    <td>Log me in</td>
+    <td><router-link to="/Login">
+          <p class="nav-item nav-link" id="small">Log me in</p>
+        </router-link></td>
   </tr>
     <tr>
-    <td>What is Shortlist again?</td>
+    <td><router-link to="/about">
+          <p class="nav-item nav-link" id="small">What is Shortlist again?</p>
+        </router-link></td>
   </tr>
 </table>
 </template>
@@ -42,14 +53,21 @@ h4 {
   font-family: "Cabin Sketch", cursive;
 }
 #small.instructions {
-  margin-top: 5%;
+  /* margin-top: 5%; */
+  margin-left: 25%; 
+  font-size: 35px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+}
+td {
+  /* margin-top: 5%; */
   margin-left: 25%; 
   font-size: 25px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
 }
 .table {
-  position: relative; 
+  /* position: relative;  */
   margin-left: 25%; 
 }
 </style>
