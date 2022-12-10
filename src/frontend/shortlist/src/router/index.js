@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DemoView from "../views/DemoView.vue";
+import ShareView from "../views/ShareView.vue";
 import ApiDemo from "../views/ApiDemo.vue";
 import { sessionStore } from "../states/sessionStore.js";
 import cookie from "@/helpers/cookie.js";
@@ -110,6 +111,11 @@ const router = createRouter({
       path: "/reset",
       name: "resetpassword-view",
       component: () => import("../views/ResetPasswordView.vue"),
+    },
+    {
+      path: "/share",
+      name: "share-view",
+      component: ShareView,
     },
   ],
 });
