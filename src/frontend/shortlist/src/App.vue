@@ -11,7 +11,7 @@ const router = useRouter();
 const appSessionStore = sessionStore();
 
 function appPasswordReset(payload) {
-  console.log(payload);
+  console.log(payload, "This is from appPasswordReset");
   let apiReq = {
     email: payload.email,
     currentPassword: payload.currentPassword,
