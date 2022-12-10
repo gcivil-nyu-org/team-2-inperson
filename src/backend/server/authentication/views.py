@@ -38,6 +38,7 @@ from django.http import JsonResponse
 
 # from .helpers import default_shortlists
 from django.http import HttpResponsePermanentRedirect
+from api.handlers.recommendation import rank_update
 
 
 class CustomRedirect(HttpResponsePermanentRedirect):
@@ -325,6 +326,7 @@ class UserDetailsView(generics.GenericAPIView):
             serializer = UpdateUserSerializer(user, data=data)
             if serializer.is_valid():
                 serializer.save()
+                rank_update(user_id, data)
                 return JsonResponse(serializer.data)
             else:
                 return Response(

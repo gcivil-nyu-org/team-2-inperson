@@ -56,7 +56,19 @@ FROM
 
 WHERE schoolz.id='{}'
 """
-
+BASE_UPDATE = """
+UPDATE api_recommendation recz
+    SET rank_asc = rank_asc - ROUND(dimz_valz.value::numeric * {})
+FROM
+    api_school as schoolz
+INNER JOIN api_schooldimvalue as dimz_valz ON
+    dimz_valz.school_id = schoolz.id
+INNER JOIN api_schooldim as dimz ON
+    dimz.id = dimz_valz.dim_id
+WHERE recz.school_id = schoolz.id
+AND dimz.field = '{}'
+AND recz.account_id = {}
+"""
 
 def school_formatter(school_id: str, account_id: str):
     """Used to format the school output with preference integration."""
@@ -93,6 +105,48 @@ def strategy_ranking_only(account_id: str, count: int):
 
 def strategy_explore_exploit(account_id: str, explore_prob: float, count: int):
     return "Not Implemented"
+
+# Update rankings based on preference data
+def rank_update(account_id: str, prefData: dict):
+    # print(type(data))
+    boroughs = [
+        "",
+        "Bronx",
+        "Brooklyn",
+        "Manhattan",
+        "Queens",
+        "Staten Island",
+      ]
+    for question in prefData["preferences"]:
+        response = prefData["preferences"][question]["Response"]
+        if not response:
+            continue
+        # rigorous instruction
+        elif question == "q1": 
+            QUERY = BASE_UPDATE.format(int(response)*100, 'survey_pp_ri', account_id)
+        # supportive environment
+        elif question == "q2":
+            QUERY = BASE_UPDATE.format(int(response)*100, 'survey_pp_se', account_id)
+        # borough
+        elif question == "q3":
+            QUERY = """
+            UPDATE api_recommendation R
+                SET rank_asc = rank_asc - 1000
+            FROM api_school S 
+            WHERE R.school_id = S.id
+            AND S.borough_code = {}
+            AND R.account_id = {}
+            """.format(boroughs.index(response), account_id)
+        # academic achievement
+        elif question == "q4":
+            QUERY = BASE_UPDATE.format(int(response)*.1, 'mean_sat_readwrite', account_id)
+
+        with connection.cursor() as cursor:
+            print(QUERY)
+            cursor.execute(QUERY)
+                # schools = dictfetchall(cursor)
+                # print(schools)
+    return "Updated rankings: ", account_id
 
 
 @csrf_exempt
