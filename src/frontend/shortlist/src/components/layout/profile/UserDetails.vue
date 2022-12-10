@@ -78,6 +78,8 @@ export default {
       axios
         .post("https://api.shortlist.nyc/auth/request-reset-email", {
           email: emailInput,
+          // token: this.$route.params.token,
+          // uidb64: this.$route.params.uidb64,
         })
         .then((email) => this.successGet(email))
         .catch(function (error) {

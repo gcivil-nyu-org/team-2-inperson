@@ -72,13 +72,20 @@ export default {
       return this.form.newPassword == this.form.confirmPassword;
     },
     submitPWResetForm() {
+      // var addedData = new FormData();
+      // addedData.append(newPassword, this.newPassword);
+      // addedData.append(confirmPassword, this.confirmPassword);
+      // addedData.append(uidb64, this.$route.params.uidb64);
+      // addedData.append(token, this.$route.params.token);
       axios
-        .post("https://api.shortlist.nyc/password-reset", {
+        .post("https://api.shortlist.nyc/password-reset/${uidb64}/${token}", 
+        {
           newPassword: this.newPassword,
           confirmPassword: this.confirmPassword,
           token: this.$route.params.token,
           uidb64: this.$route.params.uidb64,
-        })
+        }
+        )
         .then(function (response) {
           console.log(response);
         })
