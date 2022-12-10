@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DemoView from "../views/DemoView.vue";
 import ApiDemo from "../views/ApiDemo.vue";
+import ForgetPasswordView from "../views/ForgetPasswordView.vue";
 import { sessionStore } from "../states/sessionStore.js";
 import cookie from "@/helpers/cookie.js";
 import ShortlistApi from "@/api/shortlist.js";
@@ -70,7 +71,7 @@ const router = createRouter({
     },
     {
       path: "/forget",
-      name: "ForgetPasswordView",
+      name: "forgetpassword-view",
       component: () => import("../views/ForgetPasswordView.vue"),
       meta: { requiresGuest: true },
     },

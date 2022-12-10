@@ -1,12 +1,18 @@
 <script>
+import Forget from "../components/layout/signup_login/Forget.vue";
 export default {
-  
+  name: "ForgetPasswordView",
+  components: {
+    Forget,
+  },
 }
 </script>
 
 <template>
   <form>
-    <p> Enter Your Email </p>
+    <div>
+    <Forget/>
+  </div>
   </form>
 </template>
 
