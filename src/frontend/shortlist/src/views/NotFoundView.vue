@@ -58,13 +58,6 @@ h4 {
   font-family: "Cabin Sketch", cursive;
   color: #008037;
 }
-td {
-  margin-bottom: 10%;
-  margin-left: 25%;
-  font-size: 25px;
-  font-weight: 200;
-  font-family: "Cabin Sketch", cursive;
-}
 .options {
   margin-bottom: 10%;
   margin-left: 25%;
