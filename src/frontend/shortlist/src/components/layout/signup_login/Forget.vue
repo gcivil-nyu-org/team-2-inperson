@@ -36,6 +36,7 @@ export default {
     },
   computed: {
     isSubmitDisabled() {
+      this.validation = this.validateEmail(this.form.email);
       return this.validation;
     },
   },
@@ -67,7 +68,7 @@ export default {
         id="big-instructions"
         class="btn btn-outline-dark"
         @click.prevent="submitForgetForm"
-        :disabled="isSubmitDisabled"
+        :disabled="!isSubmitDisabled"
       >
         Submit
       </button>
