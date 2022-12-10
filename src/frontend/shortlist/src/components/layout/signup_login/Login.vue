@@ -29,6 +29,7 @@ export default {
         email: this.form.email.trim(),
         password: this.form.password,
       });
+      console.log(loginState, "loginState");
     },
   },
   computed: {

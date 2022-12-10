@@ -12,7 +12,7 @@ import axios from "axios";
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
 
 export default {
-  emits: ["markSchoolAsAccepted", "markSchoolAsTrashed"],
+  emits: ["markSchoolAsAccepted", "markSchoolAsTrashed", "unmarkSchoolCards"],
   components: {
     ShortlistManager,
     RecommendationStack,
@@ -32,6 +32,13 @@ export default {
     },
   },
   methods: {
+    unmarkSchoolCards(recoID) {
+      this.$emit("unmarkSchoolCards", {
+        recoID: recoID, 
+        accepted: true, 
+        trashed: true, 
+      })
+    },
     markSchoolAsAccepted(recoID) {
       this.$emit("markSchoolAsAccepted", {
         recoID: recoID,
@@ -210,6 +217,7 @@ export default {
       // console.log("DELETE FROM LIST: ", this.schoolDetailModalData.data.schoolMetadata.id);
       let schoolIdx = this.schoolDetailModalData.schoolIdx;
       let listIdx = this.schoolDetailModalData.listIdx;
+      this.unmarkSchoolCards(this.myRecommendations[0].id); 
       this.myShortlists[listIdx].school_ids.splice(schoolIdx, 1);
       this.myShortlists[listIdx].schools.splice(schoolIdx, 1);
       this.saveList(listIdx);
