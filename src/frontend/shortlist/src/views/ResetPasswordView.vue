@@ -70,21 +70,18 @@ export default {
     },
     submitPWResetForm() {
       axios
-        .post("https://api.shortlist.nyc/auth/password-reset-complete", 
-        {
+        .post("https://api.shortlist.nyc/auth/password-reset-complete", {
           email: this.form.email,
           newPassword: this.form.newPassword,
           token: this.$route.params.token,
           uidb64: this.$route.params.uidb64,
-        }
-        )
+        })
         .then(function (response) {
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
         });
-      console.log(response);
       this.$emit("appPasswordReset", {
         email: this.form.email,
         currentPassword: this.form.currentPassword,
@@ -92,7 +89,7 @@ export default {
       });
       console.log(this.form.email);
       alert("Your password has been reset");
-      this.$router.push({ path: '/login'});
+      this.$router.push({ path: "/login" });
       return;
     },
   },

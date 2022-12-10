@@ -22,9 +22,10 @@ function appPasswordReset(payload) {
   };
   let failure = (err) => {
     console.log(
-      "Failed to change the password in appPasswordReset", err.response.data
+      "Failed to change the password in appPasswordReset",
+      err.response.data
     );
-  }
+  };
   let req = apiClient.resetPassword(apiReq, success, failure);
   req.execute();
 }
