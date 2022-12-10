@@ -66,7 +66,7 @@ export default {
     </label>
     <div class="report-school-cards">
       <template
-        v-for="(schoolData, schoolIndex) in shortlistData[0].schools"
+        v-for="schoolData in shortlistData[0].schools"
         :key="schoolData"
       >
         <SchoolShareCard :schoolData="schoolData" />
