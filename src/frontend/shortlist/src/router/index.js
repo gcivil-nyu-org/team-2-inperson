@@ -71,7 +71,7 @@ const router = createRouter({
     },
     {
       path: "/forget",
-      name: "ForgetPassworView",
+      name: "forgetpassword-view",
       component: () => import("../views/ForgetPasswordView.vue"),
       meta: { requiresGuest: true },
     },
