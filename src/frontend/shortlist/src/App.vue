@@ -27,7 +27,6 @@ const appSessionStore = sessionStore();
 //   req.execute();
 // }
 
-
 function markSchoolAsTrashed(payload) {
   console.log(payload);
   let success = (response) => {
