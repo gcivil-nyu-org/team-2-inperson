@@ -1,14 +1,15 @@
 <script>
 import ShortlistApi from "@/api/shortlist";
 import SchoolShareCard from "../components/school/SchoolShareCard.vue";
+import MaterialIcon from "../components/icons/MaterialIcon.vue";
 const apiClient = new ShortlistApi("https://api.shortlist.nyc/");
 export default {
   components: {
     SchoolShareCard,
+    MaterialIcon,
   },
   methods: {
     getBorough(schoolIndex) {
-      // console.log(boroid)
       let boros = [
         "",
         "Bronx",
@@ -21,13 +22,12 @@ export default {
         this.shortlistData[0].schools[schoolIndex].schoolMetadata.boroughCode
       ];
     },
-    testFunc() {
-      console.log(this.shortlistData);
-    },
     getShortlistData(listId) {
       let success = (result) => {
         this.shortlistData = result.data;
         this.dataSuccess = true;
+        this.bgcolor = this.shortlistData[0].settings.color;
+        //console.log(this.shortlistData[0].settings);
       };
       let fail = (err) => {
         this.dataSuccess = false;
@@ -44,9 +44,11 @@ export default {
   data() {
     let dataSuccess = false;
     let shortlistData = {};
+    let bgcolor = "#030303";
     return {
       dataSuccess,
       shortlistData,
+      bgcolor,
     };
   },
 };
@@ -54,8 +56,15 @@ export default {
 
 <template>
   <div v-if="dataSuccess">
-    <h1>Report Card</h1>
-    <div class="school-simple-container">
+    <label class="share-shortlist-title">
+      <MaterialIcon
+        :src="this.shortlistData[0].settings.icon.value"
+        size="20"
+        style="color: white; size: 30px"
+      />
+      {{ this.shortlistData[0].shortlist_name }} Shortlist Report
+    </label>
+    <div class="report-school-cards">
       <template
         v-for="(schoolData, schoolIndex) in shortlistData[0].schools"
         :key="schoolData"
@@ -73,21 +82,25 @@ export default {
   </div>
 </template>
 <style scoped>
-.school-simple-container {
-  width: 1000px;
-  height: 100%;
-  border-radius: 20px;
-  padding: 40px;
-  box-sizing: border-box;
-  background: #ecf0f3;
-  box-shadow: 14px 14px 20px #779886, -14px -14px 20px white;
-  font-family: "Aleo";
-  display: flex;
-  flex-direction: column;
-}
-.school-simple-name-row {
+.share-shortlist-title {
   width: 100%;
-  padding: 15px;
+  font-family: "Aleo";
+  font-size: 1.5rem;
+  padding: 10px;
+  line-height: 2rem;
+  color: #ffffff;
+  text-align: center;
+  background-color: #030303;
+}
+.report-school-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) 0fr;
+  grid-template-rows: 1fr repeat(4, 0fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-color: v-bind(bgcolor);
+  padding: 10px;
+  justify-items: center;
 }
 .school-simple-name-name {
   width: 100%;
