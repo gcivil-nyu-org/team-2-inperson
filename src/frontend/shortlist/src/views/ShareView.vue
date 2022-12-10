@@ -72,10 +72,6 @@ export default {
         <SchoolShareCard :schoolData="schoolData" />
       </template>
     </div>
-
-    <button @click="testFunc()" style="background-color: green; color: white">
-      Test
-    </button>
   </div>
   <div v-else>
     <p>Error, you school list maybe empty.</p>
