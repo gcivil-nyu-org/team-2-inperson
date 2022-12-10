@@ -76,7 +76,7 @@ export default {
   </main>
 </template>
 
-<style scoped>
+<style>
 .form-container {
   position: absolute;
   margin-left: 34%;
