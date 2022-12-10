@@ -119,6 +119,12 @@ export default {
         >
           Sign me up!
         </button>
+        <button
+          @click="$router.replace('/forget')"
+          class="btn btn-outline-dark"
+        >
+          Forget Password 
+        </button>
       </div>
     </form>
   </div>
