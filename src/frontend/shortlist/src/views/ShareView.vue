@@ -1,7 +1,11 @@
 <script>
 import ShortlistApi from "@/api/shortlist";
+import SchoolShareCard from "../components/school/SchoolShareCard.vue";
 const apiClient = new ShortlistApi("https://api.shortlist.nyc/");
 export default {
+  components: {
+    SchoolShareCard,
+  },
   methods: {
     getBorough(schoolIndex) {
       // console.log(boroid)
@@ -56,22 +60,7 @@ export default {
         v-for="(schoolData, schoolIndex) in shortlistData[0].schools"
         :key="schoolData"
       >
-        <div class="school-simple-name-row">
-          <div class="school-simple-name-name">
-            {{ schoolData.schoolMetadata.name }}
-          </div>
-          <div class="school-simple-name-borough">
-            {{ getBorough(schoolIndex) }}
-            <br />Phone: {{ schoolData.schoolMetadata.phone }} <br />Email:
-            {{ schoolData.schoolMetadata.email }} <br />School Website:
-            <a :href="schoolData.schoolMetadata.url">{{
-              schoolData.schoolMetadata.url
-            }}</a>
-          </div>
-        </div>
-        <div class="school-simple-dim-container">
-          {{ schoolData.schoolMetadata.desc }}
-        </div>
+        <SchoolShareCard :schoolData="schoolData" />
       </template>
     </div>
 
