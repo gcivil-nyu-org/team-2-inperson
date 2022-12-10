@@ -107,7 +107,6 @@ export default {
         >
           Login
         </button>
-        <!-- TODO: Forgot password feature -->
         <p class="instructions" id="small">or</p>
         <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
           Log In with Google
