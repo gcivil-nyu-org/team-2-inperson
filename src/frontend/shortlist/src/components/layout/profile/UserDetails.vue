@@ -10,6 +10,7 @@ export default {
       nameAlert: "",
       email: "",
       validation: true,
+      pwResetSent: false,
     };
   },
   methods: {
