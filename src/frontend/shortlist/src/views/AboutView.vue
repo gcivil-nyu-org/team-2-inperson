@@ -2,16 +2,17 @@
 
 <template>
   <div class="container">
-    <h1>Shortlist About TBA</h1>
+    <h1>About Shortlist</h1>
   </div>
 </template>
 
 <style>
 .container {
-  margin: auto;
-  width: 50%;
-  height: 100%;
-  border: 3px solid green;
-  padding: 10px;
+  margin-left: 40%;
+}
+.h1 {
+  font-size: 50px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
 }
 </style>
