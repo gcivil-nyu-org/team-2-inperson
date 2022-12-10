@@ -107,7 +107,7 @@ const router = createRouter({
       component: () => import("../views/ResetPasswordView.vue"),
     },
     {
-      path: "/password-reset/:uidb64/:token",
+      path: "/reset",
       name: "ResetPasswordView",
       component: ResetPasswordView,
     },

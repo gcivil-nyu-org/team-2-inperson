@@ -12,10 +12,8 @@ export default {
     //let params = this.router.query;
     let params = this.$route.query;
     //somehow this line makes thing works, so param does not provide bool but string
-    this.isSent = params.success == "true";
     this.errorMessage = params.message;
     console.log(this.errorMessage);
-    console.log(this.isSent);
   },
   data() {
     return {
@@ -25,7 +23,6 @@ export default {
         newPassword: "",
         confirmPassword: "",
       },
-      isSent: true,
       passwordAlert: "",
       validation: true,
       errorMessage: "",
@@ -72,16 +69,11 @@ export default {
       return this.form.newPassword == this.form.confirmPassword;
     },
     submitPWResetForm() {
-      // var addedData = new FormData();
-      // addedData.append(newPassword, this.newPassword);
-      // addedData.append(confirmPassword, this.confirmPassword);
-      // addedData.append(uidb64, this.$route.params.uidb64);
-      // addedData.append(token, this.$route.params.token);
       axios
-        .post("https://api.shortlist.nyc/password-reset/${uidb64}/${token}", 
+        .post("https://api.shortlist.nyc/auth/password-reset-complete", 
         {
-          newPassword: this.newPassword,
-          confirmPassword: this.confirmPassword,
+          email: this.form.email,
+          newPassword: this.form.newPassword,
           token: this.$route.params.token,
           uidb64: this.$route.params.uidb64,
         }
@@ -93,14 +85,14 @@ export default {
           console.log(error);
         });
       console.log(response);
-      this.$router.push('/login');
       this.$emit("appPasswordReset", {
         email: this.form.email,
         currentPassword: this.form.currentPassword,
         newPassword: this.form.newPassword,
-        confirmPassword: this.form.confirmPassword,
       });
       console.log(this.form.email);
+      alert("Your password has been reset");
+      this.$router.push({ path: '/login'});
       return;
     },
   },
@@ -124,7 +116,6 @@ export default {
 <template>
   <main style="margin: auto">
     <div class="form-container">
-      {{ $router.query }}
       <div class="email">
         <label>Your Email</label>
         <input
