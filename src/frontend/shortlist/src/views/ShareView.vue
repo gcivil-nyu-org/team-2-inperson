@@ -80,6 +80,9 @@ export default {
   <div v-else>
     <p>Error, you school list maybe empty.</p>
   </div>
+  <router-link to="/">
+    <img src="/short-list-logo-light-navbar.png" class="logo_img"
+  /></router-link>
 </template>
 <style scoped>
 .share-shortlist-title {
@@ -102,16 +105,12 @@ export default {
   padding: 10px;
   justify-items: center;
 }
-.school-simple-name-name {
-  width: 100%;
-  text-align: end;
-  font-weight: bold;
-  font-size: 24px;
-  font-family: "Libre Baskerville";
-}
-.school-simple-name-borough {
-  width: 100%;
-  text-align: end;
-  font-size: 20px;
+
+.logo_img {
+  position: fixed;
+  bottom: 10px;
+  left: 45%;
+  width: 15vw;
+  height: 10vh;
 }
 </style>
