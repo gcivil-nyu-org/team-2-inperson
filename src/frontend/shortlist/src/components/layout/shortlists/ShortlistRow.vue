@@ -7,6 +7,7 @@ export default {
   name: "ShortlistRow",
   props: {
     listId: [String, Number],
+    shortlistId: [String, Number],
     listSettings: {
       default: {
         name: "MISSING",
@@ -71,6 +72,14 @@ export default {
     },
   },
   methods: {
+    shareList() {
+      console.log(this.shortlistId);
+
+      this.$router.push({
+        path: "share",
+        query: { shortlistId: this.shortlistId },
+      });
+    },
     dragStart(e, itemIdx) {
       e.stopPropagation();
       this.dragState.startReorderSchoolInList(
@@ -237,7 +246,7 @@ export default {
               src="share"
               :color="colorDeselect"
               size="18"
-              @click="$emit('shareList')"
+              @click="this.shareList"
             />
           </div>
         </div>

@@ -76,6 +76,7 @@ export default {
         :listId="listNum"
         :listSettings="list.settings"
         :listSchools="list.schools"
+        :shortlistId="list.shortlist_id"
         @listItemDetailClick="(e) => listItemDetailClick(e, listNum)"
         @shareList="shareList(listNum)"
         @changeListSettings="(s) => changeListSettings(s, listNum)"
