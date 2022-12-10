@@ -6,10 +6,10 @@
 
 <template>
   <h2>
-    <p class = "instructions" id = "big"> Sorry, that page does not exist. </p>
+    <p class = "instructions" id = "bigTitle"> Sorry, that page does not exist. </p>
     </h2>
     <h3>
-      <p class = "instructions" id = "small"> 
+      <p class = "instructions" id = "smallTitle"> 
         Here are some better options: 
         </p>
     </h3>
@@ -17,7 +17,7 @@
   <tr>
     <td>
       <router-link to="/" >
-          <p class="nav-item nav-link" id="small">Take me home</p>
+          <p class="nav-item" id="small">Take me home</p>
         </router-link>
       </td>
   </tr>
@@ -45,19 +45,20 @@ h4 {
   padding-top: 10%;
   text-align: center;
 }
-#big.instructions {
+#bigTitle {
   margin-top: 5%;
   margin-left: 25%; 
   font-size: 50px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
+  color: #008037;
 }
-#small.instructions {
-  /* margin-top: 5%; */
+#smallTitle {
   margin-left: 25%; 
   font-size: 35px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
+  color: #008037;
 }
 td {
   /* margin-top: 5%; */
@@ -69,5 +70,8 @@ td {
 .table {
   /* position: relative;  */
   margin-left: 25%; 
+}
+#small {
+  color: #008037;
 }
 </style>
