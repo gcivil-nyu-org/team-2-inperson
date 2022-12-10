@@ -29,8 +29,9 @@ const appSessionStore = sessionStore();
 
 function markSchoolAsTrashed(payload) {
   console.log(payload);
-  let success = () => {
+  let success = (response) => {
     console.log("Marked the schoolCard as being trashed");
+    console.log(response);
   };
   let failure = (err) => {
     console.log(
@@ -43,9 +44,8 @@ function markSchoolAsTrashed(payload) {
 }
 
 function markSchoolAsAccepted(payload) {
-  console.log(payload);
   let success = () => {
-    console.log("Marked as being accepted to one of the lists");
+    console.log("Marked as accepted: ", payload.recoID);
   };
   let failure = (err) => {
     console.log(
