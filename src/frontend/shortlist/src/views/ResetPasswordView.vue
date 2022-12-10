@@ -13,6 +13,8 @@ export default {
     let params = this.$route.query;
     //somehow this line makes thing works, so param does not provide bool but string
     this.errorMessage = params.message;
+    this.token = this.$route.params.token;
+    this.uidb64 = this.$route.params.uidb64;
     console.log(this.errorMessage);
   },
   data() {
@@ -83,13 +85,13 @@ export default {
           console.log(error);
         });
       this.$emit("appPasswordReset", {
-        email: this.form.email,
-        currentPassword: this.form.currentPassword,
         newPassword: this.form.newPassword,
+        token: this.token,
+        uidb64: this.uidb64,
       });
       console.log(this.form.email);
       alert("Your password has been reset");
-      this.$router.push({ path: "/login" });
+      // this.$router.push({ path: "/login" });
       return;
     },
   },

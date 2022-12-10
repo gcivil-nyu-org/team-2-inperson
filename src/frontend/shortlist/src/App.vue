@@ -13,9 +13,9 @@ const appSessionStore = sessionStore();
 function appPasswordReset(payload) {
   console.log(payload, "This is from appPasswordReset");
   let apiReq = {
-    email: payload.email,
-    currentPassword: payload.currentPassword,
-    newPassword: payload.newPassword,
+    password: payload.newPassword,
+    token: payload.token,
+    uidb64: payload.uidb64,
   };
   let success = () => {
     console.log("This password has been changed in appPasswordReset");

@@ -62,7 +62,7 @@ export class tempResetPassword {
   execute() {
     console.log(this.payload, "tempResetPassword");
     axios({
-      method: "POST",
+      method: "PATCH",
       url: "https://api.shortlist.nyc/auth/password-reset-complete",
       headers: {},
       data: this.payload,
