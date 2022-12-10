@@ -1,6 +1,19 @@
 <script>
+import { sessionStore } from "../states/sessionStore";
+import { mapState } from "pinia";
   export default {
-    name: "NotFound",
+    name: "NotFoundView",
+    // data() {
+    //   return {
+    //     isLoggedin: false ,
+    //   }
+    // },
+    computed: {
+    ...mapState(sessionStore, {
+      loginState: "loginState",
+      accountMetadata: "accountMetadata",
+    }),
+  },
   }
 </script>
 
@@ -13,31 +26,24 @@
         Here are some better options: 
         </p>
     </h3>
-  <table class = "table">
-  <tr>
-    <td>
+    <div class="options">
+
       <router-link to="/" >
-          <p class="nav-item" id="small">Take me home</p>
+          <p class="title">Take me home</p>
         </router-link>
-      </td>
-  </tr>
-  <tr>
-    <td><router-link to="/Signup">
-          <p class="nav-item nav-link" id="small">Sign me up</p>
+        
+      <router-link to="/signup" v-if="!loginState">
+          <p class= "title">Sign me up</p>
         </router-link>
-      </td>
-  </tr>
-  <tr>
-    <td><router-link to="/Login">
-          <p class="nav-item nav-link" id="small">Log me in</p>
-        </router-link></td>
-  </tr>
-    <tr>
-    <td><router-link to="/about">
-          <p class="nav-item nav-link" id="small">What is Shortlist again?</p>
-        </router-link></td>
-  </tr>
-</table>
+
+      <router-link to="/login" v-if="!loginState">
+          <p class="title" >Log me in</p>
+        </router-link>
+
+      <router-link to="/about">
+          <p class="title">What is Shortlist again?</p>
+        </router-link>
+  </div>
 </template>
 
 <style>
@@ -61,17 +67,17 @@ h4 {
   color: #008037;
 }
 td {
-  /* margin-top: 5%; */
+  margin-bottom: 10%;
   margin-left: 25%; 
   font-size: 25px;
-  font-weight: 500;
+  font-weight: 200;
   font-family: "Cabin Sketch", cursive;
 }
-.table {
-  /* position: relative;  */
+.options {
+  margin-bottom: 10%;
   margin-left: 25%; 
-}
-#small {
-  color: #008037;
+  font-size: 25px;
+  font-weight: 200;
+  font-family: "Cabin Sketch", cursive;
 }
 </style>
