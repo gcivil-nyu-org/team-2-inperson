@@ -12,7 +12,7 @@ export default {
     sendInvite() {
       axios
         //address needs change to coop
-        .post("https://api.shortlist.nyc/shortlists/send-invite", {
+        .post("https://api.shortlist.nyc/auth/send-invite", {
           //name might need change
           email: this.newEmail,
         })
