@@ -184,6 +184,6 @@ function appAddStudent(payload) {
   height: 100vh;
   margin: 0;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 </style>
