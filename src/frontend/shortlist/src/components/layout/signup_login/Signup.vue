@@ -188,13 +188,6 @@ export default {
           <div class="error-msg">&nbsp;</div>
         </div>
       </div>
-
-      <div class="mb-3">
-        <label for="formFile" class="form-label"
-          >Upload Parent/Guardian ID:</label
-        >
-        <input class="form-control" type="file" id="formFile" />
-      </div>
       <!-- TODO (Pooja): Birthdate field -->
       <button
         class="btn btn-outline-dark"

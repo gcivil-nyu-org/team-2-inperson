@@ -51,7 +51,7 @@ export default {
     <template v-if="this.isVerified">
       <form>
         <h5 this.testVerified="true">Verified successfully</h5>
-        <a href="https://www.shortlist.nyc/login" id="loginLink">
+        <a href="https://www.shortlist.nyc/login?firstTime=true" id="loginLink">
           Click here to login!
         </a>
       </form>

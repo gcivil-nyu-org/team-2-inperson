@@ -48,6 +48,14 @@ export default {
       accountMetadata: "accountMetadata",
     }),
   },
+  mounted() {
+    let params = this.$route.query;
+    this.firstTime = params.firstTime;
+    if (this.firstTime == "true") {
+      alert("Please go to your profile and update your preference!");
+      this.firstTime = "false";
+    }
+  },
 };
 </script>
 
