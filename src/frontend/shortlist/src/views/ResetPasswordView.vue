@@ -17,8 +17,6 @@ export default {
       },
       passwordAlert: "",
       validation: true,
-      token: "",
-      uidb64: "",
     };
   },
   methods: {
