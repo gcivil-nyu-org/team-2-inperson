@@ -45,14 +45,19 @@ export default {
           >
             Get Matches
           </button>
+              <div> 
+      <p class = "instruction-dash"> Simply click on the school card, you will see the detailed information. Drag and drop cards to a list where you think it belongs.
+        </p>
+      </div> 
         </div>
         <div class="action">
-          <button class="btn btn-outline-success">My Students</button>
+          <button class="btn btn-outline-success" id = "smallTitle">My Students</button>
         </div>
         <div class="action">
           <button
             class="btn btn-outline-success"
             @click="$router.replace('profile')"
+            id = "smallTitle"
           >
             My Preferences
           </button>
@@ -63,6 +68,36 @@ export default {
 </template>
 
 <style>
+.instruction-dash {
+  animation-duration: 2s;
+  animation-name: slidein;
+  animation-iteration-count: 1;
+  margin-top: 5%;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+  color: #008037;
+}
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+.button {
+  margin-top: 5%;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
 .bigTitle {
   margin-top: 5%;
   margin-left: 30%;
@@ -73,12 +108,10 @@ export default {
 }
 #smallTitle {
   margin-top: 5%;
-  margin-left: 30%;
   font-size: 15px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
   color: #008037;
-
 }
 .home-container {
   width: 100%;
@@ -101,7 +134,7 @@ export default {
 .btn-big {
   width: 200px;
   height: 80px;
-  font-family: "Cabin Sketch";
+  /* font-family: "Cabin Sketch"; */
 }
 
 .dash-container {
