@@ -24,8 +24,9 @@ export default {
     },
     getShortlistData(listId) {
       let success = (result) => {
-        this.shortlistData = result.data;
+        this.shortlistData = result.data[0];
         this.dataSuccess = true;
+        this.bgcolor = this.shortlistData.settings.color;
         this.listSize = this.shortlistData.school_ids.length;
       };
       let fail = (err) => {
@@ -49,7 +50,7 @@ export default {
       dataSuccess,
       shortlistData,
       bgcolor,
-      listSize
+      listSize,
     };
   },
 };
@@ -59,17 +60,14 @@ export default {
   <div v-if="dataSuccess">
     <label class="share-shortlist-title">
       <MaterialIcon
-        :src="this.shortlistData[0].settings.icon.value"
+        :src="this.shortlistData.settings.icon.value"
         size="20"
         style="color: white; size: 30px"
       />
-      {{ this.shortlistData[0].settings.name }} Shortlist Report
+      {{ this.shortlistData.settings.name }} Shortlist Report
     </label>
-    <div class="report-school-cards">
-      <template
-        v-for="schoolData in shortlistData[0].schools"
-        :key="schoolData"
-      >
+    <div style="overflow: auto" class="report-school-cards">
+      <template v-for="schoolData in shortlistData.schools" :key="schoolData">
         <SchoolShareCard :schoolData="schoolData" />
       </template>
     </div>

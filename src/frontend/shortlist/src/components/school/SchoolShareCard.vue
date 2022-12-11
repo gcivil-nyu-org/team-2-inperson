@@ -73,19 +73,19 @@ export default {
           {{ schoolData.schoolMetadata.desc }}
         </div>
       </div>
-      <div v-else style="overflow: auto;" >
+      <div v-else style="overflow: auto">
         <template
           v-for="dimension in schoolData.schoolDimensions"
           :key="dimension"
         >
-        <div class="school-detail-dim-row">
-          <div class="school-detail-dim-name">{{ dimension.dimShort }}</div>
-          <div class="school-detail-dim-value">{{ dimension.value }}</div>
-        </div>
+          <div class="school-detail-dim-row">
+            <div class="school-detail-dim-name">{{ dimension.dimShort }}</div>
+            <div class="school-detail-dim-value">{{ dimension.value }}</div>
+          </div>
         </template>
       </div>
-      </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
