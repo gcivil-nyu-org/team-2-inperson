@@ -182,6 +182,15 @@ export default {
             autofocus
           />
         </div>
+        <div class="input-errors" v-if="!validateName(localSettings.name)">
+          <div class="error-msg" v-if="this.localSettings.name.length >= 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
+        </div>
       </div>
 
       <!-- Color -->
