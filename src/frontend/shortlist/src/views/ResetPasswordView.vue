@@ -11,6 +11,7 @@ export default {
     let params = this.$route.query;
     this.token = this.$route.params.token;
     this.uidb64 = this.$route.params.uidb64;
+    console.log(this.token);
   },
   data() {
     return {
@@ -22,6 +23,8 @@ export default {
       },
       passwordAlert: "",
       validation: true,
+      token: "",
+      uidb64: "",
     };
   },
   methods: {
@@ -67,10 +70,9 @@ export default {
     submitPWResetForm() {
       axios
         .patch("https://api.shortlist.nyc/auth/password-reset-complete", {
-          email: this.form.email,
           password: this.form.newPassword,
-          token: this.$route.params.token,
-          uidb64: this.$route.params.uidb64,
+          token: this.$route.query.token,
+          uidb64: this.$route.query.uidb64,
         })
         .then(function (response) {
           console.log(response);
@@ -79,10 +81,9 @@ export default {
           console.log(error);
         });
       this.$emit("appPasswordReset", {
-        email: this.form.email,
         password: this.form.newPassword,
-        token: this.token,
-        uidb64: this.uidb64,
+        token: this.$route.query.token,
+        uidb64: this.$route.query.uidb64,
       });
       console.log(this.form.email);
       alert("Your password has been reset");
