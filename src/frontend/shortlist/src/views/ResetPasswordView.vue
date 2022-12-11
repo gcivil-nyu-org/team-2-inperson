@@ -67,12 +67,11 @@ export default {
         })
         .then(function (response) {
           console.log(response);
+          alert("Your password has been reset. Please log in again.");
         })
         .catch(function (error) {
-          console.log(error);
+          alert("Your password cannot be reset. Try again.")
         });
-      console.log(this.form.email);
-      alert("Your password has been reset");
       return;
     },
   },
