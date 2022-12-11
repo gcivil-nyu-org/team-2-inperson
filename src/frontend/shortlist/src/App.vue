@@ -12,11 +12,11 @@ const appSessionStore = sessionStore();
 
 function appPasswordReset(payload) {
   console.log(payload, "This is from appPasswordReset");
-  let apiReq = {
-    password: payload.password,
-    token: payload.token,
-    uidb64: payload.uidb64,
-  };
+  // let apiReq = {
+  //   password: payload.password,
+  //   token: payload.token,
+  //   uidb64: payload.uidb64,
+  // };
   let success = () => {
     console.log("This password has been changed in appPasswordReset");
   };
@@ -26,7 +26,7 @@ function appPasswordReset(payload) {
       err.response.data
     );
   };
-  let req = apiClient.resetPassword(apiReq, success, failure);
+  let req = apiClient.resetPassword(payload, success, failure);
   req.execute();
 }
 

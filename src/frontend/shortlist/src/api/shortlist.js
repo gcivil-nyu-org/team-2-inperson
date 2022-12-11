@@ -55,9 +55,10 @@ import md5 from "md5";
 
 export class tempResetPassword {
   constructor(payload, successCb, failCb) {
-    this.password = payload.password;
-    this.uidb64 = payload.uidb64;
-    this.token = payload.token;
+    // this.password = payload.password;
+    // this.uidb64 = payload.uidb64;
+    // this.token = payload.token;
+    this.payload = payload;
     this.successCb = successCb;
     this.failCb = failCb;
   }
@@ -67,11 +68,12 @@ export class tempResetPassword {
       method: "PATCH",
       url: "https://api.shortlist.nyc/auth/password-reset-complete",
       headers: {},
-      data: {
-        password: this.password,
-        uidb64: this.uidb64,
-        token: this.token,
-      }
+      data: this.payload
+      // {
+      //   password: this.password,
+      //   uidb64: this.uidb64,
+      //   token: this.token,
+      // }
     })
       .then((result) => this.successCb(result))
       .catch((err) => this.failCb(err));
