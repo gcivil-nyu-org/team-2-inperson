@@ -9,27 +9,34 @@ export default {
       newLast: "",
       nameAlert: "",
       email: "",
+      validationresult: false,
       validation: true,
       pwResetSent: false,
     };
   },
   methods: {
     validateName(value) {
-      let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
-      if (value.length < 2) {
-        this.nameAlert = "Minimum length is 2 for name!";
-        return false;
+      if (this.validation) {
+        let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+        if (value.length < 2) {
+          this.nameAlert = "Minimum length is 2 for name!";
+          return false;
+        }
+        if (value.length > 10) {
+          this.nameAlert = "Maximum length is 10 for name!";
+          return false;
+        }
+        if (!validNamePattern.test(value)) {
+          this.nameAlert =
+            "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
+          return false;
+        }
+        this.validationresult = true;
+        return true;
+      } else {
+        this.validationresult = true;
+        return true;
       }
-      if (value.length > 10) {
-        this.nameAlert = "Maximum length is 10 for name!";
-        return false;
-      }
-      if (!validNamePattern.test(value)) {
-        this.nameAlert =
-          "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
-        return false;
-      }
-      return true;
     },
     loadFile: function (event) {
       var image = document.getElementById("output");
@@ -37,20 +44,22 @@ export default {
       console.log(image.src);
     },
     updateName() {
-      let userFirst = this.newFirst
-        ? this.newFirst
-        : this.accountMetadata.preferences.userFirstName;
-      let userLast = this.newLast
-        ? this.newLast
-        : this.accountMetadata.preferences.userLastName;
+      if (this.validationresult == true) {
+        let userFirst = this.newFirst
+          ? this.newFirst
+          : this.accountMetadata.preferences.userFirstName;
+        let userLast = this.newLast
+          ? this.newLast
+          : this.accountMetadata.preferences.userLastName;
 
-      this.$emit("appAccountUpdateName", { userFirst, userLast });
+        this.$emit("appAccountUpdateName", { userFirst, userLast });
 
-      // reset name fields
-      this.newFirst = "";
-      this.newLast = "";
+        // reset name fields
+        this.newFirst = "";
+        this.newLast = "";
 
-      alert("Name updated!");
+        alert("Name updated!");
+      }
     },
     validateEmail(email) {
       let emailPattern = new RegExp(
