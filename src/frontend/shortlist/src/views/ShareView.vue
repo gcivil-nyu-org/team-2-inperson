@@ -62,7 +62,7 @@ export default {
         size="20"
         style="color: white; size: 30px"
       />
-      {{ this.shortlistData[0].shortlist_name }} Shortlist Report
+      {{ this.shortlistData[0].settings.name }} Shortlist Report
     </label>
     <div class="report-school-cards">
       <template
