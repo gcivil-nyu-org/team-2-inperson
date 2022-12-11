@@ -110,7 +110,7 @@ export default {
         </button>
         <p class="instructions" id="small">Don't have an account yet?</p>
         <button
-          @click="$router.replace('/signup')"
+          @click.prevent="$router.replace('/signup')"
           class="btn btn-outline-dark"
         >
           Sign me up!
