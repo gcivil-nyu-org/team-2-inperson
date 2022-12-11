@@ -67,7 +67,7 @@ function appAccountSignup(payload) {
 
   let success = () => {
     //router.replace("/login");
-    this.$router.push({
+    router.push({
       path: "login",
       query: { firstTimeSignup: true },
     });
