@@ -213,13 +213,15 @@ export default {
   </main>
 </template>
 <style scoped>
-main {
-  border-radius: 2%;
-  background-color: rgb(236, 236, 236);
-}
 .profileform {
   padding: 10px;
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-color: rgb(236, 236, 236);
 }
 .inputs {
   padding: 10px;
@@ -349,9 +351,6 @@ main {
   padding: 20px;
   background-color: #008037;
 }
-.image-upload > input {
-  display: none;
-}
 
 .verifiedEmail {
   margin: 0;
@@ -362,6 +361,20 @@ main {
   border-radius: 5%;
   background-color: rgb(108, 154, 185);
   padding: 4px;
+}
+
+.displayName {
+  margin: 0;
+  font-family: "Libre Baskerville", serif;
+  font-size: small;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  border-radius: 5%;
+  background-color: rgb(24, 78, 21);
+  padding: 4px;
+  display: block;
+  text-align: center;
+  width: 100px;
 }
 .error-msg {
   color: rgb(117, 28, 28);
