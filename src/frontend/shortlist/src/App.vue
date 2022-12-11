@@ -81,7 +81,11 @@ function appAuthLogin(payload) {
   let success = (result) => {
     console.log("success: ", result.data);
     appSessionStore.loginState = true;
-    appSessionStore.accountMetadata = result.data;
+    appSessionStore.accountMetadata.user_id = result.data.user_id;
+    appSessionStore.accountMetadata.email = result.data.email;
+    appSessionStore.accountMetadata.username = result.data.username;
+    appSessionStore.accountMetadata.tokens = result.data.tokens;
+    
     cookie.setCookie("accountid", result.data.user_id, 1); // expires in 1 day
     router.replace("/categorize");
   };
