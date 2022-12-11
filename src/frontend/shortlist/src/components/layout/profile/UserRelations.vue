@@ -67,7 +67,7 @@ export default {
 <style scoped>
 main {
   height: 40px;
-  background-color: #000000;
+  background-color: #020202;
   padding-left: 35%;
 }
 .relprofiletitle {

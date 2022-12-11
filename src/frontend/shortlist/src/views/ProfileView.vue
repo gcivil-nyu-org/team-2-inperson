@@ -25,6 +25,7 @@ export default {
 <template>
   <main>
     <div class="profile">
+      <UserDetails
         :accountMetadata="accountMetadata"
         @appAccountUpdateName="(p) => this.$emit('appAccountUpdateName', p)"
       />
