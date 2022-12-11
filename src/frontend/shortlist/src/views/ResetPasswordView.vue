@@ -66,15 +66,19 @@ export default {
           token: this.$route.query.token,
           uidb64: this.$route.query.uidb64,
         })
-        .then(function (response) {
-          console.log(response);
-          this.$emit("logoutEvent");
-          alert("Your password has been reset. Please log in again.");
-        })
+        .then(() => this.passwordChanged())
         .catch(function (error) {
-          alert("Your password cannot be reset. Try again.")
+          console.log(error);
+          alert("Your password cannot be reset. Try again.");
         });
       return;
+    },
+    passwordChanged() {
+      alert("Your password has been changed. You will be logged out.")
+      this.$emit("logoutEvent");
+      this.$router.push({
+        path: "login",
+      });
     },
   },
   computed: {
