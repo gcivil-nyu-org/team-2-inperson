@@ -1,15 +1,18 @@
 <script>
 import PreferenceDemo from "../../preferences/PreferenceDemo.vue";
+import ModalFullScreen from "../ModalFullScreen.vue";
 
 export default {
   emits: ["appAccountUpdatePreferences"],
   props: ["accountMetadata"],
   components: {
     PreferenceDemo,
+    ModalFullScreen,
   },
   data() {
+    let preferenceUpdateFlag = false;
     return {
-      preferenceUpdateFlag: false,
+      preferenceUpdateFlag,
     };
   },
   methods: {
