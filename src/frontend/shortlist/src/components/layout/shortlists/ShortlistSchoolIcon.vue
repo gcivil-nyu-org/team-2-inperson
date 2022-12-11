@@ -47,7 +47,7 @@ export default {
   background-color: white;
 }
 .school-icon-name {
-  width: 60px;
+  width: 70px;
   font-size: 8px;
   margin-left: 10px;
 }
