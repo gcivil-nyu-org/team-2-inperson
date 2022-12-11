@@ -353,7 +353,7 @@ export default {
   width: 400px;
   height: 100%;
   display: flex;
-  padding-left: 50px;
+  padding-left: 60px;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
@@ -438,5 +438,19 @@ export default {
 .edit-transition2-enter-from,
 .edit-transition2-leave-to {
   opacity: 0;
+}
+
+.error-msg {
+  color: rgb(117, 28, 28);
+  font-size: 13px;
+  padding-bottom: 7px;
+  left: 10px;
+  right: 30px;
+  width: 100%;
+}
+.input-errors {
+  left: 10px;
+  right: 30px;
+  width: 100%;
 }
 </style>
