@@ -6,23 +6,40 @@ export default {
   data() {
     return {
       newEmail: "",
+      validationresult: false,
+      validation: true,
     };
   },
   methods: {
+    validateEmail() {
+      if (this.validation) {
+        let emailPattern = new RegExp(
+          "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+        );
+        this.validationresult = emailPattern.test(this.newEmail);
+      } else {
+        this.validationresult = true;
+      }
+    },
     sendInvite() {
-      axios
-        //address needs change to coop
-        .post("https://api.shortlist.nyc/auth/send-invite", {
-          //name might need change
-          email: this.newEmail,
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error.response);
-        });
-      alert("Invitation Sent!");
+      this.validateEmail();
+      if (this.validationresult == true) {
+        axios
+          //address needs change to coop
+          .post("https://api.shortlist.nyc/auth/send-invite", {
+            //name might need change
+            email: this.newEmail,
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          });
+        alert("Invitation Sent!");
+      } else {
+        alert("Invalid Email Entry!");
+      }
     },
   },
 };
