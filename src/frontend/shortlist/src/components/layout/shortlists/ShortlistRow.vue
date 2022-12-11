@@ -61,6 +61,9 @@ export default {
         "token",
         "favorite",
       ],
+      nameAlert: "",
+      validationresult: false,
+      validation: true,
     };
   },
   computed: {
@@ -123,8 +126,41 @@ export default {
       this.inEditMode = true;
     },
     changeListSettings() {
-      this.$emit("changeListSettings", this.localSettings);
-      this.inEditMode = false;
+      if (this.validationresult == true) {
+        this.$emit("changeListSettings", this.localSettings);
+        this.inEditMode = false;
+      }
+    },
+    validateName(value) {
+      if (this.validation) {
+        console.log("validating.." + value);
+        let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+        if (value.length < 2) {
+          this.nameAlert = "Minimum length is 2 for name!";
+          console.log(this.nameAlert);
+          this.validationresult = false;
+          return false;
+        }
+        if (value.length > 15) {
+          this.nameAlert = "Maximum length is 15 for name!";
+          console.log(this.nameAlert);
+          this.validationresult = false;
+          return false;
+        }
+        if (!validNamePattern.test(value)) {
+          this.nameAlert =
+            "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
+          console.log(this.nameAlert);
+          this.validationresult = false;
+          return false;
+        }
+        this.validationresult = true;
+        console.log(this.nameAlert);
+        return true;
+      } else {
+        this.validationresult = true;
+        return true;
+      }
     },
   },
 };
