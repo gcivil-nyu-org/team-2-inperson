@@ -66,7 +66,7 @@ export default {
           token: this.$route.query.token,
           uidb64: this.$route.query.uidb64,
         })
-        .then(() => this.passwordChanged())
+        .then((response) => this.passwordChanged(response))
         .catch(function (error) {
           alert("Your password cannot be reset. Try again.");
         });

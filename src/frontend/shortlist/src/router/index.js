@@ -71,7 +71,7 @@ const router = createRouter({
       meta: { requiresGuest: true },
     },
     {
-      path: "/forget",
+      path: "/forgotPassword",
       name: "forgetpassword-view",
       component: () => import("../views/ForgetPasswordView.vue"),
       meta: { requiresGuest: true },
@@ -118,11 +118,6 @@ const router = createRouter({
       path: "/share",
       name: "share-view",
       component: ShareView,
-    },
-    {
-      path: "/:pathMatch(.*)*",
-      name: "NotFound",
-      component: () => import("../views/NotFoundView.vue"),
     },
   ],
 });

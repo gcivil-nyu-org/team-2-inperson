@@ -17,6 +17,9 @@ export default {
       return emailPattern.test(email);
     },
     successGet(responseData) {
+      alert(
+        "Thank you, your password reset link has been sent. Please check your email."
+      );
       console.log("get reset email function running");
       console.log(responseData, "This is responseData from successGet");
       console.log("my list looks like: ");
@@ -30,9 +33,6 @@ export default {
         .catch(function (error) {
           console.log(error.response);
         });
-      alert(
-        "Thank you, your password reset link has been sent. Please check your email."
-      );
     },
   },
   computed: {
