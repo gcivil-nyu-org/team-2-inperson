@@ -19,7 +19,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "username", "password"]
+        fields = ["email", "username", "password", "preferences"]
 
     def validate(self, attrs):
         username = attrs.get("username", "")
@@ -29,7 +29,12 @@ class RegisterSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        preferences = validated_data["preferences"]
+        del validated_data["preferences"]
+        user = User.objects.create_user(**validated_data)
+        update_user = User.objects.filter(pk=user.id).update(preferences=preferences)
+        user = User.objects.get(pk=user.id)
+        return user
 
 
 class EmailVerificationSerializer(serializers.ModelSerializer):
