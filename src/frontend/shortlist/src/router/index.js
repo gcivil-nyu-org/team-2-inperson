@@ -91,6 +91,7 @@ const router = createRouter({
       name: "logout-page",
       component: () =>
         import("../components/layout/signup_login/LoggedOut.vue"),
+      meta: { logout: true}
     },
     {
       path: "/verification",
@@ -123,30 +124,28 @@ const router = createRouter({
 router.beforeEach((to) => {
   const store = sessionStore();
   let acct = cookie.getCookie("accountid");
-  // auth required; check for existing cookie
-  // TODO: check for token?
-  if (to.meta.requiresAuth) {
-    if (acct == "") {
-      // cookie not found
+
+  if (to.meta.logout) {
+    store.$reset(); // clear store
+    cookie.deleteCookie("accountid");
+  }
+  // already logged in, get metadata
+  else if (acct != "") {
+    getUserMetadata(acct, store);
+    if (to.meta.requiresGuest) {
+      return {
+        path: "/categorize",
+      };
+    }
+  }
+  // not logged in & auth required; check for existing cookie
+  else if (to.meta.requiresAuth) {
       return {
         path: "/login",
         // save the location we were at to come back later
         query: { redirect: to.fullPath },
       };
-    } else {
-      // cookie found, get user metadata
-      getUserMetadata(acct, store);
-    }
-  }
-
-  // If logged in (cookie exists) redirect to /categorize
-  else if (to.meta.requiresGuest && cookie.getCookie("accountid") != "") {
-    getUserMetadata(acct, store);
-    return {
-      path: "/categorize",
-      // query: { redirect: to.fullPath },
-    };
-  }
+    } 
 });
 
 export default router;
