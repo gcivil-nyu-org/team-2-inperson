@@ -68,6 +68,9 @@ export default {
         })
         .then((response) => this.passwordChanged(response))
         .catch(function (error) {
+          if (error) {
+            console.log(error.response.data);
+          }
           alert("Your password cannot be reset. Try again.");
         });
       return;
