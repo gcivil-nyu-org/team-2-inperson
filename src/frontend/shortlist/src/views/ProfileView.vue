@@ -51,18 +51,10 @@ export default {
 .profile {
   height: 100%;
   width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 0fr 4fr repeat(2, 0fr);
-  grid-template-rows: 1fr repeat(4, 0fr);
+  display:grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 0.9fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-}
-.statusdetails {
-  grid-area: 1 / 1 / 2 / 2;
-  padding: 2%;
-}
-.prefrel {
-  grid-area: 1 / 3 / 2 / 4;
-  padding: 2%;
 }
 </style>
