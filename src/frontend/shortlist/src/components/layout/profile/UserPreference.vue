@@ -78,19 +78,21 @@ export default {
   </main>
 </template>
 <style scoped>
+.main {
+  height: 35px;
+}
 button {
   margin: 0px 15px 15px 0px;
 }
 .prefprofileform {
   padding: 10px;
-  width: 100%;
 }
 .prefprofiletitle {
   width: 100%;
   font-family: "Cabin Sketch", cursive;
   font-weight: bold;
   font-size: 2.5rem;
-  padding-bottom: None;
+  padding-left: 10px;
   line-height: 2rem;
   color: #067418;
 }
