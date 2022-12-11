@@ -157,7 +157,6 @@ function appAddStudent(payload) {
       @markSchoolAsAccepted="markSchoolAsAccepted"
       @markSchoolAsTrashed="markSchoolAsTrashed"
       @appRequestResetEmail="appRequestResetEmail"
-      @appPasswordReset="appPasswordReset"
     />
   </div>
 </template>

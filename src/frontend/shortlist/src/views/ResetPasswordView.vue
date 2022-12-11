@@ -3,7 +3,6 @@ import axios from "axios";
 import { useRoute } from "vue-router";
 export default {
   name: "ResetPasswordView",
-  emits: ["appPasswordReset"],
   setup() {
     return { router: useRoute() };
   },
@@ -72,11 +71,6 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      this.$emit("appPasswordReset", {
-        password: this.form.newPassword,
-        token: this.$route.query.token,
-        uidb64: this.$route.query.uidb64,
-      });
       console.log(this.form.email);
       alert("Your password has been reset");
       return;
