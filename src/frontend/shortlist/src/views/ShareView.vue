@@ -77,7 +77,7 @@ export default {
     </div>
   </div>
   <div v-else>
-    <p>Error, you school list maybe empty.</p>
+    <p>Sorry, that list does not exist.</p>
   </div>
   <router-link to="/">
     <img src="/short-list-logo-light-navbar.png" class="logo_img"

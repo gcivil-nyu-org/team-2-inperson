@@ -11,12 +11,13 @@ export const sessionStore = defineStore("sessionStore", {
         message: null,
       },
       accountMetadata: {
-        accountId: null,
-        userEmail: "sample@shortlist.nyc",
-        accountType: null,
+        user_id: null,
+        email: "sample@shortlist.nyc",
+        username: null,
+        tokens: [],
         preferences: {
-          userFirstName: null,
-          userLastName: "unset",
+          userFirstName: "",
+          userLastName: "",
           recommendationPreferences: {
             q1: {
               Question:
