@@ -48,6 +48,18 @@ export default {
       accountMetadata: "accountMetadata",
     }),
   },
+  mounted() {
+    let params = this.$route.query;
+    this.firstTime = params.firstTime;
+    this.firstTimeSignup = params.firstTimeSignup;
+    if (this.firstTime == "true") {
+      alert("Please go to your profile and update your preference!");
+      this.firstTime = "false";
+    } else if (this.firstTimeSignup == "true") {
+      alert("Please check your email and verify your account!");
+      this.firstTimeSignup = "false";
+    }
+  },
 };
 </script>
 
