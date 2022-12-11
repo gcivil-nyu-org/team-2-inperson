@@ -64,7 +64,7 @@ export default {
         size="20"
         style="color: white; size: 30px"
       />
-      {{ this.shortlistData.settings.name }} Shortlist Report
+      {{this.$route.query.userName}}'s {{ this.shortlistData.settings.name }} Shortlist
     </label>
     <div style="overflow: auto" class="report-school-cards">
       <template v-for="schoolData in shortlistData.schools" :key="schoolData">
