@@ -186,6 +186,11 @@ export default {
         >
           Update Changes
         </button>
+        <div>
+          <label style="font-size: 10px"
+            >Fill in First Name and Last Name both to Update.</label
+          >
+        </div>
       </div>
     </form>
     <button
