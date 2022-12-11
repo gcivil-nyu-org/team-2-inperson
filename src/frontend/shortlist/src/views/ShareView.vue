@@ -1,10 +1,15 @@
 <script>
 import ShortlistApi from "@/api/shortlist";
+import SchoolShareCard from "../components/school/SchoolShareCard.vue";
+import MaterialIcon from "../components/icons/MaterialIcon.vue";
 const apiClient = new ShortlistApi("https://api.shortlist.nyc/");
 export default {
+  components: {
+    SchoolShareCard,
+    MaterialIcon,
+  },
   methods: {
     getBorough(schoolIndex) {
-      // console.log(boroid)
       let boros = [
         "",
         "Bronx",
@@ -17,13 +22,12 @@ export default {
         this.shortlistData[0].schools[schoolIndex].schoolMetadata.boroughCode
       ];
     },
-    testFunc() {
-      console.log(this.shortlistData);
-    },
     getShortlistData(listId) {
       let success = (result) => {
-        this.shortlistData = result.data;
+        this.shortlistData = result.data[0];
         this.dataSuccess = true;
+        this.bgcolor = this.shortlistData.settings.color;
+        this.listSize = this.shortlistData.school_ids.length;
       };
       let fail = (err) => {
         this.dataSuccess = false;
@@ -40,9 +44,13 @@ export default {
   data() {
     let dataSuccess = false;
     let shortlistData = {};
+    let bgcolor = "#030303";
+    let listSize = 0;
     return {
       dataSuccess,
       shortlistData,
+      bgcolor,
+      listSize,
     };
   },
 };
@@ -50,66 +58,58 @@ export default {
 
 <template>
   <div v-if="dataSuccess">
-    <h1>Report Card</h1>
-    <div class="school-simple-container">
-      <template
-        v-for="(schoolData, schoolIndex) in shortlistData[0].schools"
-        :key="schoolData"
-      >
-        <div class="school-simple-name-row">
-          <div class="school-simple-name-name">
-            {{ schoolData.schoolMetadata.name }}
-          </div>
-          <div class="school-simple-name-borough">
-            {{ getBorough(schoolIndex) }}
-            <br />Phone: {{ schoolData.schoolMetadata.phone }} <br />Email:
-            {{ schoolData.schoolMetadata.email }} <br />School Website:
-            <a :href="schoolData.schoolMetadata.url">{{
-              schoolData.schoolMetadata.url
-            }}</a>
-          </div>
-        </div>
-        <div class="school-simple-dim-container">
-          {{ schoolData.schoolMetadata.desc }}
-        </div>
+    <label class="share-shortlist-title">
+      <MaterialIcon
+        :src="this.shortlistData.settings.icon.value"
+        size="20"
+        style="color: white; size: 30px"
+      />
+      <span v-if="this.$route.query.userName">
+        {{ this.$route.query.userName }}'s
+        {{ this.shortlistData.settings.name }} Shortlist
+      </span>
+      <span v-else> {{ this.shortlistData.settings.name }} Shortlist </span>
+    </label>
+    <div style="overflow: auto" class="report-school-cards">
+      <template v-for="schoolData in shortlistData.schools" :key="schoolData">
+        <SchoolShareCard :schoolData="schoolData" />
       </template>
     </div>
-
-    <button @click="testFunc()" style="background-color: green; color: white">
-      Test
-    </button>
   </div>
   <div v-else>
     <p>Error, you school list maybe empty.</p>
   </div>
+  <router-link to="/">
+    <img src="/short-list-logo-light-navbar.png" class="logo_img"
+  /></router-link>
 </template>
 <style scoped>
-.school-simple-container {
-  width: 1000px;
-  height: 100%;
-  border-radius: 20px;
-  padding: 40px;
-  box-sizing: border-box;
-  background: #ecf0f3;
-  box-shadow: 14px 14px 20px #779886, -14px -14px 20px white;
+.share-shortlist-title {
+  width: 100%;
   font-family: "Aleo";
-  display: flex;
-  flex-direction: column;
+  font-size: 1.5rem;
+  padding: 10px;
+  line-height: 2rem;
+  color: #ffffff;
+  text-align: center;
+  background-color: #030303;
 }
-.school-simple-name-row {
-  width: 100%;
-  padding: 15px;
+.report-school-cards {
+  display: grid;
+  grid-template-columns: repeat(v-bind(listSize), 1fr) 0fr;
+  grid-template-rows: 1fr repeat(v-bind(listSize), 0fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  background-color: v-bind(bgcolor);
+  padding: 10px;
+  justify-items: center;
 }
-.school-simple-name-name {
-  width: 100%;
-  text-align: end;
-  font-weight: bold;
-  font-size: 24px;
-  font-family: "Libre Baskerville";
-}
-.school-simple-name-borough {
-  width: 100%;
-  text-align: end;
-  font-size: 20px;
+
+.logo_img {
+  position: fixed;
+  bottom: 10px;
+  left: 45%;
+  width: 15vw;
+  height: 10vh;
 }
 </style>
