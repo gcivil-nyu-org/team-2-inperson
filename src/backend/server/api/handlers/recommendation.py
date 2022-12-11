@@ -70,6 +70,7 @@ AND dimz.field = '{}'
 AND recz.account_id = {}
 """
 
+
 def school_formatter(school_id: str, account_id: str):
     """Used to format the school output with preference integration."""
     with connection.cursor() as cursor:
@@ -106,6 +107,7 @@ def strategy_ranking_only(account_id: str, count: int):
 def strategy_explore_exploit(account_id: str, explore_prob: float, count: int):
     return "Not Implemented"
 
+
 # Update rankings based on preference data
 def rank_update(account_id: str, prefData: dict):
     # print(type(data))
@@ -116,36 +118,40 @@ def rank_update(account_id: str, prefData: dict):
         "Manhattan",
         "Queens",
         "Staten Island",
-      ]
+    ]
     for question in prefData["preferences"]:
         response = prefData["preferences"][question]["Response"]
         if not response:
             continue
         # rigorous instruction
-        elif question == "q1": 
-            QUERY = BASE_UPDATE.format(int(response)*100, 'survey_pp_ri', account_id)
+        elif question == "q1":
+            QUERY = BASE_UPDATE.format(int(response) * 100, "survey_pp_ri", account_id)
         # supportive environment
         elif question == "q2":
-            QUERY = BASE_UPDATE.format(int(response)*100, 'survey_pp_se', account_id)
+            QUERY = BASE_UPDATE.format(int(response) * 100, "survey_pp_se", account_id)
         # borough
         elif question == "q3":
             QUERY = """
             UPDATE api_recommendation R
                 SET rank_asc = rank_asc - 1000
-            FROM api_school S 
+            FROM api_school S
             WHERE R.school_id = S.id
             AND S.borough_code = {}
             AND R.account_id = {}
-            """.format(boroughs.index(response), account_id)
+            """.format(
+                boroughs.index(response), account_id
+            )
         # academic achievement
         elif question == "q4":
-            QUERY = BASE_UPDATE.format(int(response)*.1, 'mean_sat_readwrite', account_id)
+            QUERY = BASE_UPDATE.format(
+                int(response) * 0.1, "mean_sat_readwrite", account_id
+            )
 
         with connection.cursor() as cursor:
             print(QUERY)
             cursor.execute(QUERY)
-                # schools = dictfetchall(cursor)
-                # print(schools)
+            # schools = dictfetchall(cursor)
+            # print(schools)
     return "Updated rankings: ", account_id
 
 
