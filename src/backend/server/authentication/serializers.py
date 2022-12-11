@@ -34,7 +34,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         update_user = User.objects.filter(pk=user.id).update(
             preferences=preferences
-        )  # noqa: F401
+        )  # noqa: F841
         user = User.objects.get(pk=user.id)
         return user
 
