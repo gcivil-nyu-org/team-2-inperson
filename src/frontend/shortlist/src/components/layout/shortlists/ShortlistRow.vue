@@ -2,6 +2,8 @@
 import MaterialIcon from "../../icons/MaterialIcon.vue";
 import SchoolIcon from "./ShortlistSchoolIcon.vue";
 import { dragStateStore } from "../../../states/categorizeDragAndDrop";
+import { sessionStore } from "../../../states/sessionStore.js";
+import { mapState } from "pinia";
 
 export default {
   name: "ShortlistRow",
@@ -61,6 +63,9 @@ export default {
         "token",
         "favorite",
       ],
+      nameAlert: "",
+      validationresult: false,
+      validation: true,
     };
   },
   computed: {
@@ -70,14 +75,15 @@ export default {
     colorSelect() {
       return this.allowedColors[this.listSettings.color].select;
     },
+    ...mapState(sessionStore, {
+      accountMetadata: "accountMetadata",
+    }),
   },
   methods: {
     shareList() {
-      console.log(this.shortlistId);
-
       this.$router.push({
         path: "share",
-        query: { shortlistId: this.shortlistId },
+        query: { shortlistId: this.shortlistId, userName: this.accountMetadata.preferences.userFirstName },
       });
     },
     dragStart(e, itemIdx) {
@@ -123,8 +129,41 @@ export default {
       this.inEditMode = true;
     },
     changeListSettings() {
-      this.$emit("changeListSettings", this.localSettings);
-      this.inEditMode = false;
+      if (this.validationresult == true) {
+        this.$emit("changeListSettings", this.localSettings);
+        this.inEditMode = false;
+      }
+    },
+    validateName(value) {
+      if (this.validation) {
+        console.log("validating.." + value);
+        let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+        if (value.length < 2) {
+          this.nameAlert = "Minimum length is 2 for name!";
+          console.log(this.nameAlert);
+          this.validationresult = false;
+          return false;
+        }
+        if (value.length > 15) {
+          this.nameAlert = "Maximum length is 15 for name!";
+          console.log(this.nameAlert);
+          this.validationresult = false;
+          return false;
+        }
+        if (!validNamePattern.test(value)) {
+          this.nameAlert =
+            "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
+          console.log(this.nameAlert);
+          this.validationresult = false;
+          return false;
+        }
+        this.validationresult = true;
+        console.log(this.nameAlert);
+        return true;
+      } else {
+        this.validationresult = true;
+        return true;
+      }
     },
   },
 };
@@ -132,7 +171,10 @@ export default {
 
 <template>
   <div class="layout-list-row" :style="{ backgroundColor: listSettings.color }">
-    <div v-if="inEditMode" style="width: 100%; height: 100%">
+    <div
+      v-if="inEditMode"
+      style="width: 100%; height: 100%; overflow-y: scroll"
+    >
       <!-- Name -->
       <div class="layout-list-settings-row">
         <div class="layout-list-settings-row-prompt">Name the List:</div>
@@ -142,6 +184,15 @@ export default {
             v-model="localSettings.name"
             autofocus
           />
+        </div>
+        <div class="input-errors" v-if="!validateName(localSettings.name)">
+          <div class="error-msg" v-if="this.localSettings.name.length >= 0">
+            {{ this.nameAlert }}
+          </div>
+          <div class="error-msg" v-else>&nbsp;</div>
+        </div>
+        <div class="input-errors" v-else>
+          <div class="error-msg">&nbsp;</div>
         </div>
       </div>
 
@@ -240,7 +291,6 @@ export default {
               @click="startChangeSettings"
             />
           </div>
-          <div style="width: 10px"></div>
           <div class="layout-list-row-action-button" style="cursor: pointer">
             <MaterialIcon
               src="share"
@@ -266,7 +316,6 @@ export default {
           />
         </template>
       </div>
-      <div style="width: 100%; height: 20px"></div>
     </div>
   </div>
 </template>
@@ -274,21 +323,18 @@ export default {
 <style>
 .layout-list-row {
   width: 100%;
-  max-width: 400px;
-  padding: 10px;
+  height: 205px;
+  width: 500px;
+  max-width: 500px;
   border-radius: 10px;
   box-shadow: 0px 0px 7px -1px grey;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: start;
+  padding: 10px;
 }
 .layout-list-header-row {
   width: 100%;
   display: flex;
   justify-content: start;
   align-items: center;
-  margin-bottom: 15px;
 }
 .layout-list-row-icon {
   display: flex;
@@ -307,8 +353,10 @@ export default {
 }
 
 .layout-list-row-schools {
-  width: 100%;
+  width: 400px;
+  height: 100%;
   display: flex;
+  padding-left: 60px;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
@@ -319,8 +367,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding-bottom: 10px;
-  margin-bottom: 25px;
+  padding: 5px;
 }
 .layout-list-settings-row-prompt {
   width: 100%;
@@ -394,5 +441,19 @@ export default {
 .edit-transition2-enter-from,
 .edit-transition2-leave-to {
   opacity: 0;
+}
+
+.error-msg {
+  color: rgb(117, 28, 28);
+  font-size: 13px;
+  padding-bottom: 7px;
+  left: 10px;
+  right: 30px;
+  width: 100%;
+}
+.input-errors {
+  left: 10px;
+  right: 30px;
+  width: 100%;
 }
 </style>

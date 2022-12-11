@@ -262,76 +262,72 @@ export default {
 </script>
 
 <template>
-  <div>
-    <ModalFullScreen
-      v-if="schoolDetailModalVisible"
-      visible="schoolDetailModalVisible"
-      @modalOff="schoolDetailModalVisible = false"
-    >
-      <div style="display: block">
-        <div
-          style="
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-          "
-        >
-          <button @click="deleteFromList()">Discard?</button>
-        </div>
-        <SchoolCard
-          v-if="schoolDetailModalData"
-          :schoolData="schoolDetailModalData.data"
-        />
+  <ModalFullScreen
+    v-if="schoolDetailModalVisible"
+    visible="schoolDetailModalVisible"
+    @modalOff="schoolDetailModalVisible = false"
+  >
+    <div style="display: block">
+      <div
+        style="
+          display: flex;
+          justify-content: space-around;
+          margin-bottom: 20px;
+        "
+      >
+        <button @click="deleteFromList()">Discard?</button>
       </div>
-    </ModalFullScreen>
-    <div
-      class="categorize-view-container"
-      @dragover="dragDropOver"
-      @drop="dragDropDrop"
-    >
-      <div class="categorize-view-trash-column">
-        <TrashCan />
-      </div>
+      <SchoolCard
+        v-if="schoolDetailModalData"
+        :schoolData="schoolDetailModalData.data"
+      />
+    </div>
+  </ModalFullScreen>
+  <div
+    class="categorize-view-container"
+    @dragover="dragDropOver"
+    @drop="dragDropDrop"
+  >
+    <div class="categorize-view-trash-column">
+      <TrashCan />
+    </div>
 
-      <div class="categorize-view-recommendation-column">
-        <RecommendationStack :recommendations="myRecommendations" />
-      </div>
-      <div style="width: 50px; height: 100%"></div>
-      <div class="categorize-view-shortlist-column">
-        <ShortlistManager
-          v-if="this.myShortlists.length > 0"
-          :studentShortlists="myShortlists"
-          @listItemDetailClick="(e) => showSchoolModal(e)"
-          @changeListSettings="(e) => changeListSettings(e)"
-          @shareList="(e) => shareList(e)"
-        />
-      </div>
+    <div class="categorize-view-recommendation-column">
+      <RecommendationStack :recommendations="myRecommendations" />
+    </div>
+    <div style="width: 50px; height: 100%"></div>
+    <div class="categorize-view-shortlist-column">
+      <ShortlistManager
+        v-if="this.myShortlists.length > 0"
+        :studentShortlists="myShortlists"
+        @listItemDetailClick="(e) => showSchoolModal(e)"
+        @changeListSettings="(e) => changeListSettings(e)"
+        @shareList="(e) => shareList(e)"
+      />
     </div>
   </div>
 </template>
 
 <style scoped>
 .categorize-view-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
   padding-top: 25px;
+  position: relative;
 }
 .categorize-view-trash-column {
   width: 150px;
   height: 100%;
   display: flex;
+  padding-top:200px ;
   justify-content: center;
   align-items: center;
 }
 .categorize-view-recommendation-column {
   min-width: 550px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100px;
 }
 
 .categorize-view-shortlist-column {
