@@ -58,8 +58,6 @@ class RegisterView(generics.GenericAPIView):
         user_data = serializer.data
         user = User.objects.get(email=user_data["email"])
         token = RefreshToken.for_user(user).access_token
-        # urrent_site = get_current_site(request).domain
-        # relativeLink = reverse("email-verify")
         base_url = os.environ.get("SHORTLIST_API_URL")
         absurl = base_url + "auth/email-verify?token=" + str(token)
         email_body = """\
@@ -257,28 +255,18 @@ class PasswordTokenCheckAPI(generics.GenericAPIView):
         try:
             id = smart_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(id=id)
-
+            redirect_url_reset = "http://www.shortlist.nyc/reset"
             if not PasswordResetTokenGenerator().check_token(user, token):
-                return Response(
-                    {"error": "Token is not valid, please request a new one"},
-                    status=status.HTTP_401_UNAUTHORIZED,
-                )
-            return Response(
-                {
-                    "success": True,
-                    "message": "Credentials Valid",
-                    "uidb64": uidb64,
-                    "token": token,
-                },
-                status=status.HTTP_200_OK,
-            )
+                url = f"{redirect_url_reset}?error=Token is not valid, please request a new one&status={status.HTTP_401_UNAUTHORIZED}"
+                return CustomRedirect(url)
+
+            url = f"{redirect_url_reset}?success=True&message=Credentials Valid&uidb64={uidb64}&token={token}&status={status.HTTP_200_OK}"
+            return CustomRedirect(url)
 
         except DjangoUnicodeDecodeError:
             if not PasswordResetTokenGenerator().check_token(user):
-                return Response(
-                    {"error": "Token is not valid, please request a new one"},
-                    status=status.HTTP_401_UNAUTHORIZED,
-                )
+                url = f"{redirect_url_reset}?error=Token is not valid, please request a new one&status={status.HTTP_401_UNAUTHORIZED}"
+                return CustomRedirect(url)
 
 
 class SetNewPasswordAPIView(generics.GenericAPIView):

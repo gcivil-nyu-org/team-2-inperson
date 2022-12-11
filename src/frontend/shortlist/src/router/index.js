@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DemoView from "../views/DemoView.vue";
+import ShareView from "../views/ShareView.vue";
 import ApiDemo from "../views/ApiDemo.vue";
 import { sessionStore } from "../states/sessionStore.js";
 import cookie from "@/helpers/cookie.js";
 import ShortlistApi from "@/api/shortlist.js";
+import VerifiedView from "../views/VerifiedView.vue";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
-import VerifiedView from "../views/VerifiedView.vue";
 
 function getUserMetadata(payload, store) {
   let data = { userID: payload };
@@ -90,6 +91,7 @@ const router = createRouter({
       name: "logout-page",
       component: () =>
         import("../components/layout/signup_login/LoggedOut.vue"),
+      meta: { logout: true },
     },
     {
       path: "/verification",
@@ -97,19 +99,19 @@ const router = createRouter({
       component: VerifiedView,
     },
     {
-      path: "/shortlist/:shortlistId",
-      name: "verification-view",
-      component: () => import("../views/ShareShortlist.vue"),
+      path: "/reset",
+      name: "resetpassword-view",
+      component: () => import("../views/ResetPasswordView.vue"),
+    },
+    {
+      path: "/share",
+      name: "share-view",
+      component: ShareView,
     },
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: () => import("../views/NotFoundView.vue"),
-    },
-    {
-      path: "/reset",
-      name: "resetpassword-view",
-      component: () => import("../views/ResetPasswordView.vue"),
     },
   ],
 });
@@ -117,28 +119,26 @@ const router = createRouter({
 router.beforeEach((to) => {
   const store = sessionStore();
   let acct = cookie.getCookie("accountid");
-  // auth required; check for existing cookie
-  // TODO: check for token?
-  if (to.meta.requiresAuth) {
-    if (acct == "") {
-      // cookie not found
+
+  if (to.meta.logout) {
+    store.$reset(); // clear store
+    cookie.deleteCookie("accountid");
+  }
+  // already logged in, get metadata
+  else if (acct != "") {
+    getUserMetadata(acct, store);
+    if (to.meta.requiresGuest) {
       return {
-        path: "/login",
-        // save the location we were at to come back later
-        query: { redirect: to.fullPath },
+        path: "/categorize",
       };
-    } else {
-      // cookie found, get user metadata
-      getUserMetadata(acct, store);
     }
   }
-
-  // If logged in (cookie exists) redirect to /categorize
-  else if (to.meta.requiresGuest && cookie.getCookie("accountid") != "") {
-    getUserMetadata(acct, store);
+  // not logged in & auth required; check for existing cookie
+  else if (to.meta.requiresAuth) {
     return {
-      path: "/categorize",
-      // query: { redirect: to.fullPath },
+      path: "/login",
+      // save the location we were at to come back later
+      query: { redirect: to.fullPath },
     };
   }
 });

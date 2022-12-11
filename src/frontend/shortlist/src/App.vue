@@ -78,12 +78,20 @@ function appAccountSignup(payload) {
 }
 
 function appAuthLogin(payload) {
+  let requestPayload = {
+    email: payload.email,
+    password: payload.password,
+  };
   let success = (result) => {
-    console.log("success: ", result.data);
     appSessionStore.loginState = true;
-    appSessionStore.accountMetadata = result.data;
+    appSessionStore.accountMetadata.user_id = result.data.user_id;
+    appSessionStore.accountMetadata.email = result.data.email;
+    appSessionStore.accountMetadata.username = result.data.username;
+    appSessionStore.accountMetadata.tokens = result.data.tokens;
+
+    // console.log("success: ", appSessionStore.accountMetadata);
     cookie.setCookie("accountid", result.data.user_id, 1); // expires in 1 day
-    router.replace("/categorize");
+    router.replace(payload.redirect || "/categorize");
   };
   let fail = (err) => {
     console.log(err.response.data);
@@ -93,7 +101,7 @@ function appAuthLogin(payload) {
       alert("Could not login.");
     }
   };
-  let req = apiClient.authLogin(payload, success, fail);
+  let req = apiClient.authLogin(requestPayload, success, fail);
   req.execute();
 }
 
@@ -119,7 +127,9 @@ function appAccountUpdatePreferences(payload) {
 
 function appAccountUpdateName(payload) {
   let requestPayload = {
-    accountId: appSessionStore.accountMetadata.accountId,
+    user_id: appSessionStore.accountMetadata.user_id,
+    user_name: appSessionStore.accountMetadata.user_name,
+    email: appSessionStore.accountMetadata.email,
     preferences: appSessionStore.accountMetadata.preferences,
   };
   requestPayload.preferences.userFirstName = payload.userFirst;
@@ -131,7 +141,7 @@ function appAccountUpdateName(payload) {
     appSessionStore.accountMetadata.preferences.userLastName = payload.userLast;
   };
   let fail = (err) => {
-    console.log(err);
+    console.log(err.response.data);
   };
   let req = apiClient.updatePreferences(requestPayload, success, fail);
   req.execute();
@@ -164,26 +174,28 @@ function appAddStudent(payload) {
 <template>
   <NavBar />
   <div class="app-container">
-    <RouterView
-      @appAccountLogin="appAuthLogin"
-      @appAccountSignup="appAccountSignup"
-      @appAccountUpdatePreferences="appAccountUpdatePreferences"
-      @appAccountUpdateName="appAccountUpdateName"
-      @logoutEvent="appLogout"
-      @addStudent="appAddStudent"
-      @markSchoolAsAccepted="markSchoolAsAccepted"
-      @markSchoolAsTrashed="markSchoolAsTrashed"
-      @appRequestResetEmail="appRequestResetEmail"
-    />
+    <span style="overflow-y: scroll; height: 100%">
+      <RouterView
+        @appAccountLogin="appAuthLogin"
+        @appAccountSignup="appAccountSignup"
+        @appAccountUpdatePreferences="appAccountUpdatePreferences"
+        @appAccountUpdateName="appAccountUpdateName"
+        @logoutEvent="appLogout"
+        @addStudent="appAddStudent"
+        @markSchoolAsAccepted="markSchoolAsAccepted"
+        @markSchoolAsTrashed="markSchoolAsTrashed"
+        @appRequestResetEmail="appRequestResetEmail"
+      />
+    </span>
   </div>
 </template>
 
 <style scoped>
 .app-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   margin: 0;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 </style>

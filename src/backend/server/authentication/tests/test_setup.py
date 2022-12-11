@@ -13,6 +13,7 @@ class TestSetUp(APITestCase):
             "email": self.fake.email(),
             "username": self.fake.email().split("@")[0],
             "password": self.fake.email(),
+            "preferences": [self.fake.email().split("@")[0]],
         }
 
         return super().setUp()

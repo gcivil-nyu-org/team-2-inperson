@@ -33,7 +33,7 @@ const appLinks = [
   },
   {
     id: 4,
-    text: "LogIn",
+    text: "Login",
     page: "/login",
     always: false,
     requireLogIn: false,
@@ -73,7 +73,10 @@ export default {
           alt="shortlist"
         />
         <span v-if="loginState" style="color: #ffffff; background-color: black">
-          Welcome {{ accountMetadata.preferences.userFirstName }} !&nbsp;
+          <span v-if="accountMetadata != null">
+            Welcome {{ accountMetadata.preferences.userFirstName }} !&nbsp;
+          </span>
+          <span v-else> Welcome !&nbsp; </span>
         </span>
       </router-link>
 

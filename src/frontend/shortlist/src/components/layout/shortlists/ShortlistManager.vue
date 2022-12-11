@@ -72,26 +72,36 @@ export default {
 <template>
   <div class="layout-list-section">
     <template v-for="(list, listNum) in studentShortlists" :key="list">
-      <ShortlistRow
-        :listId="listNum"
-        :listSettings="list.settings"
-        :listSchools="list.schools"
-        @listItemDetailClick="(e) => listItemDetailClick(e, listNum)"
-        @shareList="shareList(listNum)"
-        @changeListSettings="(s) => changeListSettings(s, listNum)"
-        draggable="true"
-        @dragstart="(e) => dragStart(e, listNum)"
-        @dragenter="(e) => dragEnter(e, listNum)"
-        @dragover="(e) => dragOver(e, listNum)"
-        @dragleave="dragLeave"
-        @dragend="dragEnd"
-      />
-      <div style="height: 60px; width: 100px"></div>
+      <div class="shortlists-container">
+        <ShortlistRow
+          :listId="listNum"
+          :listSettings="list.settings"
+          :listSchools="list.schools"
+          :shortlistId="list.shortlist_id"
+          @listItemDetailClick="(e) => listItemDetailClick(e, listNum)"
+          @shareList="shareList(listNum)"
+          @changeListSettings="(s) => changeListSettings(s, listNum)"
+          draggable="true"
+          @dragstart="(e) => dragStart(e, listNum)"
+          @dragenter="(e) => dragEnter(e, listNum)"
+          @dragover="(e) => dragOver(e, listNum)"
+          @dragleave="dragLeave"
+          @dragend="dragEnd"
+        />
+      </div>
     </template>
   </div>
 </template>
 
 <style scoped>
+.shortlists-container {
+  grid-template-columns: 1fr repeat(4, 0fr);
+  grid-template-rows: repeat(3, 1fr) repeat(2, 0fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  position: relative;
+  padding-bottom: 10px;
+}
 .layout-list-section {
   height: 100%;
   min-width: 350px;
