@@ -78,16 +78,20 @@ function appAccountSignup(payload) {
 }
 
 function appAuthLogin(payload) {
+  let requestPayload = {
+    email: payload.email,
+    password: payload.password,
+  }
   let success = (result) => {
-    console.log("success: ", result.data);
     appSessionStore.loginState = true;
     appSessionStore.accountMetadata.user_id = result.data.user_id;
     appSessionStore.accountMetadata.email = result.data.email;
     appSessionStore.accountMetadata.username = result.data.username;
     appSessionStore.accountMetadata.tokens = result.data.tokens;
     
+    // console.log("success: ", appSessionStore.accountMetadata);
     cookie.setCookie("accountid", result.data.user_id, 1); // expires in 1 day
-    router.replace("/categorize");
+    router.replace(payload.redirect || '/categorize');
   };
   let fail = (err) => {
     console.log(err.response.data);
@@ -97,7 +101,7 @@ function appAuthLogin(payload) {
       alert("Could not login.");
     }
   };
-  let req = apiClient.authLogin(payload, success, fail);
+  let req = apiClient.authLogin(requestPayload, success, fail);
   req.execute();
 }
 
@@ -188,6 +192,6 @@ function appAddStudent(payload) {
   height: 100vh;
   margin: 0;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 </style>

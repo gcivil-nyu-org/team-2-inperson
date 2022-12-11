@@ -28,6 +28,7 @@ export default {
       this.$emit("appAccountLogin", {
         email: this.form.email.trim(),
         password: this.form.password,
+        redirect: this.$route.query.redirect,
       });
     },
   },
