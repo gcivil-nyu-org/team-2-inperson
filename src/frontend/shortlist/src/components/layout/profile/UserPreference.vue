@@ -90,8 +90,8 @@ export default {
   </main>
 </template>
 <style scoped>
-.main {
-  height: 35px;
+main {
+  padding-top: 30px;
 }
 button {
   margin: 0px 15px 15px 0px;
