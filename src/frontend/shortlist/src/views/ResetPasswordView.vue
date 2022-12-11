@@ -75,7 +75,8 @@ export default {
         });
       return;
     },
-    passwordChanged() {
+    passwordChanged(response) {
+      console.log(response); // [object, obecjt]
       this.$emit("logoutEvent");
       this.$router.push({
         path: "login",
