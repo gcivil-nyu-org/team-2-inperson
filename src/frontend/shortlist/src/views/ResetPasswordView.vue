@@ -68,7 +68,7 @@ export default {
       axios
         .patch("https://api.shortlist.nyc/auth/password-reset-complete", {
           email: this.form.email,
-          newPassword: this.form.newPassword,
+          password: this.form.newPassword,
           token: this.$route.params.token,
           uidb64: this.$route.params.uidb64,
         })
@@ -80,7 +80,7 @@ export default {
         });
       this.$emit("appPasswordReset", {
         email: this.form.email,
-        newPassword: this.form.newPassword,
+        password: this.form.newPassword,
         token: this.token,
         uidb64: this.uidb64,
       });

@@ -13,7 +13,7 @@ const appSessionStore = sessionStore();
 function appPasswordReset(payload) {
   console.log(payload, "This is from appPasswordReset");
   let apiReq = {
-    password: payload.newPassword,
+    password: payload.password,
     token: payload.token,
     uidb64: payload.uidb64,
   };
