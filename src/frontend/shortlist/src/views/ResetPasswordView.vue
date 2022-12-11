@@ -66,7 +66,7 @@ export default {
     },
     submitPWResetForm() {
       axios
-        .post("https://api.shortlist.nyc/auth/password-reset-complete", {
+        .patch("https://api.shortlist.nyc/auth/password-reset-complete", {
           email: this.form.email,
           newPassword: this.form.newPassword,
           token: this.$route.params.token,
