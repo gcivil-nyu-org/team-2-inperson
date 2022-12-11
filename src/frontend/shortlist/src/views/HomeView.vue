@@ -35,21 +35,13 @@ export default {
       </div>
     </div>
     <div class="dash-container" v-else>
-      <h1>{{ accountMetadata.preferences.userFirstName }}'s Dashboard</h1>
+      <h1 class="bigTitle">Dashboard</h1>
       <div class="dash-actions-container">
-        <div
-          class="pref-state"
-          v-if="prefCompletionState == false"
-          style="background-color: powderblue"
-        >
-          Please set up your preference
-          <a href="https://www.shortlist.nyc/profile"> here. </a>
-        </div>
-
         <div class="action">
           <button
             class="btn btn-outline-success"
             @click="$router.push('categorize')"
+            id = "smallTitle"
           >
             Get Matches
           </button>
@@ -71,6 +63,23 @@ export default {
 </template>
 
 <style>
+.bigTitle {
+  margin-top: 5%;
+  margin-left: 30%;
+  font-size: 50px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+  color: #008037;
+}
+#smallTitle {
+  margin-top: 5%;
+  margin-left: 30%;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+  color: #008037;
+
+}
 .home-container {
   width: 100%;
   height: 100%;
@@ -101,7 +110,10 @@ export default {
   height: 100%;
   border: 3px solid green;
   padding: 10px;
+  border-style: inset;
+  border-radius: 25px;
 }
+
 .dash-actions-container {
   display: grid;
 }

@@ -321,7 +321,7 @@ export default {
   width: 150px;
   height: 100%;
   display: flex;
-  padding-top:200px ;
+  padding-top: 200px;
   justify-content: center;
   align-items: center;
 }
