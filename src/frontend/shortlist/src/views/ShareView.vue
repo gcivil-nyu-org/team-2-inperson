@@ -26,7 +26,7 @@ export default {
       let success = (result) => {
         this.shortlistData = result.data;
         this.dataSuccess = true;
-        this.bgcolor = this.shortlistData[0].settings.color;
+        this.listSize = this.shortlistData.school_ids.length;
       };
       let fail = (err) => {
         this.dataSuccess = false;
@@ -44,10 +44,12 @@ export default {
     let dataSuccess = false;
     let shortlistData = {};
     let bgcolor = "#030303";
+    let listSize = 0;
     return {
       dataSuccess,
       shortlistData,
       bgcolor,
+      listSize
     };
   },
 };
@@ -92,9 +94,9 @@ export default {
 }
 .report-school-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr) 0fr;
-  grid-template-rows: 1fr repeat(4, 0fr);
-  grid-column-gap: 0px;
+  grid-template-columns: repeat(v-bind(listSize), 1fr) 0fr;
+  grid-template-rows: 1fr repeat(v-bind(listSize), 0fr);
+  grid-column-gap: 10px;
   grid-row-gap: 0px;
   background-color: v-bind(bgcolor);
   padding: 10px;
