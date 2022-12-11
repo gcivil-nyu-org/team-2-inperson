@@ -8,15 +8,9 @@ export default {
       url: "",
     };
   },
-  methods: {
-    geturl() {
-      this.url = this.schoolData.schoolMetadata.url;
-      //console.log(this.url);
-    },
-  },
   computed: {
     getBorough() {
-      // console.log(boroid)
+      console.log(this.schoolData.schoolMetadata);
       let boros = [
         "",
         "Bronx",
@@ -58,9 +52,20 @@ export default {
           Email : {{ schoolData.schoolMetadata.email }}
         </div>
         <div class="school-data">
-          <a :href="this.url" @click="geturl">{{
-            schoolData.schoolMetadata.url
-          }}</a>
+          <div
+            v-if="'schoolData.schoolMetadata.url'.includes('https://') == false"
+          >
+            <a
+              target="_target"
+              :href="'https://' + schoolData.schoolMetadata.url + '/'"
+              >{{ schoolData.schoolMetadata.url }}</a
+            >
+          </div>
+          <div v-else>
+            <a target="_target" :href="schoolData.schoolMetadata.url">{{
+              schoolData.schoolMetadata.url
+            }}</a>
+          </div>
         </div>
         <div class="school-desc">
           {{ schoolData.schoolMetadata.desc }}
