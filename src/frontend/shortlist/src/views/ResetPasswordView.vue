@@ -1,7 +1,17 @@
 <script>
+import axios from "axios";
+import { useRoute } from "vue-router";
 export default {
   name: "ResetPasswordView",
   emits: ["appPasswordReset"],
+  setup() {
+    return { router: useRoute() };
+  },
+  mounted() {
+    let params = this.$route.query;
+    this.token = this.$route.params.token;
+    this.uidb64 = this.$route.params.uidb64;
+  },
   data() {
     return {
       form: {
@@ -55,13 +65,27 @@ export default {
       return this.form.newPassword == this.form.confirmPassword;
     },
     submitPWResetForm() {
+      axios
+        .post("https://api.shortlist.nyc/auth/password-reset-complete", {
+          email: this.form.email,
+          newPassword: this.form.newPassword,
+          token: this.$route.params.token,
+          uidb64: this.$route.params.uidb64,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
       this.$emit("appPasswordReset", {
         email: this.form.email,
-        currentPassword: this.form.currentPassword,
         newPassword: this.form.newPassword,
-        confirmPassword: this.form.confirmPassword,
+        token: this.token,
+        uidb64: this.uidb64,
       });
       console.log(this.form.email);
+      alert("Your password has been reset");
       return;
     },
   },

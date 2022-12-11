@@ -10,22 +10,25 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
-// function appRequestResetEmail(payload) {
-//   console.log(payload);
-//   let apiReq = {
-//     email: payload.email,
-//   };
-//   let success = () => {
-//     console.log("Reset Email sent");
-//   };
-//   let failure = (err) => {
-//     console.log(
-//       "Failed to send the reset password email", err.response.data
-//     );
-//   }
-//   let req = apiClient.requestResetEmail(apiReq, success, failure);
-//   req.execute();
-// }
+function appPasswordReset(payload) {
+  console.log(payload, "This is from appPasswordReset");
+  let apiReq = {
+    password: payload.newPassword,
+    token: payload.token,
+    uidb64: payload.uidb64,
+  };
+  let success = () => {
+    console.log("This password has been changed in appPasswordReset");
+  };
+  let failure = (err) => {
+    console.log(
+      "Failed to change the password in appPasswordReset",
+      err.response.data
+    );
+  };
+  let req = apiClient.resetPassword(apiReq, success, failure);
+  req.execute();
+}
 
 function markSchoolAsTrashed(payload) {
   console.log(payload);
@@ -174,6 +177,7 @@ function appAddStudent(payload) {
       @markSchoolAsAccepted="markSchoolAsAccepted"
       @markSchoolAsTrashed="markSchoolAsTrashed"
       @appRequestResetEmail="appRequestResetEmail"
+      @appPasswordReset="appPasswordReset"
     />
   </div>
 </template>
