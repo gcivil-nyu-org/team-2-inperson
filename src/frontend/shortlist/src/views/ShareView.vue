@@ -24,9 +24,10 @@ export default {
     },
     getShortlistData(listId) {
       let success = (result) => {
-        this.shortlistData = result.data;
+        this.shortlistData = result.data[0];
         this.dataSuccess = true;
-        this.bgcolor = this.shortlistData[0].settings.color;
+        this.bgcolor = this.shortlistData.settings.color;
+        this.listSize = this.shortlistData.school_ids.length;
       };
       let fail = (err) => {
         this.dataSuccess = false;
@@ -44,10 +45,12 @@ export default {
     let dataSuccess = false;
     let shortlistData = {};
     let bgcolor = "#030303";
+    let listSize = 0;
     return {
       dataSuccess,
       shortlistData,
       bgcolor,
+      listSize,
     };
   },
 };
@@ -57,17 +60,18 @@ export default {
   <div v-if="dataSuccess">
     <label class="share-shortlist-title">
       <MaterialIcon
-        :src="this.shortlistData[0].settings.icon.value"
+        :src="this.shortlistData.settings.icon.value"
         size="20"
         style="color: white; size: 30px"
       />
-      {{ this.shortlistData[0].settings.name }} Shortlist Report
+      <span v-if="this.$route.query.userName">
+        {{ this.$route.query.userName }}'s
+        {{ this.shortlistData.settings.name }} Shortlist
+      </span>
+      <span v-else> {{ this.shortlistData.settings.name }} Shortlist </span>
     </label>
-    <div class="report-school-cards">
-      <template
-        v-for="schoolData in shortlistData[0].schools"
-        :key="schoolData"
-      >
+    <div style="overflow: auto" class="report-school-cards">
+      <template v-for="schoolData in shortlistData.schools" :key="schoolData">
         <SchoolShareCard :schoolData="schoolData" />
       </template>
     </div>
@@ -92,9 +96,9 @@ export default {
 }
 .report-school-cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr) 0fr;
-  grid-template-rows: 1fr repeat(4, 0fr);
-  grid-column-gap: 0px;
+  grid-template-columns: repeat(v-bind(listSize), 1fr) 0fr;
+  grid-template-rows: 1fr repeat(v-bind(listSize), 0fr);
+  grid-column-gap: 10px;
   grid-row-gap: 0px;
   background-color: v-bind(bgcolor);
   padding: 10px;

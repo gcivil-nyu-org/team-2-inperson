@@ -4,13 +4,18 @@ export default {
   props: ["schoolData"],
   data() {
     return {
+      isDetail: false,
       defaultImg: "/school-img-default.png",
       url: "",
     };
   },
+  methods: {
+    swapDetail() {
+      this.isDetail = !this.isDetail;
+    },
+  },
   computed: {
     getBorough() {
-      console.log(this.schoolData.schoolMetadata);
       let boros = [
         "",
         "Bronx",
@@ -27,21 +32,18 @@ export default {
 
 <template>
   <div style="select: none" v-if="schoolData != null">
-    <div class="school-sharecard-container">
-      <div class="school-simple-img-container">
+    <div class="school-sharecard-container" @click="swapDetail">
+      <div v-if="!isDetail" class="school-simple-img-container">
         <img class="school-simple-img" :src="defaultImg" draggable="false" />
       </div>
       <div class="school-simple-name-row">
         <div class="school-simple-name-name">
-          <template v-if="isDetail">
-            <a :href="schoolData.schoolMetadata.link">{{
-              schoolData.schoolMetadata.name
-            }}</a>
-          </template>
-          <template v-else>
-            {{ schoolData.schoolMetadata.name }}
-          </template>
+          <a :href="schoolData.schoolMetadata.link">{{
+            schoolData.schoolMetadata.name
+          }}</a>
         </div>
+      </div>
+      <div v-if="!isDetail">
         <div class="school-data">
           {{ getBorough }}
         </div>
@@ -70,6 +72,17 @@ export default {
         <div class="school-desc">
           {{ schoolData.schoolMetadata.desc }}
         </div>
+      </div>
+      <div v-else style="overflow: auto">
+        <template
+          v-for="dimension in schoolData.schoolDimensions"
+          :key="dimension"
+        >
+          <div class="school-detail-dim-row">
+            <div class="school-detail-dim-name">{{ dimension.dimShort }}</div>
+            <div class="school-detail-dim-value">{{ dimension.value }}</div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -113,7 +126,7 @@ export default {
   width: 100%;
   text-align: center;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 20px;
   font-family: "Libre Baskerville";
 }
 
@@ -131,5 +144,21 @@ export default {
   overflow-y: scroll;
   background-color: #d7ddd9;
   padding-top: 10px;
+}
+.school-detail-dim-row {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.school-detail-dim-name {
+  font-family: "Aleo";
+  font-weight: bold;
+  border-bottom: 1px solid #779886;
+  font-size: 18px;
+}
+
+.school-detail-dim-value {
+  font-family: sans-serif;
+  margin-left: 5px;
+  font-size: 18px;
 }
 </style>

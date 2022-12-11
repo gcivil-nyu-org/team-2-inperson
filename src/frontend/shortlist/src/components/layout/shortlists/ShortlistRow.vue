@@ -2,6 +2,8 @@
 import MaterialIcon from "../../icons/MaterialIcon.vue";
 import SchoolIcon from "./ShortlistSchoolIcon.vue";
 import { dragStateStore } from "../../../states/categorizeDragAndDrop";
+import { sessionStore } from "../../../states/sessionStore.js";
+import { mapState } from "pinia";
 
 export default {
   name: "ShortlistRow",
@@ -73,14 +75,15 @@ export default {
     colorSelect() {
       return this.allowedColors[this.listSettings.color].select;
     },
+    ...mapState(sessionStore, {
+      accountMetadata: "accountMetadata",
+    }),
   },
   methods: {
     shareList() {
-      console.log(this.shortlistId);
-
       this.$router.push({
         path: "share",
-        query: { shortlistId: this.shortlistId },
+        query: { shortlistId: this.shortlistId, userName: this.accountMetadata.preferences.userFirstName },
       });
     },
     dragStart(e, itemIdx) {
