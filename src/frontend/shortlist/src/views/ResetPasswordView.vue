@@ -68,16 +68,15 @@ export default {
         })
         .then(() => this.passwordChanged())
         .catch(function (error) {
-          console.log(error);
           alert("Your password cannot be reset. Try again.");
         });
       return;
     },
     passwordChanged() {
-      alert("Your password has been changed. You will be logged out.")
       this.$emit("logoutEvent");
       this.$router.push({
         path: "login",
+        query: { pwChanged: true },
       });
     },
   },
