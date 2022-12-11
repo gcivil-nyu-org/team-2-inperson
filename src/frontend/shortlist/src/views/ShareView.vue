@@ -27,7 +27,6 @@ export default {
         this.shortlistData = result.data;
         this.dataSuccess = true;
         this.bgcolor = this.shortlistData[0].settings.color;
-        //console.log(this.shortlistData[0].settings);
       };
       let fail = (err) => {
         this.dataSuccess = false;
