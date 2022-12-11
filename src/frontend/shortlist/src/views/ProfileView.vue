@@ -47,7 +47,7 @@ export default {
 .profile {
   height: 100%;
   width: 100%;
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 0.9fr);
   grid-column-gap: 0px;

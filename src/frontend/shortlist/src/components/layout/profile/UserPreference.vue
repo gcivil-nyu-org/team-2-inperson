@@ -38,12 +38,24 @@ export default {
           :key="val"
         >
           <label class="pref-q-name">{{ val.Question }}</label>
-          <input
-            type="text"
-            class="profilefields"
-            :placeholder="val.Response"
-            disabled
-          />
+          <span v-if="Number(val.Response)">
+            <input
+              type="range"
+              class="slider"
+              :value="Number(val.Response)"
+              min="1"
+              max="7"
+              disabled
+            />
+          </span>
+          <span v-else>
+            <input
+              type="text"
+              class="profilefields"
+              :placeholder="val.Response"
+              disabled
+            />
+          </span>
         </template>
       </form>
       <button @click="togglePreferenceForm" class="btn btn-outline-dark">
@@ -114,5 +126,14 @@ button {
   outline: none;
   transition: border-color 0.2s;
   margin-bottom: 20px;
+}
+
+.slider {
+  appearance: none;
+  width: 100%;
+  max-width: 200px;
+  height: 15px;
+  border-radius: 5px;
+  background: #2b8226;
 }
 </style>
