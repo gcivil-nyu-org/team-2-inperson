@@ -29,35 +29,53 @@ export default {
 </script>
 
 <template>
-  <span v-if="!preferenceUpdateFlag">
-    <label class="prefprofiletitle">Preferences</label>
-    <form class="prefprofileform">
-      <template
-        v-for="val in accountMetadata.preferences.recommendationPreferences"
-        :key="val"
-      >
-        <label class="pref-q-name">{{ val.Question }}</label>
-        <input
-          type="text"
-          class="profilefields"
-          :placeholder="val.Response"
-          disabled
-        />
-      </template>
-    </form>
-    <button @click="togglePreferenceForm" class="btn btn-outline-dark">
-      Update Preferences
-    </button>
-  </span>
-  <span v-else>
-    <PreferenceDemo
-      @submitPreferences="updatePref"
-      :currentPreferences="accountMetadata.preferences"
-    />
-    <button @click="togglePreferenceForm" class="btn btn-outline-dark">
-      Cancel
-    </button>
-  </span>
+  <main>
+    <div>
+      <label class="prefprofiletitle">Preferences</label>
+      <form class="prefprofileform">
+        <template
+          v-for="val in accountMetadata.preferences.recommendationPreferences"
+          :key="val"
+        >
+          <label class="pref-q-name">{{ val.Question }}</label>
+          <input
+            type="text"
+            class="profilefields"
+            :placeholder="val.Response"
+            disabled
+          />
+        </template>
+      </form>
+      <button @click="togglePreferenceForm" class="btn btn-outline-dark">
+        Update Preferences
+      </button>
+    </div>
+    <ModalFullScreen
+      v-if="preferenceUpdateFlag"
+      visible="preferenceUpdateFlag"
+      @modalOff="preferenceUpdateFlag = false"
+    >
+      <div style="display: block">
+        <div
+          style="
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+          "
+        >
+          <PreferenceDemo
+            @submitPreferences="updatePref"
+            :currentPreferences="accountMetadata.preferences"
+          />
+        </div>
+        <div style="padding-left: 45%">
+          <button @click="togglePreferenceForm" class="btn btn-outline-dark">
+            Exit
+          </button>
+        </div>
+      </div>
+    </ModalFullScreen>
+  </main>
 </template>
 <style scoped>
 button {
