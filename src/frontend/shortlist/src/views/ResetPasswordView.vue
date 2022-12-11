@@ -3,6 +3,7 @@ import axios from "axios";
 import { useRoute } from "vue-router";
 export default {
   name: "ResetPasswordView",
+  emits: ["logoutEvent"],
   setup() {
     return { router: useRoute() };
   },
@@ -67,6 +68,7 @@ export default {
         })
         .then(function (response) {
           console.log(response);
+          this.$emit("logoutEvent");
           alert("Your password has been reset. Please log in again.");
         })
         .catch(function (error) {
