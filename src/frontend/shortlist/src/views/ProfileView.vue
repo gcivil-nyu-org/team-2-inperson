@@ -25,24 +25,19 @@ export default {
 <template>
   <main>
     <div class="profile">
-      <div class="statusdetails">
-        <UserDetails
-          :accountMetadata="accountMetadata"
-          @appAccountUpdateName="(p) => this.$emit('appAccountUpdateName', p)"
-        />
-      </div>
-      <div class="prefrel">
-        <UserPreference
-          :accountMetadata="accountMetadata"
-          @appAccountUpdatePreferences="
-            (p) => this.$emit('appAccountUpdatePreferences', p)
-          "
-        />
-        <UserRelations
-          :accountMetadata="accountMetadata"
-          @addStudent="(e) => this.$emit('addStudent', e)"
-        />
-      </div>
+        :accountMetadata="accountMetadata"
+        @appAccountUpdateName="(p) => this.$emit('appAccountUpdateName', p)"
+      />
+      <UserPreference
+        :accountMetadata="accountMetadata"
+        @appAccountUpdatePreferences="
+          (p) => this.$emit('appAccountUpdatePreferences', p)
+        "
+      />
+      <UserRelations
+        :accountMetadata="accountMetadata"
+        @addStudent="(e) => this.$emit('addStudent', e)"
+      />
     </div>
   </main>
 </template>
