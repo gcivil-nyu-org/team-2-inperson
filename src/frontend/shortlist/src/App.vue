@@ -164,24 +164,26 @@ function appAddStudent(payload) {
 <template>
   <NavBar />
   <div class="app-container">
-    <RouterView
-      @appAccountLogin="appAuthLogin"
-      @appAccountSignup="appAccountSignup"
-      @appAccountUpdatePreferences="appAccountUpdatePreferences"
-      @appAccountUpdateName="appAccountUpdateName"
-      @logoutEvent="appLogout"
-      @addStudent="appAddStudent"
-      @markSchoolAsAccepted="markSchoolAsAccepted"
-      @markSchoolAsTrashed="markSchoolAsTrashed"
-      @appRequestResetEmail="appRequestResetEmail"
-    />
+    <span style="overflow-y: scroll; height: 100%">
+      <RouterView
+        @appAccountLogin="appAuthLogin"
+        @appAccountSignup="appAccountSignup"
+        @appAccountUpdatePreferences="appAccountUpdatePreferences"
+        @appAccountUpdateName="appAccountUpdateName"
+        @logoutEvent="appLogout"
+        @addStudent="appAddStudent"
+        @markSchoolAsAccepted="markSchoolAsAccepted"
+        @markSchoolAsTrashed="markSchoolAsTrashed"
+        @appRequestResetEmail="appRequestResetEmail"
+      />
+    </span>
   </div>
 </template>
 
 <style scoped>
 .app-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   margin: 0;
   height: 100%;
   overflow: auto;
