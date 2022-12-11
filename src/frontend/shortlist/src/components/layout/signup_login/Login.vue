@@ -28,6 +28,7 @@ export default {
       this.$emit("appAccountLogin", {
         email: this.form.email.trim(),
         password: this.form.password,
+        redirect: this.$route.query.redirect,
       });
     },
   },
@@ -61,7 +62,7 @@ export default {
     <form>
       <div id="emailaddress_login">
         <input
-          id="loginButtonTest"
+          id="loginEmailField"
           type="email"
           class="logininput"
           placeholder="Email"
@@ -79,7 +80,7 @@ export default {
       </div>
       <div id="password_login">
         <input
-          id="loginButtonTest"
+          id="loginPasswordField"
           type="password"
           name="password"
           v-model="this.form.password"
@@ -107,14 +108,9 @@ export default {
         >
           Login
         </button>
-        <!-- TODO: Forgot password feature -->
-        <p class="instructions" id="small">or</p>
-        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
-          Log In with Google
-        </button>
         <p class="instructions" id="small">Don't have an account yet?</p>
         <button
-          @click="$router.replace('/signup')"
+          @click.prevent="$router.replace('/signup')"
           class="btn btn-outline-dark"
         >
           Sign me up!
