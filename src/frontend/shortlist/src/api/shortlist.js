@@ -45,41 +45,10 @@ export default class ShortlistApi {
   getShortlist(payload, successCb, failCb) {
     return new tempGetShortlist(payload, successCb, failCb);
   }
-  resetPassword(payload, successCb, failCb) {
-    return new tempResetPassword(payload, successCb, failCb);
-  }
 }
 
 import axios from "axios";
 import md5 from "md5";
-
-export class tempResetPassword {
-  constructor(payload, successCb, failCb) {
-    // this.password = payload.password;
-    // this.uidb64 = payload.uidb64;
-    // this.token = payload.token;
-    this.payload = payload;
-    this.successCb = successCb;
-    this.failCb = failCb;
-  }
-  execute() {
-    console.log(this.payload, "tempResetPassword");
-    axios({
-      method: "PATCH",
-      url: "https://api.shortlist.nyc/auth/password-reset-complete",
-      headers: {},
-      data: this.payload
-      // {
-      //   password: this.password,
-      //   uidb64: this.uidb64,
-      //   token: this.token,
-      // }
-    })
-      .then((result) => this.successCb(result))
-      .catch((err) => this.failCb(err));
-  }
-}
-
 
 export class tempUpdateRecommendation {
   constructor(payload, successCb, failCb) {

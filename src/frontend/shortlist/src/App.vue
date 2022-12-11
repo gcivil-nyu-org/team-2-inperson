@@ -10,25 +10,6 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
-function appPasswordReset(payload) {
-  console.log(payload, "This is from appPasswordReset");
-  // let apiReq = {
-  //   password: payload.password,
-  //   token: payload.token,
-  //   uidb64: payload.uidb64,
-  // };
-  let success = () => {
-    console.log("This password has been changed in appPasswordReset");
-  };
-  let failure = (err) => {
-    console.log(
-      "Failed to change the password in appPasswordReset",
-      err.response.data
-    );
-  };
-  let req = apiClient.resetPassword(payload, success, failure);
-  req.execute();
-}
 
 function markSchoolAsTrashed(payload) {
   console.log(payload);
