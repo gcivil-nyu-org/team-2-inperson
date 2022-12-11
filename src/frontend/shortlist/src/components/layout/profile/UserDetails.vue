@@ -112,28 +112,26 @@ export default {
 <template>
   <main>
     <form class="profileform">
-      <div class="image-upload">
+      <div style="padding-top: 20px">
         <img
-          src="/default-parent-profile.png"
+          src="/helloInShortlist.png"
           alt="Profile-Picture"
           id="profileimg"
           class="profileimg"
         />
-        <label for="file-input"><img src="/edit.png" /></label>
-
-        <input id="file-input" type="file" />
-      </div>
-
-      <div class="inputs">
-        <div class="accountstatus">
-          <label class="typestatuslabel">Account Type:</label>&nbsp;<button
-            class="parenttype"
-            title="After verification,You can send invite for Student account registration!"
-            disabled
-          >
-            PARENT / GUARDIAN
-          </button>
+        <div>
+          <div style="padding-left: 20px">
+            <label
+              class="displayName"
+              v-if="this.accountMetadata.preferences.userFirstName.length > 0"
+              >{{ this.accountMetadata.preferences.userFirstName }}
+              {{ this.accountMetadata.preferences.userLastName }}</label
+            >
+            <label v-else>Set Name</label>
+          </div>
         </div>
+      </div>
+      <div style="width: 250px; padding-top: 20px">
         <div class="accountstatus">
           <label class="typestatuslabel">ID Status:</label>&nbsp;<button
             class="verifiedstatus"
@@ -151,7 +149,16 @@ export default {
             {{ accountMetadata.email }}
           </label>
         </div>
+        <button
+          type="button"
+          class="btn btn-outline-dark btn-sm"
+          @click.prevent="appRequestResetEmail"
+        >
+          Reset Password
+        </button>
+      </div>
 
+      <div class="inputs">
         <label>First Name</label>
         <input
           type="text"
@@ -187,28 +194,22 @@ export default {
         <div class="input-errors" v-else>
           <div class="error-msg">&nbsp;</div>
         </div>
-
-        <button
-          class="pref-actions"
-          @click="updateName"
-          :disabled="isUpdateDisabled"
-        >
-          Update Changes
-        </button>
         <div>
-          <label style="font-size: 10px"
-            >Fill in First Name and Last Name both to Update.</label
+          <button
+            class="pref-actions"
+            @click="updateName"
+            :disabled="isUpdateDisabled"
           >
+            Update Changes
+          </button>
+          <div>
+            <label style="font-size: 10px"
+              >Edit First Name and Last Name both to Update.</label
+            >
+          </div>
         </div>
       </div>
     </form>
-    <button
-      type="button"
-      class="btn btn-outline-dark btn-sm"
-      @click.prevent="appRequestResetEmail"
-    >
-      Reset Password
-    </button>
   </main>
 </template>
 <style scoped>
