@@ -7,12 +7,6 @@ export default {
   setup() {
     return { router: useRoute() };
   },
-  mounted() {
-    let params = this.$route.query;
-    this.token = this.$route.params.token;
-    this.uidb64 = this.$route.params.uidb64;
-    console.log(this.token);
-  },
   data() {
     return {
       form: {

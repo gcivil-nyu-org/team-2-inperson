@@ -10,7 +10,6 @@ const apiClient = new ShortlistApi("https://api.shortlist.nyc");
 const router = useRouter();
 const appSessionStore = sessionStore();
 
-
 function markSchoolAsTrashed(payload) {
   console.log(payload);
   let success = (response) => {
