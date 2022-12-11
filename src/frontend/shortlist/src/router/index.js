@@ -6,9 +6,9 @@ import ApiDemo from "../views/ApiDemo.vue";
 import { sessionStore } from "../states/sessionStore.js";
 import cookie from "@/helpers/cookie.js";
 import ShortlistApi from "@/api/shortlist.js";
+import VerifiedView from "../views/VerifiedView.vue";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
-import VerifiedView from "../views/VerifiedView.vue";
 
 function getUserMetadata(payload, store) {
   let data = { userID: payload };
@@ -91,22 +91,12 @@ const router = createRouter({
       name: "logout-page",
       component: () =>
         import("../components/layout/signup_login/LoggedOut.vue"),
-      meta: { logout: true}
+      meta: { logout: true },
     },
     {
       path: "/verification",
       name: "verification-view",
       component: VerifiedView,
-    },
-    {
-      path: "/shortlist/:shortlistId",
-      name: "verification-view",
-      component: () => import("../views/ShareShortlist.vue"),
-    },
-    {
-      path: "/:pathMatch(.*)*",
-      name: "NotFound",
-      component: () => import("../views/NotFoundView.vue"),
     },
     {
       path: "/reset",
@@ -117,6 +107,11 @@ const router = createRouter({
       path: "/share",
       name: "share-view",
       component: ShareView,
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: () => import("../views/NotFoundView.vue"),
     },
   ],
 });
@@ -140,12 +135,12 @@ router.beforeEach((to) => {
   }
   // not logged in & auth required; check for existing cookie
   else if (to.meta.requiresAuth) {
-      return {
-        path: "/login",
-        // save the location we were at to come back later
-        query: { redirect: to.fullPath },
-      };
-    } 
+    return {
+      path: "/login",
+      // save the location we were at to come back later
+      query: { redirect: to.fullPath },
+    };
+  }
 });
 
 export default router;

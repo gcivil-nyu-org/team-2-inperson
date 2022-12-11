@@ -81,17 +81,17 @@ function appAuthLogin(payload) {
   let requestPayload = {
     email: payload.email,
     password: payload.password,
-  }
+  };
   let success = (result) => {
     appSessionStore.loginState = true;
     appSessionStore.accountMetadata.user_id = result.data.user_id;
     appSessionStore.accountMetadata.email = result.data.email;
     appSessionStore.accountMetadata.username = result.data.username;
     appSessionStore.accountMetadata.tokens = result.data.tokens;
-    
+
     // console.log("success: ", appSessionStore.accountMetadata);
     cookie.setCookie("accountid", result.data.user_id, 1); // expires in 1 day
-    router.replace(payload.redirect || '/categorize');
+    router.replace(payload.redirect || "/categorize");
   };
   let fail = (err) => {
     console.log(err.response.data);

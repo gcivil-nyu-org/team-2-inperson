@@ -80,7 +80,7 @@ export default {
     </button>
   </div>
   <div v-else>
-    <p>Error, you school list maybe empty.</p>
+    <p>Sorry, that list does not exist.</p>
   </div>
 </template>
 <style scoped>

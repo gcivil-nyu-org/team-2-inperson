@@ -62,7 +62,7 @@ export default {
     <form>
       <div id="emailaddress_login">
         <input
-          id="loginButtonTest"
+          id="loginEmailField"
           type="email"
           class="logininput"
           placeholder="Email"
@@ -80,7 +80,7 @@ export default {
       </div>
       <div id="password_login">
         <input
-          id="loginButtonTest"
+          id="loginPasswordField"
           type="password"
           name="password"
           v-model="this.form.password"
@@ -107,11 +107,6 @@ export default {
           @click="submitLoginForm"
         >
           Login
-        </button>
-        <!-- TODO: Forgot password feature -->
-        <p class="instructions" id="small">or</p>
-        <button @click.prevent="loginWithSSO" class="btn btn-outline-dark">
-          Log In with Google
         </button>
         <p class="instructions" id="small">Don't have an account yet?</p>
         <button
