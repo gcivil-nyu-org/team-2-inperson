@@ -66,7 +66,11 @@ function appAccountSignup(payload) {
   };
 
   let success = () => {
-    router.replace("/login");
+    //router.replace("/login");
+    this.$router.push({
+      path: "login",
+      query: { firstTimeSignup: true },
+    });
   };
 
   let failure = (err) => {
