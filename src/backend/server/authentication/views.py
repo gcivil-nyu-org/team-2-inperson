@@ -57,8 +57,6 @@ class RegisterView(generics.GenericAPIView):
         user_data = serializer.data
         user = User.objects.get(email=user_data["email"])
         token = RefreshToken.for_user(user).access_token
-        # urrent_site = get_current_site(request).domain
-        # relativeLink = reverse("email-verify")
         base_url = os.environ.get("SHORTLIST_API_URL")
         absurl = base_url + "auth/email-verify?token=" + str(token)
         email_body = """\
