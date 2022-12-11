@@ -132,7 +132,10 @@ export default {
 
 <template>
   <div class="layout-list-row" :style="{ backgroundColor: listSettings.color }">
-    <div v-if="inEditMode" style="width: 100%; height: 100%">
+    <div
+      v-if="inEditMode"
+      style="width: 100%; height: 100%; overflow-y: scroll"
+    >
       <!-- Name -->
       <div class="layout-list-settings-row">
         <div class="layout-list-settings-row-prompt">Name the List:</div>
@@ -240,7 +243,6 @@ export default {
               @click="startChangeSettings"
             />
           </div>
-          <div style="width: 10px"></div>
           <div class="layout-list-row-action-button" style="cursor: pointer">
             <MaterialIcon
               src="share"
@@ -266,7 +268,6 @@ export default {
           />
         </template>
       </div>
-      <div style="width: 100%; height: 20px"></div>
     </div>
   </div>
 </template>
@@ -274,21 +275,18 @@ export default {
 <style>
 .layout-list-row {
   width: 100%;
-  max-width: 400px;
-  padding: 10px;
+  height: 205px;
+  width: 500px;
+  max-width: 500px;
   border-radius: 10px;
   box-shadow: 0px 0px 7px -1px grey;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: start;
+  padding: 10px;
 }
 .layout-list-header-row {
   width: 100%;
   display: flex;
   justify-content: start;
   align-items: center;
-  margin-bottom: 15px;
 }
 .layout-list-row-icon {
   display: flex;
@@ -307,8 +305,10 @@ export default {
 }
 
 .layout-list-row-schools {
-  width: 100%;
+  width: 400px;
+  height: 100%;
   display: flex;
+  padding-left: 50px;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
@@ -319,8 +319,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding-bottom: 10px;
-  margin-bottom: 25px;
+  padding: 5px;
 }
 .layout-list-settings-row-prompt {
   width: 100%;

@@ -35,10 +35,9 @@ export default {
   border-radius: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 5px 5px;
   user-select: none;
-  margin: 10px;
+  margin: 5px;
 }
 .school-icon-img {
   width: 30px;
