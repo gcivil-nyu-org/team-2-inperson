@@ -36,6 +36,7 @@ export default {
           .catch(function (error) {
             console.log(error.response);
           });
+        this.newEmail = "";
         alert("Invitation Sent!");
       } else {
         alert("Invalid Email Entry!");
