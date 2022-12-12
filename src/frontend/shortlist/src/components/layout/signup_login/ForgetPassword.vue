@@ -17,6 +17,7 @@ export default {
       return emailPattern.test(email);
     },
     successGet(responseData) {
+      console.log(responseData);
       alert(
         "Thank you, your password reset link has been sent. Please check your email."
       );
