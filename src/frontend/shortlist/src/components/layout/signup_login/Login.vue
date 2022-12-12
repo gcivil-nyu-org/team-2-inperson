@@ -51,8 +51,13 @@ export default {
   mounted() {
     if (this.$route) {
       let params = this.$route.query;
+      this.pwChanged = params.pwChanged;
       this.firstTime = params.firstTime;
       this.firstTimeSignup = params.firstTimeSignup;
+      if (this.pwChanged == "true") {
+        alert("Your password has been changed. Please log in again.");
+        this.pwChanged = "false";
+      }
       if (this.firstTime == "true") {
         alert("Please go to your profile and update your preference!");
         this.firstTime = "false";
@@ -129,7 +134,7 @@ export default {
         >
           Sign me up!
         </button>
-        <router-link to="/forget" class="nav-item nav-link">
+        <router-link to="/forgetPassword" class="nav-item nav-link">
           <p class="instructions" id="small">Forget Password?</p>
         </router-link>
       </div>
