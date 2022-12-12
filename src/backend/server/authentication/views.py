@@ -318,7 +318,9 @@ class UserDetailsView(generics.GenericAPIView):
             if serializer.is_valid():
                 serializer.save()
                 if updatePrefs:
-                    rank_update(user_id, data["preferences"]["recommendationPreferences"])
+                    rank_update(
+                        user_id, data["preferences"]["recommendationPreferences"]
+                    )
                 return JsonResponse(serializer.data)
             else:
                 return Response(

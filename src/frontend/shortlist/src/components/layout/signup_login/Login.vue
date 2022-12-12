@@ -28,7 +28,7 @@ export default {
       this.$emit("appAccountLogin", {
         email: this.form.email.trim(),
         password: this.form.password,
-        redirect: (redirect || ""),
+        redirect: redirect || "",
       });
     },
   },
