@@ -38,6 +38,10 @@ export default {
       <h1 class="bigTitle">Dashboard</h1>
       <div class="dash-actions-container">
         <div class="action">
+          
+      </div> 
+        </div>
+        <div class="action">
           <button
             class="btn btn-outline-success"
             @click="$router.push('categorize')"
@@ -45,15 +49,7 @@ export default {
           >
             Get Matches
           </button>
-              <div> 
-      <!-- <p class = "instruction-dash"> Simply click on the school card, you will see the detailed information. Drag and drop cards to a list where you think it belongs.
-        </p> -->
-      </div> 
-        </div>
-        <div class="action">
-          <button class="btn btn-outline-success" id = "smallTitle">My Students</button>
-        </div>
-        <div class="action">
+          <button class="btn btn-outline-success" @click="$router.replace('profile')" id = "smallTitle">My Students</button>
           <button
             class="btn btn-outline-success"
             @click="$router.replace('profile')"
@@ -62,56 +58,44 @@ export default {
             My Preferences
           </button>
         </div>
+        <div class="action">
+
+        </div>
       </div>
-    </div>
   </main>
 </template>
 
 <style>
-.instruction-dash {
-  animation-duration: 2s;
-  animation-name: slidein;
-  animation-iteration-count: 1;
-  margin-top: 5%;
-  font-size: 15px;
-  font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
-  color: #008037;
+@keyframes dashboard {
+  from {background-color :#7feac6;}
+  to {background-color: #AFE1AF;}
 }
-@keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
 
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
-}
 .button {
-  margin-top: 5%;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  display: inline-block;
 }
 
 .bigTitle {
   margin-top: 5%;
-  margin-left: 30%;
+  margin-left: 38%;
   font-size: 50px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
-  color: #008037;
+  color: black;
 }
 #smallTitle {
+  margin-left: 5%;
+  padding: 20px 60px;
   margin-top: 5%;
-  font-size: 15px;
+  font-size: 25px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
-  color: #008037;
+  color: black;
 }
 .home-container {
   width: 100%;
@@ -131,20 +115,25 @@ export default {
   margin-bottom: 2%;
 }
 
+.btn-outline-success {
+  display: inline-block;
+}
 .btn-big {
   width: 200px;
   height: 80px;
-  /* font-family: "Cabin Sketch"; */
 }
 
 .dash-container {
   margin: auto;
-  width: 50%;
+  width: 75%;
   height: 100%;
-  border: 3px solid green;
-  padding: 10px;
+  border: 5px solid green;
+  padding: 20px;
   border-style: inset;
-  border-radius: 25px;
+  border-radius: 30px;
+  animation-name: dashboard;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
 }
 
 .dash-actions-container {
