@@ -20,7 +20,7 @@ export default {
     //let params = this.router.query;
     let params = this.$route.query;
     //somehow this line makes thing works, so param does not provide bool but string
-    this.isVerified = params.token_valid == "true";
+    this.isVerified = params.token_valid == "True";
     this.errorMessage = params.message;
   },
   methods: {
@@ -51,7 +51,7 @@ export default {
     <template v-if="this.isVerified">
       <form>
         <h5 this.testVerified="true">Verified successfully</h5>
-        <a href="https://www.shortlist.nyc/login?firstTime=true" id="loginLink">
+        <a href="http://www.shortlist.nyc/login?firstTime=true" id="loginLink">
           Click here to login!
         </a>
       </form>
