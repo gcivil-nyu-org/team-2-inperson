@@ -171,7 +171,6 @@ function appAddStudent(payload) {
         @addStudent="appAddStudent"
         @markSchoolAsAccepted="markSchoolAsAccepted"
         @markSchoolAsTrashed="markSchoolAsTrashed"
-        @appRequestResetEmail="appRequestResetEmail"
       />
     </span>
   </div>
