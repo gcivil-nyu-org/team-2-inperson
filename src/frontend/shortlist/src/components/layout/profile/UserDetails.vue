@@ -185,11 +185,11 @@ export default {
           class="profilefields"
           :placeholder="accountMetadata.preferences.userFirstName"
           id="firstname"
-          v-model="newFirst"
+          v-model="this.newFirst"
         />
-        <div class="input-errors" v-if="!validateName(this.newFirst)">
+        <div class="input-errors" v-if="!this.validateFirst(this.newFirst)">
           <div class="error-msg" v-if="this.newFirst.length > 0">
-            {{ this.nameAlert }}
+            {{ this.firstnameAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
         </div>
@@ -205,9 +205,9 @@ export default {
           id="lastname"
           v-model="newLast"
         />
-        <div class="input-errors" v-if="!validateName(this.newLast)">
+        <div class="input-errors" v-if="!this.validateLast(this.newLast)">
           <div class="error-msg" v-if="this.newLast.length > 0">
-            {{ this.nameAlert }}
+            {{ this.secondnameAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
         </div>
