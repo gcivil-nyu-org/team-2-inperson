@@ -21,7 +21,7 @@ describe("LoggedOut.vue", () => {
   });
 
   //Test emit
-  it("test emit without data", async () => {
+  it.skip("test emit without data", async () => {
     const componentWrapper = mount(LoggedOut, {});
     componentWrapper.vm.$emit("logoutEvent");
 
