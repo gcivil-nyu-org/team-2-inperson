@@ -46,8 +46,8 @@ export default {
             Get Matches
           </button>
               <div> 
-      <p class = "instruction-dash"> Simply click on the school card, you will see the detailed information. Drag and drop cards to a list where you think it belongs.
-        </p>
+      <!-- <p class = "instruction-dash"> Simply click on the school card, you will see the detailed information. Drag and drop cards to a list where you think it belongs.
+        </p> -->
       </div> 
         </div>
         <div class="action">
