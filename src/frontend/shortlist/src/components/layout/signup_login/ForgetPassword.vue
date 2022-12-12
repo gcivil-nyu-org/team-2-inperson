@@ -20,9 +20,6 @@ export default {
       alert(
         "Thank you, your password reset link has been sent. Please check your email."
       );
-      console.log("get reset email function running");
-      console.log(responseData, "This is responseData from successGet");
-      console.log("my list looks like: ");
     },
     submitForgetForm() {
       axios
