@@ -20,7 +20,7 @@ export default {
     //let params = this.router.query;
     let params = this.$route.query;
     //somehow this line makes thing works, so param does not provide bool but string
-    this.isVerified = params.token_valid == "true";
+    this.isVerified = params.token_valid == "True";
     this.errorMessage = params.message;
   },
   methods: {
