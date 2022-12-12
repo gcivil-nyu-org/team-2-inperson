@@ -33,6 +33,7 @@
       (best) years 💘.
     </p>
   </div>
+  <div>Updating..</div>
 </template>
 
 <style>
