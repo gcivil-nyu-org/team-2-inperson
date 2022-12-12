@@ -9,6 +9,7 @@ import ShortlistApi from "@/api/shortlist.js";
 import VerifiedView from "../views/VerifiedView.vue";
 
 const shortlistApi = new ShortlistApi("https://api.shortlist.nyc/");
+import ResetPasswordView from "../views/ResetPasswordView.vue";
 
 function getUserMetadata(payload, store) {
   let data = { userID: payload };
@@ -70,10 +71,9 @@ const router = createRouter({
       meta: { requiresGuest: true },
     },
     {
-      path: "/forget",
-      name: "forgetpassword-view",
+      path: "/forgetPassword",
+      name: "password-view",
       component: () => import("../views/ForgetPasswordView.vue"),
-      meta: { requiresGuest: true },
     },
     {
       path: "/profile",
@@ -100,18 +100,23 @@ const router = createRouter({
     },
     {
       path: "/reset",
-      name: "resetpassword-view",
-      component: () => import("../views/ResetPasswordView.vue"),
+      name: "ResetPasswordView",
+      component: ResetPasswordView,
     },
     {
-      path: "/share",
-      name: "share-view",
-      component: ShareView,
+      path: "/shortlist/:shortlistId",
+      name: "verification-view",
+      component: () => import("../views/ShareShortlist.vue"),
     },
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: () => import("../views/NotFoundView.vue"),
+    },
+    {
+      path: "/share",
+      name: "share-view",
+      component: ShareView,
     },
   ],
 });
