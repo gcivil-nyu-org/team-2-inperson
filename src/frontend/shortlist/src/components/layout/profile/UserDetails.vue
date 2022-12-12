@@ -17,7 +17,7 @@ export default {
   methods: {
     validateName(value) {
       if (this.validation) {
-        let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+        let validNamePattern = new RegExp("^[a-zA-Z]*$");
         if (value.length < 2) {
           this.nameAlert = "Minimum length is 2 for name!";
           return false;
@@ -27,8 +27,7 @@ export default {
           return false;
         }
         if (!validNamePattern.test(value)) {
-          this.nameAlert =
-            "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
+          this.nameAlert = "Valid name only contain letters!";
           return false;
         }
         this.validationresult = true;
