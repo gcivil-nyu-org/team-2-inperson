@@ -36,39 +36,42 @@ export default {
     </div>
     <div class="dash-container" v-else>
       <h1 class="bigTitle">Dashboard</h1>
-      <div class="dash-actions-container">
-        <div class="action">
-          
-      </div> 
-        </div>
-        <div class="action">
-          <button
-            class="btn btn-outline-success"
-            @click="$router.push('categorize')"
-            id = "smallTitle"
-          >
-            Get Matches
-          </button>
-          <button class="btn btn-outline-success" @click="$router.replace('profile')" id = "smallTitle">My Students</button>
-          <button
-            class="btn btn-outline-success"
-            @click="$router.replace('profile')"
-            id = "smallTitle"
-          >
-            My Preferences
-          </button>
-        </div>
-        <div class="action">
-
-        </div>
+      <div class="dash-actions-container"></div>
+      <div class="action">
+        <button
+          class="btn btn-outline-success"
+          @click="$router.push('categorize')"
+          id="smallTitle"
+        >
+          Get Matches
+        </button>
+        <button
+          class="btn btn-outline-success"
+          @click="$router.replace('profile')"
+          id="smallTitle"
+        >
+          My Students
+        </button>
+        <button
+          class="btn btn-outline-success"
+          @click="$router.replace('profile')"
+          id="smallTitle"
+        >
+          My Preferences
+        </button>
       </div>
+    </div>
   </main>
 </template>
 
 <style>
 @keyframes dashboard {
-  from {background-color :#7feac6;}
-  to {background-color: #AFE1AF;}
+  from {
+    background-color: #7feac6;
+  }
+  to {
+    background-color: #afe1af;
+  }
 }
 
 .button {
