@@ -46,8 +46,13 @@ export default {
 <template>
   <main style="margin: auto">
     <div class="form-container">
-      <div class="email">
-        <label>Your Email</label>
+      <!-- <div class = "reset"> -->
+      <label class="reset"> Reset Your Password</label>
+      <!-- </div> -->
+      <div>
+        <div class="email">
+          <label>Your Email</label>
+        </div>
         <input
           class="resetInput"
           type="text"
@@ -159,5 +164,14 @@ form {
   border-color: #106021;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset,
     0px 0px 8px rgba(35, 173, 40, 0.5);
+}
+.email {
+  margin-left: 32%;
+}
+.reset {
+  font-size: 30px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+  margin-bottom: 4%;
 }
 </style>
