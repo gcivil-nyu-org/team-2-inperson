@@ -311,10 +311,16 @@ class UserDetailsView(generics.GenericAPIView):
         data = JSONParser().parse(request)
         if User.objects.filter(id=user_id).exists():
             user = User.objects.get(id=user_id)
+            updatePrefs = data["preferences"]["recommendationPreferences"]["update"]
+            del data["preferences"]["recommendationPreferences"]["update"]
+
             serializer = UpdateUserSerializer(user, data=data)
             if serializer.is_valid():
                 serializer.save()
-                rank_update(user_id, data)
+                if updatePrefs:
+                    rank_update(
+                        user_id, data["preferences"]["recommendationPreferences"]
+                    )
                 return JsonResponse(serializer.data)
             else:
                 return Response(

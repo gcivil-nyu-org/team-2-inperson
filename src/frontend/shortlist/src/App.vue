@@ -100,6 +100,7 @@ function appAccountUpdatePreferences(payload) {
     preferences: appSessionStore.accountMetadata.preferences,
   };
   requestPayload.preferences.recommendationPreferences = payload;
+  requestPayload.preferences.recommendationPreferences.update = true;
 
   let success = () => {
     appSessionStore.accountMetadata.preferences.recommendationPreferences =
@@ -121,6 +122,7 @@ function appAccountUpdateName(payload) {
   };
   requestPayload.preferences.userFirstName = payload.userFirst;
   requestPayload.preferences.userLastName = payload.userLast;
+  requestPayload.preferences.recommendationPreferences.update = false;
 
   let success = () => {
     appSessionStore.accountMetadata.preferences.userFirstName =

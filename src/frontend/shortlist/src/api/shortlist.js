@@ -91,26 +91,28 @@ export class temporarySignup {
         email: this.email,
         username: this.username,
         password: this.password,
-        userFirstName: this.firstName,
-        userLastName: this.lastName,
-        recommendationPreferences: {
-          q1: {
-            Question:
-              "How important is an engaging curriculum & emphasis on critical thinking skills?",
-            Response: "",
-          },
-          q2: {
-            Question:
-              "How important is a school culture where students feel safe and supported to meet high expectations?",
-            Response: "",
-          },
-          q3: {
-            Question: "Is there a specific borough you are looking for?",
-            Response: "",
-          },
-          q4: {
-            Question: "How would you rank your academic performance so far?",
-            Response: "",
+        preferences: {
+          userFirstName: this.firstName,
+          userLastName: this.lastName,
+          recommendationPreferences: {
+            q1: {
+              Question:
+                "How important is an engaging curriculum & emphasis on critical thinking skills?",
+              Response: "",
+            },
+            q2: {
+              Question:
+                "How important is a school culture where students feel safe and supported to meet high expectations?",
+              Response: "",
+            },
+            q3: {
+              Question: "Is there a specific borough you are looking for?",
+              Response: "",
+            },
+            q4: {
+              Question: "How would you rank your academic performance so far?",
+              Response: "",
+            },
           },
         },
       },
