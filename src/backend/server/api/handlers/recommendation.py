@@ -119,8 +119,8 @@ def rank_update(account_id: str, prefData: dict):
         "Queens",
         "Staten Island",
     ]
-    for question in prefData["preferences"]:
-        response = prefData["preferences"][question]["Response"]
+    for question in prefData:
+        response = prefData[question]["Response"]
         if not response:
             continue
         # rigorous instruction
@@ -148,10 +148,7 @@ def rank_update(account_id: str, prefData: dict):
             )
 
         with connection.cursor() as cursor:
-            print(QUERY)
             cursor.execute(QUERY)
-            # schools = dictfetchall(cursor)
-            # print(schools)
     return "Updated rankings: ", account_id
 
 
