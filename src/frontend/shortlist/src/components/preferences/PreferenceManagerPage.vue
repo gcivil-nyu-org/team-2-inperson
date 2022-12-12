@@ -13,7 +13,10 @@ export default {
 </script>
 
 <template>
-  <div v-show="id == selectedPage" style="margin-top: 10px; max-width: 450px">
+  <div
+    v-show="id == selectedPage"
+    style="margin: 10px 0px 10px 0px; width: 100%; max-height: 100px"
+  >
     <div class="pref-section-header">{{ subtitle }}</div>
     <slot></slot>
   </div>

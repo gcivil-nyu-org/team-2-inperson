@@ -93,7 +93,7 @@ export default {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="shortlistmenu">
-        <ul class="navbar-nav ms-auto nav">
+        <ul class="navbar-nav ms-auto nav" style="padding-bottom: 10px">
           <template v-for="link in links">
             <router-link
               class="nav-item"
@@ -109,12 +109,6 @@ export default {
           </template>
         </ul>
       </div>
-      <span
-        ><img
-          src="/default-parent-profile.png"
-          alt="Profile-Picture"
-          class="profileimg"
-      /></span>
     </nav>
   </div>
 </template>
@@ -123,12 +117,6 @@ export default {
 .navbar {
   font-family: "Cabin Sketch", cursive;
   font-weight: bold;
-}
-.profileimg {
-  vertical-align: middle;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
 }
 .router-link-active {
   border-radius: 70px;

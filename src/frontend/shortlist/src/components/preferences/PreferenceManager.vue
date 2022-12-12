@@ -121,25 +121,27 @@ export default {
   font-family: "Cabin Sketch", cursive;
   font-weight: bold;
   font-size: 2.5rem;
-  padding-bottom: None;
+  padding-top: 10px;
   line-height: 2rem;
   color: #067418;
+  text-align: center;
 }
 
 .pref-main {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  max-height: 300px;
-  min-height: 300px;
+  min-width: 50rem;
+  max-width: 50rem;
+  min-height: 20rem;
   margin: 0;
-  overflow-y: scroll;
+  padding: 20px;
 }
 .pref-actions-line {
   width: 100%;
   justify-content: space-between;
   display: flex;
+  padding: 10px;
 }
 .pref-actions {
   flex-wrap: wrap;

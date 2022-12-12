@@ -162,9 +162,9 @@ export default {
 
 <style scoped>
 .preference-demo-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: top;
+  justify-items: start;
+  height: 100%;
+  width: 100%;
 }
 
 .preference-demo-component {
