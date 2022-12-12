@@ -1,9 +1,9 @@
 <script>
-import Forget from "../components/layout/signup_login/Forget.vue";
+import ForgetPassword from "../components/layout/signup_login/ForgetPassword.vue";
 export default {
   name: "ForgetPasswordView",
   components: {
-    Forget,
+    ForgetPassword,
   },
 };
 </script>
@@ -11,7 +11,7 @@ export default {
 <template>
   <form>
     <div>
-      <Forget />
+      <ForgetPassword />
     </div>
   </form>
 </template>

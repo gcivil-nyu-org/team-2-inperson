@@ -1,7 +1,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "Forget",
+  name: "ForgetPassword",
   data() {
     return {
       form: {

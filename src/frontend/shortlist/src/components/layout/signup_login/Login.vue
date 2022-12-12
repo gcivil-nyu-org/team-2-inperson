@@ -132,7 +132,7 @@ export default {
         >
           Sign me up!
         </button>
-        <router-link to="/forgotPassword" class="nav-item nav-link">
+        <router-link to="/forgetPassword" class="nav-item nav-link">
           <p class="instructions" id="small">Forget Password?</p>
         </router-link>
       </div>
