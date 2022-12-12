@@ -83,7 +83,10 @@ export default {
     shareList() {
       this.$router.push({
         path: "share",
-        query: { shortlistId: this.shortlistId, userName: this.accountMetadata.preferences.userFirstName },
+        query: {
+          shortlistId: this.shortlistId,
+          userName: this.accountMetadata.preferences.userFirstName,
+        },
       });
     },
     dragStart(e, itemIdx) {
