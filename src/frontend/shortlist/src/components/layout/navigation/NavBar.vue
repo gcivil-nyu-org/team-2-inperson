@@ -93,7 +93,7 @@ export default {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="shortlistmenu">
-        <ul class="navbar-nav ms-auto nav" style="padding-bottom: 10px;">
+        <ul class="navbar-nav ms-auto nav" style="padding-bottom: 10px">
           <template v-for="link in links">
             <router-link
               class="nav-item"

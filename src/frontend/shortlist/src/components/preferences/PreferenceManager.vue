@@ -135,13 +135,13 @@ export default {
   max-width: 50rem;
   min-height: 20rem;
   margin: 0;
-  padding:20px;
+  padding: 20px;
 }
 .pref-actions-line {
   width: 100%;
   justify-content: space-between;
   display: flex;
-  padding:10px ;
+  padding: 10px;
 }
 .pref-actions {
   flex-wrap: wrap;

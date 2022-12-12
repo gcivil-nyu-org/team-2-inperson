@@ -164,7 +164,7 @@ export default {
 .preference-demo-container {
   justify-items: start;
   height: 100%;
-  width:100%;
+  width: 100%;
 }
 
 .preference-demo-component {
