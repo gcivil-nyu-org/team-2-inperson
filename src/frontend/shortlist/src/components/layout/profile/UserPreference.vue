@@ -115,7 +115,7 @@ button {
   font-weight: bold;
 }
 .profilefields {
-  width: 50%;
+  width: 14%;
   background: #ebf3e6;
   border: 1px solid #008037;
   border-radius: 5px;
