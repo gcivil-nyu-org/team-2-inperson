@@ -44,7 +44,7 @@ export default {
         style="font-family: Klee One; size: 10%"
         @click="$router.push('profile')"
       >
-        Let's Set Preferences!
+        Let's Get Started!
       </button>
     </div>
     <div style="margin-top: 90px">
