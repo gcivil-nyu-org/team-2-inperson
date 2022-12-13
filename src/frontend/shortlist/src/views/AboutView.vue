@@ -52,21 +52,42 @@ export default {
 </template>
 
 <style>
-.container {
-  margin-left: 40%;
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+
+  background: linear-gradient(-65deg, #7bdf8d, #525854);
 }
-.content-container {
-  margin: 2% 2% 2% 2%;
+.ShortlistLogo {
+  width: 10%;
 }
-.bigtitle {
-  font-size: 50px;
-  font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
+.ShortlistLogo img {
+  margin-left: auto;
+  margin-right: auto;
+  left: 50%;
+  width: 190%;
+  transform: translate(220%);
 }
 .contents {
-  font-size: 25px;
-  font-weight: 200;
-  color: #008037;
-  font-family: "Cabin Sketch", cursive;
+  font-family: "Aleo", sans-serif;
+  text-align: justify;
+}
+.contentslast {
+  font-family: "Aleo", sans-serif;
+  text-align: justify;
+  margin-bottom: 0px;
+}
+.teamtitle {
+  font-family: "Klee One";
+  color: rgb(62, 61, 61);
+  font-size: 1.5rem;
+  margin: 0%;
+  text-align: center;
+  padding: 0%;
+  padding-bottom: 2px;
+  font-weight: bold;
 }
 </style>
