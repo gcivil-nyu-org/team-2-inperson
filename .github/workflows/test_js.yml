@@ -7,10 +7,10 @@ on:
     branches:
       - '*'
     paths:
-      - 'src/frontend/'
+      - 'src/frontend/**'
   pull_request:
     branches:
-      - develop
+      - 'develop'
 
 jobs:
   run_js_unit:
@@ -29,7 +29,7 @@ jobs:
         run: npm run test:unit -- --run --coverage --passWithNoTests
       
       - name: Coveralls
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: "./src/frontend/shortlist/coverage/lcov.info"
+        working-directory: ./src/frontend/shortlist
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: npm run coveralls

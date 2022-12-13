@@ -9,7 +9,7 @@
     "test:e2e": "start-server-and-test preview http://localhost:4173/ 'cypress open --e2e'",
     "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "coveralls": "cat coverage/lcov.info | coveralls"
+    "coveralls": "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",

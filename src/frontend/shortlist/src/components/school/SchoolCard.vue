@@ -49,9 +49,20 @@ export default {
       <div class="school-simple-name-row">
         <div class="school-simple-name-name">
           <template v-if="isDetail">
-            <a :href="schoolData.schoolMetadata.link">{{
+            <div
+            v-if="'schoolData.schoolMetadata.url'.includes('https://') == false"
+          >
+            <a
+              target="_target"
+              :href="'https://' + schoolData.schoolMetadata.url + '/'"
+              >{{ schoolData.schoolMetadata.name }}</a
+            >
+          </div>
+          <div v-else>
+            <a target="_target" :href="schoolData.schoolMetadata.url">{{
               schoolData.schoolMetadata.name
             }}</a>
+          </div>
           </template>
           <template v-else>
             {{ schoolData.schoolMetadata.name }}
