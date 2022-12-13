@@ -72,17 +72,89 @@ export default {
     </div>
   </div>
 </template>
+<style scoped>
+.home {
+  display: -moz-grid-line;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
 
-<style>
-@keyframes dashboard {
-  from {
-    background-color: #7feac6;
+.descdiv {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.desc {
+  color: #ffffff;
+  font-size: small;
+  position: relative;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.1vw #ffffff;
+  font-family: "Cabin Sketch";
+  margin-left: 7px;
+}
+.start {
+  margin-left: 42%;
+  padding-top: 10px;
+}
+.descsub {
+  font-family: "Aleo", sans-serif;
+  text-align: center;
+  margin-bottom: 0px;
+  background: #15620f;
+  color: #ffffff;
+  opacity: 0.6;
+  font-size: small;
+}
+.desc::before {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  color: #0d4f0b;
+  overflow: hidden;
+  position: absolute;
+  content: attr(data-text);
+  -webkit-text-stroke: 0vw #000000;
+  animation: animate 6s linear infinite;
+}
+
+@keyframes animate {
+  100%,
+  10%,
+  100% {
+    width: 0;
   }
-  to {
-    background-color: #afe1af;
+
+  70%,
+  100% {
+    width: 100%;
   }
 }
 
+.logoimg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+.featuresimg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
+.avatardev {
+  width: 60px;
+  height: 60px;
+  border-radius: 40px;
+  margin: -5px;
+  filter: brightness(90%) opacity(100%);
+}
 .button {
   padding: 15px 32px;
   text-align: center;
@@ -91,69 +163,13 @@ export default {
   font-size: 16px;
   display: inline-block;
 }
-
-.bigTitle {
-  margin-top: 5%;
-  margin-left: 38%;
-  font-size: 50px;
-  font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
-  color: black;
-}
-#smallTitle {
-  margin-left: 5%;
-  padding: 20px 60px;
-  margin-top: 5%;
-  font-size: 25px;
-  font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
-  color: black;
-}
-.home-container {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  text-align: center;
-  background-color: #bcd6a2;
-  padding-top: 100px;
-  padding-bottom: 100px;
-}
-
 .start-btn-container {
   margin-top: 10%;
   margin-bottom: 2%;
 }
-
-.btn-outline-success {
-  display: inline-block;
-}
 .btn-big {
   width: 200px;
   height: 80px;
-}
-
-.dash-container {
-  margin: auto;
-  width: 75%;
-  height: 100%;
-  border: 5px solid green;
-  padding: 20px;
-  border-style: inset;
-  border-radius: 30px;
-  animation-name: dashboard;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
-}
-
-.dash-actions-container {
-  display: grid;
-}
-
-.action {
-  padding: 20px;
 }
 
 a:link {
