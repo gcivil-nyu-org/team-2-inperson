@@ -7,7 +7,6 @@ export default {
       isVerified: false,
       email: "",
       errorMessage: "",
-      testNotVerified: false,
       testPostSent: false,
     };
   },
@@ -58,7 +57,7 @@ export default {
     </template>
     <template v-else>
       <form>
-        <div class="message-container" this.testNotVerified="true">
+        <div class="message-container">
           {{ errorMessage }}
         </div>
         <div class="input-container" id="emailaddress">
@@ -72,7 +71,7 @@ export default {
         <div class="button-container">
           <button
             @click="this.resendLink"
-            id="resetButton"
+            id="resendButton"
             class="btn btn-outline-dark"
           >
             Resend Verification Link
