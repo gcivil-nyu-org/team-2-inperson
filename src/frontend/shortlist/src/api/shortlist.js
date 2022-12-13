@@ -45,32 +45,10 @@ export default class ShortlistApi {
   getShortlist(payload, successCb, failCb) {
     return new tempGetShortlist(payload, successCb, failCb);
   }
-  // resetPassword(payload, successCb, failCb) {
-  //   return new tempResetPassword(payload, successCb, failCb);
-  // }
 }
 
 import axios from "axios";
 import md5 from "md5";
-
-// export class tempResetPassword {
-//   constructor(payload, successCb, failCb) {
-//     this.payload = payload;
-//     this.successCb = successCb;
-//     this.failCb = failCb;
-//   }
-//   execute() {
-//     console.log(this.payload, "tempResetPassword");
-//     axios({
-//       method: "POST",
-//       url: "https://api.shortlist.nyc/auth/password-reset-complete",
-//       headers: {},
-//       data: this.payload,
-//     })
-//       .then((result) => this.successCb(result))
-//       .catch((err) => this.failCb(err));
-//   }
-// }
 
 export class tempUpdateRecommendation {
   constructor(payload, successCb, failCb) {
@@ -113,26 +91,28 @@ export class temporarySignup {
         email: this.email,
         username: this.username,
         password: this.password,
-        userFirstName: this.firstName,
-        userLastName: this.lastName,
-        recommendationPreferences: {
-          q1: {
-            Question:
-              "How important is an engaging curriculum & emphasis on critical thinking skills?",
-            Response: "",
-          },
-          q2: {
-            Question:
-              "How important is a school culture where students feel safe and supported to meet high expectations?",
-            Response: "",
-          },
-          q3: {
-            Question: "Is there a specific borough you are looking for?",
-            Response: "",
-          },
-          q4: {
-            Question: "How would you rank your academic performance so far?",
-            Response: "",
+        preferences: {
+          userFirstName: this.firstName,
+          userLastName: this.lastName,
+          recommendationPreferences: {
+            q1: {
+              Question:
+                "How important is an engaging curriculum & emphasis on critical thinking skills?",
+              Response: "",
+            },
+            q2: {
+              Question:
+                "How important is a school culture where students feel safe and supported to meet high expectations?",
+              Response: "",
+            },
+            q3: {
+              Question: "Is there a specific borough you are looking for?",
+              Response: "",
+            },
+            q4: {
+              Question: "How would you rank your academic performance so far?",
+              Response: "",
+            },
           },
         },
       },
