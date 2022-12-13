@@ -11,7 +11,6 @@ export default {
     return {
       form: {
         email: "",
-        currentPassword: "",
         newPassword: "",
         confirmPassword: "",
       },
@@ -25,12 +24,6 @@ export default {
         "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
       );
       return emailPattern.test(this.form.email);
-    },
-    validateCurrentPassword() {
-      return (
-        this.form.currentPassword.length > 6 &&
-        this.form.currentPassword.length < 20
-      );
     },
     validateNewPassword() {
       let passwordPattern = new RegExp(
@@ -47,11 +40,6 @@ export default {
       if (!passwordPattern.test(this.form.newPassword)) {
         this.passwordAlert =
           "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
-        return false;
-      }
-      if (this.form.newPassword === this.form.currentPassword) {
-        this.passwordAlert =
-          "New password cannot be the same as the current one!";
         return false;
       }
       return true;
@@ -92,7 +80,6 @@ export default {
         return !(
           this.validateEmail() &&
           this.validateNewPassword() &&
-          this.validateCurrentPassword() &&
           this.validateConfirmPassword()
         );
       }
@@ -123,72 +110,56 @@ export default {
         </div>
       </div>
       <div class="current-password">
-        <label>Current Password</label>
-        <input
-          class="resetInput"
-          type="password"
-          placeholder="current password"
-          v-model="this.form.currentPassword"
-        />
-        <div
-          class="input-errors"
-          v-if="!validateCurrentPassword(this.form.currentPassword)"
-        >
-          <div class="error-msg" v-if="this.form.currentPassword.length > 0">
-            {{ this.passwordAlert }}
-          </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div>
-      <div id="newPassword">
-        <label>New Password</label>
-        <input
-          class="resetInput"
-          type="password"
-          placeholder="new password"
-          v-model="this.form.newPassword"
-        />
-        <div class="input-errors" v-if="!validateNewPassword()">
-          <div class="error-msg" v-if="this.form.newPassword.length > 0">
-            {{ this.passwordAlert }}
-          </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div>
-      <div>
-        <div id="confirmPassword">
-          <label>Confirm Password</label>
+        <div id="newPassword">
+          <label>New Password</label>
           <input
             class="resetInput"
             type="password"
-            autocomplete="off"
-            placeholder="confirm new password"
-            v-model="this.form.confirmPassword"
+            placeholder="new password"
+            v-model="this.form.newPassword"
           />
-          <div class="input-errors" v-if="!validateConfirmPassword()">
-            <div class="error-msg" v-if="this.form.confirmPassword.length > 0">
-              New Password and Confirm Password must be match!
+          <div class="input-errors" v-if="!validateNewPassword()">
+            <div class="error-msg" v-if="this.form.newPassword.length > 0">
+              {{ this.passwordAlert }}
             </div>
+            <div class="error-msg" v-else>&nbsp;</div>
           </div>
           <div class="input-errors" v-else>
             <div class="error-msg">&nbsp;</div>
           </div>
         </div>
+        <div>
+          <div id="confirmPassword">
+            <label>Confirm Password</label>
+            <input
+              class="resetInput"
+              type="password"
+              autocomplete="off"
+              placeholder="confirm new password"
+              v-model="this.form.confirmPassword"
+            />
+            <div class="input-errors" v-if="!validateConfirmPassword()">
+              <div
+                class="error-msg"
+                v-if="this.form.confirmPassword.length > 0"
+              >
+                New Password and Confirm Password must be match!
+              </div>
+            </div>
+            <div class="input-errors" v-else>
+              <div class="error-msg">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+        <button
+          id="big-instructions"
+          class="btn btn-outline-dark"
+          @click.prevent="submitPWResetForm"
+          :disabled="isSubmitDisabled"
+        >
+          Submit
+        </button>
       </div>
-      <button
-        id="big-instructions"
-        class="btn btn-outline-dark"
-        @click.prevent="submitPWResetForm"
-        :disabled="isSubmitDisabled"
-      >
-        Submit
-      </button>
     </div>
   </main>
 </template>
@@ -221,6 +192,7 @@ input {
   border-radius: 5px;
 }
 #big-instructions {
+  margin-left: 30%;
   font-size: 28px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;

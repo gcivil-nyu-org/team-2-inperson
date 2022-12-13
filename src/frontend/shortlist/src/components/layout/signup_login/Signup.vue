@@ -13,56 +13,117 @@ export default {
       },
       nameAlert: "",
       passwordAlert: "",
+      validationresultfirst: false,
+      validationresultlast: false,
+      validationresultemail: false,
+      validationresultpwd: false,
+      validationresultconfirmpwd: false,
       validation: true,
     };
   },
   methods: {
-    validateName(value) {
-      let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
-      if (value.length < 2) {
-        this.nameAlert = "Minimum length is 2 for name!";
-        return false;
+    validateFirstName(value) {
+      if (this.validation) {
+        let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+        if (value.length < 2) {
+          this.nameAlert = "Minimum length is 2 for name!";
+          this.validationresultfirst = false;
+          return false;
+        }
+        if (value.length > 10) {
+          this.nameAlert = "Maximum length is 10 for name!";
+          this.validationresultfirst = false;
+          return false;
+        }
+        if (!validNamePattern.test(value)) {
+          this.nameAlert =
+            "Letters, dashes (-) and spaces (No starting spaces) only!";
+          this.validationresultfirst = false;
+          return false;
+        }
+        this.validationresultfirst = true;
+        return true;
+      } else {
+        this.validationresultfirst = true;
+        return true;
       }
-      if (value.length > 10) {
-        this.nameAlert = "Maximum length is 10 for name!";
-        return false;
+    },
+    validateLastName(value) {
+      if (this.validation) {
+        let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
+        if (value.length < 2) {
+          this.nameAlert = "Minimum length is 2 for name!";
+          this.validationresultlast = false;
+          return false;
+        }
+        if (value.length > 10) {
+          this.nameAlert = "Maximum length is 10 for name!";
+          this.validationresultlast = false;
+          return false;
+        }
+        if (!validNamePattern.test(value)) {
+          this.nameAlert =
+            "Letters, dashes (-) and spaces (No starting spaces) only!";
+          this.validationresultlast = false;
+          return false;
+        }
+        this.validationresultlast = true;
+        return true;
+      } else {
+        this.validationresultlast = true;
+        return true;
       }
-      if (!validNamePattern.test(value)) {
-        this.nameAlert =
-          "Valid name only contain letters, dashes (-) and spaces (No starting spaces)!";
-        return false;
-      }
-      return true;
     },
     validateEmail() {
-      let emailPattern = new RegExp(
-        "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
-      );
-      return emailPattern.test(this.form.email);
+      if (this.validation) {
+        let emailPattern = new RegExp(
+          "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+        );
+        this.validationresultemail = emailPattern.test(this.form.email);
+        return this.validationresultemail;
+      } else {
+        this.validationresultemail = true;
+        return true;
+      }
     },
     validatePassword() {
-      let passwordPattern = new RegExp(
-        "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
-      );
-      if (this.form.password.length < 8) {
-        this.passwordAlert = "Minimum length is 8 for password!";
-        return false;
+      if (this.validation) {
+        let passwordPattern = new RegExp(
+          "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
+        );
+        if (this.form.password.length < 8) {
+          this.passwordAlert = "Minimum length is 8 for password!";
+          this.validationresultpwd = false;
+          return false;
+        }
+        if (this.form.password.length > 15) {
+          this.passwordAlert = "Maximum length is 15 for password!";
+          this.validationresultpwd = false;
+          return false;
+        }
+        if (!passwordPattern.test(this.form.password)) {
+          this.passwordAlert =
+            "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
+          this.validationresultpwd = false;
+          return false;
+        }
+        this.validationresultpwd = true;
+        return true;
+      } else {
+        this.validationresultpwd = true;
+        return true;
       }
-      if (this.form.password.length > 15) {
-        this.passwordAlert = "Maximum length is 15 for password!";
-        return false;
-      }
-      if (!passwordPattern.test(this.form.password)) {
-        this.passwordAlert =
-          "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
-        return false;
-      }
-      return true;
     },
     validateConfirmPassword() {
-      return this.form.password == this.form.confirmPassword;
+      if (this.validation) {
+        this.validationresultconfirmpwd =
+          this.form.password == this.form.confirmPassword;
+        return this.validationresultconfirmpwd;
+      } else {
+        this.this.validationresultconfirmpwd = true;
+        return true;
+      }
     },
-    // TODO (Pooja): ID file required validation here
 
     submitSignupForm() {
       // TRIGGER SIGNUP EVENT
@@ -81,11 +142,11 @@ export default {
         return false;
       } else {
         return !(
-          this.validateName(this.form.firstName) &&
-          this.validateName(this.form.lastName) &&
-          this.validateEmail() &&
-          this.validatePassword() &&
-          this.validateConfirmPassword()
+          this.validationresultfirst &&
+          this.validationresultlast &&
+          this.validationresultemail &&
+          this.validationresultpwd &&
+          this.validationresultconfirmpwd
         );
       }
     },
@@ -109,7 +170,10 @@ export default {
           class="signupinput"
           v-model="this.form.firstName"
         />
-        <div class="input-errors" v-if="!validateName(this.form.firstName)">
+        <div
+          class="input-errors"
+          v-if="!validateFirstName(this.form.firstName)"
+        >
           <div class="error-msg" v-if="this.form.firstName.length > 0">
             {{ this.nameAlert }}
           </div>
@@ -126,7 +190,7 @@ export default {
           class="signupinput"
           v-model="this.form.lastName"
         />
-        <div class="input-errors" v-if="!validateName(this.form.lastName)">
+        <div class="input-errors" v-if="!validateLastName(this.form.lastName)">
           <div class="error-msg" v-if="this.form.lastName.length > 0">
             {{ this.nameAlert }}
           </div>

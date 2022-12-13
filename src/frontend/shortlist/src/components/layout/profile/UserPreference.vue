@@ -30,7 +30,7 @@ export default {
 
 <template>
   <main>
-    <div>
+    <div v-if="accountMetadata != null">
       <label class="prefprofiletitle">Preferences</label>
       <form class="prefprofileform">
         <template

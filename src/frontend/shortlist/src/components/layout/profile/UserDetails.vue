@@ -7,58 +7,82 @@ export default {
     return {
       newFirst: "",
       newLast: "",
-      nameAlert: "",
+      firstnameAlert: "",
+      secondnameAlert: "",
       email: "",
-      validationresult: false,
+      validationresultfirst: false,
+      validationresultlast: false,
       validation: true,
       pwResetSent: false,
     };
   },
   methods: {
-    validateName(value) {
+    validateFirst(value) {
       if (this.validation) {
-        let validNamePattern = new RegExp("^[a-zA-Z0-9]*$");
+        let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
         if (value.length < 2) {
-          this.nameAlert = "Minimum length is 2 for name!";
+          this.firstnameAlert = "Minimum length is 2 for name!";
+          this.validationresultfirst = false;
           return false;
         }
         if (value.length > 10) {
-          this.nameAlert = "Maximum length is 10 for name!";
+          this.firstnameAlert = "Maximum length is 10 for name!";
+          this.validationresultfirst = false;
           return false;
         }
         if (!validNamePattern.test(value)) {
-          this.nameAlert = "Valid name only contain letters or numbers!";
+          this.firstnameAlert =
+            "Letters, dashes (-) and spaces (No starting spaces) only!";
+          this.validationresultfirst = false;
           return false;
         }
-        this.validationresult = true;
+        this.validationresultfirst = true;
         return true;
       } else {
-        this.validationresult = true;
+        this.validationresultfirst = true;
         return true;
       }
     },
-    loadFile: function (event) {
-      var image = document.getElementById("output");
-      image.src = URL.createObjectURL(event.target.files[0]);
-      console.log(image.src);
+    validateLast(value) {
+      if (this.validation) {
+        let validNamePattern = new RegExp("^[a-zA-Z0-9]*$");
+        if (value.length < 2) {
+          this.secondnameAlert = "Minimum length is 2 for name!";
+          this.validationresultlast = false;
+          return false;
+        }
+        if (value.length > 10) {
+          this.secondnameAlert = "Maximum length is 10 for name!";
+          this.validationresultlast = false;
+          return false;
+        }
+        if (!validNamePattern.test(value)) {
+          this.secondnameAlert = "Valid name only contain letters or numbers!";
+          this.validationresultlast = false;
+          return false;
+        }
+        this.validationresultlast = true;
+        return true;
+      } else {
+        this.validationresultlast = true;
+        return true;
+      }
     },
     updateName() {
-      if (this.validationresult == true) {
-        let userFirst = this.newFirst
-          ? this.newFirst
-          : this.accountMetadata.preferences.userFirstName;
-        let userLast = this.newLast
-          ? this.newLast
-          : this.accountMetadata.preferences.userLastName;
+      let userFirst = this.newFirst
+        ? this.newFirst
+        : this.accountMetadata.preferences.userFirstName;
+      let userLast = this.newLast
+        ? this.newLast
+        : this.accountMetadata.preferences.userLastName;
 
-        this.$emit("appAccountUpdateName", { userFirst, userLast });
+      this.$emit("appAccountUpdateName", { userFirst, userLast });
 
-        // reset name fields
-        this.newFirst = "";
-        this.newLast = "";
+      // reset name fields
+      this.newFirst = "";
+      this.newLast = "";
 
-        alert("Name updated!");
-      }
+      alert("Name updated!");
     },
     validateEmail(email) {
       let emailPattern = new RegExp(
@@ -100,9 +124,7 @@ export default {
       if (!this.validation) {
         return false;
       } else {
-        return !(
-          this.validateName(this.newFirst) && this.validateName(this.newLast)
-        );
+        return !(this.validationresultfirst && this.validationresultlast);
       }
     },
   },
@@ -110,7 +132,7 @@ export default {
 </script>
 <template>
   <main>
-    <form class="profileform">
+    <form class="profileform" v-if="accountMetadata != null">
       <div style="padding-top: 20px">
         <img
           src="/helloInShortlist.png"
@@ -164,11 +186,11 @@ export default {
           class="profilefields"
           :placeholder="accountMetadata.preferences.userFirstName"
           id="firstname"
-          v-model="newFirst"
+          v-model="this.newFirst"
         />
-        <div class="input-errors" v-if="!validateName(this.newFirst)">
+        <div class="input-errors" v-if="!this.validateFirst(this.newFirst)">
           <div class="error-msg" v-if="this.newFirst.length > 0">
-            {{ this.nameAlert }}
+            {{ this.firstnameAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
         </div>
@@ -184,9 +206,9 @@ export default {
           id="lastname"
           v-model="newLast"
         />
-        <div class="input-errors" v-if="!validateName(this.newLast)">
+        <div class="input-errors" v-if="!this.validateLast(this.newLast)">
           <div class="error-msg" v-if="this.newLast.length > 0">
-            {{ this.nameAlert }}
+            {{ this.secondnameAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
         </div>
