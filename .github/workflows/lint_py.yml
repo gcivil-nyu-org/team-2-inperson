@@ -7,10 +7,10 @@ on:
     branches:
       - '*'
     paths:
-      - 'src/backend/'
+      - 'src/backend/**'
   pull_request:
     branches:
-      - develop
+      - 'develop'
 
 jobs:
   run_py_linter:

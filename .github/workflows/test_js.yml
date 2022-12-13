@@ -6,9 +6,11 @@ on:
   push:
     branches:
       - '*'
+    paths:
+      - 'src/frontend/**'
   pull_request:
     branches:
-      - develop
+      - 'develop'
 
 jobs:
   run_js_unit:
