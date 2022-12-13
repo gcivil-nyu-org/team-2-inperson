@@ -68,7 +68,7 @@ export default {
     <nav class="navbar navbar-expand-lg static-top">
       <router-link to="/" class="reset-style">
         <img
-          src="/shortlist-logo-nav.png"
+          src="/shortlistname.png"
           style="width: 170px; left: 15px"
           alt="shortlist"
         />

@@ -15,115 +15,63 @@ export default {
 </script>
 
 <template>
-  <h6 class="desc" data-text="Find Your Dream School Here.">
-    Find Your Dream School Here.
-  </h6>
-  <div class="home">
-    <div><img class="logoimg" src="/shortlist-logo-home.png" /></div>
-    <div class="start" v-if="loginState == false">
-      <button
-        class="btn btn-big btn-success"
-        style="font-family: Klee One; size: 10%"
-        @click="$router.push('signup')"
-      >
-        Get Started!
-      </button>
-      <router-link to="/login">
-        <div style="font-family: Klee One; color: black">
-          Already have an account?
-        </div>
-      </router-link>
+  <main>
+    <div class="home-container" v-if="loginState == false">
+      <div class="shortlist-fnt-serif-med">
+        <h1>Welcome to Shortlist</h1>
+      </div>
+      <div class="start-btn-container">
+        <button
+          class="btn btn-big btn-outline-dark"
+          @click="$router.push('signup')"
+        >
+          Get Started
+        </button>
+      </div>
+      <div class="login-link-container">
+        <router-link to="/login">
+          <span class="shortlist-fnt-serif-med">Already have an account?</span>
+        </router-link>
+      </div>
     </div>
-    <div class="start" v-else>
-      <button
-        class="btn btn-big btn-outline-dark"
-        style="font-family: Klee One; size: 10%"
-        @click="$router.push('profile')"
-      >
-        Let's Set Preference!
-      </button>
+    <div class="dash-container" v-else>
+      <h1 class="bigTitle">Dashboard</h1>
+      <div class="dash-actions-container"></div>
+      <div class="action">
+        <button
+          class="btn btn-outline-success"
+          @click="$router.push('categorize')"
+          id="smallTitle"
+        >
+          Get Matches
+        </button>
+        <button
+          class="btn btn-outline-success"
+          @click="$router.replace('profile')"
+          id="smallTitle"
+        >
+          My Students
+        </button>
+        <button
+          class="btn btn-outline-success"
+          @click="$router.replace('profile')"
+          id="smallTitle"
+        >
+          My Preferences
+        </button>
+      </div>
     </div>
-    <div style="margin-top: 90px" v-if="loginState == true">
-      <p class="descsub">
-        With Shortlist, you don’t search for a High School you’ve heard of, or
-        one you think you’ll get into, or one your parents want you to apply
-        for…
-      </p>
-      <p class="descsub">
-        we’ll show you options, and over time your best-matching schools might
-        surprise you.
-      </p>
-      <p class="descsub">- Team Shortlist</p>
-    </div>
-  </div>
+  </main>
 </template>
-<style scoped>
-.home {
-  display: -moz-grid-line;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-}
 
-.descdiv {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-.desc {
-  color: #ffffff;
-  font-size: small;
-  position: relative;
-  text-transform: uppercase;
-  -webkit-text-stroke: 0.1vw #ffffff;
-  font-family: "Cabin Sketch";
-  margin-left: 7px;
-}
-.start {
-  margin-left: 42%;
-  padding-top: 10px;
-}
-.descsub {
-  font-family: "Aleo", sans-serif;
-  text-align: center;
-  margin-bottom: 0px;
-  background: #15620f;
-  color: #ffffff;
-  opacity: 0.6;
-  font-size: small;
-}
-.desc::before {
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  color: #0d4f0b;
-  overflow: hidden;
-  position: absolute;
-  content: attr(data-text);
-  -webkit-text-stroke: 0vw #000000;
-  animation: animate 6s linear infinite;
-}
-
-@keyframes animate {
-  100%,
-  10%,
-  100% {
-    width: 0;
+<style>
+@keyframes dashboard {
+  from {
+    background-color: #7feac6;
   }
-
-  70%,
-  100% {
-    width: 100%;
+  to {
+    background-color: #afe1af;
   }
-}
-
-.logoimg {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
 }
 
 .button {
@@ -134,13 +82,69 @@ export default {
   font-size: 16px;
   display: inline-block;
 }
+
+.bigTitle {
+  margin-top: 5%;
+  margin-left: 38%;
+  font-size: 50px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+  color: black;
+}
+#smallTitle {
+  margin-left: 5%;
+  padding: 20px 60px;
+  margin-top: 5%;
+  font-size: 25px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+  color: black;
+}
+.home-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  background-color: #bcd6a2;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
 .start-btn-container {
   margin-top: 10%;
   margin-bottom: 2%;
 }
+
+.btn-outline-success {
+  display: inline-block;
+}
 .btn-big {
   width: 200px;
   height: 80px;
+}
+
+.dash-container {
+  margin: auto;
+  width: 75%;
+  height: 100%;
+  border: 5px solid green;
+  padding: 20px;
+  border-style: inset;
+  border-radius: 30px;
+  animation-name: dashboard;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+.dash-actions-container {
+  display: grid;
+}
+
+.action {
+  padding: 20px;
 }
 
 a:link {
