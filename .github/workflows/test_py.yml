@@ -43,4 +43,11 @@ jobs:
           SHORTLIST_EMAIL_HOST_PASSWORD: ${{ secrets.SHORTLIST_EMAIL_HOST_PASSWORD }}
           SHORTLIST_API_URL: ${{ secrets.SHORTLIST_API_URL }}
         run: |
-          python3 manage.py test
+          coverage run manage.py test
+      
+      - name: coveralls-python
+        working-directory: ./src/backend/server/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+            coveralls --service=github
