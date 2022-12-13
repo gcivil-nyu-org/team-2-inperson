@@ -170,7 +170,10 @@ export default {
           class="signupinput"
           v-model="this.form.firstName"
         />
-        <div class="input-errors" v-if="!validateName(this.form.firstName)">
+        <div
+          class="input-errors"
+          v-if="!validateFirstName(this.form.firstName)"
+        >
           <div class="error-msg" v-if="this.form.firstName.length > 0">
             {{ this.nameAlert }}
           </div>
@@ -187,7 +190,7 @@ export default {
           class="signupinput"
           v-model="this.form.lastName"
         />
-        <div class="input-errors" v-if="!validateName(this.form.lastName)">
+        <div class="input-errors" v-if="!validateLastName(this.form.lastName)">
           <div class="error-msg" v-if="this.form.lastName.length > 0">
             {{ this.nameAlert }}
           </div>
