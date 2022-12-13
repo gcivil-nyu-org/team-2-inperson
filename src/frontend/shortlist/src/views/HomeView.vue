@@ -126,20 +126,6 @@ export default {
   width: 40%;
 }
 
-.featuresimg {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-}
-
-.avatardev {
-  width: 60px;
-  height: 60px;
-  border-radius: 40px;
-  margin: -5px;
-  filter: brightness(90%) opacity(100%);
-}
 .button {
   padding: 15px 32px;
   text-align: center;
