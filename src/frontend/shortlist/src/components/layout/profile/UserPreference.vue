@@ -30,8 +30,8 @@ export default {
 
 <template>
   <main>
-    <div>
-      <label class="prefprofiletitle">Preferences</label>
+    <div v-if="accountMetadata != null">
+      <label class="prefprofiletitle" >Preferences</label>
       <form class="prefprofileform">
         <template
           v-for="val in accountMetadata.preferences.recommendationPreferences"

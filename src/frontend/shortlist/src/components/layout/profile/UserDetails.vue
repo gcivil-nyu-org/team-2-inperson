@@ -131,7 +131,7 @@ export default {
 </script>
 <template>
   <main>
-    <form class="profileform">
+    <form class="profileform" v-if="accountMetadata != null">
       <div style="padding-top: 20px">
         <img
           src="/helloInShortlist.png"
