@@ -8,6 +8,7 @@ export default {
       newEmail: "",
       validationresult: false,
       validation: true,
+      inviteSented: false,
     };
   },
   methods: {
@@ -41,6 +42,7 @@ export default {
       } else {
         alert("Invalid Email Entry!");
       }
+      this.inviteSented = true;
     },
   },
 };
@@ -59,6 +61,7 @@ export default {
         type="button"
         @click="this.sendInvite"
         class="btn btn-outline-light"
+        id="send-invite-button"
       >
         <img src="/add-student.png" class="studentupdateimg" />
       </button>
