@@ -48,11 +48,6 @@ export default {
           "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
         return false;
       }
-      // if (this.form.newPassword === this.form.currentPassword) {
-      //   this.passwordAlert =
-      //     "New password cannot be the same as the current one!";
-      //   return false;
-      // }
       return true;
     },
     validateConfirmPassword() {
