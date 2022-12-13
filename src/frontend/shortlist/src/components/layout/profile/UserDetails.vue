@@ -99,16 +99,16 @@ export default {
         return email;
       } else {
         alert("You didn't enter a valid email, try again.");
+        return "";
       }
     },
     successGet(responseData) {
-      console.log("get reset email function running");
       console.log(responseData, "This is responseData from successGet");
-      console.log("my list looks like: ");
     },
     appRequestResetEmail() {
       const emailInput = this.enterEmail();
-      axios
+      if (emailInput != "") {
+        axios
         .post("https://api.shortlist.nyc/auth/request-reset-email", {
           email: emailInput,
         })
@@ -116,6 +116,7 @@ export default {
         .catch(function (error) {
           console.log(error.response);
         });
+      }
     },
   },
 
