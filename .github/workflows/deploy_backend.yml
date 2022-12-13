@@ -3,7 +3,7 @@ name: DEPLOY - FRONTEND
 on:
   push:
     branches:
-      - '*'
+      - develop
     paths:
       - 'src/backend'
   pull_request:
