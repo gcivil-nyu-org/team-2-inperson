@@ -11,7 +11,6 @@ export default {
     return {
       form: {
         email: "",
-        currentPassword: "",
         newPassword: "",
         confirmPassword: "",
       },
@@ -26,12 +25,12 @@ export default {
       );
       return emailPattern.test(this.form.email);
     },
-    validateCurrentPassword() {
-      return (
-        this.form.currentPassword.length > 6 &&
-        this.form.currentPassword.length < 20
-      );
-    },
+    // validateCurrentPassword() {
+    //   return (
+    //     this.form.currentPassword.length > 6 &&
+    //     this.form.currentPassword.length < 20
+    //   );
+    // },
     validateNewPassword() {
       let passwordPattern = new RegExp(
         "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
@@ -49,11 +48,11 @@ export default {
           "Invalid Password. At least 1 digit, 1 lower case, 1 upper case, and 1 special required.";
         return false;
       }
-      if (this.form.newPassword === this.form.currentPassword) {
-        this.passwordAlert =
-          "New password cannot be the same as the current one!";
-        return false;
-      }
+      // if (this.form.newPassword === this.form.currentPassword) {
+      //   this.passwordAlert =
+      //     "New password cannot be the same as the current one!";
+      //   return false;
+      // }
       return true;
     },
     validateConfirmPassword() {
@@ -92,7 +91,6 @@ export default {
         return !(
           this.validateEmail() &&
           this.validateNewPassword() &&
-          this.validateCurrentPassword() &&
           this.validateConfirmPassword()
         );
       }
@@ -123,18 +121,18 @@ export default {
         </div>
       </div>
       <div class="current-password">
-        <label>Current Password</label>
-        <input
+        <!-- <label>Current Password</label> -->
+        <!-- <input
           class="resetInput"
           type="password"
           placeholder="current password"
           v-model="this.form.currentPassword"
-        />
-        <div
+        /> -->
+        <!-- <div
           class="input-errors"
           v-if="!validateCurrentPassword(this.form.currentPassword)"
-        >
-          <div class="error-msg" v-if="this.form.currentPassword.length > 0">
+        > -->
+          <!-- <div class="error-msg" v-if="this.form.currentPassword.length > 0">
             {{ this.passwordAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
@@ -142,7 +140,7 @@ export default {
         <div class="input-errors" v-else>
           <div class="error-msg">&nbsp;</div>
         </div>
-      </div>
+      </div> -->
       <div id="newPassword">
         <label>New Password</label>
         <input
@@ -190,6 +188,7 @@ export default {
         Submit
       </button>
     </div>
+    </div> 
   </main>
 </template>
 
