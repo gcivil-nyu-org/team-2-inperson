@@ -15,54 +15,62 @@ export default {
 </script>
 
 <template>
-  <main>
-    <h1>Updating...</h1>
-    <div class="home-container" v-if="loginState == false">
-      <div class="shortlist-fnt-serif-med">
-        <h1>Welcome to Shortlist</h1>
-      </div>
-      <div class="start-btn-container">
-        <button
-          class="btn btn-big btn-outline-dark"
-          @click="$router.push('signup')"
-        >
-          Get Started
-        </button>
-      </div>
-      <div class="login-link-container">
-        <router-link to="/login">
-          <span class="shortlist-fnt-serif-med">Already have an account?</span>
-        </router-link>
-      </div>
+  <h6 class="desc" data-text="Find Your Dream School Here.">
+    Find Your Dream School Here.
+  </h6>
+  <div class="home">
+    <div><img class="logoimg" src="/shortlist-logo-home.png" /></div>
+    <div class="descdiv"></div>
+    <div>
+      <img class="featuresimg" src="/shortlist-features.png" />
     </div>
-    <div class="dash-container" v-else>
-      <h1 class="bigTitle">Dashboard</h1>
-      <div class="dash-actions-container"></div>
-      <div class="action">
-        <button
-          class="btn btn-outline-success"
-          @click="$router.push('categorize')"
-          id="smallTitle"
-        >
-          Get Matches
-        </button>
-        <button
-          class="btn btn-outline-success"
-          @click="$router.replace('profile')"
-          id="smallTitle"
-        >
-          My Students
-        </button>
-        <button
-          class="btn btn-outline-success"
-          @click="$router.replace('profile')"
-          id="smallTitle"
-        >
-          My Preferences
-        </button>
-      </div>
+    <div class="start" v-if="loginState == false">
+      <button
+        class="btn btn-big btn-dark"
+        style="font-family: Klee One; size: 10%"
+        @click="$router.push('signup')"
+      >
+        Get Started
+      </button>
+      <router-link to="/login">
+        <div style="font-family: Klee One; color: black">
+          Already have an account?
+        </div>
+      </router-link>
     </div>
-  </main>
+    <div class="start" v-else>
+      <button
+        class="btn btn-big btn-outline-dark"
+        style="font-family: Klee One; size: 10%"
+        @click="$router.push('profile')"
+      >
+        Let's Set Preferences!
+      </button>
+    </div>
+    <div style="margin-top: 90px">
+      <p class="descsub">
+        With Shortlist, you don’t search for a High School you’ve heard of, or
+        one you think you’ll get into, or one your parents want you to apply
+        for…
+      </p>
+      <p class="descsub">
+        we’ll show you options, and over time your best-matching schools might
+        surprise you.
+      </p>
+      <p class="descsub">- Team Shortlist</p>
+    </div>
+    <div
+      class="descsub"
+      style="background: white; opacity: 1; padding-top: 7px"
+    >
+      <img class="avatardev" src="/AdelaideZhangDevShortlist.jpeg" />
+      <img class="avatardev" src="/Simao(Alice)ChenDevShortlist.jpg" />
+      <img class="avatardev" src="/DanielWaltDevShortlist.jpeg" />
+      <img class="avatardev" src="/PoojaPatelDevShortlist.jpg" />
+      <img class="avatardev" src="/VaibhavJainDegShortlist.jpg" />
+      <img class="avatardev" src="/YeXuDevShortlist.jpg" />
+    </div>
+  </div>
 </template>
 
 <style>
