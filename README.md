@@ -27,7 +27,7 @@
     <td></td>
     <td>Coverage</td>
     <td>
-      <a href='https://coveralls.io/github/gcivil-nyu-org/team-2-inperson?branch=develop'><img src='https://coveralls.io/repos/github/gcivil-nyu-org/team-2-inperson/badge.svg?branch=develop' alt='Coverage Status' /></a>
+      <a href='https://coveralls.io/github/gcivil-nyu-org/team-2-inperson?branch=develop'><img src='https://coveralls.io/repos/github/gcivil-nyu-org/team-2-inperson/badge.svg?branch=develop&kill_cache=1' alt='Coverage Status' /></a>
     </td>
   </tr>
   <tr>
