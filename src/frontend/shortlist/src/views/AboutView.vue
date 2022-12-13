@@ -1,4 +1,11 @@
-<script></script>
+<script>
+import DeveloperCard from "../components/layout/about/DeveloperCard.vue";
+export default {
+  components: {
+    DeveloperCard,
+  },
+};
+</script>
 
 <template>
   <div class="container">
