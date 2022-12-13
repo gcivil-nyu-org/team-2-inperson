@@ -7,7 +7,7 @@ describe("UserPreference.vue", () => {
     const componentWrapper = mount(UserPreference, {
       // props: {},
     });
-  expect(componentWrapper.exists()).toBe(true);
+    expect(componentWrapper.exists()).toBe(true);
   });
 
   it("test if emit works", async () => {
@@ -18,21 +18,21 @@ describe("UserPreference.vue", () => {
     console.log(componentWrapper.emitted(), "UserPreference emitted") ==>
     { appAccountUpdatePreferences: [ [] ] } UserPreference emitted
     */
-   componentWrapper.vm.$emit("appAccountUpdatePreferences");
-   await componentWrapper.vm.$nextTick();
-   let emittedEvent = componentWrapper.emitted();
-   expect(emittedEvent.appAccountUpdatePreferences).toBeTruthy();
+    componentWrapper.vm.$emit("appAccountUpdatePreferences");
+    await componentWrapper.vm.$nextTick();
+    let emittedEvent = componentWrapper.emitted();
+    expect(emittedEvent.appAccountUpdatePreferences).toBeTruthy();
   });
 
   it("test emitted function", async () => {
     const componentWrapper = mount(UserPreference, {
       props: {},
     });
-   expect(componentWrapper.vm.preferenceUpdateFlag).toBe(false); 
-   componentWrapper.vm.$emit("appAccountUpdatePreferences");
-   await componentWrapper.vm.$nextTick();
-   let emittedEvent = componentWrapper.emitted();
-   expect(emittedEvent.appAccountUpdatePreferences.length).toBe(1);
-   expect(emittedEvent.appAccountUpdatePreferences[0]).toEqual([]);
+    expect(componentWrapper.vm.preferenceUpdateFlag).toBe(false);
+    componentWrapper.vm.$emit("appAccountUpdatePreferences");
+    await componentWrapper.vm.$nextTick();
+    let emittedEvent = componentWrapper.emitted();
+    expect(emittedEvent.appAccountUpdatePreferences.length).toBe(1);
+    expect(emittedEvent.appAccountUpdatePreferences[0]).toEqual([]);
   });
 });

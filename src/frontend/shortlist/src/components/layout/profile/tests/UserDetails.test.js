@@ -7,7 +7,7 @@ describe("UserDetails.vue", () => {
     const componentWrapper = mount(UserDetails, {
       props: {},
     });
-  expect(componentWrapper.exists()).toBe(true);
+    expect(componentWrapper.exists()).toBe(true);
   });
 
   it("test if emit works", async () => {
@@ -18,22 +18,21 @@ describe("UserDetails.vue", () => {
     console.log(componentWrapper.emitted(), "UserDetails emitted") ==>
     { appAccountUpdateName: [ [] ] } UserDetails emitted
     */
-   componentWrapper.vm.$emit("appAccountUpdateName");
-   await componentWrapper.vm.$nextTick();
-   let emittedEvent = componentWrapper.emitted();
-   expect(emittedEvent.appAccountUpdateName).toBeTruthy();
+    componentWrapper.vm.$emit("appAccountUpdateName");
+    await componentWrapper.vm.$nextTick();
+    let emittedEvent = componentWrapper.emitted();
+    expect(emittedEvent.appAccountUpdateName).toBeTruthy();
   });
 
   it("test emitted function", async () => {
     const componentWrapper = mount(UserDetails, {
       props: {},
     });
-   expect(componentWrapper.vm.validation).toBe(true); 
-   componentWrapper.vm.$emit("appAccountUpdateName");
-   await componentWrapper.vm.$nextTick();
-   let emittedEvent = componentWrapper.emitted();
-   expect(emittedEvent.appAccountUpdateName.length).toBe(1);
-   expect(emittedEvent.appAccountUpdateName[0]).toEqual([]);
+    expect(componentWrapper.vm.validation).toBe(true);
+    componentWrapper.vm.$emit("appAccountUpdateName");
+    await componentWrapper.vm.$nextTick();
+    let emittedEvent = componentWrapper.emitted();
+    expect(emittedEvent.appAccountUpdateName.length).toBe(1);
+    expect(emittedEvent.appAccountUpdateName[0]).toEqual([]);
   });
-
 });
