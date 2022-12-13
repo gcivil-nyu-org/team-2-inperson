@@ -25,12 +25,6 @@ export default {
       );
       return emailPattern.test(this.form.email);
     },
-    // validateCurrentPassword() {
-    //   return (
-    //     this.form.currentPassword.length > 6 &&
-    //     this.form.currentPassword.length < 20
-    //   );
-    // },
     validateNewPassword() {
       let passwordPattern = new RegExp(
         "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)"
@@ -116,26 +110,6 @@ export default {
         </div>
       </div>
       <div class="current-password">
-        <!-- <label>Current Password</label> -->
-        <!-- <input
-          class="resetInput"
-          type="password"
-          placeholder="current password"
-          v-model="this.form.currentPassword"
-        /> -->
-        <!-- <div
-          class="input-errors"
-          v-if="!validateCurrentPassword(this.form.currentPassword)"
-        > -->
-        <!-- <div class="error-msg" v-if="this.form.currentPassword.length > 0">
-            {{ this.passwordAlert }}
-          </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div> -->
         <div id="newPassword">
           <label>New Password</label>
           <input
@@ -218,6 +192,7 @@ input {
   border-radius: 5px;
 }
 #big-instructions {
+  margin-left: 30%;
   font-size: 28px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
