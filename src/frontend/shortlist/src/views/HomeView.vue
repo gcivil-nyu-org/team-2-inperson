@@ -20,17 +20,13 @@ export default {
   </h6>
   <div class="home">
     <div><img class="logoimg" src="/shortlist-logo-home.png" /></div>
-    <div class="descdiv" v-if="loginState == true"></div>
-    <div v-if="loginState == true">
-      <img class="featuresimg" src="/shortlist-features.png" />
-    </div>
     <div class="start" v-if="loginState == false">
       <button
-        class="btn btn-big btn-dark"
+        class="btn btn-big btn-success"
         style="font-family: Klee One; size: 10%"
         @click="$router.push('signup')"
       >
-        Get Started
+        Get Started!
       </button>
       <router-link to="/login">
         <div style="font-family: Klee One; color: black">
@@ -44,7 +40,7 @@ export default {
         style="font-family: Klee One; size: 10%"
         @click="$router.push('profile')"
       >
-        Let's Get Started!
+        Let's Set Preference!
       </button>
     </div>
     <div style="margin-top: 90px" v-if="loginState == true">
@@ -58,18 +54,6 @@ export default {
         surprise you.
       </p>
       <p class="descsub">- Team Shortlist</p>
-    </div>
-    <div
-      class="descsub"
-      style="background: white; opacity: 1; padding-top: 7px"
-      v-if="loginState == true"
-    >
-      <img class="avatardev" src="/AdelaideZhangDevShortlist.jpeg" />
-      <img class="avatardev" src="/Simao(Alice)ChenDevShortlist.jpg" />
-      <img class="avatardev" src="/DanielWaltDevShortlist.jpeg" />
-      <img class="avatardev" src="/PoojaPatelDevShortlist.jpg" />
-      <img class="avatardev" src="/VaibhavJainDegShortlist.jpg" />
-      <img class="avatardev" src="/YeXuDevShortlist.jpg" />
     </div>
   </div>
 </template>
