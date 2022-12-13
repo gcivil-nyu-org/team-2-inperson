@@ -6,9 +6,11 @@ on:
   push:
     branches:
       - '*'
+    paths:
+      - 'src/backend/**'
   pull_request:
     branches:
-      - develop
+      - 'develop'
 
 jobs:
   run_py_linter:
