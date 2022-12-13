@@ -20,8 +20,8 @@ export default {
   </h6>
   <div class="home">
     <div><img class="logoimg" src="/shortlist-logo-home.png" /></div>
-    <div class="descdiv"></div>
-    <div>
+    <div class="descdiv" v-if="loginState == true"></div>
+    <div v-if="loginState == true">
       <img class="featuresimg" src="/shortlist-features.png" />
     </div>
     <div class="start" v-if="loginState == false">
@@ -47,7 +47,7 @@ export default {
         Let's Get Started!
       </button>
     </div>
-    <div style="margin-top: 90px">
+    <div style="margin-top: 90px" v-if="loginState == true">
       <p class="descsub">
         With Shortlist, you don’t search for a High School you’ve heard of, or
         one you think you’ll get into, or one your parents want you to apply
@@ -62,6 +62,7 @@ export default {
     <div
       class="descsub"
       style="background: white; opacity: 1; padding-top: 7px"
+      v-if="loginState == true"
     >
       <img class="avatardev" src="/AdelaideZhangDevShortlist.jpeg" />
       <img class="avatardev" src="/Simao(Alice)ChenDevShortlist.jpg" />
