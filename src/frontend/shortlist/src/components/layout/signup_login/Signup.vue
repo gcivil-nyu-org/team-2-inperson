@@ -176,7 +176,7 @@ export default {
           v-if="!validateFirstName(this.form.firstName)"
         >
           <div class="error-msg" v-if="this.form.firstName.length > 0">
-            {{ this.nameAlert }}
+            {{ this.firstnameAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
         </div>
@@ -193,7 +193,7 @@ export default {
         />
         <div class="input-errors" v-if="!validateLastName(this.form.lastName)">
           <div class="error-msg" v-if="this.form.lastName.length > 0">
-            {{ this.nameAlert }}
+            {{ this.secondnameAlert }}
           </div>
           <div class="error-msg" v-else>&nbsp;</div>
         </div>
