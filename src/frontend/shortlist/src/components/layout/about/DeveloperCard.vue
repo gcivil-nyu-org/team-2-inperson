@@ -171,7 +171,7 @@
       <div class="border">
         <img
           class="devimg"
-          src="/YeXuDevShortlist.jpg"
+          src="/YeXuDevShortlist.JPG"
           alt="YeXuDevShortlist"
         />
       </div>
