@@ -8,9 +8,9 @@ export default {
     class="school-icon-container"
     :style="{ boxShadow: '0 0 5px -1px ' + bgColor }"
   >
-    <span v-if="schoolData.schoolMetadata.address.slice(0, 4)=='http'">
+    <span v-if="schoolData.schoolMetadata.address.slice(0, 4) == 'http'">
       <!--real image-->
-      <img class="school-icon-img" :src="schoolData.schoolMetadata.address"/>
+      <img class="school-icon-img" :src="schoolData.schoolMetadata.address" />
     </span>
     <span v-else>
       <!--no image, use default-->
