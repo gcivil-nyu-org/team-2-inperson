@@ -44,17 +44,12 @@ export default {
 <template>
   <main style="margin: auto">
     <div class="form-container">
-      <!-- <div class = "reset"> -->
       <label class="reset"> Reset Your Password</label>
-      <!-- </div> -->
       <div>
-        <div class="email">
-          <label>Your Email</label>
-        </div>
         <input
           class="resetInput"
           type="text"
-          placeholder="email"
+          placeholder="Your Email"
           v-model="this.form.email"
         />
         <div class="input-errors" v-if="!validateEmail(this.form.email)">
@@ -72,6 +67,7 @@ export default {
         class="btn btn-outline-dark"
         @click.prevent="submitForgetForm"
         :disabled="!isSubmitDisabled"
+        style="font-family: Aleo"
       >
         Submit
       </button>

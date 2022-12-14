@@ -135,7 +135,11 @@ export default {
       <br />
     </form>
     <div>
-      <button @click="$router.replace('/signup')" class="btn btn-outline-dark">
+      <button
+        @click="$router.replace('/signup')"
+        class="btn btn-outline-dark"
+        style="font-family: Aleo"
+      >
         Create New Account
       </button>
     </div>
