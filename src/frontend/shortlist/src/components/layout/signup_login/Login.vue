@@ -127,16 +127,18 @@ export default {
         >
           Login
         </button>
-        <p class="instructions" id="small">Don't have an account yet?</p>
+        <router-link to="/forgetPassword" class="nav-item nav-link">
+          <p class="instructions" id="small">Forgot Password?</p>
+        </router-link>
+      </div>
+      <br />
+      <div>
         <button
           @click.prevent="$router.replace('/signup')"
           class="btn btn-outline-dark"
         >
-          Sign me up!
+          Create New Account
         </button>
-        <router-link to="/forgetPassword" class="nav-item nav-link">
-          <p class="instructions" id="small">Forget Password?</p>
-        </router-link>
       </div>
     </form>
   </div>
@@ -181,9 +183,9 @@ input {
   margin-top: 100px;
 }
 #small.instructions {
-  font-size: 24px;
-  font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: "Aleo";
 }
 #big.instructions {
   font-size: 50px;
