@@ -10,19 +10,19 @@ export default {
 <template>
   <main>
     <div class="ShortlistLogo">
-      <img src="/short-list-logo-light-navbar.png" />
+      <img src="/short-list-logo-light-navbar.png" alt="shortlistlogo" />
     </div>
     <div class="container">
       <p class="contents">
         Shortlist™ is an educational web application specializing in matching
-        middle school students and their parents with high schools
-        in NYC. Different from the traditional “prune and search” edu app that
-        has existed in the past few decades, Shortlist™ shows users around
-        400 NYC public high schools using personalized algorithms and
-        drag-n-drop mechanism. It allows users to quickly make a decision to keep
-        or discard recommended schools. Each school card contains personalized
-        and relevant information. Users can also click on each of the school
-        cards to view more in-depth details.
+        middle school students and their parents with high schools in NYC.
+        Different from the traditional “prune and search” edu app that has
+        existed in the past few decades, Shortlist™ shows users around 400 NYC
+        public high schools using personalized algorithms and drag-n-drop
+        mechanism. It allows users to quickly make a decision to keep or discard
+        recommended schools. Each school card contains personalized and relevant
+        information. Users can also click on each of the school cards to view
+        more in-depth details.
       </p>
       <p class="contents">
         Each list can contain up to four different schools and users can

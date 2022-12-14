@@ -82,7 +82,10 @@ export default {
     <p>Sorry, that list does not exist.</p>
   </div>
   <router-link to="/">
-    <img src="/short-list-logo-light-navbar.png" class="logo_img"
+    <img
+      src="/short-list-logo-light-navbar.png"
+      class="logo_img"
+      alt="shortlistlogo"
   /></router-link>
 </template>
 <style scoped>

@@ -41,8 +41,12 @@ export default {
     <div class="school-simple-container" @click="swapDetail">
       <template v-if="!isDetail">
         <div class="school-simple-img-container">
-          <img class="school-simple-img" :src="defaultImg" draggable="false" />
-          <!-- :src="schoolData.img" -->
+          <img
+            class="school-simple-img"
+            :src="defaultImg"
+            draggable="false"
+            alt="schoolimg"
+          />
         </div>
       </template>
 
@@ -50,19 +54,21 @@ export default {
         <div class="school-simple-name-name">
           <template v-if="isDetail">
             <div
-            v-if="'schoolData.schoolMetadata.url'.includes('https://') == false"
-          >
-            <a
-              target="_target"
-              :href="'https://' + schoolData.schoolMetadata.url + '/'"
-              >{{ schoolData.schoolMetadata.name }}</a
+              v-if="
+                'schoolData.schoolMetadata.url'.includes('https://') == false
+              "
             >
-          </div>
-          <div v-else>
-            <a target="_target" :href="schoolData.schoolMetadata.url">{{
-              schoolData.schoolMetadata.name
-            }}</a>
-          </div>
+              <a
+                target="_target"
+                :href="'https://' + schoolData.schoolMetadata.url + '/'"
+                >{{ schoolData.schoolMetadata.name }}</a
+              >
+            </div>
+            <div v-else>
+              <a target="_target" :href="schoolData.schoolMetadata.url">{{
+                schoolData.schoolMetadata.name
+              }}</a>
+            </div>
           </template>
           <template v-else>
             {{ schoolData.schoolMetadata.name }}

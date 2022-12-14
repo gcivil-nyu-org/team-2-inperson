@@ -34,7 +34,12 @@ export default {
   <div style="select: none" v-if="schoolData != null">
     <div class="school-sharecard-container" @click="swapDetail">
       <div v-if="!isDetail" class="school-simple-img-container">
-        <img class="school-simple-img" :src="defaultImg" draggable="false" />
+        <img
+          class="school-simple-img"
+          :src="defaultImg"
+          draggable="false"
+          alt="schoolimg"
+        />
       </div>
       <div class="school-simple-name-row">
         <div class="school-simple-name-name">

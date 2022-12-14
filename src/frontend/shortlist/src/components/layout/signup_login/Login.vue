@@ -73,7 +73,7 @@ export default {
 <template>
   <div class="logo_image_container">
     <router-link to="/" class="nav-item nav-link">
-      <img src="/logo.png" class="logo_img"
+      <img src="/logo.png" class="logo_img" alt="shortlistlogo"
     /></router-link>
   </div>
   <div class="login_components_container">

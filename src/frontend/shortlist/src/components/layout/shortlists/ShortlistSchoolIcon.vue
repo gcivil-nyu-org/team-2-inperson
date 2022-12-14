@@ -10,11 +10,15 @@ export default {
   >
     <div v-if="schoolData.img">
       <!--real image-->
-      <img class="school-icon-img" :src="schoolData.img" />
+      <img class="school-icon-img" :src="schoolData.img" alt="schoolimg" />
     </div>
     <div v-else>
       <!--no image, use default-->
-      <img class="school-icon-img" src="/school-img-default-sm.png" />
+      <img
+        class="school-icon-img"
+        src="/school-img-default-sm.png"
+        alt="schoolimg"
+      />
     </div>
 
     <div class="school-icon-name shortlist-fnt-serif-bold">
