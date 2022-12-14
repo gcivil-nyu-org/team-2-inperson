@@ -19,7 +19,9 @@ export default {
     Find Your Dream School Here.
   </h6>
   <div class="home">
-    <div><img class="logoimg" src="/shortlist-logo-home.png" /></div>
+    <div>
+      <img class="logoimg" src="/shortlist-logo-home.png" alt="shortlistlogo" />
+    </div>
     <div class="start" v-if="loginState == false">
       <button
         class="btn btn-big btn-success"

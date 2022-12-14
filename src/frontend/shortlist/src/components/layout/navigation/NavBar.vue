@@ -143,6 +143,7 @@ export default {
 .reset-style,
 .reset-style * {
   all: revert;
+  text-decoration: none;
 }
 
 ul {

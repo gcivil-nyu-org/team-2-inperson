@@ -32,7 +32,7 @@ export default {
         }
         if (!validNamePattern.test(value)) {
           this.firstnameAlert =
-            "Letters, dashes (-) and spaces (No starting spaces) only!";
+            "Letters only! In between, dashes (-) and spaces allowed!";
           this.validationresultfirst = false;
           return false;
         }
@@ -45,7 +45,7 @@ export default {
     },
     validateLast(value) {
       if (this.validation) {
-        let validNamePattern = new RegExp("^[a-zA-Z0-9]*$");
+        let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
         if (value.length < 2) {
           this.secondnameAlert = "Minimum length is 2 for name!";
           this.validationresultlast = false;
@@ -57,7 +57,8 @@ export default {
           return false;
         }
         if (!validNamePattern.test(value)) {
-          this.secondnameAlert = "Valid name only contain letters or numbers!";
+          this.secondnameAlert =
+            "Letters only! In between, dashes (-) and spaces allowed!";
           this.validationresultlast = false;
           return false;
         }
@@ -402,5 +403,6 @@ export default {
   color: rgb(117, 28, 28);
   font-size: 13px;
   padding-bottom: 7px;
+  width: 20rem;
 }
 </style>

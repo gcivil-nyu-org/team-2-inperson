@@ -10,7 +10,7 @@ export default {
 <template>
   <main>
     <div class="ShortlistLogo">
-      <img src="/short-list-logo-light-navbar.png" />
+      <img src="/short-list-logo-light-navbar.png" alt="shortlistlogo" />
     </div>
     <div class="container">
       <p class="contents">

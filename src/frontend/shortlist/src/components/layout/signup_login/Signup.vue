@@ -11,7 +11,8 @@ export default {
         password: "",
         confirmPassword: "",
       },
-      nameAlert: "",
+      firstnameAlert: "",
+      secondnameAlert: "",
       passwordAlert: "",
       validationresultfirst: false,
       validationresultlast: false,
@@ -26,18 +27,18 @@ export default {
       if (this.validation) {
         let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
         if (value.length < 2) {
-          this.nameAlert = "Minimum length is 2 for name!";
+          this.firstnameAlert = "Minimum length is 2 for name!";
           this.validationresultfirst = false;
           return false;
         }
         if (value.length > 10) {
-          this.nameAlert = "Maximum length is 10 for name!";
+          this.firstnameAlert = "Maximum length is 10 for name!";
           this.validationresultfirst = false;
           return false;
         }
         if (!validNamePattern.test(value)) {
-          this.nameAlert =
-            "Letters, dashes (-) and spaces (No starting spaces) only!";
+          this.firstnameAlert =
+            "Letters only! In between, dashes (-) and spaces allowed!";
           this.validationresultfirst = false;
           return false;
         }
@@ -52,18 +53,18 @@ export default {
       if (this.validation) {
         let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
         if (value.length < 2) {
-          this.nameAlert = "Minimum length is 2 for name!";
+          this.secondnameAlert = "Minimum length is 2 for name!";
           this.validationresultlast = false;
           return false;
         }
         if (value.length > 10) {
-          this.nameAlert = "Maximum length is 10 for name!";
+          this.secondnameAlert = "Maximum length is 10 for name!";
           this.validationresultlast = false;
           return false;
         }
         if (!validNamePattern.test(value)) {
-          this.nameAlert =
-            "Letters, dashes (-) and spaces (No starting spaces) only!";
+          this.secondnameAlert =
+            "Letters only! In between, dashes (-) and spaces allowed!";
           this.validationresultlast = false;
           return false;
         }
@@ -126,7 +127,6 @@ export default {
     },
 
     submitSignupForm() {
-      // TRIGGER SIGNUP EVENT
       this.$emit("appAccountSignup", {
         email: this.form.email.trim(),
         firstName: this.form.firstName,
@@ -157,116 +157,124 @@ export default {
 <template>
   <div class="logo_image_container">
     <router-link to="/" class="nav-item nav-link">
-      <img src="/logo.png" class="logo_img"
+      <img src="/logo.png" class="logo_img" alt="shortlistlogo"
     /></router-link>
   </div>
   <div class="signup_components_container">
     <div class="signup-form-container">
       <h1 class="instructions" id="big">Sign Up</h1>
-      <div class="first_name">
-        <input
-          type="text"
-          placeholder="First Name"
-          class="signupinput"
-          v-model="this.form.firstName"
-        />
-        <div
-          class="input-errors"
-          v-if="!validateFirstName(this.form.firstName)"
-        >
-          <div class="error-msg" v-if="this.form.firstName.length > 0">
-            {{ this.nameAlert }}
+      <form v-on:keyup.enter="submitLoginForm(this.$route.query.redirect)">
+        <div class="first_name">
+          <input
+            type="text"
+            placeholder="First Name"
+            class="signupinput"
+            v-model="this.form.firstName"
+          />
+          <div
+            class="input-errors"
+            v-if="!validateFirstName(this.form.firstName)"
+          >
+            <div class="error-msg" v-if="this.form.firstName.length > 0">
+              {{ this.firstnameAlert }}
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
           </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div>
-      <div id="last_name">
-        <input
-          type="text"
-          placeholder="Last Name"
-          class="signupinput"
-          v-model="this.form.lastName"
-        />
-        <div class="input-errors" v-if="!validateLastName(this.form.lastName)">
-          <div class="error-msg" v-if="this.form.lastName.length > 0">
-            {{ this.nameAlert }}
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
           </div>
-          <div class="error-msg" v-else>&nbsp;</div>
         </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
+        <div id="last_name">
+          <input
+            type="text"
+            placeholder="Last Name"
+            class="signupinput"
+            v-model="this.form.lastName"
+          />
+          <div
+            class="input-errors"
+            v-if="!validateLastName(this.form.lastName)"
+          >
+            <div class="error-msg" v-if="this.form.lastName.length > 0">
+              {{ this.secondnameAlert }}
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
+          </div>
         </div>
-      </div>
 
-      <div id="email_address_signup">
-        <input
-          type="email"
-          placeholder="Email"
-          class="signupinput"
-          v-model="this.form.email"
-        />
-        <div class="input-errors" v-if="!validateEmail()">
-          <div class="error-msg" v-if="this.form.email.length > 0">
-            Invalid email entry!
+        <div id="email_address_signup">
+          <input
+            type="email"
+            placeholder="Email"
+            class="signupinput"
+            v-model="this.form.email"
+          />
+          <div class="input-errors" v-if="!validateEmail()">
+            <div class="error-msg" v-if="this.form.email.length > 0">
+              Invalid email entry!
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
           </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div>
-      <div id="password_signup">
-        <input
-          type="password"
-          placeholder="Password"
-          class="signupinput"
-          v-model="this.form.password"
-        />
-        <div class="input-errors" v-if="!validatePassword()">
-          <div class="error-msg" v-if="this.form.password.length > 0">
-            {{ this.passwordAlert }}
-          </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div>
-      <div>
-        <input
-          type="password"
-          autocomplete="off"
-          placeholder="Confirm Password"
-          class="signupinput"
-          v-model="this.form.confirmPassword"
-        />
-        <div class="input-errors" v-if="!validateConfirmPassword()">
-          <div class="error-msg">
-            Password and Confirm Password must be match!
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
           </div>
         </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
+        <div id="password_signup">
+          <input
+            type="password"
+            placeholder="Password"
+            class="signupinput"
+            v-model="this.form.password"
+          />
+          <div class="input-errors" v-if="!validatePassword()">
+            <div class="error-msg" v-if="this.form.password.length > 0">
+              {{ this.passwordAlert }}
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
+          </div>
         </div>
-      </div>
-      <!-- TODO (Pooja): Birthdate field -->
-      <button
-        class="btn btn-outline-dark"
-        id="signupButtonTest"
-        @click.prevent="submitSignupForm"
-        :disabled="isSignUpDisabled"
-      >
-        Sign up
-      </button>
-      <p class="instructions" id="small">
-        Have an account already?
-        <button @click="$router.replace('/login')" class="btn btn-outline-dark">
-          Log me in!
+        <div>
+          <input
+            type="password"
+            autocomplete="off"
+            placeholder="Confirm Password"
+            class="signupinput"
+            v-model="this.form.confirmPassword"
+          />
+          <div class="input-errors" v-if="!validateConfirmPassword()">
+            <div class="error-msg">
+              Password and Confirm Password must be match!
+            </div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
+          </div>
+        </div>
+        <button
+          class="btn btn-outline-dark"
+          id="signupButtonTest"
+          @click.prevent="submitSignupForm"
+          :disabled="isSignUpDisabled"
+          style="font-family: Aleo"
+        >
+          Sign up
         </button>
-      </p>
+      </form>
+      <div>
+        <button
+          @click="$router.replace('/login')"
+          class="btn btn-outline-dark"
+          style="font-family: Aleo; margin-left: 30%"
+        >
+          Already have an account?
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -314,14 +322,15 @@ input {
   margin-top: 100px;
 }
 #small.instructions {
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
+  font-family: "Aleo";
 }
 #big.instructions {
   font-size: 50px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
+  margin-left: 30%;
 }
 .signupinput {
   width: 100%;

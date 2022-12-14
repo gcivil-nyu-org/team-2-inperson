@@ -63,7 +63,7 @@ export default {
         class="btn btn-outline-light"
         id="send-invite-button"
       >
-        <img src="/add-student.png" class="studentupdateimg" />
+        <img src="/add-student.png" class="studentupdateimg" alt="addstudent" />
       </button>
     </span>
   </main>

@@ -73,12 +73,12 @@ export default {
 <template>
   <div class="logo_image_container">
     <router-link to="/" class="nav-item nav-link">
-      <img src="/logo.png" class="logo_img"
+      <img src="/logo.png" class="logo_img" alt="shortlistlogo"
     /></router-link>
   </div>
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
-    <form>
+    <form v-on:keyup.enter="submitLoginForm(this.$route.query.redirect)">
       <div id="emailaddress_login">
         <input
           id="loginEmailField"
@@ -127,18 +127,22 @@ export default {
         >
           Login
         </button>
-        <p class="instructions" id="small">Don't have an account yet?</p>
-        <button
-          @click.prevent="$router.replace('/signup')"
-          class="btn btn-outline-dark"
-        >
-          Sign me up!
-        </button>
+
         <router-link to="/forgetPassword" class="nav-item nav-link">
-          <p class="instructions" id="small">Forget Password?</p>
+          <p class="instructions" id="small">Forgot Password?</p>
         </router-link>
       </div>
+      <br />
     </form>
+    <div>
+      <button
+        @click="$router.replace('/signup')"
+        class="btn btn-outline-dark"
+        style="font-family: Aleo"
+      >
+        Create New Account
+      </button>
+    </div>
   </div>
 </template>
 
@@ -181,9 +185,9 @@ input {
   margin-top: 100px;
 }
 #small.instructions {
-  font-size: 24px;
-  font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: "Aleo";
 }
 #big.instructions {
   font-size: 50px;

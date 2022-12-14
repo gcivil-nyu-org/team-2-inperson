@@ -46,6 +46,7 @@ export default {
               class="school-simple-img"
               :src="schoolData.schoolMetadata.address"
               draggable="false"
+              alt="schoolimg"
             />
           </span>
           <span v-else>
@@ -53,6 +54,7 @@ export default {
               class="school-simple-img"
               :src="defaultImg"
               draggable="false"
+              alt="schoolimg"
             />
           </span>
         </div>

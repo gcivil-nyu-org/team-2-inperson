@@ -10,11 +10,19 @@ export default {
   >
     <span v-if="schoolData.schoolMetadata.address.slice(0, 4) == 'http'">
       <!--real image-->
-      <img class="school-icon-img" :src="schoolData.schoolMetadata.address" />
+      <img
+        class="school-icon-img"
+        :src="schoolData.schoolMetadata.address"
+        alt="schoolimg"
+      />
     </span>
     <span v-else>
       <!--no image, use default-->
-      <img class="school-icon-img" src="/school-img-default-sm.png" />
+      <img
+        class="school-icon-img"
+        src="/school-img-default-sm.png"
+        alt="schoolimg"
+      />
     </span>
 
     <div class="school-icon-name shortlist-fnt-serif-bold">
