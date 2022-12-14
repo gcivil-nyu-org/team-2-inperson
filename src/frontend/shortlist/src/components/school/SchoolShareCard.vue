@@ -85,7 +85,17 @@ export default {
         >
           <div class="school-detail-dim-row">
             <div class="school-detail-dim-name">{{ dimension.dimShort }}</div>
-            <div class="school-detail-dim-value">{{ dimension.value }}</div>
+            <div class="school-detail-dim-value">
+              <span v-if="dimension.dimShort=='City'">
+                {{ getBorough }}
+              </span>
+              <span v-else-if="dimension.dimShort=='State'">
+                New York
+              </span>
+              <span v-else>
+                {{ dimension.value }}
+              </span>
+            </div>
           </div>
         </template>
       </div>
