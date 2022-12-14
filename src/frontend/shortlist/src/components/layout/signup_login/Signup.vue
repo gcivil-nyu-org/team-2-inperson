@@ -163,109 +163,118 @@ export default {
   <div class="signup_components_container">
     <div class="signup-form-container">
       <h1 class="instructions" id="big">Sign Up</h1>
-      <div class="first_name">
-        <input
-          type="text"
-          placeholder="First Name"
-          class="signupinput"
-          v-model="this.form.firstName"
-        />
-        <div
-          class="input-errors"
-          v-if="!validateFirstName(this.form.firstName)"
-        >
-          <div class="error-msg" v-if="this.form.firstName.length > 0">
-            {{ this.firstnameAlert }}
+      <form v-on:keyup.enter="submitLoginForm(this.$route.query.redirect)">
+        <div class="first_name">
+          <input
+            type="text"
+            placeholder="First Name"
+            class="signupinput"
+            v-model="this.form.firstName"
+          />
+          <div
+            class="input-errors"
+            v-if="!validateFirstName(this.form.firstName)"
+          >
+            <div class="error-msg" v-if="this.form.firstName.length > 0">
+              {{ this.firstnameAlert }}
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
           </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div>
-      <div id="last_name">
-        <input
-          type="text"
-          placeholder="Last Name"
-          class="signupinput"
-          v-model="this.form.lastName"
-        />
-        <div class="input-errors" v-if="!validateLastName(this.form.lastName)">
-          <div class="error-msg" v-if="this.form.lastName.length > 0">
-            {{ this.secondnameAlert }}
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
           </div>
-          <div class="error-msg" v-else>&nbsp;</div>
         </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
+        <div id="last_name">
+          <input
+            type="text"
+            placeholder="Last Name"
+            class="signupinput"
+            v-model="this.form.lastName"
+          />
+          <div
+            class="input-errors"
+            v-if="!validateLastName(this.form.lastName)"
+          >
+            <div class="error-msg" v-if="this.form.lastName.length > 0">
+              {{ this.secondnameAlert }}
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
+          </div>
         </div>
-      </div>
 
-      <div id="email_address_signup">
-        <input
-          type="email"
-          placeholder="Email"
-          class="signupinput"
-          v-model="this.form.email"
-        />
-        <div class="input-errors" v-if="!validateEmail()">
-          <div class="error-msg" v-if="this.form.email.length > 0">
-            Invalid email entry!
+        <div id="email_address_signup">
+          <input
+            type="email"
+            placeholder="Email"
+            class="signupinput"
+            v-model="this.form.email"
+          />
+          <div class="input-errors" v-if="!validateEmail()">
+            <div class="error-msg" v-if="this.form.email.length > 0">
+              Invalid email entry!
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
           </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div>
-      <div id="password_signup">
-        <input
-          type="password"
-          placeholder="Password"
-          class="signupinput"
-          v-model="this.form.password"
-        />
-        <div class="input-errors" v-if="!validatePassword()">
-          <div class="error-msg" v-if="this.form.password.length > 0">
-            {{ this.passwordAlert }}
-          </div>
-          <div class="error-msg" v-else>&nbsp;</div>
-        </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
-        </div>
-      </div>
-      <div>
-        <input
-          type="password"
-          autocomplete="off"
-          placeholder="Confirm Password"
-          class="signupinput"
-          v-model="this.form.confirmPassword"
-        />
-        <div class="input-errors" v-if="!validateConfirmPassword()">
-          <div class="error-msg">
-            Password and Confirm Password must be match!
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
           </div>
         </div>
-        <div class="input-errors" v-else>
-          <div class="error-msg">&nbsp;</div>
+        <div id="password_signup">
+          <input
+            type="password"
+            placeholder="Password"
+            class="signupinput"
+            v-model="this.form.password"
+          />
+          <div class="input-errors" v-if="!validatePassword()">
+            <div class="error-msg" v-if="this.form.password.length > 0">
+              {{ this.passwordAlert }}
+            </div>
+            <div class="error-msg" v-else>&nbsp;</div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
+          </div>
         </div>
-      </div>
-      <button
-        class="btn btn-outline-dark"
-        id="signupButtonTest"
-        @click.prevent="submitSignupForm"
-        :disabled="isSignUpDisabled"
-      >
-        Sign up
-      </button>
-      <p class="instructions" id="small">
-        Have an account already?
-        <button @click="$router.replace('/login')" class="btn btn-outline-dark">
-          Log me in!
+        <div>
+          <input
+            type="password"
+            autocomplete="off"
+            placeholder="Confirm Password"
+            class="signupinput"
+            v-model="this.form.confirmPassword"
+          />
+          <div class="input-errors" v-if="!validateConfirmPassword()">
+            <div class="error-msg">
+              Password and Confirm Password must be match!
+            </div>
+          </div>
+          <div class="input-errors" v-else>
+            <div class="error-msg">&nbsp;</div>
+          </div>
+        </div>
+        <button
+          class="btn btn-outline-dark"
+          id="signupButtonTest"
+          @click.prevent="submitSignupForm"
+          :disabled="isSignUpDisabled"
+          style="font-family: Aleo"
+        >
+          Sign up
         </button>
-      </p>
+      </form>
+      <div>
+        <button
+          @click="$router.replace('/login')"
+          class="btn btn-outline-dark"
+          style="font-family: Aleo; margin-left: 30%"
+        >
+          Already have an account?
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -313,14 +322,15 @@ input {
   margin-top: 100px;
 }
 #small.instructions {
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
+  font-family: "Aleo";
 }
 #big.instructions {
   font-size: 50px;
   font-weight: 500;
   font-family: "Cabin Sketch", cursive;
+  margin-left: 30%;
 }
 .signupinput {
   width: 100%;
