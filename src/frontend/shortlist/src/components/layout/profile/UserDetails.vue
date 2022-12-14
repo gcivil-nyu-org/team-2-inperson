@@ -403,5 +403,6 @@ export default {
   color: rgb(117, 28, 28);
   font-size: 13px;
   padding-bottom: 7px;
+  width: 20rem;
 }
 </style>
