@@ -34,7 +34,16 @@ export default {
   <div style="select: none" v-if="schoolData != null">
     <div class="school-sharecard-container" @click="swapDetail">
       <div v-if="!isDetail" class="school-simple-img-container">
-        <img class="school-simple-img" :src="defaultImg" draggable="false" />
+        <span v-if="schoolData.schoolMetadata.address.slice(0, 4) == 'http'">
+          <img
+            class="school-simple-img"
+            :src="schoolData.schoolMetadata.address"
+            draggable="false"
+          />
+        </span>
+        <span v-else>
+          <img class="school-simple-img" :src="defaultImg" draggable="false" />
+        </span>
       </div>
       <div class="school-simple-name-row">
         <div class="school-simple-name-name">
@@ -80,7 +89,15 @@ export default {
         >
           <div class="school-detail-dim-row">
             <div class="school-detail-dim-name">{{ dimension.dimShort }}</div>
-            <div class="school-detail-dim-value">{{ dimension.value }}</div>
+            <div class="school-detail-dim-value">
+              <span v-if="dimension.dimShort == 'City'">
+                {{ getBorough }}
+              </span>
+              <span v-else-if="dimension.dimShort == 'State'"> New York </span>
+              <span v-else>
+                {{ dimension.value }}
+              </span>
+            </div>
           </div>
         </template>
       </div>

@@ -18,9 +18,8 @@ describe("UserRelations.vue", () => {
     const componentWrapper = mount(UserRelations, {});
     const inviteButton = componentWrapper.find("#send-invite-button");
     expect(inviteButton.exists()).toBe(true);
-    componentWrapper.vm.newEmail = "ab@abc.com"
+    componentWrapper.vm.newEmail = "ab@abc.com";
     inviteButton.trigger("click");
     expect(componentWrapper.vm.inviteSented).toBe(true);
   });
-
 });

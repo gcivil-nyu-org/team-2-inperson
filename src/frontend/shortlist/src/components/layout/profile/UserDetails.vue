@@ -109,13 +109,13 @@ export default {
       const emailInput = this.enterEmail();
       if (emailInput != "") {
         axios
-        .post("https://api.shortlist.nyc/auth/request-reset-email", {
-          email: emailInput,
-        })
-        .then((email) => this.successGet(email))
-        .catch(function (error) {
-          console.log(error.response);
-        });
+          .post("https://api.shortlist.nyc/auth/request-reset-email", {
+            email: emailInput,
+          })
+          .then((email) => this.successGet(email))
+          .catch(function (error) {
+            console.log(error.response);
+          });
       }
     },
   },
