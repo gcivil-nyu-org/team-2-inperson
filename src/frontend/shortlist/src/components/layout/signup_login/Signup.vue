@@ -11,7 +11,8 @@ export default {
         password: "",
         confirmPassword: "",
       },
-      nameAlert: "",
+      firstnameAlert: "",
+      secondnameAlert: "",
       passwordAlert: "",
       validationresultfirst: false,
       validationresultlast: false,
@@ -26,18 +27,18 @@ export default {
       if (this.validation) {
         let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
         if (value.length < 2) {
-          this.nameAlert = "Minimum length is 2 for name!";
+          this.firstnameAlert = "Minimum length is 2 for name!";
           this.validationresultfirst = false;
           return false;
         }
         if (value.length > 10) {
-          this.nameAlert = "Maximum length is 10 for name!";
+          this.firstnameAlert = "Maximum length is 10 for name!";
           this.validationresultfirst = false;
           return false;
         }
         if (!validNamePattern.test(value)) {
-          this.nameAlert =
-            "Letters, dashes (-) and spaces (No starting spaces) only!";
+          this.firstnameAlert =
+            "Letters only! In between, dashes (-) and spaces allowed!";
           this.validationresultfirst = false;
           return false;
         }
@@ -52,18 +53,18 @@ export default {
       if (this.validation) {
         let validNamePattern = new RegExp("^[a-zA-Z]+(?:[-'\\s][a-zA-Z]+)*$");
         if (value.length < 2) {
-          this.nameAlert = "Minimum length is 2 for name!";
+          this.secondnameAlert = "Minimum length is 2 for name!";
           this.validationresultlast = false;
           return false;
         }
         if (value.length > 10) {
-          this.nameAlert = "Maximum length is 10 for name!";
+          this.secondnameAlert = "Maximum length is 10 for name!";
           this.validationresultlast = false;
           return false;
         }
         if (!validNamePattern.test(value)) {
-          this.nameAlert =
-            "Letters, dashes (-) and spaces (No starting spaces) only!";
+          this.secondnameAlert =
+            "Letters only! In between, dashes (-) and spaces allowed!";
           this.validationresultlast = false;
           return false;
         }
