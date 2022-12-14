@@ -41,8 +41,12 @@ export default {
     <div class="school-simple-container" @click="swapDetail">
       <template v-if="!isDetail">
         <div class="school-simple-img-container">
-          <img class="school-simple-img" :src="defaultImg" draggable="false" />
-          <!-- :src="schoolData.img" -->
+          <span v-if="schoolData.schoolMetadata.address.slice(0, 4)=='http'">
+            <img class="school-simple-img" :src="schoolData.schoolMetadata.address" draggable="false" />
+          </span>
+          <span v-else>
+            <img class="school-simple-img" :src="defaultImg" draggable="false" />
+          </span>
         </div>
       </template>
 
@@ -89,8 +93,19 @@ export default {
           </template>
           <template v-if="isDetail">
             <div class="school-simple-dim-row">
-              <div class="school-simple-dim-name">{{ dimension.dimShort }}</div>
-              <div class="school-simple-dim-value">{{ dimension.value }}</div>
+              <div class="school-simple-dim-name">
+                {{ dimension.dimShort}}
+              </div>
+              <div class="school-simple-dim-value">
+                <span v-if="dimension.dimShort=='City'">
+                  {{ getBorough }}
+                </span>
+                <span v-else-if="dimension.dimShort=='State'">
+                  New York
+                </span>
+                <span v-else>
+                  {{ dimension.value }}
+                </span></div>
             </div>
           </template>
         </template>
