@@ -139,7 +139,7 @@
       <div class="border">
         <img
           class="devimg"
-          src="/VaibhavJainDegShortlist.jpg"
+          src="/VaibhavJainDevShortlist.jpg"
           alt="VaibhavJainDegShortlist"
         />
       </div>
