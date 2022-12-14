@@ -255,7 +255,7 @@ export default {
     };
   },
   created() {
-    this.getRecommendations(50);
+    this.getRecommendations(15);
     this.getLists();
   },
 };
