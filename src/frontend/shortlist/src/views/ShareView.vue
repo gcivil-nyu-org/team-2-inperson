@@ -63,12 +63,14 @@ export default {
         :src="this.shortlistData.settings.icon.value"
         size="20"
         style="color: white; size: 30px"
-      />
-      <span v-if="this.$route.query.userName">
+      />&nbsp;
+      <span v-if="this.$route.query.userName" style="font-size: large">
         {{ this.$route.query.userName }}'s
         {{ this.shortlistData.settings.name }} Shortlist
       </span>
-      <span v-else> {{ this.shortlistData.settings.name }} Shortlist </span>
+      <span v-else style="font-size: large">
+        {{ this.shortlistData.settings.name }} Shortlist
+      </span>
     </label>
     <div style="overflow: auto" class="report-school-cards">
       <template v-for="schoolData in shortlistData.schools" :key="schoolData">
