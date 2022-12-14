@@ -8,18 +8,22 @@ export default {
     class="school-icon-container"
     :style="{ boxShadow: '0 0 5px -1px ' + bgColor }"
   >
-    <div v-if="schoolData.img">
+    <span v-if="schoolData.schoolMetadata.address.slice(0, 4) == 'http'">
       <!--real image-->
-      <img class="school-icon-img" :src="schoolData.img" alt="schoolimg" />
-    </div>
-    <div v-else>
+      <img
+        class="school-icon-img"
+        :src="schoolData.schoolMetadata.address"
+        alt="schoolimg"
+      />
+    </span>
+    <span v-else>
       <!--no image, use default-->
       <img
         class="school-icon-img"
         src="/school-img-default-sm.png"
         alt="schoolimg"
       />
-    </div>
+    </span>
 
     <div class="school-icon-name shortlist-fnt-serif-bold">
       <!-- Old school data format -->

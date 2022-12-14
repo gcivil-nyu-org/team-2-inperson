@@ -80,8 +80,9 @@ export default {
       };
       axios
         .post(this.calculateSaveEndpoint(listIndex), payload)
+        // eslint-disable-next-line no-unused-vars
         .then(function (response) {
-          console.log(response);
+          // console.log(response);
         })
         .catch(function (error) {
           console.log(error.response.data);
@@ -168,11 +169,11 @@ export default {
             // set current_trashed in db
             this.markSchoolAsTrashed(this.myRecommendations[0].id);
             this.removeTopCard();
-            console.log("DELETE school");
+            // console.log("DELETE school");
           } else {
             // assign it;
             if (this.myShortlists[listIdx].schools.length < 4) {
-              console.log("ASSIGN SCHOOL");
+              // console.log("ASSIGN SCHOOL");
               this.myShortlists[listIdx].schools.push(
                 this.dragState.categorizeState.schoolData.school
               );
@@ -232,6 +233,9 @@ export default {
         });
       req.execute();
     },
+    printRank() {
+      console.log("Rank: ", this.myRecommendations[0].rankAsc);
+    },
   },
   data() {
     let myShortlists = [];
@@ -255,7 +259,7 @@ export default {
     };
   },
   created() {
-    this.getRecommendations(50);
+    this.getRecommendations(15);
     this.getLists();
   },
 };
@@ -292,7 +296,7 @@ export default {
       <TrashCan />
     </div>
 
-    <div class="categorize-view-recommendation-column">
+    <div class="categorize-view-recommendation-column" @click="printRank">
       <RecommendationStack :recommendations="myRecommendations" />
     </div>
     <div style="width: 50px; height: 100%"></div>
