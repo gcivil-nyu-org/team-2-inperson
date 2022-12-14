@@ -53,16 +53,15 @@ h4 {
 }
 #smallTitle {
   margin-left: 25%;
-  font-size: 35px;
+  font-size: 28px;
   font-weight: 500;
-  font-family: "Cabin Sketch", cursive;
-  color: #008037;
+  font-family: "Aleo", serif;
 }
 .options {
   margin-bottom: 10%;
   margin-left: 25%;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 200;
-  font-family: "Cabin Sketch", cursive;
+  font-family: "Aleo", serif;
 }
 </style>
