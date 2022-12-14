@@ -14,15 +14,15 @@ export default {
     </div>
     <div class="container">
       <p class="contents">
-        Shortlist™ is an education web application specializes in matching
-        middle school students or their parents with their desired high schools
+        Shortlist™ is an educational web application specializing in matching
+        middle school students and their parents with high schools
         in NYC. Different from the traditional “prune and search” edu app that
-        has been existed in the past few decades, Shortlist™ feeds users around
+        has existed in the past few decades, Shortlist™ shows users around
         400 NYC public high schools using personalized algorithms and
-        drag-n-drop mechanism. It allows users to quickly make decision to keep
+        drag-n-drop mechanism. It allows users to quickly make a decision to keep
         or discard recommended schools. Each school card contains personalized
         and relevant information. Users can also click on each of the school
-        cards to view more in-depth information.
+        cards to view more in-depth details.
       </p>
       <p class="contents">
         Each list can contain up to four different schools and users can
@@ -34,7 +34,7 @@ export default {
         besties in a few months?
       </p>
       <p class="contentslast">
-        Does this sound fun and familiar? We certainly hope so We are here to
+        Does this sound fun and familiar? We certainly hope so. We are here to
         help hone your intuition and lead you to your destiny for the next four
         (best) years 💚.
       </p>
