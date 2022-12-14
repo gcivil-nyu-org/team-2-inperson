@@ -33,7 +33,7 @@
     </card>
     <card>
       <div class="border">
-        <img class="devimg" src="/Simao(Alice)ChenDevShortlist.jpg" />
+        <img class="devimg" src="/AliceChenDevShortlist.jpg" />
       </div>
       <h2>Alice Chen</h2>
       <h3>Software Engineer</h3>
