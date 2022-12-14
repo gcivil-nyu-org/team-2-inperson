@@ -58,7 +58,11 @@ export default {
           </span>
         </template>
       </form>
-      <button @click="togglePreferenceForm" class="btn btn-outline-dark">
+      <button
+        @click="togglePreferenceForm"
+        class="btn btn-outline-dark"
+        style="margin-left: 10px"
+      >
         Update Preferences
       </button>
     </div>
