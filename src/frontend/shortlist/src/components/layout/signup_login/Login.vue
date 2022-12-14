@@ -78,7 +78,7 @@ export default {
   </div>
   <div class="login_components_container">
     <h1 class="instructions" id="big">Log In</h1>
-    <form>
+    <form v-on:keyup.enter="submitLoginForm(this.$route.query.redirect)">
       <div id="emailaddress_login">
         <input
           id="loginEmailField"
@@ -127,20 +127,18 @@ export default {
         >
           Login
         </button>
+
         <router-link to="/forgetPassword" class="nav-item nav-link">
           <p class="instructions" id="small">Forgot Password?</p>
         </router-link>
       </div>
       <br />
-      <div>
-        <button
-          @click.prevent="$router.replace('/signup')"
-          class="btn btn-outline-dark"
-        >
-          Create New Account
-        </button>
-      </div>
     </form>
+    <div>
+      <button @click="$router.replace('/signup')" class="btn btn-outline-dark">
+        Create New Account
+      </button>
+    </div>
   </div>
 </template>
 
