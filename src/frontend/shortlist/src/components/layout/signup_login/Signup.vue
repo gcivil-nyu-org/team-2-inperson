@@ -127,7 +127,6 @@ export default {
     },
 
     submitSignupForm() {
-      // TRIGGER SIGNUP EVENT
       this.$emit("appAccountSignup", {
         email: this.form.email.trim(),
         firstName: this.form.firstName,
@@ -253,7 +252,6 @@ export default {
           <div class="error-msg">&nbsp;</div>
         </div>
       </div>
-      <!-- TODO (Pooja): Birthdate field -->
       <button
         class="btn btn-outline-dark"
         id="signupButtonTest"
