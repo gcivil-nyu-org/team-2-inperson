@@ -20,21 +20,35 @@ export default {
     <p class="instructions" id="smallTitle">Here are some better options:</p>
   </h3>
   <div class="options">
-    <router-link to="/">
-      <p class="title">Take me home</p>
-    </router-link>
+    <div>
+      <button @click="$router.replace('/')" class="btn btn-outline-dark">
+        Shortlist Home
+      </button>
+    </div>
+    <div>
+      <button @click="$router.replace('/about')" class="btn btn-outline-dark">
+        Shortlist About
+      </button>
+    </div>
 
-    <router-link to="/signup" v-if="!loginState">
-      <p class="title">Sign me up</p>
-    </router-link>
-
-    <router-link to="/login" v-if="!loginState">
-      <p class="title">Log me in</p>
-    </router-link>
-
-    <router-link to="/about">
-      <p class="title">What is Shortlist again?</p>
-    </router-link>
+    <div>
+      <button
+        @click="$router.replace('/signup')"
+        class="btn btn-outline-dark"
+        v-if="!loginState"
+      >
+        Shortlist Signup
+      </button>
+    </div>
+    <div>
+      <button
+        @click="$router.replace('/login')"
+        class="btn btn-outline-dark"
+        v-if="!loginState"
+      >
+        Shortlist Login
+      </button>
+    </div>
   </div>
 </template>
 
@@ -63,5 +77,9 @@ h4 {
   font-size: 20px;
   font-weight: 200;
   font-family: "Aleo", serif;
+}
+
+.options div {
+  padding-top: 10px;
 }
 </style>
