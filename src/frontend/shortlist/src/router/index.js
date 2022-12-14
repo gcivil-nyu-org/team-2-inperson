@@ -104,11 +104,6 @@ const router = createRouter({
       component: ResetPasswordView,
     },
     {
-      path: "/shortlist/:shortlistId",
-      name: "verification-view",
-      component: () => import("../views/ShareShortlist.vue"),
-    },
-    {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
       component: () => import("../views/NotFoundView.vue"),

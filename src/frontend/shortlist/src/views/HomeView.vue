@@ -40,12 +40,12 @@ export default {
         style="font-family: Klee One; size: 10%"
         @click="$router.push('profile')"
       >
-        Let's Set Preference!
+        Set Your Preferences!
       </button>
     </div>
     <div style="margin-top: 90px" v-if="loginState == true">
       <p class="descsub">
-        With Shortlist, you don’t search for a High School you’ve heard of, or
+        With Shortlist, you don’t search for a high school you’ve heard of, or
         one you think you’ll get into, or one your parents want you to apply
         for…
       </p>
@@ -64,6 +64,7 @@ export default {
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+  margin-top: 75px;
 }
 
 .descdiv {
@@ -87,11 +88,13 @@ export default {
 .descsub {
   font-family: "Aleo", sans-serif;
   text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin-bottom: 0px;
   background: #15620f;
   color: #ffffff;
   opacity: 0.6;
-  font-size: small;
+  font-size: medium;
 }
 .desc::before {
   top: 0;

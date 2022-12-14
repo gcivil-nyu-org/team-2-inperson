@@ -49,7 +49,7 @@ export default {
     <!-- Either resend link or redirect to login depend on verification status-->
     <template v-if="this.isVerified">
       <form>
-        <h5>Verified successfully</h5>
+        <h3 class="header">Verified successfully</h3>
         <a href="http://www.shortlist.nyc/login?firstTime=true" id="loginLink">
           Click here to login!
         </a>
@@ -58,7 +58,7 @@ export default {
     <template v-else>
       <form>
         <div class="message-container">
-          {{ errorMessage }}
+          <h3 class="header">{{ errorMessage }}</h3>
         </div>
         <div class="input-container" id="emailaddress">
           <input
@@ -84,10 +84,19 @@ export default {
 
 <style scoped>
 .verify-container {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 50vh;
+}
+
+.header {
+  font-size: 28px;
+  font-weight: 500;
+  font-family: "Cabin Sketch", cursive;
+}
+
+.input-container {
+  padding-bottom: 10px;
 }
 </style>
